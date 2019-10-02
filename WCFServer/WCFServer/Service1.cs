@@ -54,7 +54,6 @@ namespace WCFServer
                 catch
                 {
                     return "ERRORE REGISTRAZIONE UTENTE\n RIPROVARE!\n";
-
                 }
             }
 
@@ -301,7 +300,7 @@ namespace WCFServer
                     e1.CodiceSala = codice_sala;
                     e1.UsernameAdmin = usernameadmin;
                     e1.Prezzo = prezzo;
-                    t.AddRow(e1.CodiceEvento, e1.Data_e_ora, e1.CodiceSala, e1.CodiceFilm, e1.Prezzo + "€");
+                    t.AddRow(e1.CodiceEvento, e1.Data_e_ora.ToShortDateString() + " " + e1.Data_e_ora.ToShortTimeString(), e1.CodiceSala, e1.CodiceFilm, e1.Prezzo + "€");
                     // Commit the transaction.
                     sqlTran.Commit();
                     connection.Close();
@@ -454,8 +453,8 @@ namespace WCFServer
                                 listEventi[i].UsernameAdmin = reader.GetString(4);
                                 listEventi[i].Prezzo = reader.GetDecimal(5);
                                 elenco = elenco + listEventi[i].VisualizzaEventi() + "\n";
-                                t.AddRow(listEventi[i].CodiceEvento, listEventi[i].Data_e_ora, listEventi[i].CodiceSala, listEventi[i].CodiceFilm, listEventi[i].Prezzo + "€");
-                                i++;
+                                t.AddRow(listEventi[i].CodiceEvento, listEventi[i].Data_e_ora.ToShortDateString() + " " + listEventi[i].Data_e_ora.ToShortTimeString(), listEventi[i].CodiceSala, listEventi[i].CodiceFilm, listEventi[i].Prezzo + "€");
+                                i++; 
                             }
 
                         }

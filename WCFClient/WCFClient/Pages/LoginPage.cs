@@ -13,6 +13,8 @@ namespace WCFClient.Pages
         public override void Display()
         {
             base.Display();
+            //Imposto lo stato di Login su false nel caso in cui l'utente sia tornato indietro
+            Cinema.MainProgram.Global.loggedin = false; 
             // Uso l'enumerazione creata precedentemente per far scegliere il tipo di Login (Utente - Admin)
             Type input = Input.ReadEnum<Type>("Select the type of user you want to login: ");
             Output.WriteLine(ConsoleColor.Green, "\n {0} Login: ", input);

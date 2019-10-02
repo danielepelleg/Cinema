@@ -100,19 +100,19 @@ namespace Cinema
                 case "Titolo":
                     while ((a.Length < 1) || (a.Length > 50))
                     {
-                        Console.WriteLine("{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 30!\nRiprovare: ", b);
+                        Console.WriteLine("{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 50!\nRiprovare: ", b);
                         a = Console.ReadLine();
                     }
                     break;
                 case "Regia":
                     while ((a.Length < 1) || (a.Length > 30))
                     {
-                        Console.WriteLine("{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 12!\nRiprovare: ", b);
+                        Console.WriteLine("{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 30!\nRiprovare: ", b);
                         a = Console.ReadLine();
                     }
                     break;
                 case "Genere":
-                    while ((a.Length < 1) || (a.Length > 12))
+                    while ((a.Length < 1) || (a.Length > 20))
                     {
                         Console.WriteLine("{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 20!\nRiprovare: ", b);
                         a = Console.ReadLine();
