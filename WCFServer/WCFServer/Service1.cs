@@ -318,6 +318,7 @@ namespace WCFServer
         //Inserimento Prenotazioni
         public string InserimentoPrenotazione(DateTime dataora, string username_utentefree, int codice_evento, int numero_posto)
         {
+            var t = new TablePrinter("Numero Prenotazione", "ID Evento", "Username", "Data e Ora Prenotazione");
             using (SqlConnection connection = new SqlConnection("Server = localhost\\SQLEXPRESS; Database = Prova1; Integrated Security = SSPI"))
             {
                 connection.Open();
@@ -344,6 +345,7 @@ namespace WCFServer
                     p1.Dataora = dataora;
                     p1.Username_UtenteFree = username_utentefree;
                     p1.Codice_Evento = codice_evento;
+                    t.AddRow(p1.CodicePrenotazione, p1.Codice_Evento, p1.Username_UtenteFree, p1.Dataora.ToShortDateString() + " " + p1.Dataora.ToShortTimeString());
                     // Commit the transaction.
                     sqlTran.Commit();
                     //Inserisco i valori nella tabella Riserva
@@ -357,8 +359,7 @@ namespace WCFServer
                     cmd1.Connection = connection;
                     cmd1.ExecuteNonQuery();
                     sqlTran1.Commit();
-                    connection.Close();
-                    return "PRENOTAZIONE EFFETTUATA CON SUCCESSO!\nBiglietto acquistato: \n" + p1.VisualizzaPrenotazioni() + "\n";
+                    return "PRENOTAZIONE EFFETTUATA CON SUCCESSO!\nBiglietto acquistato: \n" + t.Print() + "\n";
                 }
                 catch (SqlException ex)
                 {

@@ -187,6 +187,7 @@ namespace Cinema
                 Console.WriteLine("Il posto {0} non è disponibile!" +
                     " Inserine uno disponibile!\nRiprovare: ", posto);
                 posto = Console.ReadLine();
+                posto = Convert.ToString(Intcheck(posto));
             }
             return Convert.ToInt32(posto);
         }

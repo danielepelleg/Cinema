@@ -31,7 +31,7 @@ namespace WCFClient.Pages
             int durata = Cinema.MainProgram.Intcheck(durata1);
             datauscita1 = Input.ReadString("Data di Uscita: ");
             DateTime datauscita = Cinema.MainProgram.Datecheck(datauscita1);
-            genere = Input.ReadString("Genere (max 12 caratteri): ");
+            genere = Input.ReadString("Genere (max 20 caratteri): ");
             genere = Cinema.MainProgram.Filmcheck(genere, "Genere");
 
             // Inserimento Film nel Database.

@@ -64,6 +64,7 @@
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Pages\RegistrationPage.cs" />
+    <Compile Include="Pages\UserMenu\PrenotazioneBigliettoPage.cs" />
     <Compile Include="Pages\UserMenu\UserPage.cs" />
     <Compile Include="Pages\VisualizzaEventoPagecs.cs" />
     <Compile Include="Pages\VisualizzaFilmPage.cs" />

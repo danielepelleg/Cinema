@@ -7,7 +7,7 @@ namespace WCFClient.Pages
     {
         public UserPage(Program program)
             : base("User Functions", program,
-                  new Option("Inserimento Film", () => program.NavigateTo<InserimentoFilm>()),
+                  new Option("Prenotazione biglietto", () => program.NavigateTo<PrenotazioneBiglietto>()),
                   new Option("Visualizza Film", () => program.NavigateTo<VisualizzaFilm>()))
         {
         }

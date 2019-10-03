@@ -19,3 +19,10 @@ C:\Users\Daniele\source\repos\Cinema\WCFServer\WCFServer\obj\Debug\WCFServer.csp
 C:\Users\Daniele\source\repos\Cinema\WCFServer\WCFServer\obj\Debug\WCFServer.csproj.CoreCompileInputs.cache
 C:\Users\Daniele\source\repos\Cinema\WCFServer\WCFServer\obj\Debug\WCFServer.exe
 C:\Users\Daniele\source\repos\Cinema\WCFServer\WCFServer\obj\Debug\WCFServer.pdb
+C:\Users\ricky\source\repos\Cinema\WCFServer\WCFServer\bin\Debug\WCFServer.exe.config
+C:\Users\ricky\source\repos\Cinema\WCFServer\WCFServer\bin\Debug\WCFServer.exe
+C:\Users\ricky\source\repos\Cinema\WCFServer\WCFServer\bin\Debug\WCFServer.pdb
+C:\Users\ricky\source\repos\Cinema\WCFServer\WCFServer\obj\Debug\WCFServer.csprojAssemblyReference.cache
+C:\Users\ricky\source\repos\Cinema\WCFServer\WCFServer\obj\Debug\WCFServer.csproj.CoreCompileInputs.cache
+C:\Users\ricky\source\repos\Cinema\WCFServer\WCFServer\obj\Debug\WCFServer.exe
+C:\Users\ricky\source\repos\Cinema\WCFServer\WCFServer\obj\Debug\WCFServer.pdb
