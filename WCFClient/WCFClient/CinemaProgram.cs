@@ -19,6 +19,7 @@ namespace Cinema
             AddPage(new VisualizzaEvento(this));
             AddPage(new VisualizzaFilm(this));
             AddPage(new PrenotazioneBiglietto(this));
+            AddPage(new VisualizzaPrenotazioniUtente(this));
 
             // Setto la pagina di default all'avvio del programma
             SetPage<MainPage>();

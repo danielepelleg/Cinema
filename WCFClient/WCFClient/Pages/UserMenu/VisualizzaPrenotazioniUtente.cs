@@ -13,7 +13,6 @@ namespace WCFClient.Pages
         public override void Display()
         {
             base.Display();
-
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
             Console.WriteLine("STORICO PRENOTAZIONI:");

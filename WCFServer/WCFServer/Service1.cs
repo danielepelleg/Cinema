@@ -10,9 +10,6 @@ namespace WCFServer
     // NOTA: è possibile utilizzare il comando "Rinomina" del menu "Refactoring" per modificare il nome di classe "Service1" nel codice e nel file di configurazione contemporaneamente.
     public class Service1 : IService1
     {
-        List<Film> listFilm = new List<Film>();
-        List<Evento> listEventi = new List<Evento>();
-        List<Sala> listSale = new List<Sala>();
         List<UtenteFree> listUtentiFree = new List<UtenteFree>();
         List<Prenotazione> listPrenotazioni = new List<Prenotazione>();
         Admin a1 = new Admin();
@@ -375,14 +372,13 @@ namespace WCFServer
             var t = new TablePrinter("ID", "Titolo", "Anno", "Regia", "Durata", "Data di Uscita", "Genere");
             SqlTransaction tx = null;
             string elenco = string.Empty;
-            int i = 0; //variabile di incremento per la lista
+            //int i = 0; //variabile di incremento per la lista
             try
             {
                 // Connessione al DB Cinema
                 
                 using (SqlConnection conn = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=Prova1;Integrated Security=SSPI"))
                 {
-                    listFilm.Clear(); //pulisco la lista di film in modo tale da riempirla nuovamente e non avere problemi se sono avvenute modifiche
                     conn.Open();
                     tx = conn.BeginTransaction();
                     using (SqlCommand command1 = conn.CreateCommand())
@@ -394,17 +390,16 @@ namespace WCFServer
                             while (reader.Read())
                             {
                                 Film f = new Film();
-                                listFilm.Add(f);
-                                listFilm[i].CodiceFilm = reader.GetInt32(0);
-                                listFilm[i].Titolo = reader.GetString(1);
-                                listFilm[i].Anno = reader.GetInt32(2);
-                                listFilm[i].Regia = reader.GetString(3);
-                                listFilm[i].Durata = reader.GetInt32(4);
-                                listFilm[i].DataUscita = reader.GetDateTime(5);
-                                listFilm[i].Genere = reader.GetString(6);
-                                elenco = elenco + listFilm[i].VisualizzaFilm() + "\n";
-                                t.AddRow(listFilm[i].CodiceFilm, listFilm[i].Titolo, listFilm[i].Anno, listFilm[i].Regia, listFilm[i].Durata+"'", listFilm[i].DataUscita.ToShortDateString(), listFilm[i].Genere);
-                                i++;
+                                f.CodiceFilm = reader.GetInt32(0);
+                                f.Titolo = reader.GetString(1);
+                                f.Anno = reader.GetInt32(2);
+                                f.Regia = reader.GetString(3);
+                                f.Durata = reader.GetInt32(4);
+                                f.DataUscita = reader.GetDateTime(5);
+                                f.Genere = reader.GetString(6);
+                                //elenco = elenco + listFilm[i].VisualizzaFilm() + "\n";
+                                t.AddRow(f.CodiceFilm, f.Titolo, f.Anno, f.Regia, f.Durata+"'", f.DataUscita.ToShortDateString(), f.Genere);
+                                //i++;
                             }
                         }
                     }
@@ -416,9 +411,9 @@ namespace WCFServer
             {
                 return string.Format("Connessione non riuscita: {0}", ex.ToString());
             }
-            if (elenco == string.Empty)
+            /*if (elenco == string.Empty)
                 return "Non sono ancora presenti film all'interno del database. \n";
-            else
+            else*/
                 return t.Print();
         }
 
@@ -427,14 +422,13 @@ namespace WCFServer
         {
             var t = new TablePrinter("ID EVENTO", "Data e Ora", "Sala", "ID FILM", "Prezzo");
             SqlTransaction tx = null;
-            string elenco = string.Empty;
-            int i = 0; //variabile di incremento per la lista
+            //string elenco = string.Empty;
+            //int i = 0; 
             try
             {
                 // Connessione al DB Cinema
                 using (SqlConnection conn = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=Prova1;Integrated Security=SSPI"))
                 {
-                    listEventi.Clear(); //pulisco la lista di film in modo tale da riempirla nuovamente e non avere problemi se sono avvenute modifiche
                     conn.Open();
                     tx = conn.BeginTransaction();
                     using (SqlCommand command1 = conn.CreateCommand())
@@ -446,16 +440,15 @@ namespace WCFServer
                             while (reader.Read())
                             {
                                 Evento e = new Evento();
-                                listEventi.Add(e);
-                                listEventi[i].CodiceEvento = reader.GetInt32(0);
-                                listEventi[i].Data_e_ora = reader.GetDateTime(1);
-                                listEventi[i].CodiceFilm = reader.GetInt32(2);
-                                listEventi[i].CodiceSala = reader.GetInt32(3);
-                                listEventi[i].UsernameAdmin = reader.GetString(4);
-                                listEventi[i].Prezzo = reader.GetDecimal(5);
-                                elenco = elenco + listEventi[i].VisualizzaEventi() + "\n";
-                                t.AddRow(listEventi[i].CodiceEvento, listEventi[i].Data_e_ora.ToShortDateString() + " " + listEventi[i].Data_e_ora.ToShortTimeString(), listEventi[i].CodiceSala, listEventi[i].CodiceFilm, listEventi[i].Prezzo + "€");
-                                i++; 
+                                e.CodiceEvento = reader.GetInt32(0);
+                                e.Data_e_ora = reader.GetDateTime(1);
+                                e.CodiceFilm = reader.GetInt32(2);
+                                e.CodiceSala = reader.GetInt32(3);
+                                e.UsernameAdmin = reader.GetString(4);
+                                e.Prezzo = reader.GetDecimal(5);
+                                //elenco = elenco + listEventi[i].VisualizzaEventi() + "\n";
+                                t.AddRow(e.CodiceEvento, e.Data_e_ora.ToShortDateString() + " " + e.Data_e_ora.ToShortTimeString(), e.CodiceSala, e.CodiceFilm, e.Prezzo + "€");
+                                //i++;
                             }
 
                         }
@@ -467,9 +460,9 @@ namespace WCFServer
             {
                 return string.Format("Connessione non riuscita: {0}", ex.ToString());
             }
-            if (elenco == string.Empty)
+            /*if (elenco == string.Empty)
                 return "Non sono presenti film in programmazione in questo momento. \n";
-            else
+            else*/
                 return t.Print();
         }
 
@@ -479,14 +472,13 @@ namespace WCFServer
         {
             var t = new TablePrinter(" SALA ", " CAPIENZA ");
             SqlTransaction tx = null;
-            string elenco = string.Empty;
-            int i = 0; //variabile di incremento per la lista
+            //string elenco = string.Empty;
+            //int i = 0; //variabile di incremento per la lista
             try
             {
                 // Connessione al DB Cinema
                 using (SqlConnection conn = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=Prova1;Integrated Security=SSPI"))
                 {
-                    listSale.Clear(); //pulisco la lista di film in modo tale da riempirla nuovamente e non avere problemi se sono avvenute modifiche
                     conn.Open();
                     tx = conn.BeginTransaction();
                     using (SqlCommand command1 = conn.CreateCommand())
@@ -498,12 +490,11 @@ namespace WCFServer
                             while (reader.Read())
                             {
                                 Sala s = new Sala();
-                                listSale.Add(s);
-                                listSale[i].CodiceSala = reader.GetInt32(0);
-                                listSale[i].Capienza = reader.GetInt32(1);
-                                elenco = elenco + listSale[i].VisualizzaSala() + "\n";
-                                i++;
-                                t.AddRow(reader.GetInt32(0), reader.GetInt32(1));
+                                s.CodiceSala = reader.GetInt32(0);
+                                s.Capienza = reader.GetInt32(1);
+                                //elenco = elenco + listSale[i].VisualizzaSala() + "\n";
+                                //i++;
+                                t.AddRow(s.CodiceSala, s.Capienza);
                             }
 
                         }
@@ -659,7 +650,7 @@ namespace WCFServer
         //Visualizzazione Elenco Prenotazioni filtrato per Utente
         public string Visualizzazione_elenco_Prenotazioni(string user)
         {
-            var t = new TablePrinter("ID EVENTO", "Data e Ora", "Sala", "ID FILM", "Prezzo");
+            var t = new TablePrinter("ID Prenotazione", "Data e Ora della Prenotazione", "Username Utente", "Codice Evento", "Prezzo, Titolo", "Data e Ora dell'evento", "Sala", "Prezzo", "Numero posto");
             SqlTransaction tx = null;
             string elenco = string.Empty;
             int i = 0; //variabile di incremento per la lista
@@ -685,13 +676,13 @@ namespace WCFServer
                             while (reader.Read())
                             {
                                 Prenotazione p = new Prenotazione();
-                                listPrenotazioni.Add(p);
-                                listPrenotazioni[i].CodicePrenotazione = reader.GetInt32(0);
-                                listPrenotazioni[i].Dataora = reader.GetDateTime(1);
-                                listPrenotazioni[i].Username_UtenteFree = reader.GetString(2);
-                                listPrenotazioni[i].Codice_Evento = reader.GetInt32(3);
-                                elenco = elenco + listPrenotazioni[i].VisualizzaPrenotazioni() + "\n" + "Titolo: " + reader.GetString(4) + ", Data e Ora dell'evento: " + reader.GetDateTime(5) +
-                                    ", Sala: " + reader.GetInt32(6) + "\nPrezzo: " + reader.GetDecimal(7) + ", Numero posto:" + reader.GetInt32(8) + "\n";
+                                p.CodicePrenotazione = reader.GetInt32(0);
+                                p.Dataora = reader.GetDateTime(1);
+                                p.Username_UtenteFree = reader.GetString(2);
+                                p.Codice_Evento = reader.GetInt32(3);
+                                /*elenco = elenco + listPrenotazioni[i].VisualizzaPrenotazioni() + "\n" + "Titolo: " + reader.GetString(4) + ", Data e Ora dell'evento: " + reader.GetDateTime(5) +
+                                    ", Sala: " + reader.GetInt32(6) + "\nPrezzo: " + reader.GetDecimal(7) + ", Numero posto:" + reader.GetInt32(8) + "\n";*/
+                                t.AddRow(p.CodicePrenotazione, p.Dataora.ToShortDateString() + " " + p.Dataora.ToShortTimeString(), p.Username_UtenteFree, p.Codice_Evento, reader.GetString(4), reader.GetDateTime(5), reader.GetInt32(6), reader.GetDecimal(7) + "€", reader.GetInt32(8));
                                 i++;
                             }
                         }
@@ -703,10 +694,10 @@ namespace WCFServer
             {
                 return string.Format("Connessione non riuscita: {0}", ex.ToString());
             }
-            if (elenco == string.Empty)
+            /*if (elenco == string.Empty)
                 return "Non sono state ancora effettuate prenotazioni \n";
-            else
-                return elenco;
+            else*/
+                return t.Print();
         }
 
         //Visualizzazione dei posti in sala

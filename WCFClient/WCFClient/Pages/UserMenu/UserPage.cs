@@ -8,7 +8,8 @@ namespace WCFClient.Pages
         public UserPage(Program program)
             : base("User Functions", program,
                   new Option("Visualizza l'elenco degli eventi in programmazione", () => program.NavigateTo<VisualizzaEvento>()),
-                  new Option("Prenotazione biglietto", () => program.NavigateTo<PrenotazioneBiglietto>()))
+                  new Option("Prenotazione biglietto", () => program.NavigateTo<PrenotazioneBiglietto>()),
+                  new Option("Visualizza prenotazioni utente", () => program.NavigateTo<VisualizzaPrenotazioniUtente>()))
         {
         }
         public override void Display()
