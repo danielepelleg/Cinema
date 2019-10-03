@@ -15,10 +15,16 @@ namespace WCFClient.Pages
 
             var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
             Output.WriteLine("ELENCO FILM: ");
+            try
+            {
+                // Richiamo la funzione server che mi mostra i film presenti al cinema in una tabella
+                Output.WriteLine("{0}", wcfClient.Visualizzazione_elenco_film());
 
-            // Richiamo la funzione server che mi mostra i film presenti al cinema in una tabella
-            Output.WriteLine("{0}", wcfClient.Visualizzazione_elenco_film());
-
+            }
+            catch
+            {
+                Cinema.MainProgram.Errormessage();
+            }
             // Naviga Indietro
             Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();

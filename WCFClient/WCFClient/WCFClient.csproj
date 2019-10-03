@@ -66,7 +66,8 @@
     <Compile Include="Pages\RegistrationPage.cs" />
     <Compile Include="Pages\UserMenu\PrenotazioneBigliettoPage.cs" />
     <Compile Include="Pages\UserMenu\UserPage.cs" />
-    <Compile Include="Pages\VisualizzaEventoPagecs.cs" />
+    <Compile Include="Pages\UserMenu\VisualizzaPrenotazioniUtente.cs" />
+    <Compile Include="Pages\VisualizzaEventoPage.cs" />
     <Compile Include="Pages\VisualizzaFilmPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

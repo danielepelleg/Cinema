@@ -659,6 +659,7 @@ namespace WCFServer
         //Visualizzazione Elenco Prenotazioni filtrato per Utente
         public string Visualizzazione_elenco_Prenotazioni(string user)
         {
+            var t = new TablePrinter("ID EVENTO", "Data e Ora", "Sala", "ID FILM", "Prezzo");
             SqlTransaction tx = null;
             string elenco = string.Empty;
             int i = 0; //variabile di incremento per la lista

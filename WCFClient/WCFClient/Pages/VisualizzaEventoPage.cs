@@ -17,10 +17,15 @@ namespace WCFClient.Pages
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
             Output.WriteLine("ELENCO EVENTI: ");
-
-            // Richiamo la funzione server che mi mostra gli spettacoli presenti al cinema in una tabella
-            Console.Out.WriteLine("{0}", wcfClient.Visualizzazione_elenco_eventi());
-
+            try
+            {
+                // Richiamo la funzione server che mi mostra gli spettacoli presenti al cinema in una tabella
+                Console.Out.WriteLine("{0}", wcfClient.Visualizzazione_elenco_eventi());
+            }
+            catch
+            {
+                Cinema.MainProgram.Errormessage();
+            }
             // Naviga Indietro
             Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();
