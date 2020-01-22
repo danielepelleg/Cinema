@@ -1,0 +1,10 @@
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\obj\Debug\WCFClient.csprojAssemblyReference.cache
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\obj\Debug\WCFClient.csproj.CoreCompileInputs.cache
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\bin\Debug\WCFClient.exe.config
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\bin\Debug\WCFClient.exe
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\bin\Debug\WCFClient.pdb
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\bin\Debug\EasyConsole.dll
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\bin\Debug\EasyEncryption.dll
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\obj\Debug\WCFClient.csproj.CopyComplete
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\obj\Debug\WCFClient.exe
+C:\Users\Daniele\source\repos\Cinema\WCFClient\WCFClient\obj\Debug\WCFClient.pdb
