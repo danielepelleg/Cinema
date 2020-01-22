@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFServer/Service1/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFServer/Service1/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_Registration_InputMessage">
+    <wsdl:part name="parameters" element="tns:Registration" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Registration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InserimentoFilm_InputMessage">
+    <wsdl:part name="parameters" element="tns:InserimentoFilm" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InserimentoFilm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InserimentoFilmResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CancellazioneFilm_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancellazioneFilm" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CancellazioneFilm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancellazioneFilmResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InserimentoEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:InserimentoEvento" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InserimentoEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InserimentoEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CancellazioneEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancellazioneEvento" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CancellazioneEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancellazioneEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Visualizzazione_elenco_film_InputMessage">
+    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_film" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Visualizzazione_elenco_film_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_filmResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Visualizzazione_elenco_eventi_InputMessage">
+    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_eventi" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Visualizzazione_elenco_eventi_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_eventiResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_VisualizzazioneSale_InputMessage">
+    <wsdl:part name="parameters" element="tns:VisualizzazioneSale" />
+  </wsdl:message>
+  <wsdl:message name="IService1_VisualizzazioneSale_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VisualizzazioneSaleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ControlloFK_InputMessage">
+    <wsdl:part name="parameters" element="tns:ControlloFK" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ControlloFK_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ControlloFKResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Visualizzazione_elenco_UtentiFree_InputMessage">
+    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_UtentiFree" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Visualizzazione_elenco_UtentiFree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_UtentiFreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Visualizzazione_elenco_Prenotazioni_InputMessage">
+    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_Prenotazioni" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Visualizzazione_elenco_Prenotazioni_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_PrenotazioniResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_VisualizzazionePostiDisponibili_InputMessage">
+    <wsdl:part name="parameters" element="tns:VisualizzazionePostiDisponibili" />
+  </wsdl:message>
+  <wsdl:message name="IService1_VisualizzazionePostiDisponibili_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VisualizzazionePostiDisponibiliResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InserimentoPrenotazione_InputMessage">
+    <wsdl:part name="parameters" element="tns:InserimentoPrenotazione" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InserimentoPrenotazione_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InserimentoPrenotazioneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RappresentaSale_InputMessage">
+    <wsdl:part name="parameters" element="tns:RappresentaSale" />
+  </wsdl:message>
+  <wsdl:message name="IService1_RappresentaSale_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RappresentaSaleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_VerificaPosto_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerificaPosto" />
+  </wsdl:message>
+  <wsdl:message name="IService1_VerificaPosto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerificaPostoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="Registration">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Registration" message="tns:IService1_Registration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RegistrationResponse" message="tns:IService1_Registration_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Login" message="tns:IService1_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/LoginResponse" message="tns:IService1_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InserimentoFilm">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/InserimentoFilm" message="tns:IService1_InserimentoFilm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/InserimentoFilmResponse" message="tns:IService1_InserimentoFilm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancellazioneFilm">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CancellazioneFilm" message="tns:IService1_CancellazioneFilm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CancellazioneFilmResponse" message="tns:IService1_CancellazioneFilm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InserimentoEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/InserimentoEvento" message="tns:IService1_InserimentoEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/InserimentoEventoResponse" message="tns:IService1_InserimentoEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancellazioneEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CancellazioneEvento" message="tns:IService1_CancellazioneEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CancellazioneEventoResponse" message="tns:IService1_CancellazioneEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Visualizzazione_elenco_film">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Visualizzazione_elenco_film" message="tns:IService1_Visualizzazione_elenco_film_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/Visualizzazione_elenco_filmResponse" message="tns:IService1_Visualizzazione_elenco_film_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Visualizzazione_elenco_eventi">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Visualizzazione_elenco_eventi" message="tns:IService1_Visualizzazione_elenco_eventi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/Visualizzazione_elenco_eventiResponse" message="tns:IService1_Visualizzazione_elenco_eventi_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VisualizzazioneSale">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/VisualizzazioneSale" message="tns:IService1_VisualizzazioneSale_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/VisualizzazioneSaleResponse" message="tns:IService1_VisualizzazioneSale_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ControlloFK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ControlloFK" message="tns:IService1_ControlloFK_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ControlloFKResponse" message="tns:IService1_ControlloFK_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Visualizzazione_elenco_UtentiFree">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Visualizzazione_elenco_UtentiFree" message="tns:IService1_Visualizzazione_elenco_UtentiFree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/Visualizzazione_elenco_UtentiFreeResponse" message="tns:IService1_Visualizzazione_elenco_UtentiFree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Visualizzazione_elenco_Prenotazioni">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Visualizzazione_elenco_Prenotazioni" message="tns:IService1_Visualizzazione_elenco_Prenotazioni_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/Visualizzazione_elenco_PrenotazioniResponse" message="tns:IService1_Visualizzazione_elenco_Prenotazioni_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VisualizzazionePostiDisponibili">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/VisualizzazionePostiDisponibili" message="tns:IService1_VisualizzazionePostiDisponibili_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/VisualizzazionePostiDisponibiliResponse" message="tns:IService1_VisualizzazionePostiDisponibili_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InserimentoPrenotazione">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/InserimentoPrenotazione" message="tns:IService1_InserimentoPrenotazione_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/InserimentoPrenotazioneResponse" message="tns:IService1_InserimentoPrenotazione_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RappresentaSale">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RappresentaSale" message="tns:IService1_RappresentaSale_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RappresentaSaleResponse" message="tns:IService1_RappresentaSale_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerificaPosto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/VerificaPosto" message="tns:IService1_VerificaPosto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/VerificaPostoResponse" message="tns:IService1_VerificaPosto_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Registration">
+      <soap:operation soapAction="http://tempuri.org/IService1/Registration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IService1/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserimentoFilm">
+      <soap:operation soapAction="http://tempuri.org/IService1/InserimentoFilm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancellazioneFilm">
+      <soap:operation soapAction="http://tempuri.org/IService1/CancellazioneFilm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserimentoEvento">
+      <soap:operation soapAction="http://tempuri.org/IService1/InserimentoEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancellazioneEvento">
+      <soap:operation soapAction="http://tempuri.org/IService1/CancellazioneEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Visualizzazione_elenco_film">
+      <soap:operation soapAction="http://tempuri.org/IService1/Visualizzazione_elenco_film" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Visualizzazione_elenco_eventi">
+      <soap:operation soapAction="http://tempuri.org/IService1/Visualizzazione_elenco_eventi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VisualizzazioneSale">
+      <soap:operation soapAction="http://tempuri.org/IService1/VisualizzazioneSale" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ControlloFK">
+      <soap:operation soapAction="http://tempuri.org/IService1/ControlloFK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Visualizzazione_elenco_UtentiFree">
+      <soap:operation soapAction="http://tempuri.org/IService1/Visualizzazione_elenco_UtentiFree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Visualizzazione_elenco_Prenotazioni">
+      <soap:operation soapAction="http://tempuri.org/IService1/Visualizzazione_elenco_Prenotazioni" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VisualizzazionePostiDisponibili">
+      <soap:operation soapAction="http://tempuri.org/IService1/VisualizzazionePostiDisponibili" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserimentoPrenotazione">
+      <soap:operation soapAction="http://tempuri.org/IService1/InserimentoPrenotazione" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RappresentaSale">
+      <soap:operation soapAction="http://tempuri.org/IService1/RappresentaSale" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificaPosto">
+      <soap:operation soapAction="http://tempuri.org/IService1/VerificaPosto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/WCFServer/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
