@@ -12,7 +12,7 @@ namespace WCFServer
     public interface IService1
     {
         [OperationContract]
-        string Registration(string user_type, string username, string password, string nome, string cognome);
+        string registration(string user_type, string username, string password, string nome, string cognome);
 
         [OperationContract]
         bool Login(string user_type, string username, string password);

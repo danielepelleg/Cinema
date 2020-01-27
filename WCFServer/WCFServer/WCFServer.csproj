@@ -47,6 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="Film.cs" />
+    <Compile Include="Hall.cs" />
+    <Compile Include="Place.cs" />
+    <Compile Include="Prenotation.cs" />
+    <Compile Include="Reserve.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +63,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service1.cs" />
+    <Compile Include="TablePrinter.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
