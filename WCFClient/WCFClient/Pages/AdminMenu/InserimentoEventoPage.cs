@@ -13,18 +13,16 @@ namespace WCFClient.Pages
         public override void Display()
         {
             base.Display();
-
-            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
-            Output.WriteLine("------ INSERIMENTO EVENTO ------- ");
+            Output.WriteLine("------ ADD EVENT ------- ");
 
             // Definisco le variabili che andranno a prendere i dati inseriti. Essi verranno controllati nel tipo e nella
             // validità (ad esempio lunghezza) prima di essere passati al database.
             string data_e_ora1, codice_film1, codice_sala1, prezzo1 = string.Empty;
 
             Output.WriteLine("ELENCO FILM:");
-            Output.WriteLine("{0}", wcfClient.Visualizzazione_elenco_film() + "\n");
+            Output.WriteLine("{0}", Global.wcfClient.Visualizzazione_elenco_film() + "\n");
             Console.WriteLine("ELENCO SALE:");
-            Console.WriteLine("{0}", wcfClient.VisualizzazioneSale());
+            Console.WriteLine("{0}", Global.wcfClient.VisualizzazioneSale());
 
             Console.WriteLine("--------- Inserimento Dati Evento ----------");
             data_e_ora1 = Input.ReadString("Data e Ora dell'Evento: ");
@@ -42,7 +40,7 @@ namespace WCFClient.Pages
             // Inserimento Evento nel Database.
             try
             {
-                Console.Out.WriteLine("{0}", wcfClient.InserimentoEvento(Cinema.MainProgram.Global.currentusername, data_e_ora, codice_film, codice_sala, prezzo));
+                Console.Out.WriteLine("{0}", Global.wcfClient.AddEvent(Cinema.MainProgram.Global.currentusername, data_e_ora, codice_film, codice_sala, prezzo));
             }
             catch
             {

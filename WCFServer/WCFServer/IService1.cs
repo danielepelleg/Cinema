@@ -11,26 +11,13 @@ namespace WCFServer
     [ServiceContract]
     public interface IService1
     {
-        [OperationContract]
-        bool registration(bool isAdmin, string username, string password, string name, string surname);
+        
 
         [OperationContract]
-        bool login(bool isAdmin, string username, string password);
-
-        [OperationContract]
-        bool addFilm(string titolo, int anno, string regia, int durata, DateTime datauscita, string genere);
-
-        [OperationContract]
-        string CancellazioneFilm(int codicefilm);
-
-        [OperationContract]
-        string InserimentoEvento(string usernameadmin, DateTime data_e_ora, int codice_film, int codice_sala, decimal prezzo);
+        bool AddEvent(string usernameAdmin, DateTime dateTime, int filmCode, int hallCode, decimal price);
 
         [OperationContract]
         string CancellazioneEvento(int codiceevento);
-
-        [OperationContract]
-        string Visualizzazione_elenco_film();
 
         [OperationContract]
         string Visualizzazione_elenco_eventi();

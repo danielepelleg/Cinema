@@ -13,8 +13,6 @@ namespace WCFClient.Pages
         public override void Display()
         {
             base.Display();
-
-            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
             Output.WriteLine("------ INSERIMENTO FILM ------- ");
 
             // Definisco le variabili che andranno a prendere i dati inseriti. Essi verranno controllati nel tipo e nella
@@ -37,7 +35,7 @@ namespace WCFClient.Pages
             // Inserimento Film nel Database.
             try
             {
-                bool success = wcfClient.addFilm(titolo, anno, regia, durata, datauscita, genere);
+                bool success = Global.wcfClient.AddFilm(titolo, anno, regia, durata, datauscita, genere);
                 if (success) Output.WriteLine("INSERIMENTO FILM AVVENUTO CON SUCCESSO\n");
                 else Output.WriteLine("ERRORE INSERIMENTO FILM\n RIPROVARE!\n");
             }

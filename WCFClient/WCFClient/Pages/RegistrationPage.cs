@@ -26,7 +26,6 @@ namespace WCFClient.Pages
 
             // SCRIPT REGISTRAZIONE
             string user, password, hashed_password, nome, cognome = string.Empty;
-            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
 
             // Definisco le variabili che andranno a prendere i dati inseriti. La variabile password andrà a effettuare
             // i controlli di validità della password (sulla lunghezza) mentre la corrispondente variabile hashed
@@ -45,7 +44,7 @@ namespace WCFClient.Pages
             // Registrazione dati utente (admin o user) nel Database
             try
             {
-                bool success = wcfClient.registration(isAdmin, user, hashed_password, nome, cognome);
+                bool success = Global.wcfClient.Registration(isAdmin, user, hashed_password, nome, cognome);
                 if (success) Output.WriteLine("REGISTRAZIONE AVVENUTA CON SUCCESSO\nPROCEDERE CON IL LOGIN\n");
                 else Output.WriteLine("ERRORE REGISTRAZIONE UTENTE\n RIPROVARE!\n");
             }

@@ -13,14 +13,13 @@ namespace WCFClient.Pages
         public override void Display()
         {
             base.Display();
-
-            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO     
+   
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Output.WriteLine("Selezionare l'evento di cui si vuole acquistare il biglietto: ");
             Output.WriteLine("ELENCO EVENTI IN PROGRAMMAZIONE:");
             try
             {
-                Output.WriteLine("{0}", wcfClient.Visualizzazione_elenco_eventi());
+                Output.WriteLine("{0}", Global.wcfClient.Visualizzazione_elenco_eventi());
             }
             catch
             {
@@ -33,7 +32,7 @@ namespace WCFClient.Pages
             codice_evento = Cinema.MainProgram.FKCheck(Convert.ToString(codice_evento), "Evento");
             try
             {
-                Output.WriteLine("Rappresentazione della disposizione dei posti in sala:{0}", wcfClient.RappresentaSale(codice_evento));
+                Output.WriteLine("Rappresentazione della disposizione dei posti in sala:{0}", Global.wcfClient.RappresentaSale(codice_evento));
             }
             catch
             {
@@ -42,7 +41,7 @@ namespace WCFClient.Pages
             Output.WriteLine("Elenco dei posti disponibili:");
             try
             {
-                Output.WriteLine("{0}", wcfClient.VisualizzazionePostiDisponibili(codice_evento));
+                Output.WriteLine("{0}", Global.wcfClient.VisualizzazionePostiDisponibili(codice_evento));
             }
             catch
             {
@@ -55,7 +54,7 @@ namespace WCFClient.Pages
             // Inserimento Film nel Database.
             try
             {
-                Console.Out.WriteLine("{0}", wcfClient.InserimentoPrenotazione(data_e_ora, Cinema.MainProgram.Global.currentusername, codice_evento, numero_posto));
+                Console.Out.WriteLine("{0}", Global.wcfClient.InserimentoPrenotazione(data_e_ora, Cinema.MainProgram.Global.currentusername, codice_evento, numero_posto));
             }
             catch
             {

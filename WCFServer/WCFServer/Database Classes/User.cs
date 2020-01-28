@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace WCFServer
 {
@@ -13,32 +9,18 @@ namespace WCFServer
      * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
      * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
      */
-    class User
-    {
-        private string _username;
-        private string _password;
-        private string _name;
-        private string _surname;
+    [DataContract]
+    class User {
 
-        public string username {
-            get => this._username;
-            set => this._username = value;
-        }
+        [DataMember]
+        public string username { get; set; }
+        [DataMember]
+        public string password { get; set; }
+        [DataMember]
+        public string name { get; set; }
+        [DataMember]
+        public string surname { get; set; }
 
-        public string password {
-            get => this._password;
-            set => this._password= value;
-        }
-
-        public string name {
-            get => this._name;
-            set => this._name = value;
-        }
-
-        public string surname{
-            get => this._surname;
-            set => this._surname = value;
-        }
 
         /*
          * Show information about an User
@@ -47,9 +29,9 @@ namespace WCFServer
          */
         public string showUser()
         {
-            return "Username: " + this._username + 
-                ", Name: " + this._name + 
-                ", Surname: " + this._surname;
+            return "Username: " + this.username + 
+                ", Name: " + this.name + 
+                ", Surname: " + this.surname;
         }
     }
 }

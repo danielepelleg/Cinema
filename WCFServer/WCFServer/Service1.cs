@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using WCFServer.ServiceReferenceUser;
@@ -25,42 +24,13 @@ namespace WCFServer
         Event e1 = new Event();
 
         Prenotation p1 = new Prenotation();
-
-        public static SqlConnection conn = null;
+        
         /*
-         * @return the connection to the Database
+         * Add an event into the database.
          */
-        public static SqlConnection getConnection()
+        public bool AddEvent(string usernameAdmin, DateTime dateTime, int filmCode, int hallCode, decimal price)
         {
-            if (conn != null) return conn;
-            return connect();
-        }
-
-        /*
-         * Connect to the database.
-         * @return the connection
-         */
-        public static SqlConnection connect()
-        {
-            try
-            {
-                SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["connectionString"]);
-                return conn;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine("Database Connection Error");
-            }
-            return conn;
-        }
-
-
-        /*
-         * Register an Admin or Free User in the database.
-         */
-        public bool registration(bool isAdmin, string username, string password, string name, string surname)
-        {
-            using (SqlConnection connection = getConnection())
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
             {
                 connection.Open();
                 // Start a local transaction.
@@ -71,151 +41,48 @@ namespace WCFServer
                 // to Command object for a pending local transaction
                 command.Connection = connection;
                 command.Transaction = transaction;
+
+                command.CommandText = "SELECT * FROM Cinema.Evento;";
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read()) {
+                    if (dateTime == reader.GetDateTime(1) && hallCode == reader.GetInt32(4)){
+                        return false;
+                        //return "\nNella sala inserita è gia presente una proiezione di un film nella data e all'orario che hai appena inserito!\nImpossibile effettuare l'inserimento! Riprovare!\n";
+                    }
+                }
+                reader.Close();
+                // Commit the transaction
+                transaction.Commit();
+
+                // Start a local transaction.
+                SqlTransaction transaction2 = connection.BeginTransaction();
+                SqlCommand command2 = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command2.Connection = connection;
+                command2.Transaction = transaction2;
+
                 try
                 {
-                    switch (isAdmin)
-                    {
-                        case true:
-                            command.CommandText = "INSERT Cinema.Admin VALUES ( @username, @password, @name, @surname)";
-                            break;
-                        case false:
-                            command.CommandText = "INSERT Cinema.UtenteFree VALUES ( @username, @password, @name, @surname)";
-                            break;
-                    }
-                    command.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
-                    command.Parameters.Add("@password", SqlDbType.VarChar).Value = password;
-                    command.Parameters.Add("@name", SqlDbType.VarChar).Value = name;
-                    command.Parameters.Add("@surname", SqlDbType.VarChar).Value = surname;
-
-                    // Commit the transaction.
-                    transaction.Commit();
-
-                    int result = command.ExecuteNonQuery();
-
-                    if (result > 0) return true;
-                    else{
-                        command.Parameters.Clear();
-                        throw new Exception("Errore: si è verificato un problema nell'aggiungere una Persona nel DB");
-                    }
-                }
-                catch (SqlException ex) { // TODO toglibile (?)
-                    Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
-                    Console.WriteLine("  Message: {0}", ex.Message);
-
-                    // Attempt to roll back the transaction.
-                    try
-                    {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2)
-                    {
-                        // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                        Console.WriteLine("  Message: {0}", ex2.Message);
-                    }
-
-                    return false;
-                }
-            }
-
-        }
-
-        /*
-         * Sign in an Admin or Free User in the database.
-         */
-        public bool login(bool isAdmin, string username, string password){
-            // Database connection
-            using (SqlConnection connection = getConnection())
-            {
-                connection.Open();
-
-                // Start a local transaction.
-                SqlTransaction transaction = connection.BeginTransaction();
-                SqlCommand command = connection.CreateCommand();
-
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
-                command.Connection = connection;
-                command.Transaction = transaction;
-                try{
-                    switch (isAdmin)
-                    {
-                    case true: command.CommandText = "SELECT * FROM Cinema.Admin WHERE UsernameAdmin = @username AND Password = @password;";
-                        break;
-                    case false: command.CommandText = "SELECT * FROM Cinema.UtenteFree WHERE UsernameUtenteFree = @username AND Password = @password;";
-                        break;
-                    }
-                    command.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
-                    command.Parameters.Add("@password", SqlDbType.VarChar).Value = password;
-
-                    // Attempt to commit the transaction.
-                    transaction.Commit();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read()) return true;
-                        else return false;
-                    }
-                }
-                catch (SqlException ex) { // TODO toglibile (?)
-                    Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
-                    Console.WriteLine("  Message: {0}", ex.Message);
-
-                    // Attempt to roll back the transaction.
-                    try {
-                        transaction.Rollback();
-                    }
-                    catch (Exception ex2) {
-                        // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
-                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
-                        Console.WriteLine("  Message: {0}", ex2.Message);
-                    }
-
-                    return false;
-                }
-            }
-        }
-
-        /*
-         * Add a film into the database.
-         */
-        public bool addFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre)
-        {
-            using (SqlConnection connection = WCFServer.Service1.getConnection())
-            {
-                connection.Open();
-
-                // Start a local transaction.
-                SqlTransaction transaction = connection.BeginTransaction();
-                SqlCommand command = connection.CreateCommand();
-
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
-                command.Connection = connection;
-                command.Transaction = transaction;
-                
-                try
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "Cinema.AddNewFilm";
-                    command.Parameters.Add("@Titolo", SqlDbType.VarChar).Value = title;
-                    command.Parameters.Add("@Anno", SqlDbType.Int).Value = year;
-                    command.Parameters.Add("@Regia", SqlDbType.VarChar).Value = direction;
-                    command.Parameters.Add("@Durata", SqlDbType.Int).Value = duration;
-                    command.Parameters.Add("@Data_Uscita", SqlDbType.DateTime).Value = releaseDate;
-                    command.Parameters.Add("@Genere", SqlDbType.VarChar).Value = genre;
-                    command.Parameters.Add("@CodiceFilm", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    // Insert the event in the database
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.CommandText = "Cinema.AddNewEvento";
+                    command2.Parameters.Add("@DataOra", SqlDbType.DateTime).Value = dateTime;
+                    command2.Parameters.Add("@Codice_Film", SqlDbType.Int).Value = filmCode;
+                    command2.Parameters.Add("@Codice_Sala", SqlDbType.Int).Value = hallCode;
+                    command2.Parameters.Add("@Username_Admin", SqlDbType.VarChar).Value = usernameAdmin;
+                    command2.Parameters.Add("@Prezzo", SqlDbType.Decimal).Value = price;
+                    command2.Parameters.Add("@CodiceEvento", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    command2.Connection = connection;
+                    command2.ExecuteNonQuery();
 
                     // Initialize a int value to check if the query success
                     var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
 
-                    // Commit the transaction.
-                    transaction.Commit();
+                    // Commit the transaction
+                    transaction2.Commit();
 
                     if (returnParameter.Direction > 0) return true;
                     else
@@ -223,21 +90,24 @@ namespace WCFServer
                         command.Parameters.Clear();
                         throw new Exception("Errore: si è verificato un problema nell'aggiungere un Film nel DB");
                     }
-                    /**
-                     * // Definisco la variabile t per la creazione della tabella
-            \       var t = new TablePrinter("ID", "Titolo", "Anno", "Regia", "Durata", "Data di Uscita", "Genere");
-                    Film f1 = new Film();
-                    f1.filmCode = Convert.ToInt32(cmd.Parameters["@CodiceFilm"].Value.ToString());
-                    f1.title = title;
-                    f1.year = year;
-                    f1.direction = direction;
-                    f1.duration = duration;
-                    f1.releaseDate = releaseDate;
-                    f1.genre = genre;
-                    t.AddRow(f1.filmCode, f1.title, f1.year, f1.direction, f1.duration+"'", f1.releaseDate.ToShortDateString(), f1.genre);
+                    /*
+
+                    // CodiceEvento is an IDENTITY value from the database.
+                    e1.eventCode = Convert.ToInt32(command2.Parameters["@CodiceEvento"].Value.ToString());
+                    e1.dateTime = data_e_ora;
+                    e1.filmCode = codice_film;
+                    e1.hallCode = codice_sala;
+                    e1.usernameAdmin = usernameadmin;
+                    e1.price = prezzo;
+                    
+                    var t = new TablePrinter("ID EVENTO", "Data e Ora", "Sala", "ID FILM", "Prezzo");
+                    t.AddRow(e1.eventCode, e1.dateTime.ToShortDateString() + " " + e1.dateTime.ToShortTimeString(), e1.hallCode, e1.filmCode, e1.price + "€");
                     */
+                    // Commit the transaction.
+
                 }
-                catch (SqlException ex) { // TODO toglibile (?)
+                catch (SqlException ex)
+                { // TODO toglibile (?)
                     Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
                     Console.WriteLine("  Message: {0}", ex.Message);
 
@@ -261,47 +131,13 @@ namespace WCFServer
 
         }
 
-        // Cancellazione Film
-        public string CancellazioneFilm(int codicefilm)
-        {
-
-            using (SqlConnection connection = WCFServer.Service1.getConnection())
-            {
-                connection.Open();
-                // Start a local transaction.
-                SqlTransaction sqlTran = connection.BeginTransaction();
-
-                // Enlist a command in the current transaction.
-                SqlCommand cmd = connection.CreateCommand();
-                cmd.Transaction = sqlTran;
-
-
-                try
-                {
-                    // Esecuzione Inserimento
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Cinema.DeleteFilm";
-                    cmd.Parameters.Add("@CodiceFilm", SqlDbType.Int).Value = codicefilm;
-                    cmd.Connection = connection;
-                    cmd.ExecuteNonQuery();
-                    // Commit the transaction.
-                    sqlTran.Commit();
-                    return "CANCELLAZIONE DEL FILM DAL DATABASE AVVENUTA CON SUCCESSO\n";
-
-                }
-                catch (SqlException ex)
-                {
-                    return ex.Message;
-                }
-            }
-
-        }
-
-        // Cancellazione Evento
+        /*
+         * Delete an event from the database.
+         */
         public string CancellazioneEvento(int codiceevento)
         {
 
-            using (SqlConnection connection = WCFServer.Service1.getConnection())
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
             {
                 connection.Open();
 
@@ -335,80 +171,11 @@ namespace WCFServer
 
         }
 
-        // Inserimento Evento
-        public string InserimentoEvento(string usernameadmin, DateTime data_e_ora, int codice_film, int codice_sala, decimal prezzo)
-        {
-
-            using (SqlConnection connection = WCFServer.Service1.getConnection())
-            {
-                var t = new TablePrinter("ID EVENTO", "Data e Ora", "Sala", "ID FILM", "Prezzo");
-                SqlTransaction tx = null;
-                connection.Open();
-                tx = connection.BeginTransaction();
-                using (SqlCommand command1 = connection.CreateCommand()) //controllo che non ci siano sovvrapposizioni di eventi nella stessa sala
-                {
-                    command1.CommandText = "SELECT * FROM Cinema.Evento;";
-                    command1.Transaction = tx;
-                    using (SqlDataReader reader = command1.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            if (data_e_ora == reader.GetDateTime(1) && codice_sala == reader.GetInt32(4))
-                            {
-                                return "\nNella sala inserita è gia presente una proiezione di un film nella data e all'orario che hai appena inserito!\nImpossibile effettuare l'inserimento! Riprovare!\n";
-                            }
-                        }
-                    }
-                }
-                tx.Commit();
-
-                // Start a local transaction.
-                SqlTransaction sqlTran = connection.BeginTransaction();
-
-                // Enlist a command in the current transaction.
-                SqlCommand cmd = connection.CreateCommand();
-                cmd.Transaction = sqlTran;
-
-                try
-                {
-                    // Esecuzione Inserimento
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Cinema.AddNewEvento";
-                    cmd.Parameters.Add("@DataOra", SqlDbType.DateTime).Value = data_e_ora;
-                    cmd.Parameters.Add("@Codice_Film", SqlDbType.Int).Value = codice_film;
-                    cmd.Parameters.Add("@Codice_Sala", SqlDbType.Int).Value = codice_sala;
-                    cmd.Parameters.Add("@Username_Admin", SqlDbType.VarChar).Value = usernameadmin;
-                    cmd.Parameters.Add("@Prezzo", SqlDbType.Decimal).Value = prezzo;
-                    cmd.Parameters.Add("@CodiceEvento", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Connection = connection;
-                    cmd.ExecuteNonQuery();
-                    // CodiceEvento is an IDENTITY value from the database.
-                    e1.eventCode = Convert.ToInt32(cmd.Parameters["@CodiceEvento"].Value.ToString());
-                    e1.dateTime = data_e_ora;
-                    e1.filmCode = codice_film;
-                    e1.hallCode = codice_sala;
-                    e1.usernameAdmin = usernameadmin;
-                    e1.price = prezzo;
-                    t.AddRow(e1.eventCode, e1.dateTime.ToShortDateString() + " " + e1.dateTime.ToShortTimeString(), e1.hallCode, e1.filmCode, e1.price + "€");
-                    // Commit the transaction.
-                    sqlTran.Commit();
-                    connection.Close();
-                    return "INSERIMENTO EVENTO AVVENUTO CON SUCCESSO\nEvento Inserito: \n" + t.Print() + "\n";
-
-                }
-                catch (SqlException ex)
-                {
-                    return string.Format("{0}", ex.ToString());
-                }
-            }
-
-        }
-
         //Inserimento Prenotazioni
         public string InserimentoPrenotazione(DateTime dataora, string username_utentefree, int codice_evento, int numero_posto)
         {
             var t = new TablePrinter("Numero Prenotazione", "ID Evento", "Username", "Data e Ora Prenotazione");
-            using (SqlConnection connection = WCFServer.Service1.getConnection())
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
             {
                 connection.Open();
                 // Start a local transaction.
@@ -456,58 +223,7 @@ namespace WCFServer
                 }
             }
 
-        }
-
-        //Visualizzazione Elenco Film
-        public string Visualizzazione_elenco_film()
-        {
-            var t = new TablePrinter("ID", "Titolo", "Anno", "Regia", "Durata", "Data di Uscita", "Genere");
-            SqlTransaction tx = null;
-            string elenco = string.Empty;
-            //int i = 0; //variabile di incremento per la lista
-            try
-            {
-                // Connessione al DB Cinema
-                
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
-                {
-                    conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
-                    {
-                        command1.CommandText = "SELECT * FROM Cinema.Film;";
-                        command1.Transaction = tx;
-                        using (SqlDataReader reader = command1.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Film f = new Film();
-                                f.filmCode = reader.GetInt32(0);
-                                f.title = reader.GetString(1);
-                                f.year = reader.GetInt32(2);
-                                f.direction = reader.GetString(3);
-                                f.duration = reader.GetInt32(4);
-                                f.releaseDate = reader.GetDateTime(5);
-                                f.genre = reader.GetString(6);
-                                //elenco = elenco + listFilm[i].VisualizzaFilm() + "\n";
-                                t.AddRow(f.filmCode, f.title, f.year, f.direction, f.duration+"'", f.releaseDate.ToShortDateString(), f.genre);
-                                //i++;
-                            }
-                        }
-                    }
-                    tx.Commit();
-                    conn.Close();
-                }
-            }
-            catch (SqlException ex)
-            {
-                return string.Format("Connessione non riuscita: {0}", ex.ToString());
-            }
-            /*if (elenco == string.Empty)
-                return "Non sono ancora presenti film all'interno del database. \n";
-            else*/
-                return t.Print();
-        }
+        }  
 
         //Visualizzazione Elenco Eventi
         public string Visualizzazione_elenco_eventi()
@@ -519,7 +235,7 @@ namespace WCFServer
             try
             {
                 // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
+                using (SqlConnection conn = DatabaseHandler.GetConnection())
                 {
                     conn.Open();
                     tx = conn.BeginTransaction();
@@ -568,7 +284,7 @@ namespace WCFServer
             try
             {
                 // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
+                using (SqlConnection conn = DatabaseHandler.GetConnection())
                 {
                     conn.Open();
                     tx = conn.BeginTransaction();
@@ -613,7 +329,7 @@ namespace WCFServer
             try
             {
                 // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
+                using (SqlConnection conn = DatabaseHandler.GetConnection())
                 {
                     conn.Open();
                     tx = conn.BeginTransaction();
@@ -699,7 +415,7 @@ namespace WCFServer
             try
             {
                 // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
+                using (SqlConnection conn = DatabaseHandler.GetConnection())
                 {
                     listUtentiFree.Clear(); //pulisco la lista di film in modo tale da riempirla nuovamente e non avere problemi se sono avvenute modifiche
                     conn.Open();
@@ -747,7 +463,7 @@ namespace WCFServer
             try
             {
                 // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
+                using (SqlConnection conn = DatabaseHandler.GetConnection())
                 {
                     listPrenotazioni.Clear(); //pulisco la lista di film in modo tale da riempirla nuovamente e non avere problemi se sono avvenute modifiche
                     conn.Open();
@@ -800,7 +516,7 @@ namespace WCFServer
             try
             {
                 // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
+                using (SqlConnection conn = DatabaseHandler.GetConnection())
                 {
                     conn.Open();
                     tx = conn.BeginTransaction();
@@ -857,7 +573,7 @@ namespace WCFServer
             {
                 SqlTransaction tx = null;
                 // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
+                using (SqlConnection conn = DatabaseHandler.GetConnection())
                 {
                     conn.Open();
                     tx = conn.BeginTransaction();
@@ -908,7 +624,7 @@ namespace WCFServer
             try
             {
                 // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
+                using (SqlConnection conn = DatabaseHandler.GetConnection())
                 {
                     conn.Open();
                     tx = conn.BeginTransaction();

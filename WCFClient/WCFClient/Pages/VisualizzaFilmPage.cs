@@ -13,12 +13,11 @@ namespace WCFClient.Pages
         {
             base.Display();
 
-            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
             Output.WriteLine("ELENCO FILM: ");
             try
             {
                 // Richiamo la funzione server che mi mostra i film presenti al cinema in una tabella
-                Output.WriteLine("{0}", wcfClient.Visualizzazione_elenco_film());
+                Output.WriteLine("{0}", Global.wcfClient.Visualizzazione_elenco_film());
 
             }
             catch

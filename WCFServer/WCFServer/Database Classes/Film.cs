@@ -3,43 +3,36 @@ using System.Runtime.Serialization;
 
 namespace WCFServer
 {
-    /*
-     * Film Class
-     * Store Film objects of the database
-     * 
-     * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
-     * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
-     */
     [DataContract]
     public class Film
     {
         [DataMember]
-        public int filmCode { get; set; }
+        public int FilmCode { get; set; }
         [DataMember]
-        public string title { get; set; }
+        public string Title { get; set; }
         [DataMember]
-        public int year { get; set; }
+        public int Year { get; set; }
         [DataMember]
-        public string direction { get; set; }
+        public string Direction { get; set; }
         [DataMember]
-        public int duration { get; set; }
+        public int Duration { get; set; }
         [DataMember]
-        public DateTime releaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
         [DataMember]
-        public string genre { get; set; }
+        public string Genre { get; set; }
 
         /*
          * Class Constructor
          */
         public Film(int filmCode, string title, int year, string direction, int duration, DateTime releaseDate, string genre)
         {
-            this.filmCode = filmCode;
-            this.title = title;
-            this.year = year;
-            this.direction = direction;
-            this.duration = duration;
-            this.releaseDate = releaseDate;
-            this.genre = genre;
+            this.FilmCode = filmCode;
+            this.Title = title;
+            this.Year = year;
+            this.Direction = direction;
+            this.Duration = duration;
+            this.ReleaseDate = releaseDate;
+            this.Genre = genre;
         }
 
 
@@ -52,13 +45,13 @@ namespace WCFServer
          */
         public string showFilm()
         {
-            return this.filmCode + ", " +
-                this.title + ", " +
-                this.year.ToString() + ", " +
-                this.direction + ", " +
-                this.duration.ToString() + ", " +
-                this.releaseDate.ToString() + ", " +
-                this.genre;
+            return this.FilmCode + ", " +
+                this.Title + ", " +
+                this.Year.ToString() + ", " +
+                this.Direction + ", " +
+                this.Duration.ToString() + ", " +
+                this.ReleaseDate.ToString() + ", " +
+                this.Genre;
         }
     }
 

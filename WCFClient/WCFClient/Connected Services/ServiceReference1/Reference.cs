@@ -15,35 +15,35 @@ namespace WCFClient.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/registration", ReplyAction="http://tempuri.org/IService1/registrationResponse")]
-        bool registration(bool isAdmin, string username, string password, string name, string surname);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Registration", ReplyAction="http://tempuri.org/IService1/RegistrationResponse")]
+        bool Registration(bool isAdmin, string username, string password, string name, string surname);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/registration", ReplyAction="http://tempuri.org/IService1/registrationResponse")]
-        System.Threading.Tasks.Task<bool> registrationAsync(bool isAdmin, string username, string password, string name, string surname);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Registration", ReplyAction="http://tempuri.org/IService1/RegistrationResponse")]
+        System.Threading.Tasks.Task<bool> RegistrationAsync(bool isAdmin, string username, string password, string name, string surname);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/login", ReplyAction="http://tempuri.org/IService1/loginResponse")]
-        bool login(bool isAdmin, string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        bool Login(bool isAdmin, string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/login", ReplyAction="http://tempuri.org/IService1/loginResponse")]
-        System.Threading.Tasks.Task<bool> loginAsync(bool isAdmin, string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        System.Threading.Tasks.Task<bool> LoginAsync(bool isAdmin, string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addFilm", ReplyAction="http://tempuri.org/IService1/addFilmResponse")]
-        bool addFilm(string titolo, int anno, string regia, int durata, System.DateTime datauscita, string genere);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddFilm", ReplyAction="http://tempuri.org/IService1/AddFilmResponse")]
+        bool AddFilm(string titolo, int anno, string regia, int durata, System.DateTime datauscita, string genere);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/addFilm", ReplyAction="http://tempuri.org/IService1/addFilmResponse")]
-        System.Threading.Tasks.Task<bool> addFilmAsync(string titolo, int anno, string regia, int durata, System.DateTime datauscita, string genere);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddFilm", ReplyAction="http://tempuri.org/IService1/AddFilmResponse")]
+        System.Threading.Tasks.Task<bool> AddFilmAsync(string titolo, int anno, string regia, int durata, System.DateTime datauscita, string genere);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CancellazioneFilm", ReplyAction="http://tempuri.org/IService1/CancellazioneFilmResponse")]
-        string CancellazioneFilm(int codicefilm);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteFilm", ReplyAction="http://tempuri.org/IService1/DeleteFilmResponse")]
+        bool DeleteFilm(int codicefilm);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CancellazioneFilm", ReplyAction="http://tempuri.org/IService1/CancellazioneFilmResponse")]
-        System.Threading.Tasks.Task<string> CancellazioneFilmAsync(int codicefilm);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteFilm", ReplyAction="http://tempuri.org/IService1/DeleteFilmResponse")]
+        System.Threading.Tasks.Task<bool> DeleteFilmAsync(int codicefilm);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InserimentoEvento", ReplyAction="http://tempuri.org/IService1/InserimentoEventoResponse")]
-        string InserimentoEvento(string usernameadmin, System.DateTime data_e_ora, int codice_film, int codice_sala, decimal prezzo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddEvent", ReplyAction="http://tempuri.org/IService1/AddEventResponse")]
+        bool AddEvent(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InserimentoEvento", ReplyAction="http://tempuri.org/IService1/InserimentoEventoResponse")]
-        System.Threading.Tasks.Task<string> InserimentoEventoAsync(string usernameadmin, System.DateTime data_e_ora, int codice_film, int codice_sala, decimal prezzo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddEvent", ReplyAction="http://tempuri.org/IService1/AddEventResponse")]
+        System.Threading.Tasks.Task<bool> AddEventAsync(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CancellazioneEvento", ReplyAction="http://tempuri.org/IService1/CancellazioneEventoResponse")]
         string CancellazioneEvento(int codiceevento);
@@ -139,44 +139,44 @@ namespace WCFClient.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public bool registration(bool isAdmin, string username, string password, string name, string surname) {
-            return base.Channel.registration(isAdmin, username, password, name, surname);
+        public bool Registration(bool isAdmin, string username, string password, string name, string surname) {
+            return base.Channel.Registration(isAdmin, username, password, name, surname);
         }
         
-        public System.Threading.Tasks.Task<bool> registrationAsync(bool isAdmin, string username, string password, string name, string surname) {
-            return base.Channel.registrationAsync(isAdmin, username, password, name, surname);
+        public System.Threading.Tasks.Task<bool> RegistrationAsync(bool isAdmin, string username, string password, string name, string surname) {
+            return base.Channel.RegistrationAsync(isAdmin, username, password, name, surname);
         }
         
-        public bool login(bool isAdmin, string username, string password) {
-            return base.Channel.login(isAdmin, username, password);
+        public bool Login(bool isAdmin, string username, string password) {
+            return base.Channel.Login(isAdmin, username, password);
         }
         
-        public System.Threading.Tasks.Task<bool> loginAsync(bool isAdmin, string username, string password) {
-            return base.Channel.loginAsync(isAdmin, username, password);
+        public System.Threading.Tasks.Task<bool> LoginAsync(bool isAdmin, string username, string password) {
+            return base.Channel.LoginAsync(isAdmin, username, password);
         }
         
-        public bool addFilm(string titolo, int anno, string regia, int durata, System.DateTime datauscita, string genere) {
-            return base.Channel.addFilm(titolo, anno, regia, durata, datauscita, genere);
+        public bool AddFilm(string titolo, int anno, string regia, int durata, System.DateTime datauscita, string genere) {
+            return base.Channel.AddFilm(titolo, anno, regia, durata, datauscita, genere);
         }
         
-        public System.Threading.Tasks.Task<bool> addFilmAsync(string titolo, int anno, string regia, int durata, System.DateTime datauscita, string genere) {
-            return base.Channel.addFilmAsync(titolo, anno, regia, durata, datauscita, genere);
+        public System.Threading.Tasks.Task<bool> AddFilmAsync(string titolo, int anno, string regia, int durata, System.DateTime datauscita, string genere) {
+            return base.Channel.AddFilmAsync(titolo, anno, regia, durata, datauscita, genere);
         }
         
-        public string CancellazioneFilm(int codicefilm) {
-            return base.Channel.CancellazioneFilm(codicefilm);
+        public bool DeleteFilm(int codicefilm) {
+            return base.Channel.DeleteFilm(codicefilm);
         }
         
-        public System.Threading.Tasks.Task<string> CancellazioneFilmAsync(int codicefilm) {
-            return base.Channel.CancellazioneFilmAsync(codicefilm);
+        public System.Threading.Tasks.Task<bool> DeleteFilmAsync(int codicefilm) {
+            return base.Channel.DeleteFilmAsync(codicefilm);
         }
         
-        public string InserimentoEvento(string usernameadmin, System.DateTime data_e_ora, int codice_film, int codice_sala, decimal prezzo) {
-            return base.Channel.InserimentoEvento(usernameadmin, data_e_ora, codice_film, codice_sala, prezzo);
+        public bool AddEvent(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price) {
+            return base.Channel.AddEvent(usernameAdmin, dateTime, filmCode, hallCode, price);
         }
         
-        public System.Threading.Tasks.Task<string> InserimentoEventoAsync(string usernameadmin, System.DateTime data_e_ora, int codice_film, int codice_sala, decimal prezzo) {
-            return base.Channel.InserimentoEventoAsync(usernameadmin, data_e_ora, codice_film, codice_sala, prezzo);
+        public System.Threading.Tasks.Task<bool> AddEventAsync(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price) {
+            return base.Channel.AddEventAsync(usernameAdmin, dateTime, filmCode, hallCode, price);
         }
         
         public string CancellazioneEvento(int codiceevento) {
