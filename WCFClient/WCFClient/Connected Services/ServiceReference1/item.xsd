@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Registration">
+  <xs:element name="registration">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="user_type" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isAdmin" type="xs:boolean" />
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cognome" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="surname" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RegistrationResponse">
+  <xs:element name="registrationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="RegistrationResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="registrationResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Login">
+  <xs:element name="login">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="user_type" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isAdmin" type="xs:boolean" />
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="LoginResponse">
+  <xs:element name="loginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="LoginResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="loginResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InserimentoFilm">
+  <xs:element name="addFilm">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="titolo" nillable="true" type="xs:string" />
@@ -46,10 +46,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InserimentoFilmResponse">
+  <xs:element name="addFilmResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InserimentoFilmResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="addFilmResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

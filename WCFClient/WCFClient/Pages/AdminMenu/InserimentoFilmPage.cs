@@ -37,13 +37,14 @@ namespace WCFClient.Pages
             // Inserimento Film nel Database.
             try
             {
-                Console.WriteLine("{0}", wcfClient.InserimentoFilm(titolo, anno, regia, durata, datauscita, genere));
+                bool success = wcfClient.addFilm(titolo, anno, regia, durata, datauscita, genere);
+                if (success) Output.WriteLine("INSERIMENTO FILM AVVENUTO CON SUCCESSO\n");
+                else Output.WriteLine("ERRORE INSERIMENTO FILM\n RIPROVARE!\n");
             }
             catch
             {
                 Cinema.MainProgram.Errormessage();
             }
-
             // Naviga Indietro
             Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();

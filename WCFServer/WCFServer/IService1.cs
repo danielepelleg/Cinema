@@ -12,13 +12,13 @@ namespace WCFServer
     public interface IService1
     {
         [OperationContract]
-        string registration(string user_type, string username, string password, string nome, string cognome);
+        bool registration(bool isAdmin, string username, string password, string name, string surname);
 
         [OperationContract]
-        bool Login(string user_type, string username, string password);
+        bool login(bool isAdmin, string username, string password);
 
         [OperationContract]
-        string InserimentoFilm(string titolo, int anno, string regia, int durata, DateTime datauscita, string genere);
+        bool addFilm(string titolo, int anno, string regia, int durata, DateTime datauscita, string genere);
 
         [OperationContract]
         string CancellazioneFilm(int codicefilm);
@@ -60,4 +60,6 @@ namespace WCFServer
         string VerificaPosto(int codice_evento, int numero_posto);
 
     }
+    
 }
+     

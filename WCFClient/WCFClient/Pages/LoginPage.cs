@@ -17,6 +17,8 @@ namespace WCFClient.Pages
             Cinema.MainProgram.Global.loggedin = false; 
             // Uso l'enumerazione creata precedentemente per far scegliere il tipo di Login (Utente - Admin)
             Type input = Input.ReadEnum<Type>("Select the type of user you want to login: ");
+            bool isAdmin = false;
+            if (input.ToString().Equals("Admin")) isAdmin = true;
             Output.WriteLine(ConsoleColor.Green, "\n {0} Login: ", input);
 
             // SCRIPT LOGIN
@@ -38,7 +40,7 @@ namespace WCFClient.Pages
             try
             {
                 // Mando i dati al server per il Login
-                Cinema.MainProgram.Global.loggedin = wcfClient.Login(input.ToString(), username, hashed_password);
+                Cinema.MainProgram.Global.loggedin = wcfClient.login(isAdmin, username, hashed_password);
                 // Assegno il risultato booleano del login alla relativa variabile globale
                 Cinema.MainProgram.Global.currentusername = username;
                 // Reindirizzo l'Utente alla pagina corrispondente al tipo di login effettuato
@@ -79,9 +81,6 @@ namespace WCFClient.Pages
                 Input.ReadString("Press [Enter] to navigate back");
                 Program.NavigateTo<MainPage>();
             }
-
-           
-
         }
     }
 

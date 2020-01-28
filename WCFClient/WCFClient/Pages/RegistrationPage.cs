@@ -10,7 +10,7 @@ namespace WCFClient.Pages
             : base("Registration", program)
         {
         }
-
+       
         public override void Display()
         {
             base.Display();
@@ -20,6 +20,8 @@ namespace WCFClient.Pages
 
             // Uso l'enumerazione creata precedentemente per far scegliere il tipo di Registrazione (Utente - Admin)
             Type input = Input.ReadEnum<Type>("Select the type of user you want to register: ");
+            bool isAdmin = false;
+            if (input.ToString().Equals("Admin")) isAdmin = true;
             Output.WriteLine(ConsoleColor.Green, "\n {0} Sign In: ", input);
 
             // SCRIPT REGISTRAZIONE
@@ -43,7 +45,9 @@ namespace WCFClient.Pages
             // Registrazione dati utente (admin o user) nel Database
             try
             {
-                Output.WriteLine(wcfClient.Registration(input.ToString(), user, hashed_password, nome, cognome));
+                bool success = wcfClient.registration(isAdmin, user, hashed_password, nome, cognome);
+                if (success) Output.WriteLine("REGISTRAZIONE AVVENUTA CON SUCCESSO\nPROCEDERE CON IL LOGIN\n");
+                else Output.WriteLine("ERRORE REGISTRAZIONE UTENTE\n RIPROVARE!\n");
             }
             catch
             {

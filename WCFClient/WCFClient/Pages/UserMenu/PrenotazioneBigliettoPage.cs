@@ -9,12 +9,12 @@ namespace WCFClient.Pages
             : base("Prenotazione Biglietto", program)
         {
         }
-
+        
         public override void Display()
         {
             base.Display();
 
-            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
+            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO     
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Output.WriteLine("Selezionare l'evento di cui si vuole acquistare il biglietto: ");
             Output.WriteLine("ELENCO EVENTI IN PROGRAMMAZIONE:");

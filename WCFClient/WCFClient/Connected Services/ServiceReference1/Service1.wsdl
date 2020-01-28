@@ -6,23 +6,23 @@
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFServer/Service1/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IService1_Registration_InputMessage">
-    <wsdl:part name="parameters" element="tns:Registration" />
+  <wsdl:message name="IService1_registration_InputMessage">
+    <wsdl:part name="parameters" element="tns:registration" />
   </wsdl:message>
-  <wsdl:message name="IService1_Registration_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegistrationResponse" />
+  <wsdl:message name="IService1_registration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:registrationResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_Login_InputMessage">
-    <wsdl:part name="parameters" element="tns:Login" />
+  <wsdl:message name="IService1_login_InputMessage">
+    <wsdl:part name="parameters" element="tns:login" />
   </wsdl:message>
-  <wsdl:message name="IService1_Login_OutputMessage">
-    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  <wsdl:message name="IService1_login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:loginResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_InserimentoFilm_InputMessage">
-    <wsdl:part name="parameters" element="tns:InserimentoFilm" />
+  <wsdl:message name="IService1_addFilm_InputMessage">
+    <wsdl:part name="parameters" element="tns:addFilm" />
   </wsdl:message>
-  <wsdl:message name="IService1_InserimentoFilm_OutputMessage">
-    <wsdl:part name="parameters" element="tns:InserimentoFilmResponse" />
+  <wsdl:message name="IService1_addFilm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addFilmResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_CancellazioneFilm_InputMessage">
     <wsdl:part name="parameters" element="tns:CancellazioneFilm" />
@@ -103,17 +103,17 @@
     <wsdl:part name="parameters" element="tns:VerificaPostoResponse" />
   </wsdl:message>
   <wsdl:portType name="IService1">
-    <wsdl:operation name="Registration">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Registration" message="tns:IService1_Registration_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RegistrationResponse" message="tns:IService1_Registration_OutputMessage" />
+    <wsdl:operation name="registration">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/registration" message="tns:IService1_registration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/registrationResponse" message="tns:IService1_registration_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Login">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Login" message="tns:IService1_Login_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/LoginResponse" message="tns:IService1_Login_OutputMessage" />
+    <wsdl:operation name="login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/login" message="tns:IService1_login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/loginResponse" message="tns:IService1_login_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="InserimentoFilm">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/InserimentoFilm" message="tns:IService1_InserimentoFilm_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/InserimentoFilmResponse" message="tns:IService1_InserimentoFilm_OutputMessage" />
+    <wsdl:operation name="addFilm">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/addFilm" message="tns:IService1_addFilm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/addFilmResponse" message="tns:IService1_addFilm_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CancellazioneFilm">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CancellazioneFilm" message="tns:IService1_CancellazioneFilm_InputMessage" />
@@ -170,8 +170,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="Registration">
-      <soap:operation soapAction="http://tempuri.org/IService1/Registration" style="document" />
+    <wsdl:operation name="registration">
+      <soap:operation soapAction="http://tempuri.org/IService1/registration" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -179,8 +179,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Login">
-      <soap:operation soapAction="http://tempuri.org/IService1/Login" style="document" />
+    <wsdl:operation name="login">
+      <soap:operation soapAction="http://tempuri.org/IService1/login" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -188,8 +188,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InserimentoFilm">
-      <soap:operation soapAction="http://tempuri.org/IService1/InserimentoFilm" style="document" />
+    <wsdl:operation name="addFilm">
+      <soap:operation soapAction="http://tempuri.org/IService1/addFilm" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

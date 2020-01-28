@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 
@@ -14,13 +13,11 @@ namespace WCFServer
         List<Prenotation> listPrenotazioni = new List<Prenotation>();
         Admin a1 = new Admin();
         User u1 = new User();
-        Film f1 = new Film();
         Event e1 = new Event();
+
         Prenotation p1 = new Prenotation();
 
-        private static String DBURL = "Server = localhost\\SQLEXPRESS; Database = Cinema; Integrated Security = SSPI";
         public static SqlConnection conn = null;
-
         /*
          * @return the connection to the Database
          */
@@ -38,7 +35,7 @@ namespace WCFServer
         {
             try
             {
-                SqlConnection conn = new SqlConnection(DBURL);
+                SqlConnection conn = new SqlConnection(ConfigurationManager.AppSettings["connectionString"]);
                 return conn;
             }
             catch (SqlException e)
@@ -52,151 +49,205 @@ namespace WCFServer
         /*
          * Register an Admin or Free User in the database.
          */
-        public string registration(string user_type, string username, string password, string nome, string cognome)
+        public bool registration(bool isAdmin, string username, string password, string name, string surname)
         {
-            using (SqlConnection connection = WCFServer.Service1.getConnection())
+            using (SqlConnection connection = getConnection())
             {
                 connection.Open();
-                // Start a local transaction.
-                SqlTransaction sqlTran = connection.BeginTransaction();
 
-                // Enlist a command in the current transaction.
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
-                command.Transaction = sqlTran;
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
                 try
                 {
-                    if (user_type == "Admin")
+                    switch (isAdmin)
                     {
-                        command.CommandText = "INSERT Cinema.Admin (UsernameAdmin, Password, Nome, Cognome) VALUES ('" + username + "','" + password + "','" + nome + "','" + cognome + "')";
-                        command.ExecuteNonQuery();
+                        case true:
+                            command.CommandText = "INSERT Cinema.Admin VALUES ( @username, @password, @name, @surname)";
+                            break;
+                        case false:
+                            command.CommandText = "INSERT Cinema.UtenteFree VALUES ( @username, @password, @name, @surname)";
+                            break;
                     }
-                    else if (user_type == "User")
-                    {
-                        command.CommandText = "INSERT Cinema.UtenteFree (UsernameUtenteFree, Password, Nome, Cognome) VALUES ('" + username + "','" + password + "','" + nome + "','" + cognome + "')";
-                        command.ExecuteNonQuery();
-                    }
+                    command.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
+                    command.Parameters.Add("@password", SqlDbType.VarChar).Value = password;
+                    command.Parameters.Add("@name", SqlDbType.VarChar).Value = name;
+                    command.Parameters.Add("@surname", SqlDbType.VarChar).Value = surname;
+
                     // Commit the transaction.
-                    sqlTran.Commit();
-                    return "REGISTRAZIONE AVVENUTA CON SUCCESSO\nPROCEDERE CON IL LOGIN\n";
+                    transaction.Commit();
+
+                    int result = command.ExecuteNonQuery();
+
+                    if (result > 0) return true;
+                    else{
+                        command.Parameters.Clear();
+                        throw new Exception("Errore: si è verificato un problema nell'aggiungere una Persona nel DB");
+                    }
                 }
-                catch
-                {
-                    return "ERRORE REGISTRAZIONE UTENTE\n RIPROVARE!\n";
+                catch (SqlException ex) { // TODO toglibile (?)
+                    Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
                 }
             }
 
         }
 
-        /**
+        /*
          * Sign in an Admin or Free User in the database.
          */
-        public bool Login(string user_type, string username, string password)
-        {
-            bool check = false; // Varabile booleana che controlla il successo del Login
-            // Controllo tipo di Login
-            if (user_type == "Admin")
+        public bool login(bool isAdmin, string username, string password){
+            // Database connection
+            using (SqlConnection connection = getConnection())
             {
-                a1.username = username;
-                a1.password = password;
-                user_type = "admin";
-            }
-            else if (user_type == "User")
-            {
-                u1.username = username;
-                u1.password = password;
-                user_type = "utentefree";
-            }
-            string result = string.Empty;
-            try
-            {
-                SqlTransaction tx = null;
-                // Connessione al DB Cinema
-                using (SqlConnection conn = WCFServer.Service1.getConnection())
-                {
-                    conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+                try{
+                    switch (isAdmin)
                     {
-                        command1.CommandText = "SELECT * FROM Cinema." + user_type + ";";
-                        command1.Transaction = tx;
-                        using (SqlDataReader reader = command1.ExecuteReader())
-                        {
-                            {
-                                // Definisco una ariabile booleana di controllo. 
-                                // I dati forniti dall'utente devono soddisfare quelli presenti nel Database
-                                bool found = false; 
-                                while (reader.Read())
-                                {
-                                    if ((username == reader.GetString(0)) && (password == reader.GetString(1)))
-                                    {
-                                        found = true;
-                                        check = true;
-                                    }
-                                }
-                                if (found == false)
-                                {
-                                    check = false;
-                                }
-                            }
-                        }
+                    case true: command.CommandText = "SELECT * FROM Cinema.Admin WHERE UsernameAdmin = @username AND Password = @password;";
+                        break;
+                    case false: command.CommandText = "SELECT * FROM Cinema.UtenteFree WHERE UsernameUtenteFree = @username AND Password = @password;";
+                        break;
                     }
-                    tx.Commit();
+                    command.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
+                    command.Parameters.Add("@password", SqlDbType.VarChar).Value = password;
+
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read()) return true;
+                        else return false;
+                    }
+                }
+                catch (SqlException ex) { // TODO toglibile (?)
+                    Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2) {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
                 }
             }
-            catch (SqlException ex)
-            {
-                result = string.Format("Connessione non riuscita: {0}", ex.ToString());
-            }
-            return check;
         }
 
-        // Inserimento Film
-        public string InserimentoFilm(string titolo, int anno, string regia, int durata, DateTime datauscita, string genere)
+        /*
+         * Add a film into the database.
+         */
+        public bool addFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre)
         {
-            // Definisco la variabile t per la creazione della tabella
-            var t = new TablePrinter("ID", "Titolo", "Anno", "Regia", "Durata", "Data di Uscita", "Genere");
             using (SqlConnection connection = WCFServer.Service1.getConnection())
             {
                 connection.Open();
 
                 // Start a local transaction.
-                SqlTransaction sqlTran = connection.BeginTransaction();
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
 
-                // Enlist a command in the current transaction.
-                SqlCommand cmd = connection.CreateCommand();
-                cmd.Transaction = sqlTran;
-
-
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+                
                 try
                 {
-                    // Esecuzione Inserimento
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Cinema.AddNewFilm";
-                    cmd.Parameters.Add("@Titolo", SqlDbType.VarChar).Value = titolo;
-                    cmd.Parameters.Add("@Anno", SqlDbType.Int).Value = anno;
-                    cmd.Parameters.Add("@Regia", SqlDbType.VarChar).Value = regia;
-                    cmd.Parameters.Add("@Durata", SqlDbType.Int).Value = durata;
-                    cmd.Parameters.Add("@Data_Uscita", SqlDbType.DateTime).Value = datauscita;
-                    cmd.Parameters.Add("@Genere", SqlDbType.VarChar).Value = genere;
-                    cmd.Parameters.Add("@CodiceFilm", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Connection = connection;
-                    cmd.ExecuteNonQuery();
-                    // CodiceFilm is an IDENTITY value from the database.
-                    f1.filmCode = Convert.ToInt32(cmd.Parameters["@CodiceFilm"].Value.ToString());
-                    f1.title = titolo;
-                    f1.year = anno;
-                    f1.direction = regia;
-                    f1.duration = durata;
-                    f1.releaseDate = datauscita;
-                    f1.genre = genere;
-                    t.AddRow(f1.filmCode, f1.title, f1.year, f1.direction, f1.duration+"'", f1.releaseDate.ToShortDateString(), f1.genre);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.AddNewFilm";
+                    command.Parameters.Add("@Titolo", SqlDbType.VarChar).Value = title;
+                    command.Parameters.Add("@Anno", SqlDbType.Int).Value = year;
+                    command.Parameters.Add("@Regia", SqlDbType.VarChar).Value = direction;
+                    command.Parameters.Add("@Durata", SqlDbType.Int).Value = duration;
+                    command.Parameters.Add("@Data_Uscita", SqlDbType.DateTime).Value = releaseDate;
+                    command.Parameters.Add("@Genere", SqlDbType.VarChar).Value = genre;
+                    command.Parameters.Add("@CodiceFilm", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                    // Initialize a int value to check if the query success
+                    var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
                     // Commit the transaction.
-                    sqlTran.Commit();
-                    return "\nINSERIMENTO DEL FILM AVVENUTO CON SUCCESSO" +"\nFilm Inserito: \n \n" + t.Print() + "\n";
+                    transaction.Commit();
+
+                    if (returnParameter.Direction > 0) return true;
+                    else
+                    {
+                        command.Parameters.Clear();
+                        throw new Exception("Errore: si è verificato un problema nell'aggiungere un Film nel DB");
+                    }
+                    /**
+                     * // Definisco la variabile t per la creazione della tabella
+            \       var t = new TablePrinter("ID", "Titolo", "Anno", "Regia", "Durata", "Data di Uscita", "Genere");
+                    Film f1 = new Film();
+                    f1.filmCode = Convert.ToInt32(cmd.Parameters["@CodiceFilm"].Value.ToString());
+                    f1.title = title;
+                    f1.year = year;
+                    f1.direction = direction;
+                    f1.duration = duration;
+                    f1.releaseDate = releaseDate;
+                    f1.genre = genre;
+                    t.AddRow(f1.filmCode, f1.title, f1.year, f1.direction, f1.duration+"'", f1.releaseDate.ToShortDateString(), f1.genre);
+                    */
                 }
-                catch (SqlException ex)
-                {
-                    return ex.Message;
+                catch (SqlException ex) { // TODO toglibile (?)
+                    Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
                 }
             }
 
@@ -499,7 +550,6 @@ namespace WCFServer
                 return t.Print();
         }
 
-
         //Visualizzazione Elenco Sale
         public string VisualizzazioneSale()
         {
@@ -631,7 +681,6 @@ namespace WCFServer
 
             return elenco;
         }
-
 
         //Visualizzazione Utenti
         public string Visualizzazione_elenco_UtentiFree()

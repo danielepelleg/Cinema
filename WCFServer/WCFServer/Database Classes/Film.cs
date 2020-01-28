@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace WCFServer
 {
@@ -13,49 +10,40 @@ namespace WCFServer
      * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
      * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
      */
+    [DataContract]
     public class Film
     {
-        private int film_Code;
-        private string _title;
-        private int _year;
-        private string _direction;
-        private int _duration;
-        private DateTime release_Date;
-        private string _genre;
+        [DataMember]
+        public int filmCode { get; set; }
+        [DataMember]
+        public string title { get; set; }
+        [DataMember]
+        public int year { get; set; }
+        [DataMember]
+        public string direction { get; set; }
+        [DataMember]
+        public int duration { get; set; }
+        [DataMember]
+        public DateTime releaseDate { get; set; }
+        [DataMember]
+        public string genre { get; set; }
 
-        public int filmCode {
-            get => this.film_Code;
-            set => this.film_Code = value;
+        /*
+         * Class Constructor
+         */
+        public Film(int filmCode, string title, int year, string direction, int duration, DateTime releaseDate, string genre)
+        {
+            this.filmCode = filmCode;
+            this.title = title;
+            this.year = year;
+            this.direction = direction;
+            this.duration = duration;
+            this.releaseDate = releaseDate;
+            this.genre = genre;
         }
-        
-        public string title {
-            get => this._title;
-            set => this._title = value;
-        }
-        
-        public int year {
-            get => this._year;
-            set => this._year = value;
-        }
-        
-        public string direction {
-            get => this._direction;
-            set => this._direction = value;
-        }
-        
-        public int duration {
-            get => this._duration;
-            set => this._duration = value;
-        }
-        
-        public DateTime releaseDate {
-            get => this.release_Date;
-            set => this.release_Date = value; }
-        
-        public string genre {
-            get => this._genre;
-            set => this._genre = value;
-        }
+
+
+        public Film() { }
 
         /*
          * Show information about a film
@@ -64,14 +52,15 @@ namespace WCFServer
          */
         public string showFilm()
         {
-            return this.film_Code + ", " + 
-                this._title + ", " + 
-                this._year.ToString() + ", " + 
-                this._direction + ", " + 
-                this._duration.ToString() + ", " + 
-                this.release_Date.ToString() + ", " + 
-                this._genre;
+            return this.filmCode + ", " +
+                this.title + ", " +
+                this.year.ToString() + ", " +
+                this.direction + ", " +
+                this.duration.ToString() + ", " +
+                this.releaseDate.ToString() + ", " +
+                this.genre;
         }
-
     }
+
+
 }
