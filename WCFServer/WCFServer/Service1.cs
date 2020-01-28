@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using WCFServer.ServiceReferenceUser;
+using WCFServer.ServiceReferencePrenotation;
+using WCFServer.ServiceReferenceFilm;
+using WCFServer.ServiceReferenceEvent;
 
 namespace WCFServer
 {
     // NOTA: è possibile utilizzare il comando "Rinomina" del menu "Refactoring" per modificare il nome di classe "Service1" nel codice e nel file di configurazione contemporaneamente.
     public class Service1 : IService1
     {
+        private ServiceUserClient serviceUser = new ServiceReferenceUser.ServiceUserClient();
+        private ServicePrenotationClient servicePrenotation = new ServiceReferencePrenotation.ServicePrenotationClient();
+        private ServiceFilmClient serviceFilm = new ServiceReferenceFilm.ServiceFilmClient();
+        private ServiceEventClient serviceEvent = new ServiceReferenceEvent.ServiceEventClient();
+
         List<User> listUtentiFree = new List<User>();
         List<Prenotation> listPrenotazioni = new List<Prenotation>();
         Admin a1 = new Admin();
@@ -54,7 +63,6 @@ namespace WCFServer
             using (SqlConnection connection = getConnection())
             {
                 connection.Open();
-
                 // Start a local transaction.
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
