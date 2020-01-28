@@ -57,7 +57,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
     <Compile Include="MainProgram.cs" />
+    <Compile Include="Pages\AdminMenu\DeleteFilmPage.cs" />
     <Compile Include="Pages\AdminMenu\InserimentoEventoPage.cs" />
     <Compile Include="Pages\AdminMenu\InserimentoFilmPage.cs" />
     <Compile Include="Pages\AdminMenu\AdminPage.cs" />

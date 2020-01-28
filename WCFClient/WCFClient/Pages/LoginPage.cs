@@ -21,9 +21,9 @@ namespace WCFClient.Pages
             if (input.ToString().Equals("Admin")) isAdmin = true;
             Output.WriteLine(ConsoleColor.Green, "\n {0} Login: ", input);
 
+
             // SCRIPT LOGIN
             string username, hashed_password, password = string.Empty;
-            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
 
             // Definisco le variabili che andranno a prendere i dati inseriti. La variabile password andrà a effettuare
             // i controlli di validità della password (sulla lunghezza) mentre la corrispondente variabile hashed
@@ -40,7 +40,7 @@ namespace WCFClient.Pages
             try
             {
                 // Mando i dati al server per il Login
-                Cinema.MainProgram.Global.loggedin = wcfClient.login(isAdmin, username, hashed_password);
+                Cinema.MainProgram.Global.loggedin = Global.wcfClient.Login(isAdmin, username, hashed_password);
                 // Assegno il risultato booleano del login alla relativa variabile globale
                 Cinema.MainProgram.Global.currentusername = username;
                 // Reindirizzo l'Utente alla pagina corrispondente al tipo di login effettuato

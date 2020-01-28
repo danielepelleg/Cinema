@@ -7,8 +7,9 @@ namespace WCFClient.Pages
     {
         public AdminPage(Program program)
             : base("Admin Functions", program,
-                  new Option("Inserimento Film", () => program.NavigateTo<InserimentoFilm>()),
-                  new Option("Inserimento Evento", () => program.NavigateTo<InserimentoEvento>()),
+                  new Option("Add Film", () => program.NavigateTo<InserimentoFilm>()),
+                  new Option("Add Evento", () => program.NavigateTo<InserimentoEvento>()),
+                  new Option("Delete Film", () => program.NavigateTo<DeleteFilm>()),
                   new Option("Visualizza Eventi", () => program.NavigateTo<VisualizzaEvento>()),
                   new Option("Visualizza Film", () => program.NavigateTo<VisualizzaFilm>()))
         {

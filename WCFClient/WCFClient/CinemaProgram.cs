@@ -16,6 +16,7 @@ namespace Cinema
             AddPage(new UserPage(this));
             AddPage(new InserimentoFilm(this));
             AddPage(new InserimentoEvento(this));
+            AddPage(new DeleteFilm(this));
             AddPage(new VisualizzaEvento(this));
             AddPage(new VisualizzaFilm(this));
             AddPage(new PrenotazioneBiglietto(this));

@@ -14,12 +14,11 @@ namespace WCFClient.Pages
         {
             base.Display();
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            var wcfClient = new ServiceReference1.Service1Client(); //WCF CLIENT CREATO
             Console.WriteLine("STORICO PRENOTAZIONI:");
             try
             {
                 // Richiamo la funzione server che mi mostra gli spettacoli presenti al cinema in una tabella
-                Console.Out.WriteLine("{0}", wcfClient.Visualizzazione_elenco_Prenotazioni(Cinema.MainProgram.Global.currentusername));
+                Console.Out.WriteLine("{0}", Global.wcfClient.Visualizzazione_elenco_Prenotazioni(Cinema.MainProgram.Global.currentusername));
             }
             catch
             {

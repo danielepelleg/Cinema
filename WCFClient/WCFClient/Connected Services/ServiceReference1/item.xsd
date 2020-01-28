@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="registration">
+  <xs:element name="Registration">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="isAdmin" type="xs:boolean" />
@@ -11,14 +11,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="registrationResponse">
+  <xs:element name="RegistrationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="registrationResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RegistrationResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="login">
+  <xs:element name="Login">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="isAdmin" type="xs:boolean" />
@@ -27,14 +27,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="loginResponse">
+  <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="loginResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="LoginResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="addFilm">
+  <xs:element name="AddFilm">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="titolo" nillable="true" type="xs:string" />
@@ -46,42 +46,42 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="addFilmResponse">
+  <xs:element name="AddFilmResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="addFilmResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="AddFilmResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CancellazioneFilm">
+  <xs:element name="DeleteFilm">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="codicefilm" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CancellazioneFilmResponse">
+  <xs:element name="DeleteFilmResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CancellazioneFilmResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="DeleteFilmResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InserimentoEvento">
+  <xs:element name="AddEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="usernameadmin" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="data_e_ora" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="codice_film" type="xs:int" />
-        <xs:element minOccurs="0" name="codice_sala" type="xs:int" />
-        <xs:element minOccurs="0" name="prezzo" type="xs:decimal" />
+        <xs:element minOccurs="0" name="usernameAdmin" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="filmCode" type="xs:int" />
+        <xs:element minOccurs="0" name="hallCode" type="xs:int" />
+        <xs:element minOccurs="0" name="price" type="xs:decimal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InserimentoEventoResponse">
+  <xs:element name="AddEventResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InserimentoEventoResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="AddEventResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
