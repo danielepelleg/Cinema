@@ -23,16 +23,16 @@ namespace WCFServer.ServiceReferenceUser {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string nameField;
+        private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string passwordField;
+        private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string surnameField;
+        private string SurnameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string usernameField;
+        private string UsernameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -45,53 +45,53 @@ namespace WCFServer.ServiceReferenceUser {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name {
+        public string Name {
             get {
-                return this.nameField;
+                return this.NameField;
             }
             set {
-                if ((object.ReferenceEquals(this.nameField, value) != true)) {
-                    this.nameField = value;
-                    this.RaisePropertyChanged("name");
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string password {
+        public string Password {
             get {
-                return this.passwordField;
+                return this.PasswordField;
             }
             set {
-                if ((object.ReferenceEquals(this.passwordField, value) != true)) {
-                    this.passwordField = value;
-                    this.RaisePropertyChanged("password");
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string surname {
+        public string Surname {
             get {
-                return this.surnameField;
+                return this.SurnameField;
             }
             set {
-                if ((object.ReferenceEquals(this.surnameField, value) != true)) {
-                    this.surnameField = value;
-                    this.RaisePropertyChanged("surname");
+                if ((object.ReferenceEquals(this.SurnameField, value) != true)) {
+                    this.SurnameField = value;
+                    this.RaisePropertyChanged("Surname");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string username {
+        public string Username {
             get {
-                return this.usernameField;
+                return this.UsernameField;
             }
             set {
-                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
-                    this.usernameField = value;
-                    this.RaisePropertyChanged("username");
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
                 }
             }
         }
@@ -110,17 +110,35 @@ namespace WCFServer.ServiceReferenceUser {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceUser.IServiceUser")]
     public interface IServiceUser {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/DoWork", ReplyAction="http://tempuri.org/IServiceUser/DoWorkResponse")]
-        void DoWork();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Registration", ReplyAction="http://tempuri.org/IServiceUser/RegistrationResponse")]
+        bool Registration(bool isAdmin, string username, string password, string name, string surname);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/DoWork", ReplyAction="http://tempuri.org/IServiceUser/DoWorkResponse")]
-        System.Threading.Tasks.Task DoWorkAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Registration", ReplyAction="http://tempuri.org/IServiceUser/RegistrationResponse")]
+        System.Threading.Tasks.Task<bool> RegistrationAsync(bool isAdmin, string username, string password, string name, string surname);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/makeUser", ReplyAction="http://tempuri.org/IServiceUser/makeUserResponse")]
-        WCFServer.ServiceReferenceUser.User makeUser();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Login", ReplyAction="http://tempuri.org/IServiceUser/LoginResponse")]
+        bool Login(bool isAdmin, string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/makeUser", ReplyAction="http://tempuri.org/IServiceUser/makeUserResponse")]
-        System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User> makeUserAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Login", ReplyAction="http://tempuri.org/IServiceUser/LoginResponse")]
+        System.Threading.Tasks.Task<bool> LoginAsync(bool isAdmin, string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/DeleteUser", ReplyAction="http://tempuri.org/IServiceUser/DeleteUserResponse")]
+        bool DeleteUser(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/DeleteUser", ReplyAction="http://tempuri.org/IServiceUser/DeleteUserResponse")]
+        System.Threading.Tasks.Task<bool> DeleteUserAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUser", ReplyAction="http://tempuri.org/IServiceUser/GetUserResponse")]
+        WCFServer.ServiceReferenceUser.User GetUser(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUser", ReplyAction="http://tempuri.org/IServiceUser/GetUserResponse")]
+        System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User> GetUserAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUsersList", ReplyAction="http://tempuri.org/IServiceUser/GetUsersListResponse")]
+        WCFServer.ServiceReferenceUser.User[] GetUsersList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUsersList", ReplyAction="http://tempuri.org/IServiceUser/GetUsersListResponse")]
+        System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User[]> GetUsersListAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -150,20 +168,44 @@ namespace WCFServer.ServiceReferenceUser {
                 base(binding, remoteAddress) {
         }
         
-        public void DoWork() {
-            base.Channel.DoWork();
+        public bool Registration(bool isAdmin, string username, string password, string name, string surname) {
+            return base.Channel.Registration(isAdmin, username, password, name, surname);
         }
         
-        public System.Threading.Tasks.Task DoWorkAsync() {
-            return base.Channel.DoWorkAsync();
+        public System.Threading.Tasks.Task<bool> RegistrationAsync(bool isAdmin, string username, string password, string name, string surname) {
+            return base.Channel.RegistrationAsync(isAdmin, username, password, name, surname);
         }
         
-        public WCFServer.ServiceReferenceUser.User makeUser() {
-            return base.Channel.makeUser();
+        public bool Login(bool isAdmin, string username, string password) {
+            return base.Channel.Login(isAdmin, username, password);
         }
         
-        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User> makeUserAsync() {
-            return base.Channel.makeUserAsync();
+        public System.Threading.Tasks.Task<bool> LoginAsync(bool isAdmin, string username, string password) {
+            return base.Channel.LoginAsync(isAdmin, username, password);
+        }
+        
+        public bool DeleteUser(string username) {
+            return base.Channel.DeleteUser(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteUserAsync(string username) {
+            return base.Channel.DeleteUserAsync(username);
+        }
+        
+        public WCFServer.ServiceReferenceUser.User GetUser(string username) {
+            return base.Channel.GetUser(username);
+        }
+        
+        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User> GetUserAsync(string username) {
+            return base.Channel.GetUserAsync(username);
+        }
+        
+        public WCFServer.ServiceReferenceUser.User[] GetUsersList() {
+            return base.Channel.GetUsersList();
+        }
+        
+        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User[]> GetUsersListAsync() {
+            return base.Channel.GetUsersListAsync();
         }
     }
 }

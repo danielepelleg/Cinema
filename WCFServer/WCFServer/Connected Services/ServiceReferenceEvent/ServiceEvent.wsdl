@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceEvent/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceEvent/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceEvent/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceEvent_AddEvent_InputMessage">
@@ -12,30 +13,30 @@
   <wsdl:message name="IServiceEvent_AddEvent_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddEventResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceEvent_CancellazioneEvento_InputMessage">
-    <wsdl:part name="parameters" element="tns:CancellazioneEvento" />
+  <wsdl:message name="IServiceEvent_DeleteEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEvent" />
   </wsdl:message>
-  <wsdl:message name="IServiceEvent_CancellazioneEvento_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CancellazioneEventoResponse" />
+  <wsdl:message name="IServiceEvent_DeleteEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceEvent_Visualizzazione_elenco_eventi_InputMessage">
-    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_eventi" />
+  <wsdl:message name="IServiceEvent_GetEventsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsList" />
   </wsdl:message>
-  <wsdl:message name="IServiceEvent_Visualizzazione_elenco_eventi_OutputMessage">
-    <wsdl:part name="parameters" element="tns:Visualizzazione_elenco_eventiResponse" />
+  <wsdl:message name="IServiceEvent_GetEventsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsListResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceEvent">
     <wsdl:operation name="AddEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceEvent/AddEvent" message="tns:IServiceEvent_AddEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceEvent/AddEventResponse" message="tns:IServiceEvent_AddEvent_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CancellazioneEvento">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEvent/CancellazioneEvento" message="tns:IServiceEvent_CancellazioneEvento_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEvent/CancellazioneEventoResponse" message="tns:IServiceEvent_CancellazioneEvento_OutputMessage" />
+    <wsdl:operation name="DeleteEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEvent/DeleteEvent" message="tns:IServiceEvent_DeleteEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEvent/DeleteEventResponse" message="tns:IServiceEvent_DeleteEvent_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Visualizzazione_elenco_eventi">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEvent/Visualizzazione_elenco_eventi" message="tns:IServiceEvent_Visualizzazione_elenco_eventi_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEvent/Visualizzazione_elenco_eventiResponse" message="tns:IServiceEvent_Visualizzazione_elenco_eventi_OutputMessage" />
+    <wsdl:operation name="GetEventsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEvent/GetEventsList" message="tns:IServiceEvent_GetEventsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEvent/GetEventsListResponse" message="tns:IServiceEvent_GetEventsList_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceEvent" type="tns:IServiceEvent">
@@ -49,8 +50,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CancellazioneEvento">
-      <soap:operation soapAction="http://tempuri.org/IServiceEvent/CancellazioneEvento" style="document" />
+    <wsdl:operation name="DeleteEvent">
+      <soap:operation soapAction="http://tempuri.org/IServiceEvent/DeleteEvent" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -58,8 +59,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Visualizzazione_elenco_eventi">
-      <soap:operation soapAction="http://tempuri.org/IServiceEvent/Visualizzazione_elenco_eventi" style="document" />
+    <wsdl:operation name="GetEventsList">
+      <soap:operation soapAction="http://tempuri.org/IServiceEvent/GetEventsList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

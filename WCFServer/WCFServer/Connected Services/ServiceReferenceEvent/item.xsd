@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceEvent/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" />
   <xs:element name="AddEvent">
     <xs:complexType>
       <xs:sequence>
@@ -18,29 +19,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CancellazioneEvento">
+  <xs:element name="DeleteEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="codiceevento" type="xs:int" />
+        <xs:element minOccurs="0" name="eventCode" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CancellazioneEventoResponse">
+  <xs:element name="DeleteEventResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CancellazioneEventoResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="DeleteEventResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Visualizzazione_elenco_eventi">
+  <xs:element name="GetEventsList">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="Visualizzazione_elenco_eventiResponse">
+  <xs:element name="GetEventsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="Visualizzazione_elenco_eventiResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetEventsListResult" nillable="true" type="q1:ArrayOfEvent" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

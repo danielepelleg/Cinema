@@ -11,10 +11,8 @@ namespace WCFDatabaseManager
         /*
           * Add a film into the database.
           */
-        public bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre)
-        {
-            using (SqlConnection connection = DatabaseHandler.GetConnection())
-            {
+        public bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre) {
+            using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 connection.Open();
 
                 // Start a local transaction.
@@ -26,8 +24,7 @@ namespace WCFDatabaseManager
                 command.Connection = connection;
                 command.Transaction = transaction;
 
-                try
-                {
+                try {
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = "Cinema.AddNewFilm";
                     command.Parameters.Add("@Titolo", SqlDbType.VarChar).Value = title;
@@ -38,45 +35,29 @@ namespace WCFDatabaseManager
                     command.Parameters.Add("@Genere", SqlDbType.VarChar).Value = genre;
                     command.Parameters.Add("@CodiceFilm", SqlDbType.Int).Direction = ParameterDirection.Output;
 
-                    // Initialize a int value to check if the query success
+                    // Initialize a int value to check if the Stored Procedure success
                     var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     // Commit the transaction.
                     transaction.Commit();
 
+                    // If the int value > 0 the Stored Procedure success
                     if (returnParameter.Direction > 0) return true;
-                    else
-                    {
+                    else  {
                         command.Parameters.Clear();
                         throw new Exception("Errore: si è verificato un problema nell'aggiungere un Film nel DB");
                     }
-                    /**
-                     * // Definisco la variabile t per la creazione della tabella
-            \       var t = new TablePrinter("ID", "Titolo", "Anno", "Regia", "Durata", "Data di Uscita", "Genere");
-                    Film f1 = new Film();
-                    f1.filmCode = Convert.ToInt32(cmd.Parameters["@CodiceFilm"].Value.ToString());
-                    f1.title = title;
-                    f1.year = year;
-                    f1.direction = direction;
-                    f1.duration = duration;
-                    f1.releaseDate = releaseDate;
-                    f1.genre = genre;
-                    t.AddRow(f1.filmCode, f1.title, f1.year, f1.direction, f1.duration+"'", f1.releaseDate.ToShortDateString(), f1.genre);
-                    */
                 }
-                catch (SqlException ex)
-                { // TODO toglibile (?)
+                catch (SqlException ex) {
                     Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
                     Console.WriteLine("  Message: {0}", ex.Message);
 
                     // Attempt to roll back the transaction.
-                    try
-                    {
+                    try {
                         transaction.Rollback();
                     }
-                    catch (Exception ex2)
-                    {
+                    catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
                         // on the server that would cause the rollback to fail, such as
                         // a closed connection.
@@ -93,11 +74,8 @@ namespace WCFDatabaseManager
         /*
          * Delete a film from the database.
          */
-        public bool DeleteFilm(int filmCode)
-        {
-
-            using (SqlConnection connection = DatabaseHandler.GetConnection())
-            {
+        public bool DeleteFilm(int filmCode) {
+            using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 connection.Open();
 
                 // Start a local transaction.
@@ -109,8 +87,7 @@ namespace WCFDatabaseManager
                 command.Connection = connection;
                 command.Transaction = transaction;
 
-                try
-                {
+                try {
                     // Call the stored procedure to delete the film 
                     // given the filmCode (@primaryKey)
                     command.CommandType = CommandType.StoredProcedure;
@@ -119,32 +96,29 @@ namespace WCFDatabaseManager
                     command.Connection = connection;
                     command.ExecuteNonQuery();
 
-                    // Initialize a int value to check if the query success
+                    // Initialize a int value to check if the Stored Procedure success
                     var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
                     returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     // Commit the transaction.
                     transaction.Commit();
 
+                    // If the int value > 0 the Stored Procedure success
                     if (returnParameter.Direction > 0) return true;
-                    else
-                    {
+                    else {
                         command.Parameters.Clear();
                         throw new Exception("Errore: si è verificato un problema nell'aggiungere un Film nel DB");
                     }
                 }
-                catch (SqlException ex)
-                { // TODO toglibile (?)
+                catch (SqlException ex) { // TODO toglibile (?)
                     Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
                     Console.WriteLine("  Message: {0}", ex.Message);
 
                     // Attempt to roll back the transaction.
-                    try
-                    {
+                    try {
                         transaction.Rollback();
                     }
-                    catch (Exception ex2)
-                    {
+                    catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
                         // on the server that would cause the rollback to fail, such as
                         // a closed connection.
@@ -209,7 +183,7 @@ namespace WCFDatabaseManager
             return t.Print();
         }
 
-        public Film makeFilm()
+        public Film GetFilm()
         {
             Film f = new Film(1, "Avatar", 2010, "sd", 122, DateTime.Now, "fantasy");
             return f;

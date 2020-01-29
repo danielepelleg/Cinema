@@ -4,6 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using WCFServer.ServiceReferenceUser;
+using WCFServer.ServiceReferencePrenotation;
+using WCFServer.ServiceReferenceFilm;
+using WCFServer.ServiceReferenceEvent;
+using WCFServer.ServiceReferenceHall;
+using WCFServer.ServiceReferencePlace;
 
 namespace WCFServer
 {
@@ -11,23 +17,33 @@ namespace WCFServer
     [ServiceContract]
     public interface IService1
     {
-        
-
-        
-
-        
+        // USER - ADMIN METHODS
 
         [OperationContract]
-        string ControlloFK(int valore, string value_type);
-
-
-        [OperationContract]
-        string VisualizzazionePostiDisponibili(int codice_evento);
-
-        
+        bool Registration(bool isAdmin, string username, string password, string name, string surname);
 
         [OperationContract]
-        string VerificaPosto(int codice_evento, int numero_posto);
+        bool Login(bool isAdmin, string username, string password);
+
+        [OperationContract]
+        bool DeleteUser(string username);
+
+        [OperationContract]
+        User GetUser(string username);
+
+        [OperationContract]
+        List<User> GetUsersList();
+
+        // EVENTS METHODS
+
+        [OperationContract]
+        bool AddEvent(string usernameAdmin, DateTime dateTime, int filmCode, int hallCode, decimal price);
+
+        [OperationContract]
+        bool DeleteEvent(int eventCode);
+
+        [OperationContract]
+        List<Event> GetEventsList();
 
     }
     

@@ -5,15 +5,22 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
+using WCFServer.ServiceReferenceUser;
+using WCFServer.ServiceReferencePrenotation;
+using WCFServer.ServiceReferenceFilm;
+using WCFServer.ServiceReferenceEvent;
+using WCFServer.ServiceReferenceHall;
+using WCFServer.ServiceReferencePlace;
+
 namespace WCFServer
 {
     class Program
     {
         static void Main(string[] args)
         {
-            try
-            {
+            try {
                 ServiceHost svcHost = new ServiceHost(typeof(Service1));
+                
                 svcHost.Open();
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.DarkRed;

@@ -15,10 +15,10 @@ namespace WCFDatabaseManager
         bool AddEvent(string usernameAdmin, DateTime dateTime, int filmCode, int hallCode, decimal price);
 
         [OperationContract]
-        string CancellazioneEvento(int codiceevento);
+        bool DeleteEvent(int eventCode);
 
         [OperationContract]
-        string Visualizzazione_elenco_eventi();
+        List<Event> GetEventsList();
     }
     
     [DataContract]

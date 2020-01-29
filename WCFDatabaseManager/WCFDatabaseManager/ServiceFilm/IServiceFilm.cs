@@ -21,7 +21,7 @@ namespace WCFDatabaseManager
         string Visualizzazione_elenco_film();
 
         [OperationContract]
-        Film makeFilm();
+        Film GetFilm();
     }
     [DataContract]
     public class Film

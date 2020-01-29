@@ -74,6 +74,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceReferenceHall\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceReferencePlace\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceReferencePrenotation\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,8 +94,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Database Classes\Admin.cs" />
-    <Compile Include="Database Classes\Event.cs" />
     <Compile Include="Database Classes\Film.cs" />
     <Compile Include="Database Classes\Hall.cs" />
     <Compile Include="Database Classes\Place.cs" />
@@ -102,7 +110,6 @@
     </Compile>
     <Compile Include="Service1.cs" />
     <Compile Include="TablePrinter.cs" />
-    <Compile Include="Database Classes\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -114,7 +121,13 @@
     <None Include="Connected Services\ServiceReferenceEvent\item1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReferenceEvent\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReferenceEvent\ServiceEvent.wsdl" />
+    <None Include="Connected Services\ServiceReferenceEvent\WCFServer.ServiceReferenceEvent.Event.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReferenceFilm\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -128,6 +141,20 @@
     <None Include="Connected Services\ServiceReferenceFilm\WCFServer.ServiceReferenceFilm.Film.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServiceReferenceHall\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceHall\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceHall\ServiceHall.wsdl" />
+    <None Include="Connected Services\ServiceReferencePlace\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferencePlace\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferencePlace\ServicePlace.wsdl" />
     <None Include="Connected Services\ServiceReferencePrenotation\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -165,6 +192,8 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceEvent\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceFilm\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceHall\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReferencePlace\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferencePrenotation\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReferenceUser\" />
   </ItemGroup>
@@ -224,6 +253,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceReferencePrenotation\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceHall\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceHall\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceHall\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferenceHall\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferencePlace\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferencePlace\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferencePlace\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReferencePlace\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
