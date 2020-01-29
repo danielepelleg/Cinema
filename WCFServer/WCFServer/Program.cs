@@ -15,10 +15,12 @@ namespace WCFServer
             {
                 ServiceHost svcHost = new ServiceHost(typeof(Service1));
                 svcHost.Open();
-                Console.WriteLine("Servizio WCF online, premere un tasto per interrompere...");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Servizio WCF Server online, premere un tasto per interrompere...");
                 Console.ReadLine();
                 svcHost.Close();
-                Console.WriteLine("Servizio WCF interrotto");
+                Console.WriteLine("Servizio WCF Server interrotto");
             }
             catch (Exception ex)
             {

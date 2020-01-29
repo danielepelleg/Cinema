@@ -12,7 +12,13 @@ namespace WCFDatabaseManager
     public interface IServiceFilm
     {
         [OperationContract]
-        void DoWork();
+        bool AddFilm(string titolo, int anno, string regia, int durata, DateTime datauscita, string genere);
+
+        [OperationContract]
+        bool DeleteFilm(int codicefilm);
+
+        [OperationContract]
+        string Visualizzazione_elenco_film();
 
         [OperationContract]
         Film makeFilm();
@@ -21,32 +27,34 @@ namespace WCFDatabaseManager
     public class Film
     {
         [DataMember]
-        public int filmCode { get; set; }
+        public int FilmCode { get; set; }
         [DataMember]
-        public string title { get; set; }
+        public string Title { get; set; }
         [DataMember]
-        public int year { get; set; }
+        public int Year { get; set; }
         [DataMember]
-        public string direction { get; set; }
+        public string Direction { get; set; }
         [DataMember]
-        public int duration { get; set; }
+        public int Duration { get; set; }
         [DataMember]
-        public DateTime releaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
         [DataMember]
-        public string genre { get; set; }
+        public string Genre { get; set; }
+
+        public Film() { }
         
         /*
          * Class Constructor
          */
         public Film(int filmCode, string title, int year, string direction, int duration, DateTime releaseDate, string genre)
         {
-            this.filmCode = filmCode;
-            this.title = title;
-            this.year = year;
-            this.direction = direction;
-            this.duration = duration;
-            this.releaseDate = releaseDate;
-            this.genre = genre;
+            this.FilmCode = filmCode;
+            this.Title = title;
+            this.Year = year;
+            this.Direction = direction;
+            this.Duration = duration;
+            this.ReleaseDate = releaseDate;
+            this.Genre = genre;
         }
     }
     }

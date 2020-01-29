@@ -15,11 +15,23 @@ namespace WCFServer.ServiceReferenceEvent {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceEvent.IServiceEvent")]
     public interface IServiceEvent {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEvent/DoWork", ReplyAction="http://tempuri.org/IServiceEvent/DoWorkResponse")]
-        void DoWork();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEvent/AddEvent", ReplyAction="http://tempuri.org/IServiceEvent/AddEventResponse")]
+        bool AddEvent(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEvent/DoWork", ReplyAction="http://tempuri.org/IServiceEvent/DoWorkResponse")]
-        System.Threading.Tasks.Task DoWorkAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEvent/AddEvent", ReplyAction="http://tempuri.org/IServiceEvent/AddEventResponse")]
+        System.Threading.Tasks.Task<bool> AddEventAsync(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEvent/CancellazioneEvento", ReplyAction="http://tempuri.org/IServiceEvent/CancellazioneEventoResponse")]
+        string CancellazioneEvento(int codiceevento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEvent/CancellazioneEvento", ReplyAction="http://tempuri.org/IServiceEvent/CancellazioneEventoResponse")]
+        System.Threading.Tasks.Task<string> CancellazioneEventoAsync(int codiceevento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEvent/Visualizzazione_elenco_eventi", ReplyAction="http://tempuri.org/IServiceEvent/Visualizzazione_elenco_eventiResponse")]
+        string Visualizzazione_elenco_eventi();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEvent/Visualizzazione_elenco_eventi", ReplyAction="http://tempuri.org/IServiceEvent/Visualizzazione_elenco_eventiResponse")]
+        System.Threading.Tasks.Task<string> Visualizzazione_elenco_eventiAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +61,28 @@ namespace WCFServer.ServiceReferenceEvent {
                 base(binding, remoteAddress) {
         }
         
-        public void DoWork() {
-            base.Channel.DoWork();
+        public bool AddEvent(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price) {
+            return base.Channel.AddEvent(usernameAdmin, dateTime, filmCode, hallCode, price);
         }
         
-        public System.Threading.Tasks.Task DoWorkAsync() {
-            return base.Channel.DoWorkAsync();
+        public System.Threading.Tasks.Task<bool> AddEventAsync(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price) {
+            return base.Channel.AddEventAsync(usernameAdmin, dateTime, filmCode, hallCode, price);
+        }
+        
+        public string CancellazioneEvento(int codiceevento) {
+            return base.Channel.CancellazioneEvento(codiceevento);
+        }
+        
+        public System.Threading.Tasks.Task<string> CancellazioneEventoAsync(int codiceevento) {
+            return base.Channel.CancellazioneEventoAsync(codiceevento);
+        }
+        
+        public string Visualizzazione_elenco_eventi() {
+            return base.Channel.Visualizzazione_elenco_eventi();
+        }
+        
+        public System.Threading.Tasks.Task<string> Visualizzazione_elenco_eventiAsync() {
+            return base.Channel.Visualizzazione_elenco_eventiAsync();
         }
     }
 }

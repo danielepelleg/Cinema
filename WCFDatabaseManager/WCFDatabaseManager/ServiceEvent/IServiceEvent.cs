@@ -12,36 +12,42 @@ namespace WCFDatabaseManager
     public interface IServiceEvent
     {
         [OperationContract]
-        void DoWork();
+        bool AddEvent(string usernameAdmin, DateTime dateTime, int filmCode, int hallCode, decimal price);
+
+        [OperationContract]
+        string CancellazioneEvento(int codiceevento);
+
+        [OperationContract]
+        string Visualizzazione_elenco_eventi();
     }
     
     [DataContract]
     public class Event
     {
         [DataMember]
-        public int filmCode { get; set; }
+        public int EventCode { get; set; }
         [DataMember]
-        private int event_Code { get; set; }
+        public DateTime DateTime { get; set; }
         [DataMember]
-        private DateTime date_Time { get; set; }
+        public int FilmCode { get; set; }
         [DataMember]
-        private int hall_code { get; set; }
+        public int HallCode { get; set; }
         [DataMember]
-        private string username_Admin { get; set; }
+        public string UsernameAdmin { get; set; }
         [DataMember]
-        private int film_Code { get; set; }
-        [DataMember]
-        private decimal _price { get; set; }
+        public decimal Price { get; set; }
 
-        public Event(int filmCode, int event_Code, DateTime date_Time, int hall_code, string username_Admin, int film_Code, decimal _price)
+        public Event() { }
+
+        public Event(int eventCode, DateTime dateTime, int filmCode,  int hallCode, string usernameAdmin, decimal price)
         {
-            this.filmCode = filmCode;
-            this.event_Code = event_Code;
-            this.date_Time = date_Time;
-            this.hall_code = hall_code;
-            this.username_Admin = username_Admin;
-            this.filmCode = filmCode;
-            this._price = _price;
+            EventCode = eventCode;
+            DateTime = dateTime;
+            FilmCode = filmCode;
+            HallCode = hallCode;
+            UsernameAdmin = usernameAdmin;
+            FilmCode = filmCode;
+            Price = price;
         }
     }
 

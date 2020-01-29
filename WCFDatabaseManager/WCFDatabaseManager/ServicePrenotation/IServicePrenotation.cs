@@ -16,22 +16,44 @@ namespace WCFDatabaseManager
 
         [OperationContract]
         Prenotation MakePrenotation();
+
+        [OperationContract]
+        string InserimentoPrenotazione(DateTime dateTime, string UsernameUser, int eventCode, int placeNumber);
+
+        [OperationContract]
+        string Visualizzazione_elenco_Prenotazioni(string user);
+
     }
 
     [DataContract]
     public class Prenotation
     {
-        private int prenotation_Code { get; set; }
-        private DateTime date_Time { get; set; }
-        private string username_User { get; set; }
-        private int event_Code { get; set; }
+        public int PrenotationCode { get; set; }
+        public DateTime DateTime { get; set; }
+        public string UsernameUser { get; set; }
+        public int EventCode { get; set; }
     
-        public Prenotation(int prenotation_Code, DateTime date_Time, string username_User, int event_Code)
+        public Prenotation() { }
+
+        public Prenotation(int prenotationCode, DateTime dateTime, string usernameUser, int eventCode)
         {
-            this.prenotation_Code = prenotation_Code;
-            this.date_Time = date_Time;
-            this.username_User = username_User;
-            this.event_Code = event_Code;
+            PrenotationCode = prenotationCode;
+            DateTime = dateTime;
+            UsernameUser = usernameUser;
+            EventCode = eventCode;
+        }
+
+        /*
+         * Show information about a prenotation
+         * 
+         * @return the String with the prenotion details
+         */
+        public string showPrenotations()
+        {
+            return "Prenotation code:" + PrenotationCode +
+                ", Date and time: " + DateTime +
+                ", Username of the user: " + UsernameUser +
+                ", Code of the event booked: " + EventCode;
         }
     }
 }

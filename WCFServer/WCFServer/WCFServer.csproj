@@ -86,16 +86,13 @@
     </Compile>
     <Compile Include="Database Classes\Admin.cs" />
     <Compile Include="Database Classes\Event.cs" />
-    <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Database Classes\Film.cs" />
     <Compile Include="Database Classes\Hall.cs" />
     <Compile Include="Database Classes\Place.cs" />
     <Compile Include="Database Classes\Prenotation.cs" />
     <Compile Include="Database Classes\Reserve.cs" />
+    <Compile Include="DatabaseHandler.cs" />
     <Compile Include="IService1.cs" />
-    <Compile Include="ServiceFilm\IServiceFilm.cs" />
-    <Compile Include="ServiceFilm\ServiceFilm.cs" />
-    <Compile Include="ServiceUser\IServiceUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -104,7 +101,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service1.cs" />
-    <Compile Include="ServiceUser\ServiceUser.cs" />
     <Compile Include="TablePrinter.cs" />
     <Compile Include="Database Classes\User.cs" />
   </ItemGroup>
@@ -113,6 +109,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReferenceEvent\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceEvent\item1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReferenceEvent\ServiceEvent.wsdl" />

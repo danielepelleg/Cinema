@@ -12,39 +12,57 @@ namespace WCFDatabaseManager
     public interface IServiceUser
     {
         [OperationContract]
-        void DoWork();
+        bool Registration(bool isAdmin, string username, string password, string name, string surname);
 
-        
+        [OperationContract]
+        bool Login(bool isAdmin, string username, string password);
+
+        [OperationContract]
+        string Visualizzazione_elenco_UtentiFree();
+
+
     }
     [DataContract]
     public class User
     {
         [DataMember]
-        public string username { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
 
         [DataMember]
-        public string password { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
 
         [DataMember]
-        public string name { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [DataMember]
-        public string surname { get; set; } = string.Empty;
+        public string Surname { get; set; } = string.Empty;
 
         public User()
         {
-            this.username = string.Empty;
-            this.password = string.Empty;
-            this.name = string.Empty;
-            this.surname = string.Empty;
+            this.Username = string.Empty;
+            this.Password = string.Empty;
+            this.Name = string.Empty;
+            this.Surname = string.Empty;
         }
 
         public User(string username, string password, string name, string surname)
         {
-            this.username = username;
-            this.password = password;
-            this.name = name;
-            this.surname = surname;
+            this.Username = username;
+            this.Password = password;
+            this.Name = name;
+            this.Surname = surname;
+        }
+
+        /*
+         * Show information about an User
+         * 
+         * @return the String with the user details
+         */
+        public string showUser()
+        {
+            return "Username: " + this.Username +
+                ", Name: " + this.Name +
+                ", Surname: " + this.Surname;
         }
     }
 }

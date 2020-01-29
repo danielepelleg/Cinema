@@ -2,25 +2,12 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using WCFServer.ServiceReferenceUser;
-using WCFServer.ServiceReferencePrenotation;
-using WCFServer.ServiceReferenceFilm;
-using WCFServer.ServiceReferenceEvent;
 
-namespace WCFServer
+namespace WCFDatabaseManager
 {
-    // NOTA: è possibile utilizzare il comando "Rinomina" del menu "Refactoring" per modificare il nome di classe "Service1" nel codice e nel file di configurazione contemporaneamente.
-    public class Service1 : IService1
+    // NOTA: è possibile utilizzare il comando "Rinomina" del menu "Refactoring" per modificare il nome di classe "ServicePlace" nel codice e nel file di configurazione contemporaneamente.
+    public class ServicePlace : IServicePlace
     {
-        private ServiceUserClient serviceUser = new ServiceReferenceUser.ServiceUserClient();
-        private ServicePrenotationClient servicePrenotation = new ServiceReferencePrenotation.ServicePrenotationClient();
-        private ServiceFilmClient serviceFilm = new ServiceReferenceFilm.ServiceFilmClient();
-        private ServiceEventClient serviceEvent = new ServiceReferenceEvent.ServiceEventClient();
-        
-        
-
-       
-
         //Visualizzazione Elenco Posti disponibili per ogni evento
         public string VisualizzazionePostiDisponibili(int codice_evento)
         {
@@ -52,8 +39,8 @@ namespace WCFServer
                             {
                                 Place p = new Place();
                                 lista_posti_disponibili.Add(p);
-                                lista_posti_disponibili[i].placeNumber = reader.GetInt32(0);
-                                lista_posti_disponibili[i].hallCode = reader.GetInt32(1);
+                                lista_posti_disponibili[i].PlaceNumber = reader.GetInt32(0);
+                                lista_posti_disponibili[i].HallCode = reader.GetInt32(1);
                                 i++;
 
                             }
@@ -87,7 +74,7 @@ namespace WCFServer
                     {
                         for (int y = 0; y < lista_riservati.Count; y++)
                         {
-                            if (lista_posti_disponibili[x].placeNumber == lista_riservati[y].placeNumber)
+                            if (lista_posti_disponibili[x].PlaceNumber == lista_riservati[y].placeNumber)
                             {
                                 lista_posti_disponibili.Remove(lista_posti_disponibili[x]); //Se trovo due elementi uguali lo rimuovo dalla lista dei posti disponibili
                                 break; //blocco il ciclo
@@ -96,7 +83,7 @@ namespace WCFServer
                     }
                     for (int z = 0; z < lista_posti_disponibili.Count; z++)
                     {
-                        elenco = elenco + lista_posti_disponibili[z].placeNumber + " ";
+                        elenco = elenco + lista_posti_disponibili[z].PlaceNumber + " ";
                     }
 
                     tx1.Commit();
@@ -111,11 +98,11 @@ namespace WCFServer
             return elenco;
         }
 
-       
 
-       
 
-        
+
+
+
 
         //Controllo vincolo Foreign key
         public string ControlloFK(int valore, string value_type)
@@ -194,15 +181,15 @@ namespace WCFServer
                             {
                                 Place p = new Place();
                                 lista_posti_disponibili.Add(p);
-                                lista_posti_disponibili[i].placeNumber = reader.GetInt32(0);
-                                lista_posti_disponibili[i].hallCode = reader.GetInt32(1);
+                                lista_posti_disponibili[i].PlaceNumber = reader.GetInt32(0);
+                                lista_posti_disponibili[i].HallCode = reader.GetInt32(1);
                                 i++;
                             }
                         }
                     }
                     for (int y = 0; y < lista_posti_disponibili.Count; y++)
                     {
-                        if (lista_posti_disponibili[y].placeNumber == numero_posto) condizione1 = false;
+                        if (lista_posti_disponibili[y].PlaceNumber == numero_posto) condizione1 = false;
                     }
                     tx.Commit();
                     //Prelevo i posti riservati e li inserisco nella lista "lista_posti_occupati"

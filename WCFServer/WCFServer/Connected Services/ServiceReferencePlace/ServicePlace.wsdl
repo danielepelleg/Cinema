@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServicePlace" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServicePlace/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServicePlace/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicePlace_ControlloFK_InputMessage">
+    <wsdl:part name="parameters" element="tns:ControlloFK" />
+  </wsdl:message>
+  <wsdl:message name="IServicePlace_ControlloFK_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ControlloFKResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePlace_VisualizzazionePostiDisponibili_InputMessage">
+    <wsdl:part name="parameters" element="tns:VisualizzazionePostiDisponibili" />
+  </wsdl:message>
+  <wsdl:message name="IServicePlace_VisualizzazionePostiDisponibili_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VisualizzazionePostiDisponibiliResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePlace_VerificaPosto_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerificaPosto" />
+  </wsdl:message>
+  <wsdl:message name="IServicePlace_VerificaPosto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerificaPostoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicePlace">
+    <wsdl:operation name="ControlloFK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePlace/ControlloFK" message="tns:IServicePlace_ControlloFK_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePlace/ControlloFKResponse" message="tns:IServicePlace_ControlloFK_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VisualizzazionePostiDisponibili">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePlace/VisualizzazionePostiDisponibili" message="tns:IServicePlace_VisualizzazionePostiDisponibili_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePlace/VisualizzazionePostiDisponibiliResponse" message="tns:IServicePlace_VisualizzazionePostiDisponibili_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerificaPosto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePlace/VerificaPosto" message="tns:IServicePlace_VerificaPosto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePlace/VerificaPostoResponse" message="tns:IServicePlace_VerificaPosto_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicePlace" type="tns:IServicePlace">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ControlloFK">
+      <soap:operation soapAction="http://tempuri.org/IServicePlace/ControlloFK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VisualizzazionePostiDisponibili">
+      <soap:operation soapAction="http://tempuri.org/IServicePlace/VisualizzazionePostiDisponibili" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificaPosto">
+      <soap:operation soapAction="http://tempuri.org/IServicePlace/VerificaPosto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicePlace">
+    <wsdl:port name="BasicHttpBinding_IServicePlace" binding="tns:BasicHttpBinding_IServicePlace">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServicePlace/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

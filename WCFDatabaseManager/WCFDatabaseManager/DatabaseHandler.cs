@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace WCFServer
+namespace WCFDatabaseManager
 {
     abstract class DatabaseHandler
     {
@@ -31,7 +31,7 @@ namespace WCFServer
             }
             catch (SqlException e)
             {
-                Console.WriteLine("Database Connection Error");
+                Console.WriteLine("{0} \n {1}", e.ErrorCode, e.Message);
             }
             return conn;
         }
