@@ -190,5 +190,29 @@ namespace WCFDatabaseManager
 
             return table.Print();
         }
+
+        /*
+         * Draw a table of Event Prenotations
+         */
+         public string TablePrenotationEvent(List<Ticket> ticketsList) {
+            // Create the columns
+            var table = new TablePrinter("ID PRENOTAZIONE", "DATA PRENOTAZIONE", "USER", "ID EVENTO", 
+                " TITOLO FILM ", " DATA EVENTO ", " SALA ", " PREZZO ", " NUMERO POSTO ");
+
+            // Add the row of the table
+            foreach (Ticket t in ticketsList){
+                Prenotation p = t.Prenotation;
+                Event e = t.Event;
+                Film f = t.Film;
+                Reservation r = t.Reservation;
+
+                table.AddRow(p.PrenotationCode, p.DateTime, p.UsernameUser, p.EventCode,
+                    f.Title, e.DateTime.ToShortDateString() + " " + e.DateTime.ToShortTimeString(),
+                    e.HallCode, e.Price + "€", r.PlaceNumber);
+            }
+
+            return table.Print();
+
+        }
     }
 }

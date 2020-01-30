@@ -15,10 +15,16 @@ namespace WCFDatabaseManager
         bool AddPrenotation(DateTime dateTime, string usernameUser, int eventCode, int placeNumber);
 
         [OperationContract]
-        string Visualizzazione_elenco_Prenotazioni(string user);
+        bool DeletePrenotation(int prenotationCode);
+
+        [OperationContract]
+        List<Ticket> GetTicketsList(string username);
 
     }
-
+    /*
+     * Prenotation Class
+     * Store Prenotation objects of the database
+     */
     [DataContract]
     public class Prenotation
     {
@@ -28,6 +34,13 @@ namespace WCFDatabaseManager
         public int EventCode { get; set; }
     
         public Prenotation() { }
+
+        public Prenotation(Prenotation prenotation) {
+            PrenotationCode = prenotation.PrenotationCode;
+            DateTime = prenotation.DateTime;
+            UsernameUser = prenotation.UsernameUser;
+            EventCode = prenotation.EventCode;
+        }
 
         public Prenotation(int prenotationCode, DateTime dateTime, string usernameUser, int eventCode)
         {
@@ -49,5 +62,32 @@ namespace WCFDatabaseManager
                 ", Username of the user: " + UsernameUser +
                 ", Code of the event booked: " + EventCode;
         }
+    }
+
+    /*
+     * Ticket Struct
+     * Store Prenotation, Event, Film and Reservation objects 
+     * as a Ticket for a User searching his event prenotations
+     */
+    [DataContract]
+    public struct Ticket {
+
+        public Ticket(Prenotation p, Event e, Film f, Reservation r) : this()
+        {
+            Prenotation = p;
+            Event = e;
+            Film = f;
+            Reservation = r;
+        }
+
+        [DataMember]
+        public Prenotation Prenotation { get; set; } 
+        [DataMember]
+        public Event Event { get; set; }
+        [DataMember]
+        public Film Film { get; set; }
+        [DataMember]
+        public Reservation Reservation { get; set; }
+
     }
 }

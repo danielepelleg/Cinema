@@ -128,6 +128,12 @@ namespace WCFServer.ServiceReferenceUser {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/DeleteUser", ReplyAction="http://tempuri.org/IServiceUser/DeleteUserResponse")]
         System.Threading.Tasks.Task<bool> DeleteUserAsync(string username);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/EditUser", ReplyAction="http://tempuri.org/IServiceUser/EditUserResponse")]
+        bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/EditUser", ReplyAction="http://tempuri.org/IServiceUser/EditUserResponse")]
+        System.Threading.Tasks.Task<bool> EditUserAsync(string oldUsername, string newUsername, string newPassword, string newName, string newSurname);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUser", ReplyAction="http://tempuri.org/IServiceUser/GetUserResponse")]
         WCFServer.ServiceReferenceUser.User GetUser(string username);
         
@@ -190,6 +196,14 @@ namespace WCFServer.ServiceReferenceUser {
         
         public System.Threading.Tasks.Task<bool> DeleteUserAsync(string username) {
             return base.Channel.DeleteUserAsync(username);
+        }
+        
+        public bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname) {
+            return base.Channel.EditUser(oldUsername, newUsername, newPassword, newName, newSurname);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditUserAsync(string oldUsername, string newUsername, string newPassword, string newName, string newSurname) {
+            return base.Channel.EditUserAsync(oldUsername, newUsername, newPassword, newName, newSurname);
         }
         
         public WCFServer.ServiceReferenceUser.User GetUser(string username) {

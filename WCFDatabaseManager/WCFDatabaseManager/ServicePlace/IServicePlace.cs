@@ -12,12 +12,12 @@ namespace WCFDatabaseManager
     public interface IServicePlace
     {
         [OperationContract]
-        string ControlloFK(int valore, string value_type);
+        bool CheckFK(int value, string valueType);
 
         [OperationContract]
         List<Place> GetAvailablePlacesList(int eventCode);
 
         [OperationContract]
-        string VerificaPosto(int codice_evento, int numero_posto);
+        bool CheckPlace(int eventCode, int placeNumber);
     }
 }

@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServicePrenotation/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" />
-  <xs:element name="DoWork">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DoWorkResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MakePrenotation">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="MakePrenotationResponse">
+  <xs:element name="AddPrenotation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="MakePrenotationResult" nillable="true" type="q1:Prenotation" />
+        <xs:element minOccurs="0" name="dateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="usernameUser" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="eventCode" type="xs:int" />
+        <xs:element minOccurs="0" name="placeNumber" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPrenotationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddPrenotationResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeletePrenotation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="prenotationCode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeletePrenotationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeletePrenotationResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTicketsList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTicketsListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetTicketsListResult" nillable="true" type="q1:ArrayOfTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -15,6 +15,6 @@ namespace WCFDatabaseManager
         List<Hall> GetHallsList();
 
         [OperationContract]
-        string RappresentaSale(int codice_evento);
+        string DrawHall(int eventCode);
     }
 }

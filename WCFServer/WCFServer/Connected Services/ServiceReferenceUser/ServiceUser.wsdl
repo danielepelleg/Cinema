@@ -25,6 +25,12 @@
   <wsdl:message name="IServiceUser_DeleteUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUser_EditUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUser_EditUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditUserResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceUser_GetUser_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUser" />
   </wsdl:message>
@@ -49,6 +55,10 @@
     <wsdl:operation name="DeleteUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/DeleteUser" message="tns:IServiceUser_DeleteUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/DeleteUserResponse" message="tns:IServiceUser_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/EditUser" message="tns:IServiceUser_EditUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/EditUserResponse" message="tns:IServiceUser_EditUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/GetUser" message="tns:IServiceUser_GetUser_InputMessage" />
@@ -81,6 +91,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteUser">
       <soap:operation soapAction="http://tempuri.org/IServiceUser/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceUser/EditUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -7,7 +7,8 @@ using WCFServer.ServiceReferenceFilm;
 using WCFServer.ServiceReferenceEvent;
 using WCFServer.ServiceReferenceHall;
 using WCFServer.ServiceReferencePlace;
-
+using Film = WCFServer.ServiceReferenceFilm.Film;
+using Event = WCFServer.ServiceReferenceEvent.Event;
 
 namespace WCFServer
 {
@@ -35,12 +36,34 @@ namespace WCFServer
             return serviceUser.DeleteUser(username);
         }
 
+        public bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname) {
+            return serviceUser.EditUser(oldUsername, newUsername, newPassword, newName, newSurname);
+        }
+
         public User GetUser(string username) {
             return serviceUser.GetUser(username);
         }
 
         public List<User> GetUsersList() {
             return serviceUser.GetUsersList().ToList();
+        }
+
+        // FILM METHODS
+
+        public bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre) {
+            return serviceFilm.AddFilm(title, year, direction, duration, releaseDate, genre);
+        }
+
+        public bool DeleteFilm(int filmCode) {
+            return serviceFilm.DeleteFilm(filmCode);
+        }
+
+        public Film GetFilm(int filmCode) {
+            return serviceFilm.GetFilm(filmCode);
+        }
+
+        public List<Film> GetFilmList() {
+            return serviceFilm.GetFilmList().ToList();
         }
 
         // EVENTS METHODS
@@ -57,6 +80,45 @@ namespace WCFServer
             return serviceEvent.GetEventsList().ToList();
         }
 
+        // PRENOTATION METHODS
+
+        public bool AddPrenotation(DateTime dateTime, string usernameUser, int eventCode, int placeNumber) {
+            return servicePrenotation.AddPrenotation(dateTime, usernameUser, eventCode, placeNumber);
+        }
+
+
+        public bool DeletePrenotation(int prenotationCode) {
+            return servicePrenotation.DeletePrenotation(prenotationCode);
+        }
+
+        public List<Ticket> GetTicketsList(string username) {
+            return servicePrenotation.GetTicketsList(username).ToList();
+        }
+
+        // HALL METHODS
+
+        public List<Hall> GetHallsList() {
+            return serviceHall.GetHallsList().ToList();
+        }
+
+        public string DrawHall(int eventCode) {
+            return serviceHall.DrawHall(eventCode);
+        }
+
+        // PLACE METHODS
+
+        public bool CheckFK(int value, string valueType) {
+            return servicePlace.CheckFK(value, valueType);
+        }
+
+        public List<Place> GetAvailablePlacesList(int eventCode) {
+            return servicePlace.GetAvailablePlacesList(eventCode).ToList();
+        }
+
+
+        public bool CheckPlace(int eventCode, int placeNumber) {
+            return servicePlace.CheckPlace(eventCode, placeNumber);
+        }
 
 
 

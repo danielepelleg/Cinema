@@ -64,63 +64,89 @@ namespace WCFDatabaseManager
             }
         }
 
-        //Visualizzazione dei posti in sala
-        //Funzione che mi da una semplice rappresentazione a console di come sono disposti i posti nelle varie sale del cinema
-        public string RappresentaSale(int codice_evento)
+        /*
+         * Show the places in a hall.
+         * Simple console rappresentation of the places disposition in a hall
+         */ 
+        public string DrawHall(int eventCode)
         {
-            SqlTransaction tx = null;
-            string output = string.Empty;
-            Event e1 = new Event();
-            try
+            string drawHall = string.Empty;
+            Event e = new Event();
+
+            // Database connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
             {
-                // Connessione al DB Cinema
-                using (SqlConnection conn = DatabaseHandler.GetConnection())
+
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
                 {
-                    conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.RichiestaCodiceSala";
+                    command.Parameters.Add("@codice_evento", SqlDbType.Int).Value = eventCode;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command1.Transaction = tx;
-                        command1.CommandType = CommandType.StoredProcedure;
-                        command1.CommandText = "Cinema.RichiestaCodiceSala";
-                        command1.Parameters.Add("@codice_evento", SqlDbType.Int).Value = codice_evento;
-                        command1.Connection = conn;
-                        command1.ExecuteNonQuery();
-                        using (SqlDataReader reader = command1.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                e1.EventCode = reader.GetInt32(0);
-                            }
-                            switch (e1.EventCode)
-                            {
-                                case 1:
-                                    output = "\n________________________________\n\\______________________________/\n\n   | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
-                                        "   | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n";
-                                    break;
-                                case 2:
-                                    output = "\n________________________\n\\______________________/\n\n   | 1 | 2 | 3 | 4 |\n" +
-                                        "   | 5 | 6 | 7 | 8 |\n   | 9 | 10| 11| 12|\n   | 13| 14| 15| 16|\n";
-                                    break;
-                                case 3:
-                                    output = "\n________________________________\n\\______________________________/\n\n   | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
-                                        "   | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n   | 25| 26| 27| 28| 29| 30|\n";
-                                    break;
-                                default:
-                                    output = "Errore";
-                                    break;
-                            }
+                            e.EventCode = reader.GetInt32(0);
                         }
+
+                        // Attempt to commit the transaction.
+                        transaction.Commit();
+
+                        switch (e.EventCode)
+                        {
+                            case 1:
+                                drawHall = "\n________________________________\n\\______________________________/\n\n   | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
+                                    "   | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n";
+                                break;
+                            case 2:
+                                drawHall = "\n________________________\n\\______________________/\n\n   | 1 | 2 | 3 | 4 |\n" +
+                                    "   | 5 | 6 | 7 | 8 |\n   | 9 | 10| 11| 12|\n   | 13| 14| 15| 16|\n";
+                                break;
+                            case 3:
+                                drawHall = "\n________________________________\n\\______________________________/\n\n   | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
+                                    "   | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n   | 25| 26| 27| 28| 29| 30|\n";
+                                break;
+                            default:
+                                drawHall = "Sala non trovata.";
+                                break;
+                        }
+                        return drawHall;
                     }
-                    tx.Commit();
-                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return drawHall;
                 }
             }
-            catch (SqlException ex)
-            {
-                return string.Format("Connessione non riuscita: {0}", ex.ToString());
-            }
-            return output;
         }
     }
 }

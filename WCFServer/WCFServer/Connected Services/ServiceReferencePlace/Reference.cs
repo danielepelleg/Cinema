@@ -9,29 +9,108 @@
 //------------------------------------------------------------------------------
 
 namespace WCFServer.ServiceReferencePlace {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Place", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class Place : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HallCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PlaceCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PlaceNumberField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int HallCode {
+            get {
+                return this.HallCodeField;
+            }
+            set {
+                if ((this.HallCodeField.Equals(value) != true)) {
+                    this.HallCodeField = value;
+                    this.RaisePropertyChanged("HallCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PlaceCode {
+            get {
+                return this.PlaceCodeField;
+            }
+            set {
+                if ((this.PlaceCodeField.Equals(value) != true)) {
+                    this.PlaceCodeField = value;
+                    this.RaisePropertyChanged("PlaceCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PlaceNumber {
+            get {
+                return this.PlaceNumberField;
+            }
+            set {
+                if ((this.PlaceNumberField.Equals(value) != true)) {
+                    this.PlaceNumberField = value;
+                    this.RaisePropertyChanged("PlaceNumber");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferencePlace.IServicePlace")]
     public interface IServicePlace {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/ControlloFK", ReplyAction="http://tempuri.org/IServicePlace/ControlloFKResponse")]
-        string ControlloFK(int valore, string value_type);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/CheckFK", ReplyAction="http://tempuri.org/IServicePlace/CheckFKResponse")]
+        bool CheckFK(int value, string valueType);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/ControlloFK", ReplyAction="http://tempuri.org/IServicePlace/ControlloFKResponse")]
-        System.Threading.Tasks.Task<string> ControlloFKAsync(int valore, string value_type);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/CheckFK", ReplyAction="http://tempuri.org/IServicePlace/CheckFKResponse")]
+        System.Threading.Tasks.Task<bool> CheckFKAsync(int value, string valueType);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/VisualizzazionePostiDisponibili", ReplyAction="http://tempuri.org/IServicePlace/VisualizzazionePostiDisponibiliResponse")]
-        string VisualizzazionePostiDisponibili(int codice_evento);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/GetAvailablePlacesList", ReplyAction="http://tempuri.org/IServicePlace/GetAvailablePlacesListResponse")]
+        WCFServer.ServiceReferencePlace.Place[] GetAvailablePlacesList(int eventCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/VisualizzazionePostiDisponibili", ReplyAction="http://tempuri.org/IServicePlace/VisualizzazionePostiDisponibiliResponse")]
-        System.Threading.Tasks.Task<string> VisualizzazionePostiDisponibiliAsync(int codice_evento);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/GetAvailablePlacesList", ReplyAction="http://tempuri.org/IServicePlace/GetAvailablePlacesListResponse")]
+        System.Threading.Tasks.Task<WCFServer.ServiceReferencePlace.Place[]> GetAvailablePlacesListAsync(int eventCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/VerificaPosto", ReplyAction="http://tempuri.org/IServicePlace/VerificaPostoResponse")]
-        string VerificaPosto(int codice_evento, int numero_posto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/CheckPlace", ReplyAction="http://tempuri.org/IServicePlace/CheckPlaceResponse")]
+        bool CheckPlace(int eventCode, int placeNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/VerificaPosto", ReplyAction="http://tempuri.org/IServicePlace/VerificaPostoResponse")]
-        System.Threading.Tasks.Task<string> VerificaPostoAsync(int codice_evento, int numero_posto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/CheckPlace", ReplyAction="http://tempuri.org/IServicePlace/CheckPlaceResponse")]
+        System.Threading.Tasks.Task<bool> CheckPlaceAsync(int eventCode, int placeNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -61,28 +140,28 @@ namespace WCFServer.ServiceReferencePlace {
                 base(binding, remoteAddress) {
         }
         
-        public string ControlloFK(int valore, string value_type) {
-            return base.Channel.ControlloFK(valore, value_type);
+        public bool CheckFK(int value, string valueType) {
+            return base.Channel.CheckFK(value, valueType);
         }
         
-        public System.Threading.Tasks.Task<string> ControlloFKAsync(int valore, string value_type) {
-            return base.Channel.ControlloFKAsync(valore, value_type);
+        public System.Threading.Tasks.Task<bool> CheckFKAsync(int value, string valueType) {
+            return base.Channel.CheckFKAsync(value, valueType);
         }
         
-        public string VisualizzazionePostiDisponibili(int codice_evento) {
-            return base.Channel.VisualizzazionePostiDisponibili(codice_evento);
+        public WCFServer.ServiceReferencePlace.Place[] GetAvailablePlacesList(int eventCode) {
+            return base.Channel.GetAvailablePlacesList(eventCode);
         }
         
-        public System.Threading.Tasks.Task<string> VisualizzazionePostiDisponibiliAsync(int codice_evento) {
-            return base.Channel.VisualizzazionePostiDisponibiliAsync(codice_evento);
+        public System.Threading.Tasks.Task<WCFServer.ServiceReferencePlace.Place[]> GetAvailablePlacesListAsync(int eventCode) {
+            return base.Channel.GetAvailablePlacesListAsync(eventCode);
         }
         
-        public string VerificaPosto(int codice_evento, int numero_posto) {
-            return base.Channel.VerificaPosto(codice_evento, numero_posto);
+        public bool CheckPlace(int eventCode, int placeNumber) {
+            return base.Channel.CheckPlace(eventCode, placeNumber);
         }
         
-        public System.Threading.Tasks.Task<string> VerificaPostoAsync(int codice_evento, int numero_posto) {
-            return base.Channel.VerificaPostoAsync(codice_evento, numero_posto);
+        public System.Threading.Tasks.Task<bool> CheckPlaceAsync(int eventCode, int placeNumber) {
+            return base.Channel.CheckPlaceAsync(eventCode, placeNumber);
         }
     }
 }

@@ -1,25 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceFilm/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" />
-  <xs:element name="DoWork">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DoWorkResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="makeFilm">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="makeFilmResponse">
+  <xs:element name="AddFilm">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="makeFilmResult" nillable="true" type="q1:Film" />
+        <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="year" type="xs:int" />
+        <xs:element minOccurs="0" name="direction" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="duration" type="xs:int" />
+        <xs:element minOccurs="0" name="releaseDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="genre" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddFilmResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddFilmResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFilm">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filmCode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFilmResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteFilmResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFilm">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filmCode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFilmResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetFilmResult" nillable="true" type="q1:Film" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFilmList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFilmListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetFilmListResult" nillable="true" type="q2:ArrayOfFilm" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -9,10 +9,10 @@ namespace WCFDatabaseManager
     public class ServiceFilm : IServiceFilm
     {
         /*
-          * Add a film into the database.
-          * 
-          * @return true if the operation success, false if not
-          */
+         * Add a film into the database.
+         * 
+         * @return true if the operation success, false if not
+         */
         public bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre) {
             using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 connection.Open();

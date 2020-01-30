@@ -4,34 +4,35 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceHall/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceHall/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceHall/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IServiceHall_VisualizzazioneSale_InputMessage">
-    <wsdl:part name="parameters" element="tns:VisualizzazioneSale" />
+  <wsdl:message name="IServiceHall_GetHallsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHallsList" />
   </wsdl:message>
-  <wsdl:message name="IServiceHall_VisualizzazioneSale_OutputMessage">
-    <wsdl:part name="parameters" element="tns:VisualizzazioneSaleResponse" />
+  <wsdl:message name="IServiceHall_GetHallsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHallsListResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceHall_RappresentaSale_InputMessage">
-    <wsdl:part name="parameters" element="tns:RappresentaSale" />
+  <wsdl:message name="IServiceHall_DrawHall_InputMessage">
+    <wsdl:part name="parameters" element="tns:DrawHall" />
   </wsdl:message>
-  <wsdl:message name="IServiceHall_RappresentaSale_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RappresentaSaleResponse" />
+  <wsdl:message name="IServiceHall_DrawHall_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DrawHallResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceHall">
-    <wsdl:operation name="VisualizzazioneSale">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceHall/VisualizzazioneSale" message="tns:IServiceHall_VisualizzazioneSale_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceHall/VisualizzazioneSaleResponse" message="tns:IServiceHall_VisualizzazioneSale_OutputMessage" />
+    <wsdl:operation name="GetHallsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceHall/GetHallsList" message="tns:IServiceHall_GetHallsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceHall/GetHallsListResponse" message="tns:IServiceHall_GetHallsList_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RappresentaSale">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceHall/RappresentaSale" message="tns:IServiceHall_RappresentaSale_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceHall/RappresentaSaleResponse" message="tns:IServiceHall_RappresentaSale_OutputMessage" />
+    <wsdl:operation name="DrawHall">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceHall/DrawHall" message="tns:IServiceHall_DrawHall_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceHall/DrawHallResponse" message="tns:IServiceHall_DrawHall_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceHall" type="tns:IServiceHall">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="VisualizzazioneSale">
-      <soap:operation soapAction="http://tempuri.org/IServiceHall/VisualizzazioneSale" style="document" />
+    <wsdl:operation name="GetHallsList">
+      <soap:operation soapAction="http://tempuri.org/IServiceHall/GetHallsList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -39,8 +40,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RappresentaSale">
-      <soap:operation soapAction="http://tempuri.org/IServiceHall/RappresentaSale" style="document" />
+    <wsdl:operation name="DrawHall">
+      <soap:operation soapAction="http://tempuri.org/IServiceHall/DrawHall" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

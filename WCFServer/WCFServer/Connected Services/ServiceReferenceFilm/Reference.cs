@@ -23,25 +23,25 @@ namespace WCFServer.ServiceReferenceFilm {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string directionField;
+        private string DirectionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int durationField;
+        private int DurationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int filmCodeField;
+        private int FilmCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string genreField;
+        private string GenreField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime releaseDateField;
+        private System.DateTime ReleaseDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string titleField;
+        private string TitleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int yearField;
+        private int YearField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -54,92 +54,92 @@ namespace WCFServer.ServiceReferenceFilm {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string direction {
+        public string Direction {
             get {
-                return this.directionField;
+                return this.DirectionField;
             }
             set {
-                if ((object.ReferenceEquals(this.directionField, value) != true)) {
-                    this.directionField = value;
-                    this.RaisePropertyChanged("direction");
+                if ((object.ReferenceEquals(this.DirectionField, value) != true)) {
+                    this.DirectionField = value;
+                    this.RaisePropertyChanged("Direction");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int duration {
+        public int Duration {
             get {
-                return this.durationField;
+                return this.DurationField;
             }
             set {
-                if ((this.durationField.Equals(value) != true)) {
-                    this.durationField = value;
-                    this.RaisePropertyChanged("duration");
+                if ((this.DurationField.Equals(value) != true)) {
+                    this.DurationField = value;
+                    this.RaisePropertyChanged("Duration");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int filmCode {
+        public int FilmCode {
             get {
-                return this.filmCodeField;
+                return this.FilmCodeField;
             }
             set {
-                if ((this.filmCodeField.Equals(value) != true)) {
-                    this.filmCodeField = value;
-                    this.RaisePropertyChanged("filmCode");
+                if ((this.FilmCodeField.Equals(value) != true)) {
+                    this.FilmCodeField = value;
+                    this.RaisePropertyChanged("FilmCode");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string genre {
+        public string Genre {
             get {
-                return this.genreField;
+                return this.GenreField;
             }
             set {
-                if ((object.ReferenceEquals(this.genreField, value) != true)) {
-                    this.genreField = value;
-                    this.RaisePropertyChanged("genre");
+                if ((object.ReferenceEquals(this.GenreField, value) != true)) {
+                    this.GenreField = value;
+                    this.RaisePropertyChanged("Genre");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime releaseDate {
+        public System.DateTime ReleaseDate {
             get {
-                return this.releaseDateField;
+                return this.ReleaseDateField;
             }
             set {
-                if ((this.releaseDateField.Equals(value) != true)) {
-                    this.releaseDateField = value;
-                    this.RaisePropertyChanged("releaseDate");
+                if ((this.ReleaseDateField.Equals(value) != true)) {
+                    this.ReleaseDateField = value;
+                    this.RaisePropertyChanged("ReleaseDate");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string title {
+        public string Title {
             get {
-                return this.titleField;
+                return this.TitleField;
             }
             set {
-                if ((object.ReferenceEquals(this.titleField, value) != true)) {
-                    this.titleField = value;
-                    this.RaisePropertyChanged("title");
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int year {
+        public int Year {
             get {
-                return this.yearField;
+                return this.YearField;
             }
             set {
-                if ((this.yearField.Equals(value) != true)) {
-                    this.yearField = value;
-                    this.RaisePropertyChanged("year");
+                if ((this.YearField.Equals(value) != true)) {
+                    this.YearField = value;
+                    this.RaisePropertyChanged("Year");
                 }
             }
         }
@@ -158,17 +158,29 @@ namespace WCFServer.ServiceReferenceFilm {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceFilm.IServiceFilm")]
     public interface IServiceFilm {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/DoWork", ReplyAction="http://tempuri.org/IServiceFilm/DoWorkResponse")]
-        void DoWork();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/AddFilm", ReplyAction="http://tempuri.org/IServiceFilm/AddFilmResponse")]
+        bool AddFilm(string title, int year, string direction, int duration, System.DateTime releaseDate, string genre);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/DoWork", ReplyAction="http://tempuri.org/IServiceFilm/DoWorkResponse")]
-        System.Threading.Tasks.Task DoWorkAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/AddFilm", ReplyAction="http://tempuri.org/IServiceFilm/AddFilmResponse")]
+        System.Threading.Tasks.Task<bool> AddFilmAsync(string title, int year, string direction, int duration, System.DateTime releaseDate, string genre);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/makeFilm", ReplyAction="http://tempuri.org/IServiceFilm/makeFilmResponse")]
-        WCFServer.ServiceReferenceFilm.Film makeFilm();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/DeleteFilm", ReplyAction="http://tempuri.org/IServiceFilm/DeleteFilmResponse")]
+        bool DeleteFilm(int filmCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/makeFilm", ReplyAction="http://tempuri.org/IServiceFilm/makeFilmResponse")]
-        System.Threading.Tasks.Task<WCFServer.ServiceReferenceFilm.Film> makeFilmAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/DeleteFilm", ReplyAction="http://tempuri.org/IServiceFilm/DeleteFilmResponse")]
+        System.Threading.Tasks.Task<bool> DeleteFilmAsync(int filmCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/GetFilm", ReplyAction="http://tempuri.org/IServiceFilm/GetFilmResponse")]
+        WCFServer.ServiceReferenceFilm.Film GetFilm(int filmCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/GetFilm", ReplyAction="http://tempuri.org/IServiceFilm/GetFilmResponse")]
+        System.Threading.Tasks.Task<WCFServer.ServiceReferenceFilm.Film> GetFilmAsync(int filmCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/GetFilmList", ReplyAction="http://tempuri.org/IServiceFilm/GetFilmListResponse")]
+        WCFServer.ServiceReferenceFilm.Film[] GetFilmList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceFilm/GetFilmList", ReplyAction="http://tempuri.org/IServiceFilm/GetFilmListResponse")]
+        System.Threading.Tasks.Task<WCFServer.ServiceReferenceFilm.Film[]> GetFilmListAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -198,20 +210,36 @@ namespace WCFServer.ServiceReferenceFilm {
                 base(binding, remoteAddress) {
         }
         
-        public void DoWork() {
-            base.Channel.DoWork();
+        public bool AddFilm(string title, int year, string direction, int duration, System.DateTime releaseDate, string genre) {
+            return base.Channel.AddFilm(title, year, direction, duration, releaseDate, genre);
         }
         
-        public System.Threading.Tasks.Task DoWorkAsync() {
-            return base.Channel.DoWorkAsync();
+        public System.Threading.Tasks.Task<bool> AddFilmAsync(string title, int year, string direction, int duration, System.DateTime releaseDate, string genre) {
+            return base.Channel.AddFilmAsync(title, year, direction, duration, releaseDate, genre);
         }
         
-        public WCFServer.ServiceReferenceFilm.Film makeFilm() {
-            return base.Channel.makeFilm();
+        public bool DeleteFilm(int filmCode) {
+            return base.Channel.DeleteFilm(filmCode);
         }
         
-        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceFilm.Film> makeFilmAsync() {
-            return base.Channel.makeFilmAsync();
+        public System.Threading.Tasks.Task<bool> DeleteFilmAsync(int filmCode) {
+            return base.Channel.DeleteFilmAsync(filmCode);
+        }
+        
+        public WCFServer.ServiceReferenceFilm.Film GetFilm(int filmCode) {
+            return base.Channel.GetFilm(filmCode);
+        }
+        
+        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceFilm.Film> GetFilmAsync(int filmCode) {
+            return base.Channel.GetFilmAsync(filmCode);
+        }
+        
+        public WCFServer.ServiceReferenceFilm.Film[] GetFilmList() {
+            return base.Channel.GetFilmList();
+        }
+        
+        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceFilm.Film[]> GetFilmListAsync() {
+            return base.Channel.GetFilmListAsync();
         }
     }
 }

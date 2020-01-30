@@ -55,7 +55,7 @@
     <Compile Include="ServiceHall\ServiceHall.cs" />
     <Compile Include="ServicePlace\ServicePlace.cs" />
     <Compile Include="ServicePlace\Place.cs" />
-    <Compile Include="ServicePlace\Reserve.cs" />
+    <Compile Include="ServicePlace\Reservation.cs" />
     <Compile Include="ServicePrenotation\IServicePrenotation.cs" />
     <Compile Include="ServiceEvent\IServiceEvent.cs" />
     <Compile Include="ServiceEvent\ServiceEvent.cs" />

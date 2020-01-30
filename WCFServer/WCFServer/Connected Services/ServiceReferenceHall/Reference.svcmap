@@ -25,6 +25,7 @@
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="37fbb543-c44f-4349-87a3-1619e09bda97" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceHall/?disco" />
     <MetadataFile FileName="ServiceHall.wsdl" MetadataType="Wsdl" ID="d7558f1d-d445-4caf-8ebc-f6b1c040cf41" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceHall/?wsdl" />
     <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="94082572-723c-4f06-b223-0c04d4571a15" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceHall/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="77bfe29b-3a01-4e23-8e8f-ad609c9eb5dc" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceHall/?xsd=xsd2" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="3055debb-b097-43b5-b8fc-09e6c2a2e5e6" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServiceHall/?xsd=xsd1" />
   </Metadata>
   <Extensions>

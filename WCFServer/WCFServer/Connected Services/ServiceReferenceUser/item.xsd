@@ -49,6 +49,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="EditUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="oldUsername" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newUsername" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newSurname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EditUserResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetUser">
     <xs:complexType>
       <xs:sequence>

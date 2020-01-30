@@ -12,10 +12,10 @@ namespace WCFDatabaseManager
     public interface IServiceFilm
     {
         [OperationContract]
-        bool AddFilm(string titolo, int anno, string regia, int durata, DateTime datauscita, string genere);
+        bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre);
 
         [OperationContract]
-        bool DeleteFilm(int codicefilm);
+        bool DeleteFilm(int filmCode);
 
         [OperationContract]
         Film GetFilm(int filmCode);
@@ -48,13 +48,13 @@ namespace WCFDatabaseManager
          */
         public Film(int filmCode, string title, int year, string direction, int duration, DateTime releaseDate, string genre)
         {
-            this.FilmCode = filmCode;
-            this.Title = title;
-            this.Year = year;
-            this.Direction = direction;
-            this.Duration = duration;
-            this.ReleaseDate = releaseDate;
-            this.Genre = genre;
+            FilmCode = filmCode;
+            Title = title;
+            Year = year;
+            Direction = direction;
+            Duration = duration;
+            ReleaseDate = releaseDate;
+            Genre = genre;
         }
     }
     }

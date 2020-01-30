@@ -94,12 +94,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Database Classes\Film.cs" />
-    <Compile Include="Database Classes\Hall.cs" />
-    <Compile Include="Database Classes\Place.cs" />
-    <Compile Include="Database Classes\Prenotation.cs" />
-    <Compile Include="Database Classes\Reserve.cs" />
-    <Compile Include="DatabaseHandler.cs" />
     <Compile Include="IService1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,7 +103,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service1.cs" />
-    <Compile Include="TablePrinter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -147,14 +140,26 @@
     <None Include="Connected Services\ServiceReferenceHall\item1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReferenceHall\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReferenceHall\ServiceHall.wsdl" />
+    <None Include="Connected Services\ServiceReferenceHall\WCFServer.ServiceReferenceHall.Hall.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReferencePlace\item.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReferencePlace\item1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceReferencePlace\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReferencePlace\ServicePlace.wsdl" />
+    <None Include="Connected Services\ServiceReferencePlace\WCFServer.ServiceReferencePlace.Place.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReferencePrenotation\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -165,7 +170,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReferencePrenotation\ServicePrenotation.wsdl" />
-    <None Include="Connected Services\ServiceReferencePrenotation\WCFServer.ServiceReferencePrenotation.Prenotation.datasource">
+    <None Include="Connected Services\ServiceReferencePrenotation\WCFServer.ServiceReferencePrenotation.Ticket.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReferenceUser\item.xsd">

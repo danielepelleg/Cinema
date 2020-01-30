@@ -185,6 +185,76 @@ namespace WCFDatabaseManager
         }
 
         /*
+         * Edit a User in the database
+         * 
+         * @return true if the operation success, false if not
+         */
+        public bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname)
+        {
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
+            {
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+                try
+                {
+                    // Update an User
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.EditUser";
+                    command.Parameters.Add("@OldUsername", SqlDbType.VarChar).Value = oldUsername;
+                    command.Parameters.Add("@NewUsername", SqlDbType.VarChar).Value = newUsername;
+                    command.Parameters.Add("@NewPassword", SqlDbType.VarChar).Value = newPassword;
+                    command.Parameters.Add("@NewName", SqlDbType.VarChar).Value = newName;
+                    command.Parameters.Add("@NewSurname", SqlDbType.VarChar).Value = newSurname;
+                    command.ExecuteNonQuery();
+
+                    // Initialize a int value to check if the Stored Procedure success
+                    var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    // Commit the transaction.
+                    transaction.Commit();
+
+                    // If the int value > 0 the Stored Procedure success
+                    if (returnParameter.Direction > 0) return true;
+                    else
+                    {
+                        command.Parameters.Clear();
+                        throw new Exception("Errore: si è verificato un problema nell'aggiornare un Utente del DB");
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
+                }
+            }
+        }
+
+        /*
          * Get the User of the database given his username
          */
         public User GetUser(string username) {

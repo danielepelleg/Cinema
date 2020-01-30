@@ -16,7 +16,7 @@ namespace WCFDatabaseManager
             // Define two list: one for available places, 
             //  the second for the booked ones
             List<Place> availablePlacesList = new List<Place>();
-            List<Reserve> reserveList = new List<Reserve>();
+            List<Reservation> reserveList = new List<Reservation>();
 
             // Connessione al DB Cinema
             using (SqlConnection connection = DatabaseHandler.GetConnection())
@@ -60,7 +60,7 @@ namespace WCFDatabaseManager
                     {
                         while (reader.Read())
                         {
-                            Reserve reserve = new Reserve();
+                            Reservation reserve = new Reservation();
                             reserve.PlaceNumber = reader.GetInt32(0);
                             reserve.PrenotationCode = reader.GetInt32(1);
                             reserveList.Add(reserve);
@@ -109,135 +109,178 @@ namespace WCFDatabaseManager
             }
         }
 
-        //Controllo vincolo Foreign key
-        public string ControlloFK(int valore, string value_type)
+        /* Check if the place the User wants to buy is a valid one.
+         * The place must exist in that hall and must not already be reserved
+         *
+         * @return true if the place is a valid one, false otherwise
+         */
+        public bool CheckPlace(int eventCode, int placeNumber)
         {
-            string result = string.Empty;
-            try
+            // Define two list, the first containing the existing place
+            // the second containing the reserved ones
+            List<Reservation> reservationsList = new List<Reservation>();
+            List<Place> availablePlacesList = new List<Place>();
+
+            // Define two bool value, he first check if the place exists,
+            // the second whether it is already reserved
+            bool placeExists = false;
+            bool placeReserved = false;
+
+            // Connessione al DB Cinema
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
             {
-                SqlTransaction tx = null;
-                // Connessione al DB Cinema
-                using (SqlConnection conn = DatabaseHandler.GetConnection())
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+                try
                 {
-                    conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.VisualizzaPostiSala";
+                    command.Parameters.Add("@codice_evento", SqlDbType.Int).Value = eventCode;
+
+                    // Fill the availablePlaceList with the available places for the event
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command1.CommandText = "SELECT * FROM Cinema." + value_type + ";";
-                        command1.Transaction = tx;
-                        using (SqlDataReader reader = command1.ExecuteReader())
+                        while (reader.Read())
                         {
-                            {
-                                bool found = false;
-                                while (reader.Read())
-                                {
-                                    if (valore == reader.GetInt32(0))
-                                    {
-                                        found = true;
-                                        result = "Trovato";
-                                    }
-                                }
-                                if (found == false)
-                                    result = "Non Presente";
-                            }
+                            Place p = new Place();
+                            p.PlaceNumber = reader.GetInt32(0);
+                            p.HallCode = reader.GetInt32(1);
+                            availablePlacesList.Add(p);
                         }
                     }
-                    tx.Commit();
+
+                    // Check if the place exists
+                    for (int y = 0; y < availablePlacesList.Count; y++)
+                    {
+                        if (availablePlacesList[y].PlaceNumber == placeNumber) placeExists = true;
+                    }
+
+                    // Reset the parameters
+                    command.Parameters.Clear();
+
+                    // Takes the Reservations and fill the list reservationsList with booked/bought places
+                    //Prelevo i posti riservati e li inserisco nella lista "lista_posti_occupati"
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.VisualizzaPostiRiservati";
+                    command.Parameters.Add("@codice_evento", SqlDbType.Int).Value = eventCode;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Reservation r = new Reservation();
+                            r.PlaceNumber = reader.GetInt32(0);
+                            r.PrenotationCode = reader.GetInt32(1);
+                            reservationsList.Add(r);
+                        }
+                    }
+
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    // Check if the place is already in Reservation table
+                    for (int z = 0; z < reservationsList.Count; z++)
+                    {
+                        if (reservationsList[z].PlaceNumber == placeNumber) placeReserved = true;
+                    }
+
+
+                    if (placeExists == true || placeReserved == true)
+                    {
+                        return false;
+                    }
+                    else return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
                 }
             }
-            catch (Exception ex)
-            {
-                result = string.Format("{0}", ex.ToString());
-            }
-            return result;
         }
 
-        //Controllo che il posto inserito dall'utente non sia gia stato prenotato e quindi sia già presente nella tabella Riserva del DB
-        //Controllo inoltre che il numero posto inserito dall'utente non sia presente all'interno della sala in cui avverrà la presentazione
-        public string VerificaPosto(int codice_evento, int numero_posto)
+        /*
+         * Check Foreign Key bond
+         * 
+         * @return true if the foreign key exists, false if not
+         */
+        public bool CheckFK(int value, string valueType)
         {
-            string result = string.Empty;
-            List<Reserve> lista_riservati = new List<Reserve>();
-            SqlTransaction tx1 = null;
-            List<Place> lista_posti_disponibili = new List<Place>();
-            SqlTransaction tx = null;
-            bool condizione1 = true;
-            bool condizione2 = false;
-            int i = 0;
-            int h = 0;
-            try
+            // Datbase Connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
             {
-                // Connessione al DB Cinema
-                using (SqlConnection conn = DatabaseHandler.GetConnection())
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
                 {
-                    conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
+                    command.CommandText = "SELECT * FROM Cinema." + valueType + ";";
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command1.Transaction = tx;
-                        command1.CommandType = CommandType.StoredProcedure;
-                        command1.CommandText = "Cinema.VisualizzaPostiSala";
-                        command1.Parameters.Add("@codice_evento", SqlDbType.Int).Value = codice_evento;
-                        command1.Connection = conn;
-                        command1.ExecuteNonQuery();
-                        using (SqlDataReader reader = command1.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                Place p = new Place();
-                                lista_posti_disponibili.Add(p);
-                                lista_posti_disponibili[i].PlaceNumber = reader.GetInt32(0);
-                                lista_posti_disponibili[i].HallCode = reader.GetInt32(1);
-                                i++;
-                            }
+                            if (value == reader.GetInt32(0)) return true;
                         }
-                    }
-                    for (int y = 0; y < lista_posti_disponibili.Count; y++)
-                    {
-                        if (lista_posti_disponibili[y].PlaceNumber == numero_posto) condizione1 = false;
-                    }
-                    tx.Commit();
-                    //Prelevo i posti riservati e li inserisco nella lista "lista_posti_occupati"
-                    tx1 = conn.BeginTransaction();
-                    using (SqlCommand command = conn.CreateCommand())
-                    {
-                        command.Transaction = tx1;
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.CommandText = "Cinema.VisualizzaPostiRiservati";
-                        command.Parameters.Add("@codice_evento", SqlDbType.Int).Value = codice_evento;
-                        command.Connection = conn;
-                        command.ExecuteNonQuery();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Reserve r = new Reserve();
-                                lista_riservati.Add(r);
-                                lista_riservati[h].PlaceNumber = reader.GetInt32(0);
-                                lista_riservati[h].PrenotationCode = reader.GetInt32(1);
-                                h++;
-                            }
-                        }
-                    }
-                    for (int z = 0; z < lista_riservati.Count; z++)
-                    {
-                        if (lista_riservati[z].PlaceNumber == numero_posto)
-                        {
-                            condizione2 = true;
-                        }
-                    }
-                    tx1.Commit();
-                    if (condizione1 == true || condizione2 == true)
-                    {
-                        result = "Valore non valido";
+                        return false;
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
+                }
             }
-            catch (SqlException ex)
-            {
-                return string.Format("Connessione non riuscita: {0}", ex.ToString());
-            }
-            return result;
         }
+
+        
     }
 }

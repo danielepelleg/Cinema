@@ -10,6 +10,8 @@ namespace WCFDatabaseManager
     {
         /*
          * Add a Prenotation into the database.
+         * 
+         * @return true if the operation success, false if not
          */
         public bool AddPrenotation(DateTime dateTime, string usernameUser, int eventCode, int placeNumber) {
             using (SqlConnection connection = DatabaseHandler.GetConnection()) {
@@ -91,55 +93,154 @@ namespace WCFDatabaseManager
 
         }
 
-        //Visualizzazione Elenco Prenotazioni filtrato per Utente
-        public string Visualizzazione_elenco_Prenotazioni(string user)
+        /*
+         * Delete a Prenotation and the Reservation record from the database.
+         * 
+         * @return true if the operation success, false if not
+         */
+        public bool DeletePrenotation(int prenotationCode)
         {
-            var t = new TablePrinter("Prenotation ID", "Prenotation Date", "User", "Event Code", "Price, Title", "Event Date", "Hall", "Price", "Place Number");
-            SqlTransaction tx = null;
-            string elenco = string.Empty;
-            int i = 0; //variabile di incremento per la lista
-            try
-            {
-                // Connessione al DB Cinema
-                using (SqlConnection conn = DatabaseHandler.GetConnection())
-                {conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
-                    {
-                        command1.Transaction = tx;
-                        command1.CommandType = CommandType.StoredProcedure;
-                        command1.CommandText = "Cinema.VisualizzaPrenotazione";
-                        command1.Parameters.Add("@user", SqlDbType.VarChar).Value = user;
-                        command1.Connection = conn;
-                        command1.ExecuteNonQuery();
 
-                        using (SqlDataReader reader = command1.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Prenotation p = new Prenotation();
-                                p.PrenotationCode = reader.GetInt32(0);
-                                p.DateTime = reader.GetDateTime(1);
-                                p.UsernameUser = reader.GetString(2);
-                                p.EventCode = reader.GetInt32(3);
-                                /*elenco = elenco + listPrenotazioni[i].VisualizzaPrenotazioni() + "\n" + "Titolo: " + reader.GetString(4) + ", Data e Ora dell'evento: " + reader.GetDateTime(5) +
-                                    ", Sala: " + reader.GetInt32(6) + "\nPrezzo: " + reader.GetDecimal(7) + ", Numero posto:" + reader.GetInt32(8) + "\n";*/
-                                t.AddRow(p.PrenotationCode, p.DateTime.ToShortDateString() + " " + p.DateTime.ToShortTimeString(), p.UsernameUser, p.EventCode, reader.GetString(4), reader.GetDateTime(5), reader.GetInt32(6), reader.GetDecimal(7) + "€", reader.GetInt32(8));
-                                i++;
-                            }
-                        }
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
+            {
+                connection.Open();
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    // Insert an Event
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.DeletePrenotazione";
+                    command.Parameters.Add("@CodicePrenotazione", SqlDbType.Int).Value = prenotationCode;
+                    command.ExecuteNonQuery();
+
+                    // Initialize a int value to check if the Stored Procedure success
+                    var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                    // Commit the transaction.
+                    transaction.Commit();
+
+                    // If the int value > 0 the Stored Procedure success
+                    if (returnParameter.Direction > 0) return true;
+                    else
+                    {
+                        command.Parameters.Clear();
+                        throw new Exception("Errore: si è verificato un problema nell'eliminare una Prenotazione e una Riserva dal DB");
                     }
-                    tx.Commit();
+
+                }
+                catch (SqlException ex)
+                {
+
+                    Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
                 }
             }
-            catch (SqlException ex)
+
+        }
+
+        /*
+         * Get the list containing the tickets of a user
+         */
+        public List<Ticket> GetTicketsList(string username)
+        {
+            // Database connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
             {
-                return string.Format("Connessione non riuscita: {0}", ex.ToString());
+
+                // Define a new list of Users
+                List<Ticket> ticketsList = new List<Ticket>();
+
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.VisualizzaPrenotazione";
+                    command.Parameters.Add("@user", SqlDbType.VarChar).Value = username;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Prenotation p = new Prenotation();
+                            p.PrenotationCode = reader.GetInt32(0);
+                            p.DateTime = reader.GetDateTime(1);
+                            p.UsernameUser = reader.GetString(2);
+                            p.EventCode = reader.GetInt32(3);
+
+                            Event e = new Event();
+                            e.EventCode = reader.GetInt32(3);
+                            e.DateTime = reader.GetDateTime(5);
+                            e.HallCode = reader.GetInt32(6);
+                            e.Price = reader.GetDecimal(7);
+
+                            Film f = new Film();
+                            f.Title = reader.GetString(4);
+
+                            Reservation r = new Reservation();
+                            r.PlaceNumber = reader.GetInt32(8);
+
+                            ticketsList.Add(new Ticket(p, e, f, r));
+                        }
+                    }
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    return ticketsList;
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2) {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return new List<Ticket>() { };
+                }
             }
-            /*if (elenco == string.Empty)
-                return "Non sono state ancora effettuate prenotazioni \n";
-            else*/
-            return t.Print();
         }
     }
 }

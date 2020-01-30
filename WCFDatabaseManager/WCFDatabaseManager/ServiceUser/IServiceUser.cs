@@ -25,6 +25,9 @@ namespace WCFDatabaseManager
         bool DeleteUser(string username);
 
         [OperationContract]
+        bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname);
+
+        [OperationContract]
         User GetUser(string username);
 
         [OperationContract]
