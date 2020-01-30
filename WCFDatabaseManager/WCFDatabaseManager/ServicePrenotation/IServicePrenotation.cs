@@ -12,13 +12,7 @@ namespace WCFDatabaseManager
     public interface IServicePrenotation
     {
         [OperationContract]
-        void DoWork();
-
-        [OperationContract]
-        Prenotation MakePrenotation();
-
-        [OperationContract]
-        string InserimentoPrenotazione(DateTime dateTime, string UsernameUser, int eventCode, int placeNumber);
+        bool AddPrenotation(DateTime dateTime, string usernameUser, int eventCode, int placeNumber);
 
         [OperationContract]
         string Visualizzazione_elenco_Prenotazioni(string user);

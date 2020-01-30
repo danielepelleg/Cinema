@@ -10,6 +10,8 @@ namespace WCFDatabaseManager
     {
         /*
           * Add a film into the database.
+          * 
+          * @return true if the operation success, false if not
           */
         public bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre) {
             using (SqlConnection connection = DatabaseHandler.GetConnection()) {
@@ -73,6 +75,8 @@ namespace WCFDatabaseManager
 
         /*
          * Delete a film from the database.
+         * 
+         * @return true if the operation success, false if not
          */
         public bool DeleteFilm(int filmCode) {
             using (SqlConnection connection = DatabaseHandler.GetConnection()) {
@@ -132,61 +136,127 @@ namespace WCFDatabaseManager
 
         }
 
-        //Visualizzazione Elenco Film
-        public string Visualizzazione_elenco_film()
-        {
-            var t = new TablePrinter("ID", "Titolo", "Anno", "Regia", "Durata", "Data di Uscita", "Genere");
-            SqlTransaction tx = null;
-            string elenco = string.Empty;
-            //int i = 0; //variabile di incremento per la lista
-            try
-            {
-                // Connessione al DB Cinema
+        /*
+         * Get the Film of the database given its code
+         */
+        public Film GetFilm(int filmCode) {
+            using (SqlConnection connection = DatabaseHandler.GetConnection()) {
+                connection.Open();
 
-                using (SqlConnection conn = DatabaseHandler.GetConnection())
-                {
-                    conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
-                    {
-                        command1.CommandText = "SELECT * FROM Cinema.Film;";
-                        command1.Transaction = tx;
-                        using (SqlDataReader reader = command1.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Film f = new Film();
-                                f.FilmCode = reader.GetInt32(0);
-                                f.Title = reader.GetString(1);
-                                f.Year = reader.GetInt32(2);
-                                f.Direction = reader.GetString(3);
-                                f.Duration = reader.GetInt32(4);
-                                f.ReleaseDate = reader.GetDateTime(5);
-                                f.Genre = reader.GetString(6);
-                                //elenco = elenco + listFilm[i].VisualizzaFilm() + "\n";
-                                t.AddRow(f.FilmCode, f.Title, f.Year, f.Direction, f.Duration + "'", f.ReleaseDate.ToShortDateString(), f.Genre);
-                                //i++;
-                            }
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try {
+                    command.CommandText = "SELECT * FROM Cinema.Film WHERE CodiceFilm = @filmCode ";
+                    command.Parameters.Add("@filmCode", SqlDbType.Int).Value = filmCode;
+
+                    Film film = new Film();
+                    using (SqlDataReader reader = command.ExecuteReader()) {
+                        while (reader.Read()) {
+                            film.FilmCode = reader.GetInt32(0);
+                            film.Title = reader.GetString(1);
+                            film.Year = reader.GetInt32(2);
+                            film.Direction = reader.GetString(3);
+                            film.Duration = reader.GetInt32(4);
+                            film.ReleaseDate = reader.GetDateTime(5);
+                            film.Genre = reader.GetString(6);
                         }
+
                     }
-                    tx.Commit();
-                    conn.Close();
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    return film;
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2) {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return new Film();
                 }
             }
-            catch (SqlException ex)
-            {
-                return string.Format("Connessione non riuscita: {0}", ex.ToString());
-            }
-            /*if (elenco == string.Empty)
-                return "Non sono ancora presenti film all'interno del database. \n";
-            else*/
-            return t.Print();
         }
 
-        public Film GetFilm()
+        /*
+         * Get the list containing the Film of the database
+         */
+        public List<Film> GetFilmList()
         {
-            Film f = new Film(1, "Avatar", 2010, "sd", 122, DateTime.Now, "fantasy");
-            return f;
+            // Database connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
+            {
+                // Define a new list of Users
+                List<Film> filmList = new List<Film>();
+
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "SELECT * FROM Cinema.Evento;";
+                    using (SqlDataReader reader = command.ExecuteReader()) {
+                        while (reader.Read()) {
+                            var filmCode = reader.GetInt32(0);
+                            var title = reader.GetString(1);
+                            var year = reader.GetInt32(2);
+                            var direction = reader.GetString(3);
+                            var duration = reader.GetInt32(4);
+                            var releaseDate = reader.GetDateTime(5);
+                            var genre = reader.GetString(6);
+
+                            filmList.Add(new Film(filmCode, title, year, direction, duration, releaseDate, genre));
+                        }
+                    }
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    return filmList;
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2) {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return new List<Film>() { };
+                }
+            }
         }
     }
 }

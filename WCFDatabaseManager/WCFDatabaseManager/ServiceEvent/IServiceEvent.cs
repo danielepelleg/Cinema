@@ -20,7 +20,10 @@ namespace WCFDatabaseManager
         [OperationContract]
         List<Event> GetEventsList();
     }
-    
+    /*
+     * User Class
+     * Store User objects of the database
+     */
     [DataContract]
     public class Event
     {

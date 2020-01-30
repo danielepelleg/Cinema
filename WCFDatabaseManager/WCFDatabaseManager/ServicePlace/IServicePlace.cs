@@ -14,9 +14,8 @@ namespace WCFDatabaseManager
         [OperationContract]
         string ControlloFK(int valore, string value_type);
 
-
         [OperationContract]
-        string VisualizzazionePostiDisponibili(int codice_evento);
+        List<Place> GetAvailablePlacesList(int eventCode);
 
         [OperationContract]
         string VerificaPosto(int codice_evento, int numero_posto);

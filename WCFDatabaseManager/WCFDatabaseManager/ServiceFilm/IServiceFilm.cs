@@ -18,10 +18,10 @@ namespace WCFDatabaseManager
         bool DeleteFilm(int codicefilm);
 
         [OperationContract]
-        string Visualizzazione_elenco_film();
+        Film GetFilm(int filmCode);
 
         [OperationContract]
-        Film GetFilm();
+        List<Film> GetFilmList();        
     }
     [DataContract]
     public class Film

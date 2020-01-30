@@ -8,46 +8,60 @@ namespace WCFDatabaseManager
     // NOTA: è possibile utilizzare il comando "Rinomina" del menu "Refactoring" per modificare il nome di classe "ServiceHall" nel codice e nel file di configurazione contemporaneamente.
     public class ServiceHall : IServiceHall
     {
-        //Visualizzazione Elenco Sale
-        public string VisualizzazioneSale()
-        {
-            var t = new TablePrinter(" SALA ", " CAPIENZA ");
-            SqlTransaction tx = null;
-            //string elenco = string.Empty;
-            //int i = 0; //variabile di incremento per la lista
-            try
-            {
-                // Connessione al DB Cinema
-                using (SqlConnection conn = DatabaseHandler.GetConnection())
-                {
-                    conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
-                    {
-                        command1.CommandText = "SELECT * FROM Cinema.Sala;";
-                        command1.Transaction = tx;
-                        using (SqlDataReader reader = command1.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Hall s = new Hall();
-                                s.HallCode = reader.GetInt32(0);
-                                s.Capacity = reader.GetInt32(1);
-                                //elenco = elenco + listSale[i].VisualizzaSala() + "\n";
-                                //i++;
-                                t.AddRow(s.HallCode, s.Capacity);
-                            }
+        /*
+         * Get the list containing the Halls of the database
+         */
+        public List<Hall> GetHallsList() {
+            // Database connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection()) {
+                // Define a new list of Users
+                List<Hall> hallsList = new List<Hall>();
 
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try {
+                    command.CommandText = "SELECT * FROM Cinema.Sala;";
+                    using (SqlDataReader reader = command.ExecuteReader()) {
+                        while (reader.Read()) {
+                            var hallCode = reader.GetInt32(0);
+                            var capacity = reader.GetInt32(1);
+
+                            hallsList.Add(new Hall(hallCode, capacity));
                         }
                     }
-                    tx.Commit();
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    return hallsList;
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2) {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return new List<Hall>() { };
                 }
             }
-            catch (SqlException ex)
-            {
-                return string.Format("Connessione non riuscita: {0}", ex.ToString());
-            }
-            return t.Print();
         }
 
         //Visualizzazione dei posti in sala

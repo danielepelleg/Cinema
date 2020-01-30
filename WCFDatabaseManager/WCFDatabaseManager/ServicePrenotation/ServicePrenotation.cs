@@ -8,67 +8,84 @@ namespace WCFDatabaseManager
     // NOTA: è possibile utilizzare il comando "Rinomina" del menu "Refactoring" per modificare il nome di classe "ServicePrenotation" nel codice e nel file di configurazione contemporaneamente.
     public class ServicePrenotation : IServicePrenotation
     {
-        List<Prenotation> listPrenotazioni = new List<Prenotation>();
-        Prenotation p1 = new Prenotation();
-        public void DoWork()
-        {
-        }
-
-        public Prenotation MakePrenotation()
-        {
-            Prenotation p = new Prenotation(1,DateTime.Now,"corso",12);
-            return p;
-        }
-
-        //Inserimento Prenotazioni
-        public string InserimentoPrenotazione(DateTime dateTime, string UsernameUser, int eventCode, int placeNumber)
-        {
-            var t = new TablePrinter("Numero Prenotazione", "ID Evento", "Username", "Data e Ora Prenotazione");
-            using (SqlConnection connection = DatabaseHandler.GetConnection())
-            {
+        /*
+         * Add a Prenotation into the database.
+         */
+        public bool AddPrenotation(DateTime dateTime, string usernameUser, int eventCode, int placeNumber) {
+            using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 connection.Open();
+
                 // Start a local transaction.
-                SqlTransaction sqlTran = connection.BeginTransaction();
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
 
-                // Enlist a command in the current transaction.
-                SqlCommand cmd = connection.CreateCommand();
-                cmd.Transaction = sqlTran;
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
 
-                try
-                {
-                    // Esecuzione Inserimento
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Cinema.AddNewPrenotazione";
-                    cmd.Parameters.Add("@DataOra", SqlDbType.DateTime).Value = dateTime;
-                    cmd.Parameters.Add("@Username_UtenteFree", SqlDbType.VarChar).Value = UsernameUser;
-                    cmd.Parameters.Add("@Codice_Evento", SqlDbType.Int).Value = eventCode;
-                    cmd.Parameters.Add("@CodicePrenotazione", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    cmd.Connection = connection;
-                    cmd.ExecuteNonQuery();
-                    // CodiceEvento is an IDENTITY value from the database.
-                    p1.PrenotationCode = Convert.ToInt32(cmd.Parameters["@CodicePrenotazione"].Value.ToString());
-                    p1.DateTime = dateTime;
-                    p1.UsernameUser = UsernameUser;
-                    p1.EventCode = eventCode;
-                    t.AddRow(p1.PrenotationCode, p1.EventCode, p1.UsernameUser, p1.DateTime.ToShortDateString() + " " + p1.DateTime.ToShortTimeString());
-                    // Commit the transaction.
-                    sqlTran.Commit();
-                    //Inserisco i valori nella tabella Riserva
-                    SqlTransaction sqlTran1 = connection.BeginTransaction();
-                    SqlCommand cmd1 = connection.CreateCommand();
-                    cmd1.Transaction = sqlTran1;
-                    cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.CommandText = "Cinema.AddNewRiserva";
-                    cmd1.Parameters.Add("@numero_posto", SqlDbType.Int).Value = placeNumber;
-                    cmd1.Parameters.Add("@codice_prenotazione", SqlDbType.Int).Value = p1.PrenotationCode;
-                    cmd1.Connection = connection;
-                    cmd1.ExecuteNonQuery();
-                    sqlTran1.Commit();
-                    return "PRENOTAZIONE EFFETTUATA CON SUCCESSO!\nBiglietto acquistato: \n" + t.Print() + "\n";
+                try {
+                    // Insert the Prenotation into the database
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.AddNewPrenotazione";
+                    command.Parameters.Add("@DataOra", SqlDbType.DateTime).Value = dateTime;
+                    command.Parameters.Add("@Username_UtenteFree", SqlDbType.VarChar).Value = usernameUser;
+                    command.Parameters.Add("@Codice_Evento", SqlDbType.Int).Value = eventCode;
+                    command.Parameters.Add("@CodicePrenotazione", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+
+                    // Create a Prenotation Object
+                    Prenotation prenotation = new Prenotation(Convert.ToInt32(command.Parameters["@CodicePrenotazione"].Value.ToString()), 
+                        dateTime, usernameUser, eventCode);
+
+                    // Initialize a int value to check if the Stored Procedure success
+                    var returnParameter1 = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                    returnParameter1.Direction = ParameterDirection.ReturnValue;
+
+                    // Commit the transaction
+                    transaction.Commit();
+
+                    //Reset the parameters
+                    command.Parameters.Clear();
+
+                    // Insert data in Reserve table in the database
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.AddNewRiserva";
+                    command.Parameters.Add("@numero_posto", SqlDbType.Int).Value = placeNumber;
+                    command.Parameters.Add("@codice_prenotazione", SqlDbType.Int).Value = prenotation.PrenotationCode;
+                    command.ExecuteNonQuery();
+
+                    // Initialize a int value to check if the Stored Procedure success
+                    var returnParameter2 = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                    returnParameter2.Direction = ParameterDirection.ReturnValue;
+
+                    // Commit the transaction
+                    transaction.Commit();
+
+                    // If both the int value > 0 the Stored Procedure both success
+                    if (returnParameter1.Direction > 0 && returnParameter2.Direction > 0) return true;
+                    else {
+                        command.Parameters.Clear();
+                        throw new Exception("Errore: si è verificato un problema nell'aggiungere un Evento nel DB");
+                    }
                 }
-                catch (SqlException ex)
-                {
-                    return string.Format("{0}", ex.ToString());
+                catch (SqlException ex) {
+                    Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2) {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
                 }
             }
 
@@ -85,9 +102,7 @@ namespace WCFDatabaseManager
             {
                 // Connessione al DB Cinema
                 using (SqlConnection conn = DatabaseHandler.GetConnection())
-                {
-                    listPrenotazioni.Clear(); //pulisco la lista di film in modo tale da riempirla nuovamente e non avere problemi se sono avvenute modifiche
-                    conn.Open();
+                {conn.Open();
                     tx = conn.BeginTransaction();
                     using (SqlCommand command1 = conn.CreateCommand())
                     {

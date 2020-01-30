@@ -132,7 +132,9 @@ namespace WCFDatabaseManager
 
         /*
          * Delete a User from the database
-         */ 
+         * 
+         * @return true if the operation success, false if not
+         */
         public bool DeleteUser(string username) {
             using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 connection.Open();
@@ -238,6 +240,7 @@ namespace WCFDatabaseManager
             }
         }
 
+ 
         /*
          * Get the list containing the Users of the database
          */

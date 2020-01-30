@@ -8,101 +8,106 @@ namespace WCFDatabaseManager
     // NOTA: è possibile utilizzare il comando "Rinomina" del menu "Refactoring" per modificare il nome di classe "ServicePlace" nel codice e nel file di configurazione contemporaneamente.
     public class ServicePlace : IServicePlace
     {
-        //Visualizzazione Elenco Posti disponibili per ogni evento
-        public string VisualizzazionePostiDisponibili(int codice_evento)
+        /*
+         * Get the list containing the avilable Places for an Event of the database
+         */
+        public List<Place> GetAvailablePlacesList(int eventCode)
         {
-            List<Place> lista_posti_disponibili = new List<Place>();
-            List<Reserve> lista_riservati = new List<Reserve>();
-            SqlTransaction tx = null;
-            SqlTransaction tx1 = null;
-            string elenco = string.Empty;
-            int i = 0; //variabile di incremento per la lista
-            int h = 0; //variabile di incremento per la lista
-            try
+            // Define two list: one for available places, 
+            //  the second for the booked ones
+            List<Place> availablePlacesList = new List<Place>();
+            List<Reserve> reserveList = new List<Reserve>();
+
+            // Connessione al DB Cinema
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
             {
-                // Connessione al DB Cinema
-                using (SqlConnection conn = DatabaseHandler.GetConnection())
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
                 {
-                    conn.Open();
-                    tx = conn.BeginTransaction();
-                    using (SqlCommand command1 = conn.CreateCommand())
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.VisualizzaPostiSala";
+                    command.Parameters.Add("@codice_evento", SqlDbType.Int).Value = eventCode;
+                    command.ExecuteNonQuery();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command1.Transaction = tx;
-                        command1.CommandType = CommandType.StoredProcedure;
-                        command1.CommandText = "Cinema.VisualizzaPostiSala";
-                        command1.Parameters.Add("@codice_evento", SqlDbType.Int).Value = codice_evento;
-                        command1.Connection = conn;
-                        command1.ExecuteNonQuery();
-                        using (SqlDataReader reader = command1.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                Place p = new Place();
-                                lista_posti_disponibili.Add(p);
-                                lista_posti_disponibili[i].PlaceNumber = reader.GetInt32(0);
-                                lista_posti_disponibili[i].HallCode = reader.GetInt32(1);
-                                i++;
-
-                            }
+                            Place place = new Place();
+                            place.PlaceNumber = reader.GetInt32(0);
+                            place.HallCode = reader.GetInt32(1);
+                            availablePlacesList.Add(place);
                         }
                     }
-                    tx.Commit();
-                    //Prelevo i posti riservati e li inserisco nella lista "lista_posti_occupati"
-                    tx1 = conn.BeginTransaction();
-                    using (SqlCommand command = conn.CreateCommand())
+                    // Reset the parameters
+                    command.Parameters.Clear();
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.VisualizzaPostiRiservati";
+                    command.Parameters.Add("@codice_evento", SqlDbType.Int).Value = eventCode;
+                    command.ExecuteNonQuery();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        command.Transaction = tx1;
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.CommandText = "Cinema.VisualizzaPostiRiservati";
-                        command.Parameters.Add("@codice_evento", SqlDbType.Int).Value = codice_evento;
-                        command.Connection = conn;
-                        command.ExecuteNonQuery();
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                Reserve r = new Reserve();
-                                lista_riservati.Add(r);
-                                lista_riservati[h].placeNumber = reader.GetInt32(0);
-                                lista_riservati[h].prenotationCode = reader.GetInt32(1);
-                                h++;
-                            }
+                            Reserve reserve = new Reserve();
+                            reserve.PlaceNumber = reader.GetInt32(0);
+                            reserve.PrenotationCode = reader.GetInt32(1);
+                            reserveList.Add(reserve);
                         }
                     }
 
-                    for (int x = lista_posti_disponibili.Count - 1; x >= 0; x--)
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    for (int x = availablePlacesList.Count - 1; x >= 0; x--)
                     {
-                        for (int y = 0; y < lista_riservati.Count; y++)
+                        for (int y = 0; y < reserveList.Count; y++)
                         {
-                            if (lista_posti_disponibili[x].PlaceNumber == lista_riservati[y].placeNumber)
+                            if (availablePlacesList[x].PlaceNumber == reserveList[y].PlaceNumber)
                             {
-                                lista_posti_disponibili.Remove(lista_posti_disponibili[x]); //Se trovo due elementi uguali lo rimuovo dalla lista dei posti disponibili
-                                break; //blocco il ciclo
+                                // If an element is in both the lists remove it from the availablePlaceList
+                                availablePlacesList.Remove(availablePlacesList[x]);
+                                break; // Stop the cycle
                             }
                         }
                     }
-                    for (int z = 0; z < lista_posti_disponibili.Count; z++)
+
+                    return availablePlacesList;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
                     {
-                        elenco = elenco + lista_posti_disponibili[z].PlaceNumber + " ";
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
                     }
 
-                    tx1.Commit();
-                    conn.Close();
+                    return new List<Place>() { };
                 }
             }
-            catch (SqlException ex)
-            {
-                return string.Format("Connessione non riuscita: {0}", ex.ToString());
-            }
-
-            return elenco;
         }
-
-
-
-
-
-
 
         //Controllo vincolo Foreign key
         public string ControlloFK(int valore, string value_type)
@@ -208,15 +213,15 @@ namespace WCFDatabaseManager
                             {
                                 Reserve r = new Reserve();
                                 lista_riservati.Add(r);
-                                lista_riservati[h].placeNumber = reader.GetInt32(0);
-                                lista_riservati[h].prenotationCode = reader.GetInt32(1);
+                                lista_riservati[h].PlaceNumber = reader.GetInt32(0);
+                                lista_riservati[h].PrenotationCode = reader.GetInt32(1);
                                 h++;
                             }
                         }
                     }
                     for (int z = 0; z < lista_riservati.Count; z++)
                     {
-                        if (lista_riservati[z].placeNumber == numero_posto)
+                        if (lista_riservati[z].PlaceNumber == numero_posto)
                         {
                             condizione2 = true;
                         }

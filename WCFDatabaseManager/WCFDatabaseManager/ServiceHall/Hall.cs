@@ -10,12 +10,18 @@ namespace WCFDatabaseManager
      * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
      */
     [DataContract]
-    class Hall
+    public class Hall
     {
         [DataMember]
         public int HallCode { get; set; }
         [DataMember]
         public int Capacity { get; set; }
+
+        public Hall(int hallCode, int capacity)
+        {
+            HallCode = hallCode;
+            Capacity = capacity;
+        }
 
         /*
          * Show information about a hall

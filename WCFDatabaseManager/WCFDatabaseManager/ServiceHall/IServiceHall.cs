@@ -12,7 +12,7 @@ namespace WCFDatabaseManager
     public interface IServiceHall
     {
         [OperationContract]
-        string VisualizzazioneSale();
+        List<Hall> GetHallsList();
 
         [OperationContract]
         string RappresentaSale(int codice_evento);

@@ -9,11 +9,14 @@ namespace WCFDatabaseManager
     public class ServiceEvent : IServiceEvent
     {
         /*
-         * Add an event into the database.
+         * Add an event into the database
+         * 
+         * @return true if the operation success, false if not
          */
         public bool AddEvent(string usernameAdmin, DateTime dateTime, int filmCode, int hallCode, decimal price) {
             using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 connection.Open();
+
                 // Start a local transaction.
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
@@ -35,6 +38,7 @@ namespace WCFDatabaseManager
                             }
                         }
                     }
+                    // Reset the parameters
                     command.Parameters.Clear();
 
                     // Insert the event in the database
@@ -46,7 +50,6 @@ namespace WCFDatabaseManager
                     command.Parameters.Add("@Username_Admin", SqlDbType.VarChar).Value = usernameAdmin;
                     command.Parameters.Add("@Prezzo", SqlDbType.Decimal).Value = price;
                     command.Parameters.Add("@CodiceEvento", SqlDbType.Int).Direction = ParameterDirection.Output;
-                    command.Connection = connection;
                     command.ExecuteNonQuery();
 
                     // Initialize a int value to check if the Stored Procedure success
@@ -85,7 +88,9 @@ namespace WCFDatabaseManager
         }
 
         /*
-         * Delete an event from the database.
+         * Delete an event from the database
+         * 
+         * @return true if the operation success, false if not
          */
         public bool DeleteEvent(int eventCode) {
 
@@ -146,9 +151,9 @@ namespace WCFDatabaseManager
         }
 
         /*
-         * Get the User of the database given his username
+         * Get the Event of the database given its code
          */
-        public Event GetEvent(string eventCode) {
+        public Event GetEvent(int eventCode) {
             using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 connection.Open();
 
@@ -174,7 +179,7 @@ namespace WCFDatabaseManager
                             _event.FilmCode = reader.GetInt32(2);
                             _event.HallCode = reader.GetInt32(3);
                             _event.UsernameAdmin = reader.GetString(4);
-                            _event.Price = reader.GetInt32(5);
+                            _event.Price = reader.GetDecimal(5);
                         }
 
                     }
@@ -205,7 +210,7 @@ namespace WCFDatabaseManager
         }
 
         /*
-         * Get the list containing the Users of the database
+         * Get the list containing the Events of the database
          */
         public List<Event> GetEventsList() {
             // Database connection
@@ -233,7 +238,7 @@ namespace WCFDatabaseManager
                             var filmCode = reader.GetInt32(2);
                             var hallCode = reader.GetInt32(3);
                             var usernameAdmin = reader.GetString(4);
-                            var price = reader.GetInt32(5);
+                            var price = reader.GetDecimal(5);
                             Console.WriteLine(reader.GetString(5));
                             Console.WriteLine(price);
 

@@ -15,7 +15,7 @@ namespace WCFDatabaseManager
      * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
      */
     [DataContract]
-    class Place
+    public class Place
     {
         [DataMember]
         public int PlaceCode { get; set; }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace WCFDatabaseManager
 {
@@ -17,10 +15,14 @@ namespace WCFDatabaseManager
      * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
      * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
      */
-    class TablePrinter
+     [DataContract]
+    public class TablePrinter
     {
+        [DataMember]
         private readonly string[] titles;
+        [DataMember]
         private readonly List<int> lengths;
+        [DataMember]
         private readonly List<string[]> rows = new List<string[]>();
 
         /*
@@ -100,6 +102,93 @@ namespace WCFDatabaseManager
             lengths.ForEach(l => s += ("+-" + new string('-', l) + '-'));
             s += ("+" + "\n");
             return s;
+        }
+
+        /*
+         * Draw a table of users
+         */
+        public string TableUser(List<User> userList)
+        {
+            // Create the columns
+            var table = new TablePrinter(" NOME ", " COGNOME ", " USERNAME ");
+
+            // Add the row of the table
+            foreach (User u in userList)
+            {
+                table.AddRow(u.Name, u.Surname, u.Username);
+            }
+
+            return table.Print();
+        }
+
+        /*
+         * Draw a table of film
+         */
+        public string TableFilm(List<Film> filmList)
+        {
+            // Create the columns
+            var table = new TablePrinter(" ID ", " TITOLO ", " ANNO ", " REGIA ", " DURATA ", " DATA DI USCITA ", " GENERE ");
+
+            // Add the row of the table
+            foreach (Film f in filmList)
+            {
+                table.AddRow(f.FilmCode, f.Title, f.Year, f.Direction,
+                    f.Duration + "'", f.ReleaseDate.ToShortDateString(), f.Genre);
+            }
+
+            return table.Print();
+        }
+
+        /*
+         * Draw a table of events
+         */
+        public string TableEvent(List<Event> eventsList)
+        {
+            // Create the columns
+            var table = new TablePrinter("ID EVENTO", " DATA E ORA ", " SALA ", " ID FILM ", " PREZZO ");
+
+            // Add the row of the table
+            foreach (Event e in eventsList)
+            {
+                table.AddRow(e.EventCode, e.DateTime.ToShortDateString() + " " + e.DateTime.ToShortTimeString(), 
+                    e.HallCode, e.FilmCode, e.Price + "€");
+            }
+
+            return table.Print();
+        }
+
+        /*
+         * Draw a table of halls
+         */
+        public string TableHall(List<Hall> hallsList)
+        {
+            // Create the columns
+            var table = new TablePrinter(" SALA ", " CAPIENZA ");
+
+            // Add the row of the table
+            foreach (Hall h in hallsList)
+            {
+                table.AddRow(h.HallCode, h.Capacity);
+            }
+
+            return table.Print();
+        }
+
+        /*
+         * Draw a table of prenotations
+         */
+        public string TablePrenotation(List<Prenotation> prenotationsList)
+        {
+            // Create the columns
+            var table = new TablePrinter("ID PRENOTAZIONE", " DATA ", " UTENTE ", "CODICE EVENTO");
+
+            // Add the row of the table
+            foreach (Prenotation p in prenotationsList)
+            {
+                table.AddRow(p.PrenotationCode, p.DateTime, p.UsernameUser, p.EventCode);
+            }
+
+            return table.Print();
         }
     }
 }
