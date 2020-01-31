@@ -14,13 +14,13 @@ namespace Cinema
             AddPage(new LoginPage(this));
             AddPage(new AdminPage(this));
             AddPage(new UserPage(this));
-            AddPage(new InserimentoFilm(this));
-            AddPage(new InserimentoEvento(this));
+            AddPage(new AddFilm(this));
+            AddPage(new AddEvent(this));
             AddPage(new DeleteFilm(this));
-            AddPage(new VisualizzaEvento(this));
-            AddPage(new VisualizzaFilm(this));
-            AddPage(new PrenotazioneBiglietto(this));
-            AddPage(new VisualizzaPrenotazioniUtente(this));
+            AddPage(new ShowEvents(this));
+            AddPage(new ShowFilm(this));
+            AddPage(new TicketPrenotation(this));
+            AddPage(new ShowUserTickets(this));
 
             // Setto la pagina di default all'avvio del programma
             SetPage<MainPage>();

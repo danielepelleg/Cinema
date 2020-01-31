@@ -66,7 +66,12 @@
   </xs:complexType>
   <xs:element name="Film" nillable="true" type="tns:Film" />
   <xs:complexType name="Prenotation">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EventCode" type="xs:int" />
+      <xs:element minOccurs="0" name="PrenotationCode" type="xs:int" />
+      <xs:element minOccurs="0" name="UsernameUser" nillable="true" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="Prenotation" nillable="true" type="tns:Prenotation" />
   <xs:complexType name="Reservation">

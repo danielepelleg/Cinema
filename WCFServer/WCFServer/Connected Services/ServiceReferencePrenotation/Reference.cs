@@ -380,6 +380,18 @@ namespace WCFServer.ServiceReferencePrenotation {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int EventCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PrenotationCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameUserField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -387,6 +399,58 @@ namespace WCFServer.ServiceReferencePrenotation {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateTime {
+            get {
+                return this.DateTimeField;
+            }
+            set {
+                if ((this.DateTimeField.Equals(value) != true)) {
+                    this.DateTimeField = value;
+                    this.RaisePropertyChanged("DateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int EventCode {
+            get {
+                return this.EventCodeField;
+            }
+            set {
+                if ((this.EventCodeField.Equals(value) != true)) {
+                    this.EventCodeField = value;
+                    this.RaisePropertyChanged("EventCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PrenotationCode {
+            get {
+                return this.PrenotationCodeField;
+            }
+            set {
+                if ((this.PrenotationCodeField.Equals(value) != true)) {
+                    this.PrenotationCodeField = value;
+                    this.RaisePropertyChanged("PrenotationCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UsernameUser {
+            get {
+                return this.UsernameUserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameUserField, value) != true)) {
+                    this.UsernameUserField = value;
+                    this.RaisePropertyChanged("UsernameUser");
+                }
             }
         }
         

@@ -28,9 +28,13 @@ namespace WCFDatabaseManager
     [DataContract]
     public class Prenotation
     {
+        [DataMember]
         public int PrenotationCode { get; set; }
+        [DataMember]
         public DateTime DateTime { get; set; }
+        [DataMember]
         public string UsernameUser { get; set; }
+        [DataMember]
         public int EventCode { get; set; }
     
         public Prenotation() { }

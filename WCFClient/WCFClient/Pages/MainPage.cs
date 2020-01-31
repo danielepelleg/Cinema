@@ -16,9 +16,13 @@ namespace WCFClient.Pages
         {
         }
     }
-    // Selezione del tipo di utente che vuole registrarsi
-    enum Type
-    {
+
+    /*
+     * User Type Enumeration
+     * 
+     * Select the type of User, if Admin or not
+     */ 
+    enum UserType {
         User,
         Admin
     }

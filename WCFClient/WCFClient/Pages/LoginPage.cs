@@ -13,75 +13,60 @@ namespace WCFClient.Pages
         public override void Display()
         {
             base.Display();
-            //Imposto lo stato di Login su false nel caso in cui l'utente sia tornato indietro
-            Cinema.MainProgram.Global.loggedin = false; 
-            // Uso l'enumerazione creata precedentemente per far scegliere il tipo di Login (Utente - Admin)
-            Type input = Input.ReadEnum<Type>("Select the type of user you want to login: ");
-            bool isAdmin = false;
-            if (input.ToString().Equals("Admin")) isAdmin = true;
-            Output.WriteLine(ConsoleColor.Green, "\n {0} Login: ", input);
+
+            /*
+             * Reset the Session (when the User go back in the pages)
+             */
+            SessionManager.Reset();
+
+            /* 
+             * Choose the type of Login (User - Admin)
+             */
+            UserType input = Input.ReadEnum<UserType>("Select the type of user you want to login: ");
+            SessionManager.SetAdmin(input);
+            Output.WriteLine(ConsoleColor.Green, "\n{0} Login: ", input);
 
 
-            // SCRIPT LOGIN
-            string username, hashed_password, password = string.Empty;
-
-            // Definisco le variabili che andranno a prendere i dati inseriti. La variabile password andrà a effettuare
-            // i controlli di validità della password (sulla lunghezza) mentre la corrispondente variabile hashed
-            // andrà a criptarla prima dell'inserimento nel DB attraverso un algoritmo MD5 per garantirne la sicurezza
-
+            /* 
+             * Login Form
+             * 
+             * Every input must be valid and checked. The password is hashed with 
+             * a MD5 algorithm before to be stored in the database, for a security reason.
+             */
             Output.WriteLine("--------- LOGIN ----------");
-            username = Input.ReadString("Username: ");
-            username = Cinema.MainProgram.CheckUserInput("Username", username);
+            string username = Input.ReadString("Username: ");
+            username = Controls.CheckUserInput("Username", username);
             Console.Write("Password: ");
-            password = Cinema.MainProgram.InputPassword();
-            hashed_password = EasyEncryption.MD5.ComputeMD5Hash(Cinema.MainProgram.CheckUserInput(password, "Password"));
+            string password = Controls.InputPassword();
+            string hashedPassword = EasyEncryption.MD5.ComputeMD5Hash(Controls.CheckUserInput(password, "Password"));
 
-            // Controllo Dati nel Database
-            try
-            {
-                // Mando i dati al server per il Login
-                Cinema.MainProgram.Global.loggedin = Global.wcfClient.Login(isAdmin, username, hashed_password);
-                // Assegno il risultato booleano del login alla relativa variabile globale
-                Cinema.MainProgram.Global.currentusername = username;
-                // Reindirizzo l'Utente alla pagina corrispondente al tipo di login effettuato
-                switch (input.ToString())
-                {
-                    case "Admin":
-                        // Controllo che il login admin sia andato a buon fine
-                        if (Cinema.MainProgram.Global.loggedin)
-                        {
-                            Output.WriteLine("\nLogin Successful");
-                            Input.ReadString("Press [Enter] to navigate to your menu");
-                            Program.NavigateTo<AdminPage>();
-                        }
-                        else
-                            Output.WriteLine("\nLogin Failed");
-                            Input.ReadString("Press [Enter] to navigate back");
-                            Program.NavigateTo<MainPage>();
-                        break;
-                    case "User":
-                        // Controllo che il login user sia andato a buon fine
-                        if (Cinema.MainProgram.Global.loggedin)
-                        {
-                            Output.WriteLine("\nLogin Successful");
-                            Input.ReadString("Press [Enter] to navigate to your menu");
-                            Program.NavigateTo<UserPage>();
-                        }
-                        else
-                            Output.WriteLine("\nLogin Failed");
-                        Input.ReadString("Press [Enter] to navigate back");
-                        Program.NavigateTo<MainPage>();
-                        break;
+            /*
+             * Send data to Database
+             */ 
+            if (SessionManager.wcfClient.Login(SessionManager.IsAdmin(), username, hashedPassword))
+                SessionManager.SetUser(SessionManager.wcfClient.GetUser(username));
 
+            /*
+             * Go to the Menu
+             */
+            if (!SessionManager.GetUser().Equals(null)) {                   // Check Login
+                Output.WriteLine("\nLogin Successful");
+                Input.ReadString("Press [Enter] to navigate to your menu");
+                switch (SessionManager.IsAdmin()){                          // Check User Type
+                    case true: Program.NavigateTo<AdminPage>();
+                        break;
+                    case false:
+                        Program.NavigateTo<UserPage>();
+                        break;
                 }
             }
-            catch // WCF Server Spento
-            {
-                Cinema.MainProgram.Errormessage();
-                Input.ReadString("Press [Enter] to navigate back");
-                Program.NavigateTo<MainPage>();
-            }
+            Output.WriteLine("\nLogin Failed");
+
+            /*
+             * Navigate back
+             */
+            Input.ReadString("Press [Enter] to navigate back");
+            Program.NavigateTo<MainPage>();
         }
     }
-
 }

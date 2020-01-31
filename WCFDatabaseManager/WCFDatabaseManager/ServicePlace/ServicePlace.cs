@@ -109,7 +109,8 @@ namespace WCFDatabaseManager
             }
         }
 
-        /* Check if the place the User wants to buy is a valid one.
+        /* 
+         * Check if the place the User wants to buy is a valid one.
          * The place must exist in that hall and must not already be reserved
          *
          * @return true if the place is a valid one, false otherwise

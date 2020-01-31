@@ -3,9 +3,9 @@ using System;
 
 namespace WCFClient.Pages
 {
-    class InserimentoEvento : Page
+    class AddEventPage : Page
     {
-        public InserimentoEvento(Program program)
+        public AddEventPage(Program program)
             : base("Inserimento Evento", program)
         {
         }
@@ -20,18 +20,18 @@ namespace WCFClient.Pages
             string data_e_ora1, codice_film1, codice_sala1, prezzo1 = string.Empty;
 
             Output.WriteLine("ELENCO FILM:");
-            Output.WriteLine("{0}", Global.wcfClient.Visualizzazione_elenco_film() + "\n");
+            Output.WriteLine("{0}", SessionManager.wcfClient.Visualizzazione_elenco_film() + "\n");
             Console.WriteLine("ELENCO SALE:");
-            Console.WriteLine("{0}", Global.wcfClient.VisualizzazioneSale());
+            Console.WriteLine("{0}", SessionManager.wcfClient.VisualizzazioneSale());
 
             Console.WriteLine("--------- Inserimento Dati Evento ----------");
             data_e_ora1 = Input.ReadString("Data e Ora dell'Evento: ");
             DateTime data_e_ora = Cinema.MainProgram.CheckDate(data_e_ora1);
             codice_film1 = Input.ReadString("Codice Film Proiettato: ");
-            int codice_film = Cinema.MainProgram.Intcheck(codice_film1);
+            int codice_film = Cinema.MainProgram.CheckInt(codice_film1);
             codice_film = Cinema.MainProgram.GetPrimaryKey(Convert.ToString(codice_film), "Film");
             codice_sala1 = Input.ReadString("Codice Sala Spettacolo: ");
-            int codice_sala = Cinema.MainProgram.Intcheck(codice_sala1);
+            int codice_sala = Cinema.MainProgram.CheckInt(codice_sala1);
             codice_sala = Cinema.MainProgram.GetPrimaryKey(Convert.ToString(codice_sala), "Sala");
             prezzo1 = Input.ReadString("Inserire il Prezzo del biglietto (esempio: 8,50): ");
             decimal prezzo = Cinema.MainProgram.CheckDecimal(prezzo1);
@@ -40,7 +40,7 @@ namespace WCFClient.Pages
             // Inserimento Evento nel Database.
             try
             {
-                Console.Out.WriteLine("{0}", Global.wcfClient.AddEvent(Global.currentusername, data_e_ora, codice_film, codice_sala, prezzo));
+                Console.Out.WriteLine("{0}", SessionManager.wcfClient.AddEvent(SessionManager.currentusername, data_e_ora, codice_film, codice_sala, prezzo));
             }
             catch
             {

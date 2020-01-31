@@ -15,44 +15,44 @@ namespace WCFClient.Pages
         {
             base.Display();
 
-            //Imposto lo stato di Login su false nel caso in cui l'utente sia tornato indietro
-            Cinema.MainProgram.Global.loggedin = false;
+            /*
+             * Reset the Session (when the User go back in the pages)
+             */ 
+            SessionManager.Reset();
 
-            // Uso l'enumerazione creata precedentemente per far scegliere il tipo di Registrazione (Utente - Admin)
-            Type input = Input.ReadEnum<Type>("Select the type of user you want to register: ");
-            bool isAdmin = false;
-            if (input.ToString().Equals("Admin")) isAdmin = true;
-            Output.WriteLine(ConsoleColor.Green, "\n {0} Sign In: ", input);
+            /* 
+             * Choose the type of Registration (User - Admin)
+             */
+            UserType input = Input.ReadEnum<UserType>("Select the type of user you want to register: ");
+            SessionManager.SetAdmin(input);
+            Output.WriteLine(ConsoleColor.Green, "\n{0} Sign In: ", input);
 
-            // SCRIPT REGISTRAZIONE
-            string username, password, hashed_password, nome, cognome = string.Empty;
-
-            // Definisco le variabili che andranno a prendere i dati inseriti. La variabile password andrà a effettuare
-            // i controlli di validità della password (sulla lunghezza) mentre la corrispondente variabile hashed
-            // andrà a criptarla prima dell'inserimento nel DB attraverso un algoritmo MD5 per garantirne la sicurezza 
-
+            /* 
+             * Registration Form
+             * 
+             * Every input must be valid and checked. The password is hashed with 
+             * a MD5 algorithm before to be stored in the database, for a security reason.
+             */
             Output.WriteLine("--------- REGISTRAZIONE ----------");
-            username = Input.ReadString("Username (max 30 caratteri): ");
-            username = Cinema.MainProgram.CheckUserInput("Username", username);  
-            password = Input.ReadString("Password (max 32 caratteri): ");
-            hashed_password = EasyEncryption.MD5.ComputeMD5Hash(Cinema.MainProgram.CheckUserInput("Password", password));
-            nome = Input.ReadString("Nome (max 20 caratteri): ");
-            nome = Cinema.MainProgram.CheckUserInput("Nome", nome);
-            cognome = Input.ReadString("Cognome (max 20 caratteri): ");
-            cognome = Cinema.MainProgram.CheckUserInput("Cognome", cognome);
+            string username = Input.ReadString("Username (max 30 characters): ");
+            username = Controls.CheckUserInput("Username", username);  
+            string password = Input.ReadString("Password (max 32 characters): ");
+            string hashedPassword = EasyEncryption.MD5.ComputeMD5Hash(Controls.CheckUserInput("Password", password));
+            string name = Input.ReadString("Name (max 20 caratteri): ");
+            name = Controls.CheckUserInput("Nome", name);
+            string surname = Input.ReadString("Surname (max 20 caratteri): ");
+            surname = Controls.CheckUserInput("Cognome", surname);
 
-            // Registrazione dati utente (admin o user) nel Database
-            try
-            {
-                bool success = Global.wcfClient.Registration(isAdmin, username, hashed_password, nome, cognome);
-                if (success) Output.WriteLine("REGISTRAZIONE AVVENUTA CON SUCCESSO\nPROCEDERE CON IL LOGIN\n");
-                else Output.WriteLine("ERRORE REGISTRAZIONE UTENTE\n RIPROVARE!\n");
-            }
-            catch
-            {
-                Cinema.MainProgram.Errormessage();
-            }
+            /*
+             * Send data to Database
+             */
+            if (SessionManager.wcfClient.Registration(SessionManager.IsAdmin(), username, hashedPassword, name, surname))
+                Output.WriteLine("REGISTRATION SUCCESS!\n Come back to login\n");
+            else Output.WriteLine("REGISTRATION ERROR\n Retry!\n");
 
+            /*
+             * Navigate back
+             */
             Input.ReadString("Press [Enter] to navigate home");
             Program.NavigateHome();
         }
