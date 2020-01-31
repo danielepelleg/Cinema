@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WCFClient;
 
 namespace Cinema
 {
@@ -12,184 +13,179 @@ namespace Cinema
         {
             new CinemaProgram().Run();
         }
-        public static class Global
-        {
-            public static string currentusername = "default";
-            public static bool loggedin = false;
-        }
 
-        //Nascondere Inserimento Password
-        public static string Passinsert(string a)
+        /*
+         * Hide Password Insertion
+         */
+        public static string InputPassword()
         {
-            ConsoleKeyInfo key;
+            string password = string.Empty;
             do
             {
-                key = Console.ReadKey(true);
-
+                ConsoleKeyInfo key = Console.ReadKey(true);
                 // Backspace Should Not Work
+                // Stops Receving Keys Once Enter is Pressed
                 if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
                 {
-                    a += key.KeyChar;
+                    password += key.KeyChar;
                     Console.Write("*");
                 }
-            }
-            // Stops Receving Keys Once Enter is Pressed
-            while (key.Key != ConsoleKey.Enter);
-            return a;
+                else
+                {
+                    if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+                    {
+                        password = password.Substring(0, (password.Length - 1));
+                        Console.Write("\b \b");
+                    }
+                    else if (key.Key == ConsoleKey.Enter)
+                    {
+                        break;
+                    }
+                }
+            } while (true);
+
+            return password;
         }
 
-        //Controllo Caratteri Speciali
-        public static bool Charcheck(string a)
-        {
+        /*
+         * Check if the string contains special characters
+         * 
+         * @return true if the string is valid, false if not
+         */ 
+        public static bool Charcheck(string word) {
             int v = 0;
             string s = "!£$%&()=?^ì+*+§°#][@,;:.-_<>|/\\'\" ";
-            foreach (char c in s)
-            {
-                if (a.Contains(c))
+            foreach (char c in s) {
+                if (word.Contains(c))
                     v += 1;
             }
-            if (v == 0)
-                return true;
-            else
-                return false;
+            if (v == 0) return true;
+            else return false;
         }
 
-        //Controllo Validità Input (Variabile da controllare, Nome formale della Variabile)
-        public static string Inputcheck(string a, string b)
-        {
-            string c = string.Empty;
-            switch (b)
-            {
+        /*
+         * Check the User's attributes input
+         */ 
+        public static string CheckUserInput(string userAttribute, string value) {
+
+            switch (userAttribute) {
                 case "Username":
-                    while ((a.Length < 1) || (a.Length > 30) || Charcheck(a) == false)
-                    {
-                        Console.WriteLine("\n{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 30! I caratteri speciali non sono ammessi.\nRiprovare: ", b);
-                        a = Console.ReadLine();
-                    }
-                    break;
+                    while ((value.Length < 1) || (value.Length > 30) || !Charcheck(value)) {
+                        Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 30! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
+                        userAttribute = Console.ReadLine();
+                    } break;
+
                 case "Password":
-                    while ((a.Length < 4) || (a.Length > 32))
-                    {
-                        Console.WriteLine("\n{0} non accettabile. Inserire un numero di caratteri compreso tra 4 e 32!\nRiprovare: ", b);
-                        a = Passinsert(c);
-                    }
-                    break;
+                    while ((value.Length < 4) || (value.Length > 32)) {
+                        Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 4 e 32!\nRiprovare: ", userAttribute);
+                        userAttribute = InputPassword();
+                    } break;
+
                 case "Nome":
-                    while ((a.Length < 1) || (a.Length > 20) || Charcheck(a) == false)
-                    {
-                        Console.WriteLine("\n{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 20! I caratteri speciali non sono ammessi.\nRiprovare: ", b);
-                        a = Console.ReadLine();
-                    }
-                    break;
+                    while ((value.Length < 1) || (value.Length > 20) || !Charcheck(value)) {
+                        Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 20! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
+                        userAttribute = Console.ReadLine();
+                    } break;
+
                 case "Cognome":
-                    while ((a.Length < 1) || (a.Length > 20) || Charcheck(a) == false)
-                    {
-                        Console.WriteLine("\n{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 20! I caratteri speciali non sono ammessi.\nRiprovare: ", b);
-                        a = Console.ReadLine();
-                    }
-                    break;
+                    while ((value.Length < 1) || (value.Length > 20) || !Charcheck(value)) {
+                        Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 20! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
+                        userAttribute = Console.ReadLine();
+                    } break;
             }
-            return a;
+            return userAttribute;
         }
 
-        //Controllo Validità Dati Film
-        public static string Filmcheck(string a, string b)
-        {
-            switch (b)
-            {
+        /*
+         * Check Film's attributes input
+         */ 
+        public static string CheckFilm(string filmAttribute, string value) {
+
+            switch (filmAttribute) {
                 case "Titolo":
-                    while ((a.Length < 1) || (a.Length > 50))
-                    {
-                        Console.WriteLine("{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 50!\nRiprovare: ", b);
-                        a = Console.ReadLine();
-                    }
-                    break;
+                    while ((value.Length < 1) || (value.Length > 50))  {
+                        Console.WriteLine("{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 50!\nRiprovare: ", filmAttribute);
+                        value = Console.ReadLine();
+                    } break;
+
                 case "Regia":
-                    while ((a.Length < 1) || (a.Length > 30))
-                    {
-                        Console.WriteLine("{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 30!\nRiprovare: ", b);
-                        a = Console.ReadLine();
-                    }
-                    break;
+                    while ((value.Length < 1) || (value.Length > 30)) {
+                        Console.WriteLine("{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 30!\nRiprovare: ", filmAttribute);
+                        value = Console.ReadLine();
+                    } break;
+
                 case "Genere":
-                    while ((a.Length < 1) || (a.Length > 20))
-                    {
-                        Console.WriteLine("{0} non accettabile. Inserire un numero di caratteri compreso tra 1 e 20!\nRiprovare: ", b);
-                        a = Console.ReadLine();
-                    }
-                    break;
+                    while ((value.Length < 1) || (value.Length > 20)) {
+                        Console.WriteLine("{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 20!\nRiprovare: ", filmAttribute);
+                        value = Console.ReadLine();
+                    }  break;
             }
-            return a;
+
+            return value;
         }
 
-        //Controllo Inserimento valore con Foreign key
-        public static int FKCheck(string valore, string tipo)
-        {
-            var wcfClient = new WCFClient.ServiceReference1.Service1Client();
-            while (wcfClient.ControlloFK(Convert.ToInt32(valore), tipo) != "Trovato")
-            {
-                Console.WriteLine("{0} non presente. Inserire un valore accettabile!\nRiprovare: ", tipo);
-                valore = Console.ReadLine();
+        /*
+         * Get the Primary Key of a Table, given a value
+         */ 
+        public static int GetPrimaryKey(string value, string valueType) {
+            while (!Global.wcfClient.CheckFK(Convert.ToInt32(value), valueType)) {
+                Console.WriteLine("{0} non presente. \nInserire un valore accettabile!\nRiprovare: ", valueType);
+                value = Console.ReadLine();
             }
-            return Convert.ToInt32(valore);
+            return Convert.ToInt32(value);
         }
 
-        //Controllo Validità Numero Intero
-        public static int Intcheck(string a)
-        {
-            int b;
-            while (int.TryParse(a, out int number1) == false)
-            {
+        /*
+         * Check the validity of an Int input
+         */ 
+        public static int Intcheck(string value) {
+            while (!int.TryParse(value, out int number1)) {
                 Console.WriteLine("Immissione non valida. Riprovare: ");
-                a = Console.ReadLine();
+                value = Console.ReadLine();
             }
-            return b = Convert.ToInt32(a);
+            return Convert.ToInt32(value);
         }
 
-        //Controllo Validità Data
-        public static DateTime Datecheck(string a)
-        {
-            DateTime b;
-            while (DateTime.TryParse(a, out DateTime date1) == false)
-            {
+        /*
+         * Check the validity of a Date input
+         */
+        public static DateTime CheckDate(string date) {
+            while (!DateTime.TryParse(date, out DateTime date1)) {
                 Console.WriteLine("Immissione non valida. Riprovare: ");
-                a = Console.ReadLine();
+                date = Console.ReadLine();
             }
-            return b = Convert.ToDateTime(a);
+            return Convert.ToDateTime(date);
         }
 
-        //Controllo Validità Decimal
-        public static decimal Decimalcheck(string a)
-        {
-            decimal b;
-            while (decimal.TryParse(a, out decimal decimal1) == false)
-            {
+        /*
+         * Check the validity of a Decimal input
+         */
+        public static decimal CheckDecimal(string value) {
+            while (!decimal.TryParse(value, out decimal decimal1)) {
                 Console.WriteLine("Immissione non valida. Riprovare: ");
-                a = Console.ReadLine();
+                value = Console.ReadLine();
             }
-            foreach (char c in a)
-            {
-                if (a.Contains("."))
-                {
+            foreach (char c in value) {
+                if (value.Contains(".")) {
                     Console.WriteLine("Inserire la virgola anzichè il punto! Riprovare: ");
-                    a = Console.ReadLine();
+                    value = Console.ReadLine();
                 }
             }
-            return b = Convert.ToDecimal(a);
+            return Decimal.Round(Convert.ToDecimal(value), 2);
         }
 
-        //Controllo che il posto inserito non sia gia stato prenotato
-        public static int ControlloPosto(string codice_evento, string posto)
-        {
-            var wcfClient = new WCFClient.ServiceReference1.Service1Client();
-            while (wcfClient.VerificaPosto(Convert.ToInt32(codice_evento), Convert.ToInt32(posto)) == "Valore non valido")
-            {
+        /*
+         * Check the validity of the Place requested by the User
+         * 
+         */ 
+        public static int CheckPlace(string eventCode, string place) {
+            while (!Global.wcfClient.CheckPlace(Convert.ToInt32(eventCode), Convert.ToInt32(place)))  {
                 Console.WriteLine("Il posto {0} non è disponibile!" +
-                    " Inserine uno disponibile!\nRiprovare: ", posto);
-                posto = Console.ReadLine();
-                posto = Convert.ToString(Intcheck(posto));
+                    " Inserine uno disponibile!\nRiprovare: ", place);
+                place = Console.ReadLine();
+                place = Convert.ToString(Intcheck(place));
             }
-            return Convert.ToInt32(posto);
+            return Convert.ToInt32(place);
         }
 
         // Messaggio di errore collegamento al DB

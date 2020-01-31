@@ -25,26 +25,26 @@ namespace WCFClient.Pages
             Output.WriteLine(ConsoleColor.Green, "\n {0} Sign In: ", input);
 
             // SCRIPT REGISTRAZIONE
-            string user, password, hashed_password, nome, cognome = string.Empty;
+            string username, password, hashed_password, nome, cognome = string.Empty;
 
             // Definisco le variabili che andranno a prendere i dati inseriti. La variabile password andrà a effettuare
             // i controlli di validità della password (sulla lunghezza) mentre la corrispondente variabile hashed
             // andrà a criptarla prima dell'inserimento nel DB attraverso un algoritmo MD5 per garantirne la sicurezza 
 
             Output.WriteLine("--------- REGISTRAZIONE ----------");
-            user = Input.ReadString("Username (max 30 caratteri): ");
-            user = Cinema.MainProgram.Inputcheck(user, "Username");  
+            username = Input.ReadString("Username (max 30 caratteri): ");
+            username = Cinema.MainProgram.CheckUserInput("Username", username);  
             password = Input.ReadString("Password (max 32 caratteri): ");
-            hashed_password = EasyEncryption.MD5.ComputeMD5Hash(Cinema.MainProgram.Inputcheck(password, "Password"));
+            hashed_password = EasyEncryption.MD5.ComputeMD5Hash(Cinema.MainProgram.CheckUserInput("Password", password));
             nome = Input.ReadString("Nome (max 20 caratteri): ");
-            nome = Cinema.MainProgram.Inputcheck(nome, "Nome");
+            nome = Cinema.MainProgram.CheckUserInput("Nome", nome);
             cognome = Input.ReadString("Cognome (max 20 caratteri): ");
-            cognome = Cinema.MainProgram.Inputcheck(cognome, "Cognome");
+            cognome = Cinema.MainProgram.CheckUserInput("Cognome", cognome);
 
             // Registrazione dati utente (admin o user) nel Database
             try
             {
-                bool success = Global.wcfClient.Registration(isAdmin, user, hashed_password, nome, cognome);
+                bool success = Global.wcfClient.Registration(isAdmin, username, hashed_password, nome, cognome);
                 if (success) Output.WriteLine("REGISTRAZIONE AVVENUTA CON SUCCESSO\nPROCEDERE CON IL LOGIN\n");
                 else Output.WriteLine("ERRORE REGISTRAZIONE UTENTE\n RIPROVARE!\n");
             }

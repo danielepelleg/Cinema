@@ -26,21 +26,21 @@ namespace WCFClient.Pages
 
             Console.WriteLine("--------- Inserimento Dati Evento ----------");
             data_e_ora1 = Input.ReadString("Data e Ora dell'Evento: ");
-            DateTime data_e_ora = Cinema.MainProgram.Datecheck(data_e_ora1);
+            DateTime data_e_ora = Cinema.MainProgram.CheckDate(data_e_ora1);
             codice_film1 = Input.ReadString("Codice Film Proiettato: ");
             int codice_film = Cinema.MainProgram.Intcheck(codice_film1);
-            codice_film = Cinema.MainProgram.FKCheck(Convert.ToString(codice_film), "Film");
+            codice_film = Cinema.MainProgram.GetPrimaryKey(Convert.ToString(codice_film), "Film");
             codice_sala1 = Input.ReadString("Codice Sala Spettacolo: ");
             int codice_sala = Cinema.MainProgram.Intcheck(codice_sala1);
-            codice_sala = Cinema.MainProgram.FKCheck(Convert.ToString(codice_sala), "Sala");
+            codice_sala = Cinema.MainProgram.GetPrimaryKey(Convert.ToString(codice_sala), "Sala");
             prezzo1 = Input.ReadString("Inserire il Prezzo del biglietto (esempio: 8,50): ");
-            decimal prezzo = Cinema.MainProgram.Decimalcheck(prezzo1);
+            decimal prezzo = Cinema.MainProgram.CheckDecimal(prezzo1);
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             // Inserimento Evento nel Database.
             try
             {
-                Console.Out.WriteLine("{0}", Global.wcfClient.AddEvent(Cinema.MainProgram.Global.currentusername, data_e_ora, codice_film, codice_sala, prezzo));
+                Console.Out.WriteLine("{0}", Global.wcfClient.AddEvent(Global.currentusername, data_e_ora, codice_film, codice_sala, prezzo));
             }
             catch
             {

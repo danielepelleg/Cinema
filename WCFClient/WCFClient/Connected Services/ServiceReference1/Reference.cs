@@ -9,11 +9,728 @@
 //------------------------------------------------------------------------------
 
 namespace WCFClient.ServiceReference1 {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Surname {
+            get {
+                return this.SurnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurnameField, value) != true)) {
+                    this.SurnameField = value;
+                    this.RaisePropertyChanged("Surname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Event", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class Event : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int EventCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FilmCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HallCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameAdminField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateTime {
+            get {
+                return this.DateTimeField;
+            }
+            set {
+                if ((this.DateTimeField.Equals(value) != true)) {
+                    this.DateTimeField = value;
+                    this.RaisePropertyChanged("DateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int EventCode {
+            get {
+                return this.EventCodeField;
+            }
+            set {
+                if ((this.EventCodeField.Equals(value) != true)) {
+                    this.EventCodeField = value;
+                    this.RaisePropertyChanged("EventCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FilmCode {
+            get {
+                return this.FilmCodeField;
+            }
+            set {
+                if ((this.FilmCodeField.Equals(value) != true)) {
+                    this.FilmCodeField = value;
+                    this.RaisePropertyChanged("FilmCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int HallCode {
+            get {
+                return this.HallCodeField;
+            }
+            set {
+                if ((this.HallCodeField.Equals(value) != true)) {
+                    this.HallCodeField = value;
+                    this.RaisePropertyChanged("HallCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UsernameAdmin {
+            get {
+                return this.UsernameAdminField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameAdminField, value) != true)) {
+                    this.UsernameAdminField = value;
+                    this.RaisePropertyChanged("UsernameAdmin");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Ticket", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial struct Ticket : System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WCFClient.ServiceReference1.Event EventField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WCFClient.ServiceReference1.Film FilmField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WCFClient.ServiceReference1.Prenotation PrenotationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WCFClient.ServiceReference1.Reservation ReservationField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WCFClient.ServiceReference1.Event Event {
+            get {
+                return this.EventField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EventField, value) != true)) {
+                    this.EventField = value;
+                    this.RaisePropertyChanged("Event");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WCFClient.ServiceReference1.Film Film {
+            get {
+                return this.FilmField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FilmField, value) != true)) {
+                    this.FilmField = value;
+                    this.RaisePropertyChanged("Film");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WCFClient.ServiceReference1.Prenotation Prenotation {
+            get {
+                return this.PrenotationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PrenotationField, value) != true)) {
+                    this.PrenotationField = value;
+                    this.RaisePropertyChanged("Prenotation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WCFClient.ServiceReference1.Reservation Reservation {
+            get {
+                return this.ReservationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReservationField, value) != true)) {
+                    this.ReservationField = value;
+                    this.RaisePropertyChanged("Reservation");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Film", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class Film : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DirectionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DurationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FilmCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GenreField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ReleaseDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int YearField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Direction {
+            get {
+                return this.DirectionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DirectionField, value) != true)) {
+                    this.DirectionField = value;
+                    this.RaisePropertyChanged("Direction");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Duration {
+            get {
+                return this.DurationField;
+            }
+            set {
+                if ((this.DurationField.Equals(value) != true)) {
+                    this.DurationField = value;
+                    this.RaisePropertyChanged("Duration");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FilmCode {
+            get {
+                return this.FilmCodeField;
+            }
+            set {
+                if ((this.FilmCodeField.Equals(value) != true)) {
+                    this.FilmCodeField = value;
+                    this.RaisePropertyChanged("FilmCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Genre {
+            get {
+                return this.GenreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GenreField, value) != true)) {
+                    this.GenreField = value;
+                    this.RaisePropertyChanged("Genre");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ReleaseDate {
+            get {
+                return this.ReleaseDateField;
+            }
+            set {
+                if ((this.ReleaseDateField.Equals(value) != true)) {
+                    this.ReleaseDateField = value;
+                    this.RaisePropertyChanged("ReleaseDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Year {
+            get {
+                return this.YearField;
+            }
+            set {
+                if ((this.YearField.Equals(value) != true)) {
+                    this.YearField = value;
+                    this.RaisePropertyChanged("Year");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Prenotation", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class Prenotation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Reservation", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class Reservation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PlaceNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PrenotationCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PlaceNumber {
+            get {
+                return this.PlaceNumberField;
+            }
+            set {
+                if ((this.PlaceNumberField.Equals(value) != true)) {
+                    this.PlaceNumberField = value;
+                    this.RaisePropertyChanged("PlaceNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PrenotationCode {
+            get {
+                return this.PrenotationCodeField;
+            }
+            set {
+                if ((this.PrenotationCodeField.Equals(value) != true)) {
+                    this.PrenotationCodeField = value;
+                    this.RaisePropertyChanged("PrenotationCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Hall", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class Hall : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CapacityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HallCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Capacity {
+            get {
+                return this.CapacityField;
+            }
+            set {
+                if ((this.CapacityField.Equals(value) != true)) {
+                    this.CapacityField = value;
+                    this.RaisePropertyChanged("Capacity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int HallCode {
+            get {
+                return this.HallCodeField;
+            }
+            set {
+                if ((this.HallCodeField.Equals(value) != true)) {
+                    this.HallCodeField = value;
+                    this.RaisePropertyChanged("HallCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Place", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class Place : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HallCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PlaceCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PlaceNumberField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int HallCode {
+            get {
+                return this.HallCodeField;
+            }
+            set {
+                if ((this.HallCodeField.Equals(value) != true)) {
+                    this.HallCodeField = value;
+                    this.RaisePropertyChanged("HallCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PlaceCode {
+            get {
+                return this.PlaceCodeField;
+            }
+            set {
+                if ((this.PlaceCodeField.Equals(value) != true)) {
+                    this.PlaceCodeField = value;
+                    this.RaisePropertyChanged("PlaceCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PlaceNumber {
+            get {
+                return this.PlaceNumberField;
+            }
+            set {
+                if ((this.PlaceNumberField.Equals(value) != true)) {
+                    this.PlaceNumberField = value;
+                    this.RaisePropertyChanged("PlaceNumber");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Registration", ReplyAction="http://tempuri.org/IService1/RegistrationResponse")]
+        bool Registration(bool isAdmin, string username, string password, string name, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Registration", ReplyAction="http://tempuri.org/IService1/RegistrationResponse")]
+        System.Threading.Tasks.Task<bool> RegistrationAsync(bool isAdmin, string username, string password, string name, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        bool Login(bool isAdmin, string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        System.Threading.Tasks.Task<bool> LoginAsync(bool isAdmin, string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteUser", ReplyAction="http://tempuri.org/IService1/DeleteUserResponse")]
+        bool DeleteUser(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteUser", ReplyAction="http://tempuri.org/IService1/DeleteUserResponse")]
+        System.Threading.Tasks.Task<bool> DeleteUserAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditUser", ReplyAction="http://tempuri.org/IService1/EditUserResponse")]
+        bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EditUser", ReplyAction="http://tempuri.org/IService1/EditUserResponse")]
+        System.Threading.Tasks.Task<bool> EditUserAsync(string oldUsername, string newUsername, string newPassword, string newName, string newSurname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUser", ReplyAction="http://tempuri.org/IService1/GetUserResponse")]
+        WCFClient.ServiceReference1.User GetUser(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUser", ReplyAction="http://tempuri.org/IService1/GetUserResponse")]
+        System.Threading.Tasks.Task<WCFClient.ServiceReference1.User> GetUserAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUsersList", ReplyAction="http://tempuri.org/IService1/GetUsersListResponse")]
+        System.Collections.Generic.List<WCFClient.ServiceReference1.User> GetUsersList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUsersList", ReplyAction="http://tempuri.org/IService1/GetUsersListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.User>> GetUsersListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddEvent", ReplyAction="http://tempuri.org/IService1/AddEventResponse")]
         bool AddEvent(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price);
@@ -21,65 +738,89 @@ namespace WCFClient.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddEvent", ReplyAction="http://tempuri.org/IService1/AddEventResponse")]
         System.Threading.Tasks.Task<bool> AddEventAsync(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CancellazioneEvento", ReplyAction="http://tempuri.org/IService1/CancellazioneEventoResponse")]
-        string CancellazioneEvento(int codiceevento);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteEvent", ReplyAction="http://tempuri.org/IService1/DeleteEventResponse")]
+        bool DeleteEvent(int eventCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CancellazioneEvento", ReplyAction="http://tempuri.org/IService1/CancellazioneEventoResponse")]
-        System.Threading.Tasks.Task<string> CancellazioneEventoAsync(int codiceevento);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteEvent", ReplyAction="http://tempuri.org/IService1/DeleteEventResponse")]
+        System.Threading.Tasks.Task<bool> DeleteEventAsync(int eventCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Visualizzazione_elenco_eventi", ReplyAction="http://tempuri.org/IService1/Visualizzazione_elenco_eventiResponse")]
-        string Visualizzazione_elenco_eventi();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEventsList", ReplyAction="http://tempuri.org/IService1/GetEventsListResponse")]
+        System.Collections.Generic.List<WCFClient.ServiceReference1.Event> GetEventsList();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Visualizzazione_elenco_eventi", ReplyAction="http://tempuri.org/IService1/Visualizzazione_elenco_eventiResponse")]
-        System.Threading.Tasks.Task<string> Visualizzazione_elenco_eventiAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetEventsList", ReplyAction="http://tempuri.org/IService1/GetEventsListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Event>> GetEventsListAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VisualizzazioneSale", ReplyAction="http://tempuri.org/IService1/VisualizzazioneSaleResponse")]
-        string VisualizzazioneSale();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddPrenotation", ReplyAction="http://tempuri.org/IService1/AddPrenotationResponse")]
+        bool AddPrenotation(System.DateTime dateTime, string usernameUser, int eventCode, int placeNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VisualizzazioneSale", ReplyAction="http://tempuri.org/IService1/VisualizzazioneSaleResponse")]
-        System.Threading.Tasks.Task<string> VisualizzazioneSaleAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddPrenotation", ReplyAction="http://tempuri.org/IService1/AddPrenotationResponse")]
+        System.Threading.Tasks.Task<bool> AddPrenotationAsync(System.DateTime dateTime, string usernameUser, int eventCode, int placeNumber);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ControlloFK", ReplyAction="http://tempuri.org/IService1/ControlloFKResponse")]
-        string ControlloFK(int valore, string value_type);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeletePrenotation", ReplyAction="http://tempuri.org/IService1/DeletePrenotationResponse")]
+        bool DeletePrenotation(int prenotationCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ControlloFK", ReplyAction="http://tempuri.org/IService1/ControlloFKResponse")]
-        System.Threading.Tasks.Task<string> ControlloFKAsync(int valore, string value_type);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeletePrenotation", ReplyAction="http://tempuri.org/IService1/DeletePrenotationResponse")]
+        System.Threading.Tasks.Task<bool> DeletePrenotationAsync(int prenotationCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Visualizzazione_elenco_UtentiFree", ReplyAction="http://tempuri.org/IService1/Visualizzazione_elenco_UtentiFreeResponse")]
-        string Visualizzazione_elenco_UtentiFree();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetTicketsList", ReplyAction="http://tempuri.org/IService1/GetTicketsListResponse")]
+        System.Collections.Generic.List<WCFClient.ServiceReference1.Ticket> GetTicketsList(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Visualizzazione_elenco_UtentiFree", ReplyAction="http://tempuri.org/IService1/Visualizzazione_elenco_UtentiFreeResponse")]
-        System.Threading.Tasks.Task<string> Visualizzazione_elenco_UtentiFreeAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetTicketsList", ReplyAction="http://tempuri.org/IService1/GetTicketsListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Ticket>> GetTicketsListAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Visualizzazione_elenco_Prenotazioni", ReplyAction="http://tempuri.org/IService1/Visualizzazione_elenco_PrenotazioniResponse")]
-        string Visualizzazione_elenco_Prenotazioni(string user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddFilm", ReplyAction="http://tempuri.org/IService1/AddFilmResponse")]
+        bool AddFilm(string title, int year, string direction, int duration, System.DateTime releaseDate, string genre);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Visualizzazione_elenco_Prenotazioni", ReplyAction="http://tempuri.org/IService1/Visualizzazione_elenco_PrenotazioniResponse")]
-        System.Threading.Tasks.Task<string> Visualizzazione_elenco_PrenotazioniAsync(string user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddFilm", ReplyAction="http://tempuri.org/IService1/AddFilmResponse")]
+        System.Threading.Tasks.Task<bool> AddFilmAsync(string title, int year, string direction, int duration, System.DateTime releaseDate, string genre);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VisualizzazionePostiDisponibili", ReplyAction="http://tempuri.org/IService1/VisualizzazionePostiDisponibiliResponse")]
-        string VisualizzazionePostiDisponibili(int codice_evento);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteFilm", ReplyAction="http://tempuri.org/IService1/DeleteFilmResponse")]
+        bool DeleteFilm(int filmCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VisualizzazionePostiDisponibili", ReplyAction="http://tempuri.org/IService1/VisualizzazionePostiDisponibiliResponse")]
-        System.Threading.Tasks.Task<string> VisualizzazionePostiDisponibiliAsync(int codice_evento);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteFilm", ReplyAction="http://tempuri.org/IService1/DeleteFilmResponse")]
+        System.Threading.Tasks.Task<bool> DeleteFilmAsync(int filmCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InserimentoPrenotazione", ReplyAction="http://tempuri.org/IService1/InserimentoPrenotazioneResponse")]
-        string InserimentoPrenotazione(System.DateTime dataora, string username_utentefree, int codice_evento, int numero_posto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFilm", ReplyAction="http://tempuri.org/IService1/GetFilmResponse")]
+        WCFClient.ServiceReference1.Film GetFilm(int filmCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InserimentoPrenotazione", ReplyAction="http://tempuri.org/IService1/InserimentoPrenotazioneResponse")]
-        System.Threading.Tasks.Task<string> InserimentoPrenotazioneAsync(System.DateTime dataora, string username_utentefree, int codice_evento, int numero_posto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFilm", ReplyAction="http://tempuri.org/IService1/GetFilmResponse")]
+        System.Threading.Tasks.Task<WCFClient.ServiceReference1.Film> GetFilmAsync(int filmCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RappresentaSale", ReplyAction="http://tempuri.org/IService1/RappresentaSaleResponse")]
-        string RappresentaSale(int codice_evento);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFilmList", ReplyAction="http://tempuri.org/IService1/GetFilmListResponse")]
+        System.Collections.Generic.List<WCFClient.ServiceReference1.Film> GetFilmList();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RappresentaSale", ReplyAction="http://tempuri.org/IService1/RappresentaSaleResponse")]
-        System.Threading.Tasks.Task<string> RappresentaSaleAsync(int codice_evento);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFilmList", ReplyAction="http://tempuri.org/IService1/GetFilmListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Film>> GetFilmListAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VerificaPosto", ReplyAction="http://tempuri.org/IService1/VerificaPostoResponse")]
-        string VerificaPosto(int codice_evento, int numero_posto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetHallsList", ReplyAction="http://tempuri.org/IService1/GetHallsListResponse")]
+        System.Collections.Generic.List<WCFClient.ServiceReference1.Hall> GetHallsList();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/VerificaPosto", ReplyAction="http://tempuri.org/IService1/VerificaPostoResponse")]
-        System.Threading.Tasks.Task<string> VerificaPostoAsync(int codice_evento, int numero_posto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetHallsList", ReplyAction="http://tempuri.org/IService1/GetHallsListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Hall>> GetHallsListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DrawHall", ReplyAction="http://tempuri.org/IService1/DrawHallResponse")]
+        string DrawHall(int eventCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DrawHall", ReplyAction="http://tempuri.org/IService1/DrawHallResponse")]
+        System.Threading.Tasks.Task<string> DrawHallAsync(int eventCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckFK", ReplyAction="http://tempuri.org/IService1/CheckFKResponse")]
+        bool CheckFK(int value, string valueType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckFK", ReplyAction="http://tempuri.org/IService1/CheckFKResponse")]
+        System.Threading.Tasks.Task<bool> CheckFKAsync(int value, string valueType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAvailablePlacesList", ReplyAction="http://tempuri.org/IService1/GetAvailablePlacesListResponse")]
+        System.Collections.Generic.List<WCFClient.ServiceReference1.Place> GetAvailablePlacesList(int eventCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAvailablePlacesList", ReplyAction="http://tempuri.org/IService1/GetAvailablePlacesListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Place>> GetAvailablePlacesListAsync(int eventCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPlace", ReplyAction="http://tempuri.org/IService1/CheckPlaceResponse")]
+        bool CheckPlace(int eventCode, int placeNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPlace", ReplyAction="http://tempuri.org/IService1/CheckPlaceResponse")]
+        System.Threading.Tasks.Task<bool> CheckPlaceAsync(int eventCode, int placeNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -109,6 +850,54 @@ namespace WCFClient.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
+        public bool Registration(bool isAdmin, string username, string password, string name, string surname) {
+            return base.Channel.Registration(isAdmin, username, password, name, surname);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegistrationAsync(bool isAdmin, string username, string password, string name, string surname) {
+            return base.Channel.RegistrationAsync(isAdmin, username, password, name, surname);
+        }
+        
+        public bool Login(bool isAdmin, string username, string password) {
+            return base.Channel.Login(isAdmin, username, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> LoginAsync(bool isAdmin, string username, string password) {
+            return base.Channel.LoginAsync(isAdmin, username, password);
+        }
+        
+        public bool DeleteUser(string username) {
+            return base.Channel.DeleteUser(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteUserAsync(string username) {
+            return base.Channel.DeleteUserAsync(username);
+        }
+        
+        public bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname) {
+            return base.Channel.EditUser(oldUsername, newUsername, newPassword, newName, newSurname);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditUserAsync(string oldUsername, string newUsername, string newPassword, string newName, string newSurname) {
+            return base.Channel.EditUserAsync(oldUsername, newUsername, newPassword, newName, newSurname);
+        }
+        
+        public WCFClient.ServiceReference1.User GetUser(string username) {
+            return base.Channel.GetUser(username);
+        }
+        
+        public System.Threading.Tasks.Task<WCFClient.ServiceReference1.User> GetUserAsync(string username) {
+            return base.Channel.GetUserAsync(username);
+        }
+        
+        public System.Collections.Generic.List<WCFClient.ServiceReference1.User> GetUsersList() {
+            return base.Channel.GetUsersList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.User>> GetUsersListAsync() {
+            return base.Channel.GetUsersListAsync();
+        }
+        
         public bool AddEvent(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price) {
             return base.Channel.AddEvent(usernameAdmin, dateTime, filmCode, hallCode, price);
         }
@@ -117,84 +906,116 @@ namespace WCFClient.ServiceReference1 {
             return base.Channel.AddEventAsync(usernameAdmin, dateTime, filmCode, hallCode, price);
         }
         
-        public string CancellazioneEvento(int codiceevento) {
-            return base.Channel.CancellazioneEvento(codiceevento);
+        public bool DeleteEvent(int eventCode) {
+            return base.Channel.DeleteEvent(eventCode);
         }
         
-        public System.Threading.Tasks.Task<string> CancellazioneEventoAsync(int codiceevento) {
-            return base.Channel.CancellazioneEventoAsync(codiceevento);
+        public System.Threading.Tasks.Task<bool> DeleteEventAsync(int eventCode) {
+            return base.Channel.DeleteEventAsync(eventCode);
         }
         
-        public string Visualizzazione_elenco_eventi() {
-            return base.Channel.Visualizzazione_elenco_eventi();
+        public System.Collections.Generic.List<WCFClient.ServiceReference1.Event> GetEventsList() {
+            return base.Channel.GetEventsList();
         }
         
-        public System.Threading.Tasks.Task<string> Visualizzazione_elenco_eventiAsync() {
-            return base.Channel.Visualizzazione_elenco_eventiAsync();
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Event>> GetEventsListAsync() {
+            return base.Channel.GetEventsListAsync();
         }
         
-        public string VisualizzazioneSale() {
-            return base.Channel.VisualizzazioneSale();
+        public bool AddPrenotation(System.DateTime dateTime, string usernameUser, int eventCode, int placeNumber) {
+            return base.Channel.AddPrenotation(dateTime, usernameUser, eventCode, placeNumber);
         }
         
-        public System.Threading.Tasks.Task<string> VisualizzazioneSaleAsync() {
-            return base.Channel.VisualizzazioneSaleAsync();
+        public System.Threading.Tasks.Task<bool> AddPrenotationAsync(System.DateTime dateTime, string usernameUser, int eventCode, int placeNumber) {
+            return base.Channel.AddPrenotationAsync(dateTime, usernameUser, eventCode, placeNumber);
         }
         
-        public string ControlloFK(int valore, string value_type) {
-            return base.Channel.ControlloFK(valore, value_type);
+        public bool DeletePrenotation(int prenotationCode) {
+            return base.Channel.DeletePrenotation(prenotationCode);
         }
         
-        public System.Threading.Tasks.Task<string> ControlloFKAsync(int valore, string value_type) {
-            return base.Channel.ControlloFKAsync(valore, value_type);
+        public System.Threading.Tasks.Task<bool> DeletePrenotationAsync(int prenotationCode) {
+            return base.Channel.DeletePrenotationAsync(prenotationCode);
         }
         
-        public string Visualizzazione_elenco_UtentiFree() {
-            return base.Channel.Visualizzazione_elenco_UtentiFree();
+        public System.Collections.Generic.List<WCFClient.ServiceReference1.Ticket> GetTicketsList(string username) {
+            return base.Channel.GetTicketsList(username);
         }
         
-        public System.Threading.Tasks.Task<string> Visualizzazione_elenco_UtentiFreeAsync() {
-            return base.Channel.Visualizzazione_elenco_UtentiFreeAsync();
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Ticket>> GetTicketsListAsync(string username) {
+            return base.Channel.GetTicketsListAsync(username);
         }
         
-        public string Visualizzazione_elenco_Prenotazioni(string user) {
-            return base.Channel.Visualizzazione_elenco_Prenotazioni(user);
+        public bool AddFilm(string title, int year, string direction, int duration, System.DateTime releaseDate, string genre) {
+            return base.Channel.AddFilm(title, year, direction, duration, releaseDate, genre);
         }
         
-        public System.Threading.Tasks.Task<string> Visualizzazione_elenco_PrenotazioniAsync(string user) {
-            return base.Channel.Visualizzazione_elenco_PrenotazioniAsync(user);
+        public System.Threading.Tasks.Task<bool> AddFilmAsync(string title, int year, string direction, int duration, System.DateTime releaseDate, string genre) {
+            return base.Channel.AddFilmAsync(title, year, direction, duration, releaseDate, genre);
         }
         
-        public string VisualizzazionePostiDisponibili(int codice_evento) {
-            return base.Channel.VisualizzazionePostiDisponibili(codice_evento);
+        public bool DeleteFilm(int filmCode) {
+            return base.Channel.DeleteFilm(filmCode);
         }
         
-        public System.Threading.Tasks.Task<string> VisualizzazionePostiDisponibiliAsync(int codice_evento) {
-            return base.Channel.VisualizzazionePostiDisponibiliAsync(codice_evento);
+        public System.Threading.Tasks.Task<bool> DeleteFilmAsync(int filmCode) {
+            return base.Channel.DeleteFilmAsync(filmCode);
         }
         
-        public string InserimentoPrenotazione(System.DateTime dataora, string username_utentefree, int codice_evento, int numero_posto) {
-            return base.Channel.InserimentoPrenotazione(dataora, username_utentefree, codice_evento, numero_posto);
+        public WCFClient.ServiceReference1.Film GetFilm(int filmCode) {
+            return base.Channel.GetFilm(filmCode);
         }
         
-        public System.Threading.Tasks.Task<string> InserimentoPrenotazioneAsync(System.DateTime dataora, string username_utentefree, int codice_evento, int numero_posto) {
-            return base.Channel.InserimentoPrenotazioneAsync(dataora, username_utentefree, codice_evento, numero_posto);
+        public System.Threading.Tasks.Task<WCFClient.ServiceReference1.Film> GetFilmAsync(int filmCode) {
+            return base.Channel.GetFilmAsync(filmCode);
         }
         
-        public string RappresentaSale(int codice_evento) {
-            return base.Channel.RappresentaSale(codice_evento);
+        public System.Collections.Generic.List<WCFClient.ServiceReference1.Film> GetFilmList() {
+            return base.Channel.GetFilmList();
         }
         
-        public System.Threading.Tasks.Task<string> RappresentaSaleAsync(int codice_evento) {
-            return base.Channel.RappresentaSaleAsync(codice_evento);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Film>> GetFilmListAsync() {
+            return base.Channel.GetFilmListAsync();
         }
         
-        public string VerificaPosto(int codice_evento, int numero_posto) {
-            return base.Channel.VerificaPosto(codice_evento, numero_posto);
+        public System.Collections.Generic.List<WCFClient.ServiceReference1.Hall> GetHallsList() {
+            return base.Channel.GetHallsList();
         }
         
-        public System.Threading.Tasks.Task<string> VerificaPostoAsync(int codice_evento, int numero_posto) {
-            return base.Channel.VerificaPostoAsync(codice_evento, numero_posto);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Hall>> GetHallsListAsync() {
+            return base.Channel.GetHallsListAsync();
+        }
+        
+        public string DrawHall(int eventCode) {
+            return base.Channel.DrawHall(eventCode);
+        }
+        
+        public System.Threading.Tasks.Task<string> DrawHallAsync(int eventCode) {
+            return base.Channel.DrawHallAsync(eventCode);
+        }
+        
+        public bool CheckFK(int value, string valueType) {
+            return base.Channel.CheckFK(value, valueType);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckFKAsync(int value, string valueType) {
+            return base.Channel.CheckFKAsync(value, valueType);
+        }
+        
+        public System.Collections.Generic.List<WCFClient.ServiceReference1.Place> GetAvailablePlacesList(int eventCode) {
+            return base.Channel.GetAvailablePlacesList(eventCode);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Place>> GetAvailablePlacesListAsync(int eventCode) {
+            return base.Channel.GetAvailablePlacesListAsync(eventCode);
+        }
+        
+        public bool CheckPlace(int eventCode, int placeNumber) {
+            return base.Channel.CheckPlace(eventCode, placeNumber);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckPlaceAsync(int eventCode, int placeNumber) {
+            return base.Channel.CheckPlaceAsync(eventCode, placeNumber);
         }
     }
 }

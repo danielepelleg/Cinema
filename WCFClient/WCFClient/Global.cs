@@ -11,6 +11,9 @@ namespace WCFClient
     class Global
     {
         // Creation of WCF Client
-        public static Service1Client wcfClient = new ServiceReference1.Service1Client();
+        public static Service1Client wcfClient = new Service1Client();
+
+        public static string currentusername = "default";
+        public static bool loggedin = false;
     }
 }

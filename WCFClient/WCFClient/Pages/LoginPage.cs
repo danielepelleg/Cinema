@@ -31,10 +31,10 @@ namespace WCFClient.Pages
 
             Output.WriteLine("--------- LOGIN ----------");
             username = Input.ReadString("Username: ");
-            username = Cinema.MainProgram.Inputcheck(username, "Username");
+            username = Cinema.MainProgram.CheckUserInput("Username", username);
             Console.Write("Password: ");
-            password = Cinema.MainProgram.Passinsert(password);
-            hashed_password = EasyEncryption.MD5.ComputeMD5Hash(Cinema.MainProgram.Inputcheck(password, "Password"));
+            password = Cinema.MainProgram.InputPassword();
+            hashed_password = EasyEncryption.MD5.ComputeMD5Hash(Cinema.MainProgram.CheckUserInput(password, "Password"));
 
             // Controllo Dati nel Database
             try

@@ -29,7 +29,7 @@ namespace WCFClient.Pages
             DateTime data_e_ora = DateTime.Now;
             codice_evento1 = Input.ReadString("Scegliere il codice corrispondente all'evento che si vuole prenotare: ");
             int codice_evento = Cinema.MainProgram.Intcheck(codice_evento1);
-            codice_evento = Cinema.MainProgram.FKCheck(Convert.ToString(codice_evento), "Evento");
+            codice_evento = Cinema.MainProgram.GetFK(Convert.ToString(codice_evento), "Evento");
             try
             {
                 Output.WriteLine("Rappresentazione della disposizione dei posti in sala:{0}", Global.wcfClient.RappresentaSale(codice_evento));
@@ -49,7 +49,7 @@ namespace WCFClient.Pages
             }
             numero_posto1 = Input.ReadString("Scegliere il numero del posto che si vuole prenotare: ");
             int numero_posto = Cinema.MainProgram.Intcheck(numero_posto1);
-            numero_posto = Cinema.MainProgram.ControlloPosto(Convert.ToString(codice_evento), Convert.ToString(numero_posto));
+            numero_posto = Cinema.MainProgram.CheckPlace(Convert.ToString(codice_evento), Convert.ToString(numero_posto));
 
             // Inserimento Film nel Database.
             try

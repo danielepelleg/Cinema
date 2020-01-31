@@ -20,17 +20,17 @@ namespace WCFClient.Pages
             string titolo, anno1, regia, durata1, datauscita1, genere = string.Empty;
 
             titolo = Input.ReadString("Titolo (max 50 caratteri): ");
-            titolo = Cinema.MainProgram.Filmcheck(titolo, "Titolo");
+            titolo = Cinema.MainProgram.CheckFilm("Titolo", titolo);
             anno1 = Input.ReadString("Anno di Produzione: ");
             int anno = Cinema.MainProgram.Intcheck(anno1);
             regia = Input.ReadString("Regia (max 30 caratteri): ");
-            regia = Cinema.MainProgram.Filmcheck(regia, "Regia");
+            regia = Cinema.MainProgram.CheckFilm("Regia", regia);
             durata1 = Input.ReadString("Durata: ");
             int durata = Cinema.MainProgram.Intcheck(durata1);
             datauscita1 = Input.ReadString("Data di Uscita: ");
-            DateTime datauscita = Cinema.MainProgram.Datecheck(datauscita1);
+            DateTime datauscita = Cinema.MainProgram.CheckDate(datauscita1);
             genere = Input.ReadString("Genere (max 20 caratteri): ");
-            genere = Cinema.MainProgram.Filmcheck(genere, "Genere");
+            genere = Cinema.MainProgram.CheckFilm("Genere", genere);
 
             // Inserimento Film nel Database.
             try
