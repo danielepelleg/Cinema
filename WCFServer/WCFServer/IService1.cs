@@ -35,7 +35,7 @@ namespace WCFServer
         bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname);
 
         [OperationContract]
-        User GetUser(string username);
+        User GetUser(bool isAdmin, string username);
 
         [OperationContract]
         List<User> GetUsersList();

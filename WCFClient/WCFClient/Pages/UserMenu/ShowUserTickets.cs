@@ -23,8 +23,17 @@ namespace WCFClient.Pages
             /*
              * Get data from the Database
              */
-            Output.WriteLine("{0} TICKETS: ", SessionManager.GetUser().Username);
-            TablePrinter.Ticket(SessionManager.GetServiceClient().GetTicketsList(SessionManager.GetUser().Username));
+            try
+            {
+                Output.WriteLine("{0} TICKETS: ", SessionManager.GetUser().Username);
+                TablePrinter.Ticket(SessionManager.GetServiceClient().GetTicketsList(SessionManager.GetUser().Username));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Type: {0}", ex.GetType());
+                Console.WriteLine("Message: {0}", ex.Message);
+            }
+            
 
             /*
              * Navigate back

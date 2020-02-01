@@ -42,10 +42,17 @@ namespace WCFClient.Pages
             /*
              * Send data to Database
              */
-            if (SessionManager.GetServiceClient().Login(SessionManager.IsAdmin(), username, hashedPassword))
+            try
             {
-                SessionManager.SetUser(SessionManager.GetServiceClient().GetUser(username));
+                if (SessionManager.GetServiceClient().Login(SessionManager.IsAdmin(), username, hashedPassword))
+                {
+                    SessionManager.SetUser(SessionManager.GetServiceClient().GetUser(SessionManager.IsAdmin(), username));
+                }
+            } catch (Exception ex){
+                Console.WriteLine("Exception Type: {0}", ex.GetType());
+                Console.WriteLine("Message: {0}", ex.Message);
             }
+            
 
             /*
              * Go to the Menu

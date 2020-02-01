@@ -40,8 +40,8 @@ namespace WCFServer
             return serviceUser.EditUser(oldUsername, newUsername, newPassword, newName, newSurname);
         }
 
-        public User GetUser(string username) {
-            return serviceUser.GetUser(username);
+        public User GetUser(bool isAdmin ,string username) {
+            return serviceUser.GetUser(isAdmin, username);
         }
 
         public List<User> GetUsersList() {

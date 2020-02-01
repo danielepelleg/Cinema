@@ -36,6 +36,7 @@ namespace WCFDatabaseManager
                     command.Parameters.Add("@Data_Uscita", SqlDbType.DateTime).Value = releaseDate;
                     command.Parameters.Add("@Genere", SqlDbType.VarChar).Value = genre;
                     command.Parameters.Add("@CodiceFilm", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
 
                     // Initialize a int value to check if the Stored Procedure success
                     var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
@@ -97,7 +98,6 @@ namespace WCFDatabaseManager
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = "Cinema.DeleteFilm";
                     command.Parameters.Add("@CodiceFilm", SqlDbType.Int).Value = filmCode;
-                    command.Connection = connection;
                     command.ExecuteNonQuery();
 
                     // Initialize a int value to check if the Stored Procedure success
@@ -111,10 +111,10 @@ namespace WCFDatabaseManager
                     if (returnParameter.Direction > 0) return true;
                     else {
                         command.Parameters.Clear();
-                        throw new Exception("Errore: si è verificato un problema nell'aggiungere un Film nel DB");
+                        throw new Exception("Errore: there was a problem removing the Movie!");
                     }
                 }
-                catch (SqlException ex) { // TODO toglibile (?)
+                catch (SqlException ex) {
                     Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
                     Console.WriteLine("  Message: {0}", ex.Message);
 

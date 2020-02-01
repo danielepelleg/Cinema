@@ -135,10 +135,10 @@ namespace WCFServer.ServiceReferenceUser {
         System.Threading.Tasks.Task<bool> EditUserAsync(string oldUsername, string newUsername, string newPassword, string newName, string newSurname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUser", ReplyAction="http://tempuri.org/IServiceUser/GetUserResponse")]
-        WCFServer.ServiceReferenceUser.User GetUser(string username);
+        WCFServer.ServiceReferenceUser.User GetUser(bool isAdmin, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUser", ReplyAction="http://tempuri.org/IServiceUser/GetUserResponse")]
-        System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User> GetUserAsync(string username);
+        System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User> GetUserAsync(bool isAdmin, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUsersList", ReplyAction="http://tempuri.org/IServiceUser/GetUsersListResponse")]
         WCFServer.ServiceReferenceUser.User[] GetUsersList();
@@ -206,12 +206,12 @@ namespace WCFServer.ServiceReferenceUser {
             return base.Channel.EditUserAsync(oldUsername, newUsername, newPassword, newName, newSurname);
         }
         
-        public WCFServer.ServiceReferenceUser.User GetUser(string username) {
-            return base.Channel.GetUser(username);
+        public WCFServer.ServiceReferenceUser.User GetUser(bool isAdmin, string username) {
+            return base.Channel.GetUser(isAdmin, username);
         }
         
-        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User> GetUserAsync(string username) {
-            return base.Channel.GetUserAsync(username);
+        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User> GetUserAsync(bool isAdmin, string username) {
+            return base.Channel.GetUserAsync(isAdmin, username);
         }
         
         public WCFServer.ServiceReferenceUser.User[] GetUsersList() {

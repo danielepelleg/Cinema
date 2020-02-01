@@ -23,8 +23,16 @@ namespace WCFClient.Pages
             /*
              * Get data from the Database
              */
-            Output.WriteLine("EVENTS LIST: ");
-            TablePrinter.Event(SessionManager.GetServiceClient().GetEventsList());
+            try
+            {
+                Output.WriteLine("EVENTS LIST: ");
+                TablePrinter.Event(SessionManager.GetServiceClient().GetEventsList());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Type: {0}", ex.GetType());
+                Console.WriteLine("Message: {0}", ex.Message);
+            }
 
             /*
              * Navigate back

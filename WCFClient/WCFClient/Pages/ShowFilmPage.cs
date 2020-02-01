@@ -1,4 +1,5 @@
 ﻿using EasyConsole;
+using System;
 using System.Collections.Generic;
 using WCFClient.ServiceReference1;
 
@@ -18,9 +19,17 @@ namespace WCFClient.Pages
             /*
              * Get data from the Database
              */
-            Output.WriteLine("FILM LIST: ");
-            TablePrinter.Film(SessionManager.GetServiceClient().GetFilmList());
-
+            try
+            {
+                Output.WriteLine("FILM LIST: ");
+                TablePrinter.Film(SessionManager.GetServiceClient().GetFilmList());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Type: {0}", ex.GetType());
+                Console.WriteLine("Message: {0}", ex.Message);
+            }
+            
             /*
              * Navigate back
              */

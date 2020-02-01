@@ -38,18 +38,26 @@ namespace WCFClient.Pages
             username = Controls.CheckUserInput("Username", username);  
             string password = Input.ReadString("Password (max 32 characters): ");
             string hashedPassword = EasyEncryption.MD5.ComputeMD5Hash(Controls.CheckUserInput("Password", password));
-            string name = Input.ReadString("Name (max 20 caratteri): ");
+            string name = Input.ReadString("Name (max 20 characters): ");
             name = Controls.CheckUserInput("Nome", name);
-            string surname = Input.ReadString("Surname (max 20 caratteri): ");
+            string surname = Input.ReadString("Surname (max 20 characters): ");
             surname = Controls.CheckUserInput("Cognome", surname);
 
             /*
              * Send data to Database
              */
-            if (SessionManager.GetServiceClient().Registration(SessionManager.IsAdmin(), username, hashedPassword, name, surname))
-                Output.WriteLine("REGISTRATION SUCCESS!\n Come back to login\n");
-            else Output.WriteLine("REGISTRATION ERROR\n Retry!\n");
-
+            try
+            {
+                if (SessionManager.GetServiceClient().Registration(SessionManager.IsAdmin(), username, hashedPassword, name, surname))
+                    Output.WriteLine("REGISTRATION SUCCESS!\n Come back to login\n");
+                else Output.WriteLine("REGISTRATION ERROR\n Retry!\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception Type: {0}", ex.GetType());
+                Console.WriteLine("Message: {0}", ex.Message);
+            }
+            
             /*
              * Navigate back
              */

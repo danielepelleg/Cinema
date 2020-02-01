@@ -41,8 +41,7 @@ namespace WCFClient
                 wcfClient.GetFilmList();
             }
             catch (Exception ex) {
-                Console.WriteLine("\nCommit Exception Type: {0}", ex.GetType());
-                Console.WriteLine("  Message: {0}", ex.Message);
+                Console.WriteLine("\nConnection Error! Server Unreacheable!");
             }
             return wcfClient;
         }

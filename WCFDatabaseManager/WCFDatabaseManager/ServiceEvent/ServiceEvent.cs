@@ -63,7 +63,7 @@ namespace WCFDatabaseManager
                     if (returnParameter.Direction > 0) return true;
                     else {
                         command.Parameters.Clear();
-                        throw new Exception("Errore: si è verificato un problema nell'aggiungere un Evento nel DB");
+                        throw new Exception("Error: There is a problem adding the Event into the DB!");
                     }
                 }
                 catch (SqlException ex) {
@@ -235,10 +235,10 @@ namespace WCFDatabaseManager
                         while (reader.Read()) {
                             var eventCode = reader.GetInt32(0);
                             var dateTime = reader.GetDateTime(1);
-                            var filmCode = reader.GetInt32(2);
-                            var hallCode = reader.GetInt32(3);
-                            var usernameAdmin = reader.GetString(4);
-                            var price = reader.GetDecimal(5);
+                            var price = reader.GetDecimal(2);
+                            var filmCode = reader.GetInt32(3);
+                            var hallCode = reader.GetInt32(4);
+                            var usernameAdmin = reader.GetString(5);
 
                             eventsList.Add(new Event(eventCode, dateTime, filmCode, hallCode, usernameAdmin, price));
                         }

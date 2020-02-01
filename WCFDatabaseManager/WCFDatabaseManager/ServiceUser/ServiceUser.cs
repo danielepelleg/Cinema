@@ -102,7 +102,7 @@ namespace WCFDatabaseManager
                     command.Parameters.Add("@password", SqlDbType.VarChar).Value = password;
 
                     // Attempt to commit the transaction.
-                    //transaction.Commit();
+                    transaction.Commit();
 
                     using (SqlDataReader reader = command.ExecuteReader()) {
                         if (reader.Read()) return true;
@@ -115,7 +115,7 @@ namespace WCFDatabaseManager
 
                     // Attempt to roll back the transaction.
                     try {
-                        //transaction.Rollback();
+                        transaction.Rollback();
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
@@ -257,7 +257,7 @@ namespace WCFDatabaseManager
         /*
          * Get the User of the database given his username
          */
-        public User GetUser(string username) {
+        public User GetUser(bool isAdmin, string username) {
             using (SqlConnection connection = DatabaseHandler.GetConnection())  {
                 connection.Open();
 
@@ -269,12 +269,17 @@ namespace WCFDatabaseManager
                 // to Command object for a pending local transaction
                 command.Connection = connection;
                 command.Transaction = transaction;
-
                 try {
-
-                    command.CommandText = "SELECT * FROM Cinema.UtenteFree WHERE username = @username ";
+                    switch (isAdmin)
+                    {
+                        case true:
+                            command.CommandText = "SELECT * FROM Cinema.Admin WHERE Cinema.Admin.UsernameAdmin = @username";
+                            break;
+                        case false:
+                            command.CommandText = "SELECT * FROM Cinema.UtenteFree WHERE Cinema.UtenteFree.UsernameUtenteFree = @username";
+                            break;
+                    }
                     command.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
-
                     User user = new User();
                     using (SqlDataReader reader = command.ExecuteReader()) {
                         while (reader.Read()) {

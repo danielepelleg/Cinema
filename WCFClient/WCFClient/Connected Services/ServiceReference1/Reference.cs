@@ -785,10 +785,10 @@ namespace WCFClient.ServiceReference1 {
         System.Threading.Tasks.Task<bool> EditUserAsync(string oldUsername, string newUsername, string newPassword, string newName, string newSurname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUser", ReplyAction="http://tempuri.org/IService1/GetUserResponse")]
-        WCFClient.ServiceReference1.User GetUser(string username);
+        WCFClient.ServiceReference1.User GetUser(bool isAdmin, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUser", ReplyAction="http://tempuri.org/IService1/GetUserResponse")]
-        System.Threading.Tasks.Task<WCFClient.ServiceReference1.User> GetUserAsync(string username);
+        System.Threading.Tasks.Task<WCFClient.ServiceReference1.User> GetUserAsync(bool isAdmin, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUsersList", ReplyAction="http://tempuri.org/IService1/GetUsersListResponse")]
         System.Collections.Generic.List<WCFClient.ServiceReference1.User> GetUsersList();
@@ -946,12 +946,12 @@ namespace WCFClient.ServiceReference1 {
             return base.Channel.EditUserAsync(oldUsername, newUsername, newPassword, newName, newSurname);
         }
         
-        public WCFClient.ServiceReference1.User GetUser(string username) {
-            return base.Channel.GetUser(username);
+        public WCFClient.ServiceReference1.User GetUser(bool isAdmin, string username) {
+            return base.Channel.GetUser(isAdmin, username);
         }
         
-        public System.Threading.Tasks.Task<WCFClient.ServiceReference1.User> GetUserAsync(string username) {
-            return base.Channel.GetUserAsync(username);
+        public System.Threading.Tasks.Task<WCFClient.ServiceReference1.User> GetUserAsync(bool isAdmin, string username) {
+            return base.Channel.GetUserAsync(isAdmin, username);
         }
         
         public System.Collections.Generic.List<WCFClient.ServiceReference1.User> GetUsersList() {
