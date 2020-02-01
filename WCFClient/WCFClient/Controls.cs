@@ -71,7 +71,7 @@ namespace WCFClient
                     while ((value.Length < 1) || (value.Length > 30) || !CheckChar(value))
                     {
                         Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 30! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
-                        userAttribute = Console.ReadLine();
+                        value = Console.ReadLine();
                     }
                     break;
 
@@ -79,7 +79,7 @@ namespace WCFClient
                     while ((value.Length < 4) || (value.Length > 32))
                     {
                         Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 4 e 32!\nRiprovare: ", userAttribute);
-                        userAttribute = InputPassword();
+                        value = InputPassword();
                     }
                     break;
 
@@ -87,7 +87,7 @@ namespace WCFClient
                     while ((value.Length < 1) || (value.Length > 20) || !CheckChar(value))
                     {
                         Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 20! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
-                        userAttribute = Console.ReadLine();
+                        value = Console.ReadLine();
                     }
                     break;
 
@@ -95,11 +95,11 @@ namespace WCFClient
                     while ((value.Length < 1) || (value.Length > 20) || !CheckChar(value))
                     {
                         Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 20! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
-                        userAttribute = Console.ReadLine();
+                        value = Console.ReadLine();
                     }
                     break;
             }
-            return userAttribute;
+            return value;
         }
 
         /*
@@ -143,7 +143,7 @@ namespace WCFClient
          */
         public static int GetPrimaryKey(string value, string valueType)
         {
-            while (!SessionManager.wcfClient.CheckFK(Convert.ToInt32(value), valueType))
+            while (!SessionManager.GetServiceClient().CheckFK(Convert.ToInt32(value), valueType))
             {
                 Console.WriteLine("{0} non presente. \nInserire un valore accettabile!\nRiprovare: ", valueType);
                 value = Console.ReadLine();
@@ -204,7 +204,7 @@ namespace WCFClient
          */
         public static int CheckPlace(string eventCode, string place)
         {
-            while (!SessionManager.wcfClient.CheckPlace(Convert.ToInt32(eventCode), Convert.ToInt32(place)))
+            while (!SessionManager.GetServiceClient().CheckPlace(Convert.ToInt32(eventCode), Convert.ToInt32(place)))
             {
                 Console.WriteLine("Il posto {0} non è disponibile!" +
                     " Inserine uno disponibile!\nRiprovare: ", place);

@@ -92,17 +92,17 @@ namespace WCFDatabaseManager
                 try {
                     switch (isAdmin) {
                         case true:
-                            command.CommandText = "SELECT * FROM Cinema.Admin WHERE UsernameAdmin = @username AND Password = @password;";
+                            command.CommandText = "SELECT * FROM Cinema.Admin WHERE UsernameAdmin = @username AND Password = @password";
                             break;
                         case false:
-                            command.CommandText = "SELECT * FROM Cinema.UtenteFree WHERE UsernameUtenteFree = @username AND Password = @password;";
+                            command.CommandText = "SELECT * FROM Cinema.UtenteFree WHERE UsernameUtenteFree = @username AND Password = @password";
                             break;
                     }
                     command.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
                     command.Parameters.Add("@password", SqlDbType.VarChar).Value = password;
 
                     // Attempt to commit the transaction.
-                    transaction.Commit();
+                    //transaction.Commit();
 
                     using (SqlDataReader reader = command.ExecuteReader()) {
                         if (reader.Read()) return true;
@@ -115,7 +115,7 @@ namespace WCFDatabaseManager
 
                     // Attempt to roll back the transaction.
                     try {
-                        transaction.Rollback();
+                        //transaction.Rollback();
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred

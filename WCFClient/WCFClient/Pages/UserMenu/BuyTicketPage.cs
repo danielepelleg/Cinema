@@ -3,10 +3,10 @@ using System;
 
 namespace WCFClient.Pages
 {
-    class TicketPrenotation : Page
+    class BuyTicket : Page
     {
-        public TicketPrenotation(Program program)
-            : base("Prenotazione Biglietto", program)
+        public BuyTicket(Program program)
+            : base("Buy Ticket", program)
         {
         }
         
@@ -25,7 +25,7 @@ namespace WCFClient.Pages
              */
             Output.WriteLine("Choose the event you want to buy the ticket: ");
             Output.WriteLine("EVENTS LIST: ");
-            TablePrinter.Event(SessionManager.wcfClient.GetEventsList());
+            TablePrinter.Event(SessionManager.GetServiceClient().GetEventsList());
             
             DateTime dateTime = DateTime.Now;
             string event_code = Input.ReadString("\nChoose the code of the event you want to buy the ticket: ");
@@ -36,13 +36,13 @@ namespace WCFClient.Pages
              * Show the User the Hall
              */ 
             Output.WriteLine("Available places in the Hall:\n{0}", 
-                SessionManager.wcfClient.DrawHall(eventCode));
+                SessionManager.GetServiceClient().DrawHall(eventCode));
             
             /*
              * Show the User the available Places
              */ 
             Output.WriteLine("Available Places:");
-            TablePrinter.PlaceNumber(SessionManager.wcfClient.GetAvailablePlacesList(eventCode));
+            TablePrinter.PlaceNumber(SessionManager.GetServiceClient().GetAvailablePlacesList(eventCode));
             /*
              * Let the User choose the place to buy
              */ 
@@ -53,7 +53,7 @@ namespace WCFClient.Pages
             /*
              * Add a New Prenotation
              */
-            if (SessionManager.wcfClient.AddPrenotation(dateTime, SessionManager.GetUser().Username, eventCode, placeNumber))
+            if (SessionManager.GetServiceClient().AddPrenotation(dateTime, SessionManager.GetUser().Username, eventCode, placeNumber))
                 Output.WriteLine("\nYour Prenotation request success!");
             else Output.WriteLine("\nPrenotation request failed! Retry!");
 

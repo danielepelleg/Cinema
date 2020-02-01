@@ -8,7 +8,9 @@ namespace Cinema
         public CinemaProgram()
             : base("Cinema", breadcrumbHeader: true)
         {
-            // Inserisco Menu e Pagine presenti nel programma
+            /*
+             * Add Menu and Pages to the program
+             */ 
             AddPage(new MainPage(this));
             AddPage(new RegistrationPage(this));
             AddPage(new LoginPage(this));
@@ -19,10 +21,12 @@ namespace Cinema
             AddPage(new DeleteFilm(this));
             AddPage(new ShowEvents(this));
             AddPage(new ShowFilm(this));
-            AddPage(new TicketPrenotation(this));
+            AddPage(new BuyTicket(this));
             AddPage(new ShowUserTickets(this));
 
-            // Setto la pagina di default all'avvio del programma
+            /*
+             * Default Page when Program starts
+             */ 
             SetPage<MainPage>();
         }
     }

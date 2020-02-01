@@ -6,7 +6,7 @@ namespace WCFClient.Pages
     class ShowUserTickets : Page
     {
         public ShowUserTickets(Program program)
-            : base("Visualizza Prenotazioni Utente", program)
+            : base("Show User Tickets", program)
         {
         }
 
@@ -24,7 +24,7 @@ namespace WCFClient.Pages
              * Get data from the Database
              */
             Output.WriteLine("{0} TICKETS: ", SessionManager.GetUser().Username);
-            TablePrinter.Ticket(SessionManager.wcfClient.GetTicketsList(SessionManager.GetUser().Username));
+            TablePrinter.Ticket(SessionManager.GetServiceClient().GetTicketsList(SessionManager.GetUser().Username));
 
             /*
              * Navigate back

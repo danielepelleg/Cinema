@@ -1,4 +1,6 @@
 ﻿using EasyConsole;
+using System.Collections.Generic;
+using WCFClient.ServiceReference1;
 
 namespace WCFClient.Pages
 {
@@ -17,11 +19,11 @@ namespace WCFClient.Pages
              * Get data from the Database
              */
             Output.WriteLine("FILM LIST: ");
-            TablePrinter.Film(SessionManager.wcfClient.GetFilmList());
+            TablePrinter.Film(SessionManager.GetServiceClient().GetFilmList());
 
             /*
              * Navigate back
-             */ 
+             */
             Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();
         }

@@ -6,7 +6,7 @@ namespace WCFClient.Pages
     class DeleteFilm : Page
     {
         public DeleteFilm(Program program)
-            : base("Inserimento Film", program)
+            : base("Delete Film", program)
         {
         }
 
@@ -14,34 +14,37 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            /*
+             * Change output encoding to allow special 
+             * characters output such as € 
+             */
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Output.WriteLine("ELENCO EVENTI: ");
-            try {
-                // Richiamo la funzione server che mi mostra gli spettacoli presenti al cinema in una tabella
-                Console.Out.WriteLine("{0}", SessionManager.wcfClient.Visualizzazione_elenco_film());
-            }
-            catch {
-                Cinema.MainProgram.Errormessage();
-            }
-            
+
+            /*
+             * Show the User the Film
+             */ 
+            Output.WriteLine("FILM LIST: ");
+            TablePrinter.Film(SessionManager.GetServiceClient().GetFilmList());
+
+            /* 
+             * Delete Film Form
+             * 
+             * Every Primary Key input must be valid.
+             */
             Output.WriteLine("\n------ DELETE FILM ------- ");
+            string film_code = Input.ReadString("Insert the Code of the Film to delete: ");
+            int filmCode = Controls.CheckInt(film_code);
 
+            /*
+             * Send data to Database
+             */
+            if (SessionManager.GetServiceClient().DeleteFilm(filmCode))
+                Output.WriteLine("\nFILM CANCELLATION SUCCESS!\n");
+            else Output.WriteLine("\nFILM CANCELLATION FAILED! Retry!\n");
 
-            string filmCode1 = Input.ReadString("Inserisci il codice del film da eliminare: ");
-            int filmCode = Cinema.MainProgram.CheckInt(filmCode1);
-
-            // Inserimento Film nel Database.
-            try
-            {
-                bool success = SessionManager.wcfClient.DeleteFilm(filmCode);
-                if (success) Output.WriteLine("CANCELLAZIONE FILM AVVENUTO CON SUCCESSO\n");
-                else Output.WriteLine("ERRORE CANCELLAZIONE FILM\n RIPROVARE!\n");
-            }
-            catch
-            {
-                Cinema.MainProgram.Errormessage();
-            }
-            // Naviga Indietro
+            /*
+             * Navigate back
+             */
             Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();
         }

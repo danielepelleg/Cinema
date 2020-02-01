@@ -24,7 +24,7 @@ namespace WCFClient.Pages
              * Get data from the Database
              */
             Output.WriteLine("EVENTS LIST: ");
-            TablePrinter.Event(SessionManager.wcfClient.GetEventsList());
+            TablePrinter.Event(SessionManager.GetServiceClient().GetEventsList());
 
             /*
              * Navigate back

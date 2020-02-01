@@ -52,12 +52,12 @@ namespace WCFClient
             // Create the columns
             ColumnHeader[] headers = new[] {
                 new ColumnHeader(" # ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" TITLE ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" TITLE ", Alignment.Center, Alignment.Center),
                 new ColumnHeader(" YEAR ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" DIRECTION ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" DIRECTION ", Alignment.Center, Alignment.Center),
                 new ColumnHeader(" DURATION ", Alignment.Center, Alignment.Right),
                 new ColumnHeader(" RELEASE DATE ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" GENRE ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" GENRE ", Alignment.Center, Alignment.Center),
             };
             Table table = new Table(headers);
 

@@ -219,7 +219,7 @@ namespace WCFDatabaseManager
 
                 try
                 {
-                    command.CommandText = "SELECT * FROM Cinema.Evento;";
+                    command.CommandText = "SELECT * FROM Cinema.Film;";
                     using (SqlDataReader reader = command.ExecuteReader()) {
                         while (reader.Read()) {
                             var filmCode = reader.GetInt32(0);

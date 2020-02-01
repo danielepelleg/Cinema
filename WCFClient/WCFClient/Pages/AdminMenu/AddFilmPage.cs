@@ -6,7 +6,7 @@ namespace WCFClient.Pages
     class AddFilm : Page
     {
         public AddFilm(Program program)
-            : base("Inserimento Film", program)
+            : base("Add new Film", program)
         {
         }
 
@@ -36,7 +36,7 @@ namespace WCFClient.Pages
             /*
              * Send data to Database
              */
-            if(SessionManager.wcfClient.AddFilm(title, year, director, duration, releaseDate, genre))
+            if(SessionManager.GetServiceClient().AddFilm(title, year, director, duration, releaseDate, genre))
                 Output.WriteLine("\nFILM INSERTION SUCCESSFUL\n");
             else Output.WriteLine("\nFILM INSERTION FAILED!\n");
 

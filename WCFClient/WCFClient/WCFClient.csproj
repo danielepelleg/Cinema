@@ -60,21 +60,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controls.cs" />
+    <Compile Include="Pages\AdminMenu\AddEventPage.cs" />
+    <Compile Include="Pages\AdminMenu\AddFilmPage.cs" />
+    <Compile Include="Pages\UserMenu\ShowUserTickets.cs" />
+    <Compile Include="Pages\UserMenu\BuyTicketPage.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Pages\AdminMenu\DeleteFilmPage.cs" />
-    <Compile Include="Pages\AdminMenu\InserimentoEventoPage.cs" />
-    <Compile Include="Pages\AdminMenu\InserimentoFilmPage.cs" />
     <Compile Include="Pages\AdminMenu\AdminPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Pages\RegistrationPage.cs" />
-    <Compile Include="Pages\UserMenu\PrenotazioneBigliettoPage.cs" />
     <Compile Include="Pages\UserMenu\UserPage.cs" />
-    <Compile Include="Pages\UserMenu\VisualizzaPrenotazioniUtente.cs" />
-    <Compile Include="Pages\VisualizzaEventoPage.cs" />
-    <Compile Include="Pages\VisualizzaFilmPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pages\ShowEventsPage.cs" />
+    <Compile Include="Pages\ShowFilmPage.cs" />
     <Compile Include="TablePrinter.cs" />
   </ItemGroup>
   <ItemGroup>

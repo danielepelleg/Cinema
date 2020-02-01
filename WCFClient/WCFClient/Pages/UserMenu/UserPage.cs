@@ -7,7 +7,7 @@ namespace WCFClient.Pages
         public UserPage(Program program)
             : base("User Functions", program,
                   new Option("Show Events Scheduled ", () => program.NavigateTo<ShowEvents>()),
-                  new Option("Buy a Ticket", () => program.NavigateTo<TicketPrenotation>()),
+                  new Option("Buy a Ticket", () => program.NavigateTo<BuyTicket>()),
                   new Option("My Tickets", () => program.NavigateTo<ShowUserTickets>()))
         {
         }

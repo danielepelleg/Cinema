@@ -46,7 +46,7 @@ namespace WCFClient.Pages
             /*
              * Send data to Database
              */
-            if (SessionManager.wcfClient.Registration(SessionManager.IsAdmin(), username, hashedPassword, name, surname))
+            if (SessionManager.GetServiceClient().Registration(SessionManager.IsAdmin(), username, hashedPassword, name, surname))
                 Output.WriteLine("REGISTRATION SUCCESS!\n Come back to login\n");
             else Output.WriteLine("REGISTRATION ERROR\n Retry!\n");
 

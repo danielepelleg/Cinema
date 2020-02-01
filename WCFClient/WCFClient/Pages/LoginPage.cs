@@ -26,7 +26,6 @@ namespace WCFClient.Pages
             SessionManager.SetAdmin(input);
             Output.WriteLine(ConsoleColor.Green, "\n{0} Login: ", input);
 
-
             /* 
              * Login Form
              * 
@@ -38,18 +37,20 @@ namespace WCFClient.Pages
             username = Controls.CheckUserInput("Username", username);
             Console.Write("Password: ");
             string password = Controls.InputPassword();
-            string hashedPassword = EasyEncryption.MD5.ComputeMD5Hash(Controls.CheckUserInput(password, "Password"));
+            string hashedPassword = EasyEncryption.MD5.ComputeMD5Hash(Controls.CheckUserInput("Password", password));
 
             /*
              * Send data to Database
-             */ 
-            if (SessionManager.wcfClient.Login(SessionManager.IsAdmin(), username, hashedPassword))
-                SessionManager.SetUser(SessionManager.wcfClient.GetUser(username));
+             */
+            if (SessionManager.GetServiceClient().Login(SessionManager.IsAdmin(), username, hashedPassword))
+            {
+                SessionManager.SetUser(SessionManager.GetServiceClient().GetUser(username));
+            }
 
             /*
              * Go to the Menu
              */
-            if (!SessionManager.GetUser().Equals(null)) {                   // Check Login
+            if (SessionManager.GetUser() != null) {                   // Check Login
                 Output.WriteLine("\nLogin Successful");
                 Input.ReadString("Press [Enter] to navigate to your menu");
                 switch (SessionManager.IsAdmin()){                          // Check User Type

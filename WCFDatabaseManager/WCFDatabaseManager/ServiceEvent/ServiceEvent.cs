@@ -239,8 +239,6 @@ namespace WCFDatabaseManager
                             var hallCode = reader.GetInt32(3);
                             var usernameAdmin = reader.GetString(4);
                             var price = reader.GetDecimal(5);
-                            Console.WriteLine(reader.GetString(5));
-                            Console.WriteLine(price);
 
                             eventsList.Add(new Event(eventCode, dateTime, filmCode, hallCode, usernameAdmin, price));
                         }
