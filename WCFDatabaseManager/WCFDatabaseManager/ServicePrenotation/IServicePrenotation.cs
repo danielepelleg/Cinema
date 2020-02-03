@@ -18,6 +18,9 @@ namespace WCFDatabaseManager
         bool DeletePrenotation(int prenotationCode);
 
         [OperationContract]
+        List<Prenotation> GetPrenotationsList();
+
+        [OperationContract]
         List<Ticket> GetTicketsList(string username);
 
     }

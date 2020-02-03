@@ -26,9 +26,6 @@ namespace WCFServer.ServiceReferencePlace {
         private int HallCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PlaceCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PlaceNumberField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -50,19 +47,6 @@ namespace WCFServer.ServiceReferencePlace {
                 if ((this.HallCodeField.Equals(value) != true)) {
                     this.HallCodeField = value;
                     this.RaisePropertyChanged("HallCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PlaceCode {
-            get {
-                return this.PlaceCodeField;
-            }
-            set {
-                if ((this.PlaceCodeField.Equals(value) != true)) {
-                    this.PlaceCodeField = value;
-                    this.RaisePropertyChanged("PlaceCode");
                 }
             }
         }

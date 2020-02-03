@@ -52,12 +52,7 @@ namespace WCFDatabaseManager
         [DataMember]
         public string Surname { get; set; } = string.Empty;
 
-        public User()
-        {
-            this.Username = string.Empty;
-            this.Password = string.Empty;
-            this.Name = string.Empty;
-            this.Surname = string.Empty;
+        public User() {   
         }
 
         public User(string username, string password, string name, string surname)

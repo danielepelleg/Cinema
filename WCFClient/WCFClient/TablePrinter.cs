@@ -3,6 +3,7 @@ using EasyConsole;
 using System;
 using System.Collections.Generic;
 using WCFClient.ServiceReference1;
+using System.Text;
 
 namespace WCFClient
 {
@@ -29,16 +30,17 @@ namespace WCFClient
             {
                 // Create the columns
                 ColumnHeader[] headers = new[] {
-                new ColumnHeader(" NAME ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" SURNAME ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" USERNAME ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" USERNAME ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" HASHED PASSWORD ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" NAME ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" SURNAME ", Alignment.Right, Alignment.Center),
             };
                 Table table = new Table(headers);
 
                 // Add the rows of the table
                 foreach (User u in userList)
                 {
-                    table.AddRow(u.Name, u.Surname, u.Username);
+                    table.AddRow(u.Name, u.Password, u.Surname, u.Username);
                 }
 
                 // Format the table
@@ -90,11 +92,11 @@ namespace WCFClient
             {
                 // Create the columns
                 ColumnHeader[] headers = new[] {
-                new ColumnHeader(" # ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" DATE / TIME ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" HALL ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" # FILM ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" PRICE ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" # ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" DATE / TIME ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" HALL ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" # FILM ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" PRICE ", Alignment.Right, Alignment.Center),
                 };
                 Table table = new Table(headers);
 
@@ -109,7 +111,7 @@ namespace WCFClient
                 table.Config = TableConfiguration.UnicodeAlt();
 
                 Output.WriteLine(table.ToString());
-            } else Console.WriteLine("There are no Event in the DataBase!");
+            } else Console.WriteLine("There are no Events in the DataBase!");
         }
 
         /*
@@ -148,8 +150,7 @@ namespace WCFClient
             {
                 // Create the columns
                 ColumnHeader[] headers = new[] {
-                new ColumnHeader(" # ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" PLACE NUMBER ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" # PLACE NUMBER ", Alignment.Center, Alignment.Right),
                 new ColumnHeader(" # HALL ", Alignment.Center, Alignment.Right),
             };
                 Table table = new Table(headers);
@@ -157,7 +158,7 @@ namespace WCFClient
                 // Add the row of the table
                 foreach (Place p in placesList)
                 {
-                    table.AddRow(p.PlaceCode, p.PlaceNumber, p.HallCode);
+                    table.AddRow(p.PlaceNumber, p.HallCode);
                 }
 
                 // Format the table
@@ -176,15 +177,21 @@ namespace WCFClient
             {
                 // Create the columns
                 ColumnHeader[] headers = new[] {
-                new ColumnHeader(" PLACE NUMBER ", Alignment.Center, Alignment.Right),
-            };
+                new ColumnHeader(" PLACE NUMBER ", Alignment.Right, Alignment.Center),
+                };
                 Table table = new Table(headers);
 
                 // Add the row of the table
+                StringBuilder result = new StringBuilder(" ");
+                int counter = 0;
                 foreach (Place p in placesList)
                 {
-                    table.AddRow(p.PlaceNumber);
+                    if (counter != placesList.Count-1)
+                        result.Append(p.PlaceNumber + ",  ");
+                    else result.Append(p.PlaceNumber + " ");
+                    counter++;
                 }
+                table.AddRow(result);
 
                 // Format the table
                 table.Config = TableConfiguration.MySqlSimple();
@@ -202,10 +209,10 @@ namespace WCFClient
             {
                 // Create the columns
                 ColumnHeader[] headers = new[] {
-                new ColumnHeader(" # ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" DATE ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" USER ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" # EVENT ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" # ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" DATE ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" USER ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" # EVENT ", Alignment.Right, Alignment.Center),
             };
                 Table table = new Table(headers);
 

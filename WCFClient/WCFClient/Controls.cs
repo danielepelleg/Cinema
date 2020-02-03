@@ -206,8 +206,8 @@ namespace WCFClient
         {
             while (!SessionManager.GetServiceClient().CheckPlace(Convert.ToInt32(eventCode), Convert.ToInt32(place)))
             {
-                Console.WriteLine("Il posto {0} non è disponibile!" +
-                    " Inserine uno disponibile!\nRiprovare: ", place);
+                Console.WriteLine("The place number {0} is not available!" +
+                    " Digit a valid number!\nRetry: ", place);
                 place = Console.ReadLine();
                 place = Convert.ToString(CheckInt(place));
             }

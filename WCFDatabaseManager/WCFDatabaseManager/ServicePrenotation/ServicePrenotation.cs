@@ -37,15 +37,12 @@ namespace WCFDatabaseManager
                     command.ExecuteNonQuery();
 
                     // Create a Prenotation Object
-                    Prenotation prenotation = new Prenotation(Convert.ToInt32(command.Parameters["@CodicePrenotazione"].Value.ToString()), 
+                    Prenotation prenotation = new Prenotation(Convert.ToInt32(command.Parameters["@CodicePrenotazione"].Value), 
                         dateTime, usernameUser, eventCode);
 
                     // Initialize a int value to check if the Stored Procedure success
                     var returnParameter1 = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
                     returnParameter1.Direction = ParameterDirection.ReturnValue;
-
-                    // Commit the transaction
-                    transaction.Commit();
 
                     //Reset the parameters
                     command.Parameters.Clear();
@@ -53,8 +50,8 @@ namespace WCFDatabaseManager
                     // Insert data in Reserve table in the database
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = "Cinema.AddNewRiserva";
-                    command.Parameters.Add("@numero_posto", SqlDbType.Int).Value = placeNumber;
-                    command.Parameters.Add("@codice_prenotazione", SqlDbType.Int).Value = prenotation.PrenotationCode;
+                    command.Parameters.Add("@Numero_Posto", SqlDbType.Int).Value = placeNumber;
+                    command.Parameters.Add("@Codice_Prenotazione", SqlDbType.Int).Value = prenotation.PrenotationCode;
                     command.ExecuteNonQuery();
 
                     // Initialize a int value to check if the Stored Procedure success
@@ -164,6 +161,72 @@ namespace WCFDatabaseManager
         }
 
         /*
+         * Get the list containing the Prenotations of the database
+         */
+        public List<Prenotation> GetPrenotationsList()
+        {
+            // Database connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
+            {
+                // Define a new list of Users
+                List<Prenotation> prenotationsList = new List<Prenotation>();
+
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "SELECT * FROM Cinema.Prenotazione;";
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var prenotationCode = reader.GetInt32(0);
+                            var dateTime = reader.GetDateTime(1);
+                            var username = reader.GetString(2);
+                            var eventCode = reader.GetInt32(3);
+
+                            prenotationsList.Add(new Prenotation(prenotationCode, dateTime, username, eventCode));
+                        }
+                    }
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    return prenotationsList;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return new List<Prenotation>() { };
+                }
+            }
+        }
+
+        /*
          * Get the list containing the tickets of a user
          */
         public List<Ticket> GetTicketsList(string username)
@@ -190,7 +253,7 @@ namespace WCFDatabaseManager
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = "Cinema.VisualizzaPrenotazione";
-                    command.Parameters.Add("@user", SqlDbType.VarChar).Value = username;
+                    command.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {

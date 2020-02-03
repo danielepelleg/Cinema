@@ -235,10 +235,10 @@ namespace WCFDatabaseManager
                         while (reader.Read()) {
                             var eventCode = reader.GetInt32(0);
                             var dateTime = reader.GetDateTime(1);
-                            var price = reader.GetDecimal(2);
-                            var filmCode = reader.GetInt32(3);
-                            var hallCode = reader.GetInt32(4);
-                            var usernameAdmin = reader.GetString(5);
+                            var filmCode = reader.GetInt32(2);
+                            var hallCode = reader.GetInt32(3);
+                            var usernameAdmin = reader.GetString(4);
+                            var price = reader.GetDecimal(5);
 
                             eventsList.Add(new Event(eventCode, dateTime, filmCode, hallCode, usernameAdmin, price));
                         }

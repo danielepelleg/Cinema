@@ -9,7 +9,6 @@
   <xs:complexType name="Place">
     <xs:sequence>
       <xs:element minOccurs="0" name="HallCode" type="xs:int" />
-      <xs:element minOccurs="0" name="PlaceCode" type="xs:int" />
       <xs:element minOccurs="0" name="PlaceNumber" type="xs:int" />
     </xs:sequence>
   </xs:complexType>

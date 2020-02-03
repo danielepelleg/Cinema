@@ -18,9 +18,14 @@ namespace Cinema
             AddPage(new UserPage(this));
             AddPage(new AddFilm(this));
             AddPage(new AddEvent(this));
+            AddPage(new DeleteUser(this));
             AddPage(new DeleteFilm(this));
-            AddPage(new ShowEvents(this));
+            AddPage(new DeleteEvent(this));
+            AddPage(new DeletePrenotation(this));
+            AddPage(new ShowUsers(this));
             AddPage(new ShowFilm(this));
+            AddPage(new ShowEvents(this));
+            AddPage(new ShowPrenotations(this));
             AddPage(new BuyTicket(this));
             AddPage(new ShowUserTickets(this));
 

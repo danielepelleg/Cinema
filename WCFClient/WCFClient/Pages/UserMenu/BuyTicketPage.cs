@@ -37,7 +37,7 @@ namespace WCFClient.Pages
                 /*
                  * Show the User the Hall
                  */
-                Output.WriteLine("Available places in the Hall:\n{0}",
+                Output.WriteLine("Places in the Hall:\n{0}", 
                     SessionManager.GetServiceClient().DrawHall(eventCode));
 
                 /*
@@ -45,6 +45,7 @@ namespace WCFClient.Pages
                  */
                 Output.WriteLine("Available Places:");
                 TablePrinter.PlaceNumber(SessionManager.GetServiceClient().GetAvailablePlacesList(eventCode));
+
                 /*
                  * Let the User choose the place to buy
                  */
@@ -64,6 +65,7 @@ namespace WCFClient.Pages
                 Console.WriteLine("Exception Type: {0}", ex.GetType());
                 Console.WriteLine("Message: {0}", ex.Message);
             }
+
             /*
              * Navigate back
              */

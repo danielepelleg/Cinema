@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WCFDatabaseManager/ServicePrenotation/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfPrenotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Prenotation" nillable="true" type="tns:Prenotation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPrenotation" nillable="true" type="tns:ArrayOfPrenotation" />
+  <xs:complexType name="Prenotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EventCode" type="xs:int" />
+      <xs:element minOccurs="0" name="PrenotationCode" type="xs:int" />
+      <xs:element minOccurs="0" name="UsernameUser" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Prenotation" nillable="true" type="tns:Prenotation" />
   <xs:complexType name="ArrayOfTicket">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Ticket" type="tns:Ticket" />
@@ -44,15 +59,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Film" nillable="true" type="tns:Film" />
-  <xs:complexType name="Prenotation">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="EventCode" type="xs:int" />
-      <xs:element minOccurs="0" name="PrenotationCode" type="xs:int" />
-      <xs:element minOccurs="0" name="UsernameUser" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Prenotation" nillable="true" type="tns:Prenotation" />
   <xs:complexType name="Reservation">
     <xs:sequence>
       <xs:element minOccurs="0" name="PlaceNumber" type="xs:int" />

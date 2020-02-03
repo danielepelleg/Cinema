@@ -73,6 +73,12 @@
   <wsdl:message name="IService1_DeletePrenotation_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeletePrenotationResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetPrenotationsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrenotationsList" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPrenotationsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrenotationsListResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetTicketsList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTicketsList" />
   </wsdl:message>
@@ -177,6 +183,10 @@
     <wsdl:operation name="DeletePrenotation">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeletePrenotation" message="tns:IService1_DeletePrenotation_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeletePrenotationResponse" message="tns:IService1_DeletePrenotation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrenotationsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPrenotationsList" message="tns:IService1_GetPrenotationsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPrenotationsListResponse" message="tns:IService1_GetPrenotationsList_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetTicketsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetTicketsList" message="tns:IService1_GetTicketsList_InputMessage" />
@@ -313,6 +323,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeletePrenotation">
       <soap:operation soapAction="http://tempuri.org/IService1/DeletePrenotation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrenotationsList">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPrenotationsList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

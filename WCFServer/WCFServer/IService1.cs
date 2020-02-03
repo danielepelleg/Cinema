@@ -60,7 +60,10 @@ namespace WCFServer
         bool DeletePrenotation(int prenotationCode);
 
         [OperationContract]
-        List<Ticket> GetTicketsList(string username);
+        List<Prenotation> GetPrenotationsList();
+
+        [OperationContract]
+        List<Ticket> GetTicketsList(string username);       
 
         // FILM METHODS
 

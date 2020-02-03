@@ -201,8 +201,7 @@ namespace WCFDatabaseManager
         public List<Film> GetFilmList()
         {
             // Database connection
-            using (SqlConnection connection = DatabaseHandler.GetConnection())
-            {
+            using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 // Define a new list of Users
                 List<Film> filmList = new List<Film>();
 
@@ -217,8 +216,7 @@ namespace WCFDatabaseManager
                 command.Connection = connection;
                 command.Transaction = transaction;
 
-                try
-                {
+                try {
                     command.CommandText = "SELECT * FROM Cinema.Film;";
                     using (SqlDataReader reader = command.ExecuteReader()) {
                         while (reader.Read()) {

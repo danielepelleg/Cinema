@@ -71,12 +71,10 @@ namespace WCFDatabaseManager
         public string DrawHall(int eventCode)
         {
             string drawHall = string.Empty;
-            Event e = new Event();
+            Hall h = new Hall();
 
             // Database connection
-            using (SqlConnection connection = DatabaseHandler.GetConnection())
-            {
-
+            using (SqlConnection connection = DatabaseHandler.GetConnection()) {
                 connection.Open();
 
                 // Start a local transaction.
@@ -88,55 +86,48 @@ namespace WCFDatabaseManager
                 command.Connection = connection;
                 command.Transaction = transaction;
 
-                try
-                {
+                try {
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = "Cinema.RichiestaCodiceSala";
-                    command.Parameters.Add("@codice_evento", SqlDbType.Int).Value = eventCode;
+                    command.Parameters.Add("@CodiceEvento", SqlDbType.Int).Value = eventCode;
 
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            e.EventCode = reader.GetInt32(0);
+                    using (SqlDataReader reader = command.ExecuteReader()) {
+                        while (reader.Read()) {
+                            h.HallCode = reader.GetInt32(0);
                         }
-
-                        // Attempt to commit the transaction.
-                        transaction.Commit();
-
-                        switch (e.EventCode)
-                        {
-                            case 1:
-                                drawHall = "\n________________________________\n\\______________________________/\n\n   | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
-                                    "   | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n";
-                                break;
-                            case 2:
-                                drawHall = "\n________________________\n\\______________________/\n\n   | 1 | 2 | 3 | 4 |\n" +
-                                    "   | 5 | 6 | 7 | 8 |\n   | 9 | 10| 11| 12|\n   | 13| 14| 15| 16|\n";
-                                break;
-                            case 3:
-                                drawHall = "\n________________________________\n\\______________________________/\n\n   | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
-                                    "   | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n   | 25| 26| 27| 28| 29| 30|\n";
-                                break;
-                            default:
-                                drawHall = "Sala non trovata.";
-                                break;
-                        }
-                        return drawHall;
                     }
+
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    switch (h.HallCode) {
+                        case 1:
+                            drawHall = "\n  ________________________________\n  \\______________________________/\n\n      | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
+                                "      | 7 | 8 | 9 | 10| 11| 12|\n      | 13| 14| 15| 16| 17| 18|\n      | 19| 20| 21| 22| 23| 24|\n";
+                            break;
+                        case 2:
+                            drawHall = "    \n________________________\n\\______________________/\n\n   | 1 | 2 | 3 | 4 |\n" +
+                                "      | 5 | 6 | 7 | 8 |\n   | 9 | 10| 11| 12|\n   | 13| 14| 15| 16|\n";
+                            break;
+                        case 3:
+                            drawHall = "    \n________________________________\n\\______________________________/\n\n   | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
+                                "      | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n   | 25| 26| 27| 28| 29| 30|\n";
+                            break;
+                        default:
+                            drawHall = "Hall not found.";
+                            break;
+                    }
+                    return drawHall;
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
                     Console.WriteLine("  Message: {0}", ex.Message);
 
                     // Attempt to roll back the transaction.
-                    try
-                    {
+                    try {
                         transaction.Rollback();
                     }
-                    catch (Exception ex2)
-                    {
+                    catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
                         // on the server that would cause the rollback to fail, such as
                         // a closed connection.

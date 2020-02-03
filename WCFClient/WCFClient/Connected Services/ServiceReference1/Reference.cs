@@ -233,6 +233,99 @@ namespace WCFClient.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Prenotation", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
+    [System.SerializableAttribute()]
+    public partial class Prenotation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int EventCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PrenotationCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameUserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DateTime {
+            get {
+                return this.DateTimeField;
+            }
+            set {
+                if ((this.DateTimeField.Equals(value) != true)) {
+                    this.DateTimeField = value;
+                    this.RaisePropertyChanged("DateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int EventCode {
+            get {
+                return this.EventCodeField;
+            }
+            set {
+                if ((this.EventCodeField.Equals(value) != true)) {
+                    this.EventCodeField = value;
+                    this.RaisePropertyChanged("EventCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PrenotationCode {
+            get {
+                return this.PrenotationCodeField;
+            }
+            set {
+                if ((this.PrenotationCodeField.Equals(value) != true)) {
+                    this.PrenotationCodeField = value;
+                    this.RaisePropertyChanged("PrenotationCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UsernameUser {
+            get {
+                return this.UsernameUserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameUserField, value) != true)) {
+                    this.UsernameUserField = value;
+                    this.RaisePropertyChanged("UsernameUser");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Ticket", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
     [System.SerializableAttribute()]
     public partial struct Ticket : System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -466,99 +559,6 @@ namespace WCFClient.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Prenotation", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
-    [System.SerializableAttribute()]
-    public partial class Prenotation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime DateTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int EventCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PrenotationCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsernameUserField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime DateTime {
-            get {
-                return this.DateTimeField;
-            }
-            set {
-                if ((this.DateTimeField.Equals(value) != true)) {
-                    this.DateTimeField = value;
-                    this.RaisePropertyChanged("DateTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int EventCode {
-            get {
-                return this.EventCodeField;
-            }
-            set {
-                if ((this.EventCodeField.Equals(value) != true)) {
-                    this.EventCodeField = value;
-                    this.RaisePropertyChanged("EventCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PrenotationCode {
-            get {
-                return this.PrenotationCodeField;
-            }
-            set {
-                if ((this.PrenotationCodeField.Equals(value) != true)) {
-                    this.PrenotationCodeField = value;
-                    this.RaisePropertyChanged("PrenotationCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UsernameUser {
-            get {
-                return this.UsernameUserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsernameUserField, value) != true)) {
-                    this.UsernameUserField = value;
-                    this.RaisePropertyChanged("UsernameUser");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Reservation", Namespace="http://schemas.datacontract.org/2004/07/WCFDatabaseManager")]
     [System.SerializableAttribute()]
     public partial class Reservation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -692,9 +692,6 @@ namespace WCFClient.ServiceReference1 {
         private int HallCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PlaceCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PlaceNumberField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -716,19 +713,6 @@ namespace WCFClient.ServiceReference1 {
                 if ((this.HallCodeField.Equals(value) != true)) {
                     this.HallCodeField = value;
                     this.RaisePropertyChanged("HallCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PlaceCode {
-            get {
-                return this.PlaceCodeField;
-            }
-            set {
-                if ((this.PlaceCodeField.Equals(value) != true)) {
-                    this.PlaceCodeField = value;
-                    this.RaisePropertyChanged("PlaceCode");
                 }
             }
         }
@@ -825,6 +809,12 @@ namespace WCFClient.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeletePrenotation", ReplyAction="http://tempuri.org/IService1/DeletePrenotationResponse")]
         System.Threading.Tasks.Task<bool> DeletePrenotationAsync(int prenotationCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPrenotationsList", ReplyAction="http://tempuri.org/IService1/GetPrenotationsListResponse")]
+        System.Collections.Generic.List<WCFClient.ServiceReference1.Prenotation> GetPrenotationsList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPrenotationsList", ReplyAction="http://tempuri.org/IService1/GetPrenotationsListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Prenotation>> GetPrenotationsListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetTicketsList", ReplyAction="http://tempuri.org/IService1/GetTicketsListResponse")]
         System.Collections.Generic.List<WCFClient.ServiceReference1.Ticket> GetTicketsList(string username);
@@ -1000,6 +990,14 @@ namespace WCFClient.ServiceReference1 {
         
         public System.Threading.Tasks.Task<bool> DeletePrenotationAsync(int prenotationCode) {
             return base.Channel.DeletePrenotationAsync(prenotationCode);
+        }
+        
+        public System.Collections.Generic.List<WCFClient.ServiceReference1.Prenotation> GetPrenotationsList() {
+            return base.Channel.GetPrenotationsList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.Prenotation>> GetPrenotationsListAsync() {
+            return base.Channel.GetPrenotationsListAsync();
         }
         
         public System.Collections.Generic.List<WCFClient.ServiceReference1.Ticket> GetTicketsList(string username) {

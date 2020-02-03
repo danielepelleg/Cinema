@@ -86,10 +86,15 @@ namespace WCFServer
             return servicePrenotation.AddPrenotation(dateTime, usernameUser, eventCode, placeNumber);
         }
 
-
         public bool DeletePrenotation(int prenotationCode) {
             return servicePrenotation.DeletePrenotation(prenotationCode);
         }
+
+        public List<Prenotation> GetPrenotationsList()
+        {
+            return servicePrenotation.GetPrenotationsList().ToList();
+        }
+
 
         public List<Ticket> GetTicketsList(string username) {
             return servicePrenotation.GetTicketsList(username).ToList();

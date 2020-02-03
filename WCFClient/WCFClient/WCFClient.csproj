@@ -63,6 +63,11 @@
     <Compile Include="Controls.cs" />
     <Compile Include="Pages\AdminMenu\AddEventPage.cs" />
     <Compile Include="Pages\AdminMenu\AddFilmPage.cs" />
+    <Compile Include="Pages\AdminMenu\DeleteEventPage.cs" />
+    <Compile Include="Pages\AdminMenu\DeletePrenotationPage.cs" />
+    <Compile Include="Pages\AdminMenu\DeleteUser.cs" />
+    <Compile Include="Pages\AdminMenu\ShowUsersPage.cs" />
+    <Compile Include="Pages\AdminMenu\ShowPrenotationsPage.cs" />
     <Compile Include="Pages\UserMenu\ShowUserTickets.cs" />
     <Compile Include="Pages\UserMenu\BuyTicketPage.cs" />
     <Compile Include="SessionManager.cs" />
@@ -100,6 +105,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\WCFClient.ServiceReference1.Place.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\WCFClient.ServiceReference1.Prenotation.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\WCFClient.ServiceReference1.Ticket.datasource">

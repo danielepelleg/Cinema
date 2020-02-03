@@ -148,19 +148,25 @@ namespace WCFDatabaseManager
                 command.Connection = connection;
                 command.Transaction = transaction;
                 try {
-                    command.CommandText = "DELETE FROM Cinema.Admin WHERE username = @username;";
-                            
-                    command.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "Cinema.DeleteUser";
+                    command.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
+                    command.ExecuteNonQuery();
+
+
+                    // Initialize a int value to check if the Stored Procedure success
+                    var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                    returnParameter.Direction = ParameterDirection.ReturnValue;
 
                     // Commit the transaction.
                     transaction.Commit();
 
-                    int result = command.ExecuteNonQuery();
-
-                    if (result > 0) return true;
-                    else {
+                    // If the int value > 0 the Stored Procedure success
+                    if (returnParameter.Direction > 0) return true;
+                    else
+                    {
                         command.Parameters.Clear();
-                        throw new Exception("Errore: si è verificato un problema nell'eliminare una Persona dal DB");
+                        throw new Exception("Errore: si è verificato un problema nell'eliminare un Utente dal DB");
                     }
                 }
                 catch (SqlException ex)  { 
@@ -314,7 +320,6 @@ namespace WCFDatabaseManager
                 }
             }
         }
-
  
         /*
          * Get the list containing the Users of the database
@@ -341,10 +346,12 @@ namespace WCFDatabaseManager
                     using (SqlDataReader reader = command.ExecuteReader()) {
                         while (reader.Read()) {
                             var username = reader.GetString(0);
+                            var hashedPassword = reader.GetString(1);
                             var name = reader.GetString(2);
                             var surname = reader.GetString(3);
+                            
 
-                            usersList.Add(new User(username, name, surname));
+                            usersList.Add(new User(username, hashedPassword, name, surname));
                         }
                     }
                     // Attempt to commit the transaction.

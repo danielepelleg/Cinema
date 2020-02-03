@@ -170,6 +170,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReferencePrenotation\ServicePrenotation.wsdl" />
+    <None Include="Connected Services\ServiceReferencePrenotation\WCFServer.ServiceReferencePrenotation.Prenotation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReferencePrenotation\WCFServer.ServiceReferencePrenotation.Ticket.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
