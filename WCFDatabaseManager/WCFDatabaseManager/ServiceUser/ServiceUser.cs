@@ -379,5 +379,63 @@ namespace WCFDatabaseManager
                 }
             }
         }
+
+        /*
+         * Check Foreign Key bond
+         * 
+         * @return true if the foreign key exists, false if not
+         */
+        public bool CheckStringFK(string value, string valueType)
+        {
+            // Datbase Connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
+            {
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "SELECT * FROM Cinema." + valueType + ";";
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (value == reader.GetString(0)) return true;
+                        }
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return false;
+                }
+            }
+        }
     }
 }

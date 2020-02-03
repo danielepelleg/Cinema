@@ -139,9 +139,9 @@ namespace WCFClient
         }
 
         /*
-         * Get the Primary Key of a Table, given a value
+         * Check if the integer value inserted is in the DB, cheking the Foreign Key restriction
          */
-        public static int GetPrimaryKey(string value, string valueType)
+        public static int CheckIntForeignKey(string value, string valueType)
         {
             while (!SessionManager.GetServiceClient().CheckFK(Convert.ToInt32(value), valueType))
             {
@@ -149,6 +149,19 @@ namespace WCFClient
                 value = Console.ReadLine();
             }
             return Convert.ToInt32(value);
+        }
+
+        /*
+         * Check if the string value inserted is in the DB, cheking the Foreign Key restriction
+         */
+        public static string CheckStringForeignKey(string value, string valueType)
+        {
+            while (!SessionManager.GetServiceClient().CheckStringFK(value, valueType))
+            {
+                Console.WriteLine("{0} non presente. \nInserire un valore accettabile!\nRiprovare: ", valueType);
+                value = Console.ReadLine();
+            }
+            return value;
         }
 
         /*

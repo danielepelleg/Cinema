@@ -22,27 +22,32 @@ namespace WCFClient.Pages
 
             try
             {
-            /*
-             * Show the Admin the Film
-             */
-                Output.WriteLine("FILM LIST: ");
-                TablePrinter.Film(SessionManager.GetServiceClient().GetFilmList());
+                if (SessionManager.GetServiceClient().GetFilmList().Count != 0)
+                {
+                    /*
+                  * Show the Admin the Film
+                  */
+                    Output.WriteLine("FILM LIST: ");
+                    TablePrinter.Film(SessionManager.GetServiceClient().GetFilmList());
 
-                /* 
-                 * Delete Film Form
-                 * 
-                 * Every Primary Key input must be valid.
-                 */
-                Output.WriteLine("\n------ DELETE FILM ------- ");
-                string film_code = Input.ReadString("Insert the Code of the Film to delete: ");
-                int filmCode = Controls.CheckInt(film_code);
+                    /* 
+                     * Delete Film Form
+                     * 
+                     * Every Primary Key input must be valid.
+                     */
+                    Output.WriteLine("\n------ DELETE FILM ------- ");
+                    string film_code = Input.ReadString("Insert the Code of the Film to delete: ");
+                    int filmCode = Controls.CheckInt(film_code);
+                    filmCode = Controls.CheckIntForeignKey(filmCode.ToString(), "Film");
 
-                /*
-                 * Send data to Database
-                 */
-                if (SessionManager.GetServiceClient().DeleteFilm(filmCode))
-                    Output.WriteLine("\nFILM CANCELLATION SUCCESS!\n");
-                else Output.WriteLine("\nFILM CANCELLATION FAILED! Retry!\n");
+                    /*
+                     * Send data to Database
+                     */
+                    if (SessionManager.GetServiceClient().DeleteFilm(filmCode))
+                        Output.WriteLine("\nFILM CANCELLATION SUCCESS!\n");
+                    else Output.WriteLine("\nFILM CANCELLATION FAILED! Retry!\n");
+
+                } else Console.WriteLine("There are no Film in the DataBase!");
             }
             catch (Exception ex)
             {

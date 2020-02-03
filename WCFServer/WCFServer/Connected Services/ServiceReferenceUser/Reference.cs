@@ -145,6 +145,12 @@ namespace WCFServer.ServiceReferenceUser {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUsersList", ReplyAction="http://tempuri.org/IServiceUser/GetUsersListResponse")]
         System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User[]> GetUsersListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/CheckStringFK", ReplyAction="http://tempuri.org/IServiceUser/CheckStringFKResponse")]
+        bool CheckStringFK(string value, string valueType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/CheckStringFK", ReplyAction="http://tempuri.org/IServiceUser/CheckStringFKResponse")]
+        System.Threading.Tasks.Task<bool> CheckStringFKAsync(string value, string valueType);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -220,6 +226,14 @@ namespace WCFServer.ServiceReferenceUser {
         
         public System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User[]> GetUsersListAsync() {
             return base.Channel.GetUsersListAsync();
+        }
+        
+        public bool CheckStringFK(string value, string valueType) {
+            return base.Channel.CheckStringFK(value, valueType);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckStringFKAsync(string value, string valueType) {
+            return base.Channel.CheckStringFKAsync(value, valueType);
         }
     }
 }

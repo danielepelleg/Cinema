@@ -32,6 +32,9 @@ namespace WCFDatabaseManager
 
         [OperationContract]
         List<User> GetUsersList();
+
+        [OperationContract]
+        bool CheckStringFK(string value, string valueType);
     }
     /*
      * User Class

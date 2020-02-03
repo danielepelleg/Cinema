@@ -48,6 +48,10 @@ namespace WCFServer
             return serviceUser.GetUsersList().ToList();
         }
 
+        public bool CheckStringFK(string value, string valueType) {
+            return serviceUser.CheckStringFK(value, valueType);
+        }
+
         // FILM METHODS
 
         public bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre) {

@@ -40,6 +40,9 @@ namespace WCFServer
         [OperationContract]
         List<User> GetUsersList();
 
+        [OperationContract]
+        bool CheckStringFK(string value, string valueType);
+
         // EVENTS METHODS
 
         [OperationContract]

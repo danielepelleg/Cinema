@@ -32,7 +32,7 @@ namespace WCFClient.Pages
                 DateTime dateTime = DateTime.Now;
                 string event_code = Input.ReadString("\nChoose the code of the event you want to buy the ticket: ");
                 int eventCode = Controls.CheckInt(event_code);
-                eventCode = Controls.GetPrimaryKey(Convert.ToString(eventCode), "Evento");
+                eventCode = Controls.CheckIntForeignKey(Convert.ToString(eventCode), "Evento");
 
                 /*
                  * Show the User the Hall

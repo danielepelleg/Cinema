@@ -40,7 +40,7 @@ namespace WCFClient
                 // Add the rows of the table
                 foreach (User u in userList)
                 {
-                    table.AddRow(u.Name, u.Password, u.Surname, u.Username);
+                    table.AddRow(u.Username, u.Password, u.Name, u.Surname);
                 }
 
                 // Format the table

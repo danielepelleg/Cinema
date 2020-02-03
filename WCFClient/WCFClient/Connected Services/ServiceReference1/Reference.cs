@@ -780,6 +780,12 @@ namespace WCFClient.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUsersList", ReplyAction="http://tempuri.org/IService1/GetUsersListResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.User>> GetUsersListAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckStringFK", ReplyAction="http://tempuri.org/IService1/CheckStringFKResponse")]
+        bool CheckStringFK(string value, string valueType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckStringFK", ReplyAction="http://tempuri.org/IService1/CheckStringFKResponse")]
+        System.Threading.Tasks.Task<bool> CheckStringFKAsync(string value, string valueType);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddEvent", ReplyAction="http://tempuri.org/IService1/AddEventResponse")]
         bool AddEvent(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price);
         
@@ -950,6 +956,14 @@ namespace WCFClient.ServiceReference1 {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.User>> GetUsersListAsync() {
             return base.Channel.GetUsersListAsync();
+        }
+        
+        public bool CheckStringFK(string value, string valueType) {
+            return base.Channel.CheckStringFK(value, valueType);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckStringFKAsync(string value, string valueType) {
+            return base.Channel.CheckStringFKAsync(value, valueType);
         }
         
         public bool AddEvent(string usernameAdmin, System.DateTime dateTime, int filmCode, int hallCode, decimal price) {
