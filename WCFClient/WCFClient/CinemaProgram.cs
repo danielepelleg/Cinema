@@ -22,6 +22,7 @@ namespace Cinema
             AddPage(new DeleteFilm(this));
             AddPage(new DeleteEvent(this));
             AddPage(new DeletePrenotation(this));
+            AddPage(new EditUserPage(this));
             AddPage(new ShowUsers(this));
             AddPage(new ShowFilm(this));
             AddPage(new ShowEvents(this));

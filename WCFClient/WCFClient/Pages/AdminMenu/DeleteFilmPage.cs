@@ -25,8 +25,8 @@ namespace WCFClient.Pages
                 if (SessionManager.GetServiceClient().GetFilmList().Count != 0)
                 {
                     /*
-                  * Show the Admin the Film
-                  */
+                     * Show the Admin the Film
+                     */
                     Output.WriteLine("FILM LIST: ");
                     TablePrinter.Film(SessionManager.GetServiceClient().GetFilmList());
 

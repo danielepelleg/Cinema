@@ -26,4 +26,6 @@ namespace WCFClient.Pages
         User,
         Admin
     }
+
+    
 }

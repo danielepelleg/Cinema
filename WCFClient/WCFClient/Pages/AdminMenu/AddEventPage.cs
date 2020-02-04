@@ -32,7 +32,7 @@ namespace WCFClient.Pages
                 Output.WriteLine("------ ADD NEW EVENT ------- ");
                 string date_time = Input.ReadString("Data and Time of the Event: ");
                 DateTime dateTime = Controls.CheckDate(date_time);
-                string film_code = Input.ReadString("Codice Film Proiettato: ");
+                string film_code = Input.ReadString("Code of the Film: ");
                 int filmCode = Controls.CheckInt(film_code);
                 filmCode = Controls.CheckIntForeignKey(filmCode.ToString(), "Film");
                 string hall_code = Input.ReadString("Hall code of the Event: ");
@@ -40,6 +40,8 @@ namespace WCFClient.Pages
                 hallCode = Controls.CheckIntForeignKey(hallCode.ToString(), "Sala");
                 string _price = Input.ReadString("Insert the Price (ex: 8,50): ");
                 decimal price = Controls.CheckDecimal(_price);
+                
+
 
                 /*
                  * Send data to Database

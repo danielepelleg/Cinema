@@ -153,6 +153,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetShowsList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetShowsListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetShowsListResult" nillable="true" type="q4:ArrayOfShow" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AddPrenotation">
     <xs:complexType>
       <xs:sequence>
@@ -192,7 +204,7 @@
   <xs:element name="GetPrenotationsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetPrenotationsListResult" nillable="true" type="q4:ArrayOfPrenotation" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetPrenotationsListResult" nillable="true" type="q5:ArrayOfPrenotation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -206,7 +218,7 @@
   <xs:element name="GetTicketsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetTicketsListResult" nillable="true" type="q5:ArrayOfTicket" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetTicketsListResult" nillable="true" type="q6:ArrayOfTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -253,7 +265,7 @@
   <xs:element name="GetFilmResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetFilmResult" nillable="true" type="q6:Film" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetFilmResult" nillable="true" type="q7:Film" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -265,7 +277,7 @@
   <xs:element name="GetFilmListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetFilmListResult" nillable="true" type="q7:ArrayOfFilm" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetFilmListResult" nillable="true" type="q8:ArrayOfFilm" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -277,7 +289,7 @@
   <xs:element name="GetHallsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetHallsListResult" nillable="true" type="q8:ArrayOfHall" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetHallsListResult" nillable="true" type="q9:ArrayOfHall" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -320,7 +332,7 @@
   <xs:element name="GetAvailablePlacesListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetAvailablePlacesListResult" nillable="true" type="q9:ArrayOfPlace" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetAvailablePlacesListResult" nillable="true" type="q10:ArrayOfPlace" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

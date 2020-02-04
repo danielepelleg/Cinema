@@ -33,7 +33,7 @@ namespace WCFDatabaseManager
 
                     using (SqlDataReader reader = command.ExecuteReader()) {
                         while (reader.Read()) {
-                            if (dateTime == reader.GetDateTime(1) && hallCode == reader.GetInt32(4)) {
+                            if (dateTime == reader.GetDateTime(1) && hallCode == reader.GetInt32(3)) {
                                 return false;
                             }
                         }
@@ -265,6 +265,76 @@ namespace WCFDatabaseManager
                     }
 
                     return new List<Event>() { };
+                }
+            }
+        }
+
+        /*
+         * Get the list containing the Events of the database
+         */
+        public List<Show> GetShowsList()
+        {
+            // Database connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
+            {
+                // Define a new list of Users
+                List<Show> showsList = new List<Show>();
+
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Must assign both transaction object and connection
+                // to Command object for a pending local transaction
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "SELECT * FROM Show;";
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Event e = new Event();
+                            e.EventCode = reader.GetInt32(0);
+                            e.DateTime = reader.GetDateTime(1);
+                            e.HallCode = reader.GetInt32(3);
+                            e.Price = reader.GetDecimal(4);
+
+                            Film f = new Film();
+                            f.Title = reader.GetString(2);
+
+                            showsList.Add(new Show(e, f));
+                        }
+                    }
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    return showsList;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail, such as
+                        // a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return new List<Show>() { };
                 }
             }
         }

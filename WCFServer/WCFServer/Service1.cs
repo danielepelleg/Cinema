@@ -84,6 +84,11 @@ namespace WCFServer
             return serviceEvent.GetEventsList().ToList();
         }
 
+        public List<Show> GetShowsList()
+        {
+            return serviceEvent.GetShowsList().ToList();
+        }
+
         // PRENOTATION METHODS
 
         public bool AddPrenotation(DateTime dateTime, string usernameUser, int eventCode, int placeNumber) {

@@ -54,6 +54,10 @@ namespace WCFServer
         [OperationContract]
         List<Event> GetEventsList();
 
+        [OperationContract]
+        List<Show> GetShowsList();
+
+
         // PRENOTATION METHODS
 
         [OperationContract]

@@ -25,12 +25,11 @@ namespace WCFClient.Pages
              */
             try
             {
-                Output.WriteLine("Choose the event you want to buy the ticket: ");
-                Output.WriteLine("EVENTS LIST: ");
-                TablePrinter.Event(SessionManager.GetServiceClient().GetEventsList());
+                Output.WriteLine("SHOWS LIST: ");
+                TablePrinter.Show(SessionManager.GetServiceClient().GetShowsList());
 
                 DateTime dateTime = DateTime.Now;
-                string event_code = Input.ReadString("\nChoose the code of the event you want to buy the ticket: ");
+                string event_code = Input.ReadString("\nChoose the code of the show you want to buy the ticket: ");
                 int eventCode = Controls.CheckInt(event_code);
                 eventCode = Controls.CheckIntForeignKey(Convert.ToString(eventCode), "Evento");
 

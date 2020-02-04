@@ -121,6 +121,9 @@
     <None Include="Connected Services\ServiceReferenceEvent\WCFServer.ServiceReferenceEvent.Event.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServiceReferenceEvent\WCFServer.ServiceReferenceEvent.Show.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReferenceFilm\item.xsd">
       <SubType>Designer</SubType>
     </None>

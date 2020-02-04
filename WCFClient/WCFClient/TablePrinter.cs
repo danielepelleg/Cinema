@@ -11,10 +11,6 @@ namespace WCFClient
      * TablePrinter Class
      * Draw a console table where storing data.
      * 
-     * The class has 3 attribute. The first stay for the table header, the titles of the columns, 
-     * the second attribute is a List that contains the titles numbers of character for the table creation,
-     * and the third attribute stores the numbers of rows.
-     * 
      * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
      * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
      */
@@ -59,13 +55,13 @@ namespace WCFClient
             {
                 // Create the columns
                 ColumnHeader[] headers = new[] {
-                new ColumnHeader(" # ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" TITLE ", Alignment.Center, Alignment.Center),
-                new ColumnHeader(" YEAR ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" DIRECTION ", Alignment.Center, Alignment.Center),
-                new ColumnHeader(" DURATION ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" RELEASE DATE ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" GENRE ", Alignment.Center, Alignment.Center),
+                new ColumnHeader(" # ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" TITLE ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" YEAR ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" DIRECTION ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" DURATION ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" RELEASE DATE ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" GENRE ", Alignment.Right, Alignment.Center),
             };
                 Table table = new Table(headers);
 
@@ -115,6 +111,38 @@ namespace WCFClient
         }
 
         /*
+         * Draw a table of Events
+         */
+        public static void Show(List<Show> showsList)
+        {
+            if (showsList.Count != 0)
+            {
+                // Create the columns
+                ColumnHeader[] headers = new[] {
+                new ColumnHeader(" # SHOW", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" DATE / TIME ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" FILM TITLE ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" # HALL ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" PRICE ", Alignment.Right, Alignment.Center),
+                };
+                Table table = new Table(headers);
+
+                // Add the row of the table
+                foreach (Show s in showsList)
+                {
+                    table.AddRow(s.Event.EventCode, s.Event.DateTime.ToShortDateString() + " " + s.Event.DateTime.ToShortTimeString(),
+                        s.Film.Title, s.Event.HallCode, s.Event.Price + "€");
+                }
+
+                // Format the table
+                table.Config = TableConfiguration.UnicodeAlt();
+
+                Output.WriteLine(table.ToString());
+            }
+            else Console.WriteLine("There are no Shows in the DataBase!");
+        }
+
+        /*
          * Draw a table of Halls
          */
         public static void Hall(List<Hall> hallsList)
@@ -123,8 +151,8 @@ namespace WCFClient
             {
                 // Create the columns
                 ColumnHeader[] headers = new[] {
-                new ColumnHeader(" HALL ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" CAPACITY ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" HALL ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" CAPACITY ", Alignment.Right, Alignment.Center),
             };
                 Table table = new Table(headers);
 
@@ -238,15 +266,15 @@ namespace WCFClient
             {
                 // Create the columns
                 ColumnHeader[] headers = new[] {
-                new ColumnHeader(" # PRENOTATION ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" PRENOTATION DATE ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" USER ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" # EVENT ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" FILM TITLE ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" EVENT DATE ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" HALL ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" PRICE ", Alignment.Center, Alignment.Right),
-                new ColumnHeader(" PLACE NUMBER ", Alignment.Center, Alignment.Right),
+                new ColumnHeader(" # TICKET ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" PRENOTATION DATE ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" USER ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" # EVENT ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" FILM TITLE ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" EVENT DATE ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" HALL ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" PLACE NUMBER ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" PRICE ", Alignment.Right, Alignment.Center),
             };
                 Table table = new Table(headers);
 
@@ -260,7 +288,7 @@ namespace WCFClient
 
                     table.AddRow(p.PrenotationCode, p.DateTime, p.UsernameUser, p.EventCode,
                         f.Title, e.DateTime.ToShortDateString() + " " + e.DateTime.ToShortTimeString(),
-                        e.HallCode, e.Price + "€", r.PlaceNumber);
+                        e.HallCode, r.PlaceNumber, e.Price + "€");
                 }
 
                 // Format the table

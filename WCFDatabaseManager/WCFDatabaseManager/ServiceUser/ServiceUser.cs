@@ -217,8 +217,8 @@ namespace WCFDatabaseManager
                     command.Parameters.Add("@OldUsername", SqlDbType.VarChar).Value = oldUsername;
                     command.Parameters.Add("@NewUsername", SqlDbType.VarChar).Value = newUsername;
                     command.Parameters.Add("@NewPassword", SqlDbType.VarChar).Value = newPassword;
-                    command.Parameters.Add("@NewName", SqlDbType.VarChar).Value = newName;
-                    command.Parameters.Add("@NewSurname", SqlDbType.VarChar).Value = newSurname;
+                    command.Parameters.Add("@NewNome", SqlDbType.VarChar).Value = newName;
+                    command.Parameters.Add("@NewCognome", SqlDbType.VarChar).Value = newSurname;
                     command.ExecuteNonQuery();
 
                     // Initialize a int value to check if the Stored Procedure success

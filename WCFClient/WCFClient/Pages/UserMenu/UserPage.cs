@@ -13,7 +13,7 @@ namespace WCFClient.Pages
         {
         }
         public override void Display() {
-            Output.WriteLine(ConsoleColor.Yellow, "--------- {0} ---------", base.Title);
+            Output.WriteLine(ConsoleColor.Yellow, "-------== {0} ==-------", base.Title);
             base.Display();
         }
     }

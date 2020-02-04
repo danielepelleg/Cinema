@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.ServiceModel;
 
 namespace WCFDatabaseManager
@@ -24,10 +25,14 @@ namespace WCFDatabaseManager
                 svcHostHall.Open();
                 svcHostPlace.Open();
 
+                
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine(ConfigurationManager.AppSettings["logo"]);
+
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.BackgroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Servizio WCF Database Manager online --- premere un tasto per interrompere...");
-
 
                 Console.ReadLine();
                 Console.WriteLine("Servizio WCF Database Manager interrotto");

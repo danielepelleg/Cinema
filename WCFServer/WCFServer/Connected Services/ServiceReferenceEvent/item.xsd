@@ -45,4 +45,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetShowsList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetShowsListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WCFDatabaseManager" minOccurs="0" name="GetShowsListResult" nillable="true" type="q2:ArrayOfShow" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
