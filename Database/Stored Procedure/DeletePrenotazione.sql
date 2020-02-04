@@ -9,14 +9,6 @@ BEGIN
     WHERE CodicePrenotazione = @CodicePrenotazione
 
 	/*
-	 * Save the last value of the Primary Key and reset
-	 * the Primary Key counters to the last value known.
-	 */
-	declare @maxPrenotation int;  
-	select @maxPrenotation = max(CodicePrenotazione) from Cinema.Prenotazione;  
-	dbcc checkident('Cinema.Prenotazione', reseed, @maxPrenotation);
-
-	/*
 	 * Delete the Reservation
 	 */
 	DELETE Cinema.[Riserva]

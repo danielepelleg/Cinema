@@ -3,7 +3,7 @@
       @Codice_Film int,
 	  @Codice_Sala int,
       @Username_Admin varchar(30),
-	  @Prezzo decimal,
+	  @Prezzo decimal (3, 2),
 	  @CodiceEvento int output
 AS
 BEGIN

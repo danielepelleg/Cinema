@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE Cinema.[AddNewRiserva]
-      @Codice_Prenotazione int,
-	  @Numero_Posto int
+		@Numero_Posto int,
+		@Codice_Prenotazione int
+	  
 AS
 BEGIN
       SET NOCOUNT ON;
