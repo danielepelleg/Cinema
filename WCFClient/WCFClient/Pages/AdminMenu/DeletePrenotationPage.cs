@@ -33,8 +33,7 @@ namespace WCFClient.Pages
                      */
                     Output.WriteLine("\n------ DELETE PRENOTATION ------- ");
                     string prenotation_code = Input.ReadString("Insert the Code of the Prenotation to delete: ");
-                    int prenotation_Code = Controls.CheckInt(prenotation_code);
-                    int prenotationCode = Controls.CheckIntForeignKey(prenotation_Code.ToString(), "Prenotazione");
+                    int prenotationCode = Controls.CheckIntForeignKey(prenotation_code, "Prenotazione");
 
                     /*
                      * Send data to Database

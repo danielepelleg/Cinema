@@ -307,18 +307,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CheckFK">
+  <xs:element name="CheckIntFK">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="value" type="xs:int" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="valueType" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CheckFKResponse">
+  <xs:element name="CheckIntFKResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CheckFKResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="CheckIntFKResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

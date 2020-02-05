@@ -38,8 +38,7 @@ namespace WCFClient.Pages
                      */
                     Output.WriteLine("\n------ DELETE EVENT ------- ");
                     string event_code = Input.ReadString("Insert the Code of the Event to delete: ");
-                    int event_Code = Controls.CheckInt(event_code);
-                    int eventCode = Controls.CheckIntForeignKey(event_Code.ToString(), "Evento");
+                    int eventCode = Controls.CheckIntForeignKey(event_code.ToString(), "Evento");
 
                     /*
                      * Send data to Database

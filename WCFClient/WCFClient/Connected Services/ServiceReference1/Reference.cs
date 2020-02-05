@@ -930,11 +930,11 @@ namespace WCFClient.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DrawHall", ReplyAction="http://tempuri.org/IService1/DrawHallResponse")]
         System.Threading.Tasks.Task<string> DrawHallAsync(int eventCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckFK", ReplyAction="http://tempuri.org/IService1/CheckFKResponse")]
-        bool CheckFK(int value, string valueType);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckIntFK", ReplyAction="http://tempuri.org/IService1/CheckIntFKResponse")]
+        bool CheckIntFK(string value, string valueType);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckFK", ReplyAction="http://tempuri.org/IService1/CheckFKResponse")]
-        System.Threading.Tasks.Task<bool> CheckFKAsync(int value, string valueType);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckIntFK", ReplyAction="http://tempuri.org/IService1/CheckIntFKResponse")]
+        System.Threading.Tasks.Task<bool> CheckIntFKAsync(string value, string valueType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAvailablePlacesList", ReplyAction="http://tempuri.org/IService1/GetAvailablePlacesListResponse")]
         System.Collections.Generic.List<WCFClient.ServiceReference1.Place> GetAvailablePlacesList(int eventCode);
@@ -1144,12 +1144,12 @@ namespace WCFClient.ServiceReference1 {
             return base.Channel.DrawHallAsync(eventCode);
         }
         
-        public bool CheckFK(int value, string valueType) {
-            return base.Channel.CheckFK(value, valueType);
+        public bool CheckIntFK(string value, string valueType) {
+            return base.Channel.CheckIntFK(value, valueType);
         }
         
-        public System.Threading.Tasks.Task<bool> CheckFKAsync(int value, string valueType) {
-            return base.Channel.CheckFKAsync(value, valueType);
+        public System.Threading.Tasks.Task<bool> CheckIntFKAsync(string value, string valueType) {
+            return base.Channel.CheckIntFKAsync(value, valueType);
         }
         
         public System.Collections.Generic.List<WCFClient.ServiceReference1.Place> GetAvailablePlacesList(int eventCode) {

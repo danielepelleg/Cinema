@@ -121,8 +121,8 @@ namespace WCFServer
 
         // PLACE METHODS
 
-        public bool CheckFK(int value, string valueType) {
-            return servicePlace.CheckFK(value, valueType);
+        public bool CheckIntFK(string value, string valueType) {
+            return servicePlace.CheckIntFK(value, valueType);
         }
 
         public List<Place> GetAvailablePlacesList(int eventCode) {

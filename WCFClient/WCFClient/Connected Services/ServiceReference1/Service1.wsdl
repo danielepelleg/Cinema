@@ -133,11 +133,11 @@
   <wsdl:message name="IService1_DrawHall_OutputMessage">
     <wsdl:part name="parameters" element="tns:DrawHallResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_CheckFK_InputMessage">
-    <wsdl:part name="parameters" element="tns:CheckFK" />
+  <wsdl:message name="IService1_CheckIntFK_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckIntFK" />
   </wsdl:message>
-  <wsdl:message name="IService1_CheckFK_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CheckFKResponse" />
+  <wsdl:message name="IService1_CheckIntFK_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckIntFKResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetAvailablePlacesList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAvailablePlacesList" />
@@ -236,9 +236,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DrawHall" message="tns:IService1_DrawHall_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DrawHallResponse" message="tns:IService1_DrawHall_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CheckFK">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckFK" message="tns:IService1_CheckFK_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckFKResponse" message="tns:IService1_CheckFK_OutputMessage" />
+    <wsdl:operation name="CheckIntFK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckIntFK" message="tns:IService1_CheckIntFK_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckIntFKResponse" message="tns:IService1_CheckIntFK_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAvailablePlacesList">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAvailablePlacesList" message="tns:IService1_GetAvailablePlacesList_InputMessage" />
@@ -440,8 +440,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CheckFK">
-      <soap:operation soapAction="http://tempuri.org/IService1/CheckFK" style="document" />
+    <wsdl:operation name="CheckIntFK">
+      <soap:operation soapAction="http://tempuri.org/IService1/CheckIntFK" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

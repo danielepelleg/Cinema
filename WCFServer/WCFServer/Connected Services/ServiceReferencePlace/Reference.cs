@@ -78,11 +78,11 @@ namespace WCFServer.ServiceReferencePlace {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferencePlace.IServicePlace")]
     public interface IServicePlace {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/CheckFK", ReplyAction="http://tempuri.org/IServicePlace/CheckFKResponse")]
-        bool CheckFK(int value, string valueType);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/CheckIntFK", ReplyAction="http://tempuri.org/IServicePlace/CheckIntFKResponse")]
+        bool CheckIntFK(string value, string valueType);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/CheckFK", ReplyAction="http://tempuri.org/IServicePlace/CheckFKResponse")]
-        System.Threading.Tasks.Task<bool> CheckFKAsync(int value, string valueType);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/CheckIntFK", ReplyAction="http://tempuri.org/IServicePlace/CheckIntFKResponse")]
+        System.Threading.Tasks.Task<bool> CheckIntFKAsync(string value, string valueType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePlace/GetAvailablePlacesList", ReplyAction="http://tempuri.org/IServicePlace/GetAvailablePlacesListResponse")]
         WCFServer.ServiceReferencePlace.Place[] GetAvailablePlacesList(int eventCode);
@@ -124,12 +124,12 @@ namespace WCFServer.ServiceReferencePlace {
                 base(binding, remoteAddress) {
         }
         
-        public bool CheckFK(int value, string valueType) {
-            return base.Channel.CheckFK(value, valueType);
+        public bool CheckIntFK(string value, string valueType) {
+            return base.Channel.CheckIntFK(value, valueType);
         }
         
-        public System.Threading.Tasks.Task<bool> CheckFKAsync(int value, string valueType) {
-            return base.Channel.CheckFKAsync(value, valueType);
+        public System.Threading.Tasks.Task<bool> CheckIntFKAsync(string value, string valueType) {
+            return base.Channel.CheckIntFKAsync(value, valueType);
         }
         
         public WCFServer.ServiceReferencePlace.Place[] GetAvailablePlacesList(int eventCode) {

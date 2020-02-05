@@ -74,7 +74,7 @@ namespace WCFClient.Pages
              * Navigate back
              */
             Input.ReadString("Press [Enter] to navigate back");
-            Program.NavigateTo<MainPage>();
+            Program.NavigateHome();
         }
     }
 }

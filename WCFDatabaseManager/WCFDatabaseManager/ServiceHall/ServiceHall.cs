@@ -23,8 +23,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
 
@@ -53,8 +52,7 @@ namespace WCFDatabaseManager
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
@@ -81,8 +79,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
 
@@ -111,7 +108,7 @@ namespace WCFDatabaseManager
                             break;
                         case 3:
                             drawHall = "    \n________________________________\n\\______________________________/\n\n   | 1 | 2 | 3 | 4 | 5 | 6 |\n" +
-                                "      | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n   | 25| 26| 27| 28| 29| 30|\n";
+                                "   | 7 | 8 | 9 | 10| 11| 12|\n   | 13| 14| 15| 16| 17| 18|\n   | 19| 20| 21| 22| 23| 24|\n   | 25| 26| 27| 28| 29| 30|\n";
                             break;
                         default:
                             drawHall = "Hall not found.";
@@ -129,8 +126,7 @@ namespace WCFDatabaseManager
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }

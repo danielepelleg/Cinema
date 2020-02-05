@@ -21,8 +21,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
                 try {
@@ -47,7 +46,8 @@ namespace WCFDatabaseManager
                     if (result > 0) return true;
                     else {
                         command.Parameters.Clear();
-                        throw new Exception("Errore: si è verificato un problema nell'aggiungere una Persona nel DB");
+                        //throw new Exception("Errore: si è verificato un problema nell'aggiungere una Persona nel DB");
+                        return false;
                     }
                 }
                 catch (SqlException ex) { 
@@ -60,8 +60,7 @@ namespace WCFDatabaseManager
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
@@ -85,8 +84,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
                 try {
@@ -119,8 +117,7 @@ namespace WCFDatabaseManager
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
@@ -143,8 +140,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
                 try {
@@ -166,7 +162,8 @@ namespace WCFDatabaseManager
                     else
                     {
                         command.Parameters.Clear();
-                        throw new Exception("Errore: si è verificato un problema nell'eliminare un Utente dal DB");
+                        //throw new Exception("Errore: si è verificato un problema nell'eliminare un Utente dal DB");
+                        return false;
                     }
                 }
                 catch (SqlException ex)  { 
@@ -179,8 +176,7 @@ namespace WCFDatabaseManager
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
@@ -205,8 +201,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
                 try
@@ -233,7 +228,8 @@ namespace WCFDatabaseManager
                     else
                     {
                         command.Parameters.Clear();
-                        throw new Exception("Errore: si è verificato un problema nell'aggiornare un Utente del DB");
+                        //throw new Exception("Errore: si è verificato un problema nell'aggiornare un Utente del DB");
+                        return false;
                     }
                 }
                 catch (SqlException ex)
@@ -249,8 +245,7 @@ namespace WCFDatabaseManager
                     catch (Exception ex2)
                     {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
@@ -271,8 +266,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
                 try {
@@ -310,8 +304,7 @@ namespace WCFDatabaseManager
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
@@ -336,8 +329,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
 
@@ -369,8 +361,7 @@ namespace WCFDatabaseManager
                     }
                     catch (Exception ex2) {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
@@ -396,8 +387,7 @@ namespace WCFDatabaseManager
                 SqlTransaction transaction = connection.BeginTransaction();
                 SqlCommand command = connection.CreateCommand();
 
-                // Must assign both transaction object and connection
-                // to Command object for a pending local transaction
+                // Assign both transaction object and connection to Command object
                 command.Connection = connection;
                 command.Transaction = transaction;
 
@@ -427,8 +417,7 @@ namespace WCFDatabaseManager
                     catch (Exception ex2)
                     {
                         // This catch block will handle any errors that may have occurred
-                        // on the server that would cause the rollback to fail, such as
-                        // a closed connection.
+                        // on the server that would cause the rollback to fail 
                         Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
                         Console.WriteLine("  Message: {0}", ex2.Message);
                     }
