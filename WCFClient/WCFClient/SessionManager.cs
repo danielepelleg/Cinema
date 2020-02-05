@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using WCFClient.ServiceReference1;
 
 namespace WCFClient

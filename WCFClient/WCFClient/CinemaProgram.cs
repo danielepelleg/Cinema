@@ -1,7 +1,7 @@
 ﻿using WCFClient.Pages;
 using EasyConsole;
 
-namespace Cinema
+namespace WCFClient
 {
     class CinemaProgram : Program
     {

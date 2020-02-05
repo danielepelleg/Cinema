@@ -26,12 +26,11 @@ namespace WCFDatabaseManager
                 svcHostPlace.Open();
 
                 
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.BackgroundColor = ConsoleColor.Black;
+                Console.Clear();
                 Console.WriteLine(ConfigurationManager.AppSettings["logo"]);
-
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                
                 Console.WriteLine("Servizio WCF Database Manager online --- premere un tasto per interrompere...");
 
                 Console.ReadLine();

@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Senza titolo-1.ico</ApplicationIcon>
+    <ApplicationIcon>icon3.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -73,7 +73,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Senza titolo-1.ico" />
+    <Content Include="icon.ico" />
+    <Content Include="icon2.ico" />
+    <Content Include="icon3.ico" />
+    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\logo.txt" />
+    <Content Include="Resources\mainframe.ico" />
+    <Content Include="Resources\icon.ico" />
+    <Content Include="Resources\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

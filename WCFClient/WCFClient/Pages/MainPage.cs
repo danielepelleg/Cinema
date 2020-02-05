@@ -10,7 +10,7 @@ namespace WCFClient.Pages
     class MainPage : MenuPage
     {
         public MainPage(Program program)
-            :base("Main Page", program,
+            :base(" Main Page ", program,
                  new Option("Registrazione", () => program.NavigateTo<RegistrationPage>()),
                  new Option("Login", () => program.NavigateTo<LoginPage>()))
         {
