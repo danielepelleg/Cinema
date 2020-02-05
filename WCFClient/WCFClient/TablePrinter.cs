@@ -170,7 +170,7 @@ namespace WCFClient
         }
 
         /*
-         * Draw a table of Halls
+         * Draw a table of Places
          */
         public static void Place(List<Place> placesList)
         {
@@ -197,7 +197,7 @@ namespace WCFClient
         }
 
         /*
-         * Draw a table of Halls
+         * Draw a table of Available Places
          */
         public static void PlaceNumber(List<Place> placesList)
         {
@@ -225,7 +225,7 @@ namespace WCFClient
                 table.Config = TableConfiguration.MySqlSimple();
 
                 Output.WriteLine(table.ToString());
-            } else Console.WriteLine("There are no Places in the DataBase!");
+            } else Console.WriteLine("There are no Available Places in the DataBase!");
         }
 
         /*

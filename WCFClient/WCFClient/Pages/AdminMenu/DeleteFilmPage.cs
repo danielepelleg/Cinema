@@ -37,8 +37,8 @@ namespace WCFClient.Pages
                      */
                     Output.WriteLine("\n------ DELETE FILM ------- ");
                     string film_code = Input.ReadString("Insert the Code of the Film to delete: ");
-                    int filmCode = Controls.CheckInt(film_code);
-                    filmCode = Controls.CheckIntForeignKey(filmCode.ToString(), "Film");
+                    int film_Code = Controls.CheckInt(film_code);
+                    int filmCode = Controls.CheckIntForeignKey(film_Code.ToString(), "Film");
 
                     /*
                      * Send data to Database

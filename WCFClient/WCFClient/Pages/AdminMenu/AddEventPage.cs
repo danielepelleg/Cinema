@@ -33,11 +33,11 @@ namespace WCFClient.Pages
                 string date_time = Input.ReadString("Data and Time of the Event: ");
                 DateTime dateTime = Controls.CheckDate(date_time);
                 string film_code = Input.ReadString("Code of the Film: ");
-                int filmCode = Controls.CheckInt(film_code);
-                filmCode = Controls.CheckIntForeignKey(filmCode.ToString(), "Film");
+                int film_Code = Controls.CheckInt(film_code);
+                int filmCode = Controls.CheckIntForeignKey(film_Code.ToString(), "Film");
                 string hall_code = Input.ReadString("Hall code of the Event: ");
-                int hallCode = Controls.CheckInt(hall_code);
-                hallCode = Controls.CheckIntForeignKey(hallCode.ToString(), "Sala");
+                int hall_Code = Controls.CheckInt(hall_code);
+                int hallCode = Controls.CheckIntForeignKey(hall_Code.ToString(), "Sala");
                 string _price = Input.ReadString("Insert the Price (ex: 8,50): ");
                 decimal price = Controls.CheckDecimal(_price);
                 

@@ -25,39 +25,44 @@ namespace WCFClient.Pages
              */
             try
             {
-                Output.WriteLine("SHOWS LIST: ");
-                TablePrinter.Show(SessionManager.GetServiceClient().GetShowsList());
+                if (SessionManager.GetServiceClient().GetShowsList().Count != 0) {
+                    Output.WriteLine("SHOWS LIST: ");
+                    TablePrinter.Show(SessionManager.GetServiceClient().GetShowsList());
 
-                DateTime dateTime = DateTime.Now;
-                string event_code = Input.ReadString("\nChoose the code of the show you want to buy the ticket: ");
-                int eventCode = Controls.CheckInt(event_code);
-                eventCode = Controls.CheckIntForeignKey(Convert.ToString(eventCode), "Evento");
+                    DateTime dateTime = DateTime.Now;
+                    string event_code = Input.ReadString("\nChoose the code of the show you want to buy the ticket: ");
+                    int event_Code = Controls.CheckInt(event_code);
+                    int eventCode = Controls.CheckIntForeignKey(Convert.ToString(event_Code), "Evento");
 
-                /*
-                 * Show the User the Hall
-                 */
-                Output.WriteLine("Places in the Hall:\n{0}", 
-                    SessionManager.GetServiceClient().DrawHall(eventCode));
+                    /*
+                     * Show the User the Hall
+                     */
+                    Output.WriteLine("Places in the Hall:\n{0}",
+                        SessionManager.GetServiceClient().DrawHall(eventCode));
 
-                /*
-                 * Show the User the available Places
-                 */
-                Output.WriteLine("Available Places:");
-                TablePrinter.PlaceNumber(SessionManager.GetServiceClient().GetAvailablePlacesList(eventCode));
+                    /*
+                     * Show the User the available Places
+                     */
+                    Output.WriteLine("Available Places:");
+                    TablePrinter.PlaceNumber(SessionManager.GetServiceClient().GetAvailablePlacesList(eventCode));
 
-                /*
-                 * Let the User choose the place to buy
-                 */
-                string place_number = Input.ReadString("Choose the place you want to buy: ");
-                int placeNumber = Controls.CheckInt(place_number);
-                placeNumber = Controls.CheckPlace(eventCode.ToString(), placeNumber.ToString());
+                    /*
+                     * Let the User choose the place to buy
+                     */
+                    string place_number = Input.ReadString("Choose the place you want to buy: ");
+                    int place_Number = Controls.CheckInt(place_number);
+                    int placeNumber = Controls.CheckPlace(eventCode.ToString(), place_Number.ToString());
 
-                /*
-                 * Add a New Prenotation
-                 */
-                if (SessionManager.GetServiceClient().AddPrenotation(dateTime, SessionManager.GetUser().Username, eventCode, placeNumber))
-                    Output.WriteLine("\nYour Prenotation request success!");
-                else Output.WriteLine("\nPrenotation request failed! Retry!");
+                    /*
+                     * Add a New Prenotation
+                     */
+                    if (SessionManager.GetServiceClient().AddPrenotation(dateTime, SessionManager.GetUser().Username, eventCode, placeNumber)) { 
+                        Output.WriteLine("\nYour Prenotation request success!");
+                    }
+                    else Output.WriteLine("\nPrenotation request failed! Retry!");
+
+                }
+                else Console.WriteLine("There are no Shows in the DB!\n");
             }
             catch (Exception ex)
             {

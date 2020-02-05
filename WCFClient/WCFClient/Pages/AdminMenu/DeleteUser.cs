@@ -33,9 +33,8 @@ namespace WCFClient.Pages
                      */
                     Output.WriteLine("\n------ DELETE USER ------- ");
                     string username = Input.ReadString("Insert the Username of the User to delete: ");
-                    username = Controls.CheckUserInput("Username", username);
-                    username = Controls.CheckStringForeignKey(username, "UtenteFree");
-
+                    string Username = Controls.CheckStringForeignKey(username, "UtenteFree");
+                    
                     /*
                      * Send data to Database
                      */

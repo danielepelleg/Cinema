@@ -143,12 +143,14 @@ namespace WCFClient
          */
         public static int CheckIntForeignKey(string value, string valueType)
         {
+            int result = 0;
             while (!SessionManager.GetServiceClient().CheckFK(Convert.ToInt32(value), valueType))
             {
                 Console.WriteLine("{0} non presente. \nInserire un valore accettabile!\nRiprovare: ", valueType);
                 value = Console.ReadLine();
+                result = CheckInt(value);
             }
-            return Convert.ToInt32(value);
+            return result;
         }
 
         /*
@@ -160,6 +162,7 @@ namespace WCFClient
             {
                 Console.WriteLine("{0} non presente. \nInserire un valore accettabile!\nRiprovare: ", valueType);
                 value = Console.ReadLine();
+                
             }
             return value;
         }
