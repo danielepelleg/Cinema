@@ -42,12 +42,12 @@ namespace WCFClient
             Service1Client wcfClient = new Service1Client();
             try {
                 //Check if the Database Manager is reacheable
-                if (wcfClient.CheckConnection()) 
-                {
+                if (wcfClient.CheckConnection())
                     return wcfClient;
-                }
-                else {
-                    Console.WriteLine("\n\nConnection Error! Database Server Manager Unreacheable!");
+                if (!wcfClient.CheckConnection()) {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\n\nConnection Error! Database Manager Unreacheable!");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
             catch {

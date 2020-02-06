@@ -256,9 +256,10 @@ namespace WCFClient
         /*
          * Error message when Server is not available
          */ 
-        public static void ErrorMessage()
-        {
-            Console.WriteLine("\n\nConnection Error!");
+        public static void ErrorMessage() {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n\nConnection Error! Server Unreacheable!");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
