@@ -46,7 +46,6 @@ namespace WCFDatabaseManager
                     if (result > 0) return true;
                     else {
                         command.Parameters.Clear();
-                        //throw new Exception("Errore: si è verificato un problema nell'aggiungere una Persona nel DB");
                         return false;
                     }
                 }
@@ -162,7 +161,6 @@ namespace WCFDatabaseManager
                     else
                     {
                         command.Parameters.Clear();
-                        //throw new Exception("Errore: si è verificato un problema nell'eliminare un Utente dal DB");
                         return false;
                     }
                 }
@@ -228,7 +226,6 @@ namespace WCFDatabaseManager
                     else
                     {
                         command.Parameters.Clear();
-                        //throw new Exception("Errore: si è verificato un problema nell'aggiornare un Utente del DB");
                         return false;
                     }
                 }

@@ -62,7 +62,6 @@ namespace WCFDatabaseManager
                     if (returnParameter.Direction > 0) return true;
                     else {
                         command.Parameters.Clear();
-                        //throw new Exception("Error: There is a problem adding the Event into the DB!");
                         return false;
                     }
                 }
@@ -120,7 +119,6 @@ namespace WCFDatabaseManager
                     if (returnParameter.Direction > 0) return true;
                     else {
                         command.Parameters.Clear();
-                        //throw new Exception("Errore: si è verificato un problema nell'eliminare un Evento dal DB");
                         return false;
                     }
 

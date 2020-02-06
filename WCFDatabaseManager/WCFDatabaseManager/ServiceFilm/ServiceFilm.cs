@@ -48,7 +48,6 @@ namespace WCFDatabaseManager
                     if (returnParameter.Direction > 0) return true;
                     else  {
                         command.Parameters.Clear();
-                        //throw new Exception("Errore: si è verificato un problema nell'aggiungere un Film nel DB");
                         return false;
                     }
                 }
@@ -109,7 +108,6 @@ namespace WCFDatabaseManager
                     if (returnParameter.Direction > 0) return true;
                     else {
                         command.Parameters.Clear();
-                        //throw new Exception("Errore: there was a problem removing the Movie!");
                         return false;
                     }
                 }

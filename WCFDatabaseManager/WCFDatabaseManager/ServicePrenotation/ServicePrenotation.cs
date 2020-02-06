@@ -64,7 +64,6 @@ namespace WCFDatabaseManager
                     if (returnParameter1.Direction > 0 && returnParameter2.Direction > 0) return true;
                     else {
                         command.Parameters.Clear();
-                        //throw new Exception("Errore: si è verificato un problema nell'aggiungere un Evento nel DB");
                         return false;
                     }
                 }
@@ -128,7 +127,6 @@ namespace WCFDatabaseManager
                     else
                     {
                         command.Parameters.Clear();
-                        //throw new Exception("Errore: si è verificato un problema nell'eliminare una Prenotazione e una Riserva dal DB");
                         return false;
                     }
 
