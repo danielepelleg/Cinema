@@ -30,7 +30,9 @@ namespace WCFServer
                 return serviceUser.Registration(isAdmin, username, password, name, surname);
             }
             catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -40,8 +42,10 @@ namespace WCFServer
             {
                 return serviceUser.Login(isAdmin, username, password);
             }
-            catch {             
+            catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -52,7 +56,9 @@ namespace WCFServer
                 return serviceUser.DeleteUser(username);
             }
             catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -63,7 +69,9 @@ namespace WCFServer
                 return serviceUser.EditUser(oldUsername, newUsername, newPassword, newName, newSurname);
             }
             catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
 
@@ -76,7 +84,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -88,7 +98,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -100,7 +112,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -113,7 +127,9 @@ namespace WCFServer
                 return serviceFilm.AddFilm(title, year, direction, duration, releaseDate, genre);
             }
             catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -125,7 +141,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -137,7 +155,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -149,7 +169,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -163,7 +185,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -175,7 +199,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -187,7 +213,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -200,7 +228,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -214,7 +244,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -226,7 +258,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -239,7 +273,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -252,7 +288,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -266,7 +304,9 @@ namespace WCFServer
             }
             catch
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
         }
@@ -277,7 +317,9 @@ namespace WCFServer
                 return serviceHall.DrawHall(eventCode);
             }
             catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return "Error!";
         }
@@ -290,7 +332,9 @@ namespace WCFServer
                 return servicePlace.CheckIntFK(value, valueType);
             }
             catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
             
@@ -302,7 +346,9 @@ namespace WCFServer
                 return servicePlace.GetAvailablePlacesList(eventCode).ToList();
             }
             catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return null;
             
@@ -313,7 +359,9 @@ namespace WCFServer
                 return servicePlace.CheckPlace(eventCode, placeNumber);
             }
             catch {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             return false;
         }
@@ -330,8 +378,5 @@ namespace WCFServer
                 return false;
             }
         }
-
-
-
     }
 }
