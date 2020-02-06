@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon3.ico</ApplicationIcon>
+    <ApplicationIcon>icon2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -51,6 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Event.cs" />
+    <Compile Include="Classes\Film.cs" />
+    <Compile Include="Classes\Hall.cs" />
+    <Compile Include="Classes\Place.cs" />
+    <Compile Include="Classes\Prenotation.cs" />
+    <Compile Include="Classes\Reservation.cs" />
+    <Compile Include="Classes\User.cs" />
     <Compile Include="DatabaseHandler.cs" />
     <Compile Include="ServicePlace\IServicePlace.cs" />
     <Compile Include="ServiceHall\IServiceHall.cs" />
@@ -73,7 +80,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon.ico" />
     <Content Include="icon2.ico" />
     <Content Include="icon3.ico" />
     <Content Include="Resources\logo.png" />

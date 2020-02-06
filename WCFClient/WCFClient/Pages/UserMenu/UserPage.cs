@@ -13,8 +13,13 @@ namespace WCFClient.Pages
         {
         }
         public override void Display() {
-            Output.WriteLine(ConsoleColor.Yellow, "-------== {0} ==-------", base.Title);
+            Console.BackgroundColor = ConsoleColor.DarkMagenta;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------", base.Title);
+            Output.WriteLine(ConsoleColor.White, "\n | User: {0} \n", SessionManager.GetUser().Username);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
             base.Display();
+            
         }
     }
 }

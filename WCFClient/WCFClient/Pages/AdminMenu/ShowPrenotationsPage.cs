@@ -16,6 +16,10 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
+
             /*
              * Get data from the Database
              */

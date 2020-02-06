@@ -6,7 +6,7 @@ namespace WCFClient.Pages
     class AddFilm : Page
     {
         public AddFilm(Program program)
-            : base("Add new Film", program)
+            : base("Add New Film", program)
         {
         }
 
@@ -14,15 +14,22 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
+
             try
             {
-            /* 
-             * Add Film Form
-             * 
-             * Every input must be valid and checked.
-             */
+                /* 
+                 * Add Film Form
+                 * 
+                 * Every input must be valid and checked.
+                 */
                 Output.WriteLine("------ ADD NEW FILM ------- ");
                 string title = Input.ReadString("Title (max 50 characters): ");
+                // Navigate back if User type "\\" on first input
+                if (title.Contains("\\"))
+                    Program.NavigateBack();
                 title = Controls.CheckFilm("Titolo", title);
                 string _year = Input.ReadString("Year: ");
                 int year = Controls.CheckInt(_year);

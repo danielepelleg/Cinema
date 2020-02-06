@@ -24,7 +24,10 @@ namespace WCFClient.Pages
 
         public override void Display()
         {
-            Output.WriteLine(ConsoleColor.Blue, "-------== {0} ==-------", base.Title);
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Output.WriteLine(ConsoleColor.White, "\n | Admin: {0} \n", SessionManager.GetUser().Username);
             base.Display();
         }
     }

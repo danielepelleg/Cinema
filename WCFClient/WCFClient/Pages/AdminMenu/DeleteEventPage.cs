@@ -14,6 +14,10 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
+
             /*
              * Change output encoding to allow special 
              * characters output such as € 
@@ -38,6 +42,9 @@ namespace WCFClient.Pages
                      */
                     Output.WriteLine("\n------ DELETE EVENT ------- ");
                     string event_code = Input.ReadString("Insert the Code of the Event to delete: ");
+                    // Navigate back if User type "\\" on first input
+                    if (event_code.Contains("\\"))
+                        Program.NavigateBack();
                     int eventCode = Controls.CheckIntForeignKey(event_code.ToString(), "Evento");
 
                     /*

@@ -25,40 +25,6 @@ namespace WCFDatabaseManager
     }
 
     /*
-     * User Class
-     * Store User objects of the database
-     */
-    [DataContract]
-    public class Event
-    {
-        [DataMember]
-        public int EventCode { get; set; }
-        [DataMember]
-        public DateTime DateTime { get; set; }
-        [DataMember]
-        public int FilmCode { get; set; }
-        [DataMember]
-        public int HallCode { get; set; }
-        [DataMember]
-        public string UsernameAdmin { get; set; }
-        [DataMember]
-        public decimal Price { get; set; }
-
-        public Event() { }
-
-        public Event(int eventCode, DateTime dateTime, int filmCode,  int hallCode, string usernameAdmin, decimal price)
-        {
-            EventCode = eventCode;
-            DateTime = dateTime;
-            FilmCode = filmCode;
-            HallCode = hallCode;
-            UsernameAdmin = usernameAdmin;
-            FilmCode = filmCode;
-            Price = price;
-        }
-    }
-
-    /*
      * Ticket Struct
      * Store Prenotation, Event, Film and Reservation objects 
      * as a Ticket for a User searching his event prenotations

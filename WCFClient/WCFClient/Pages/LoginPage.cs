@@ -23,6 +23,8 @@ namespace WCFClient.Pages
              * Choose the type of Login (User - Admin)
              */
             UserType input = Input.ReadEnum<UserType>("Select the type of user you want to login: ");
+            if (input.Equals(UserType.Back))
+                Program.NavigateHome();
             SessionManager.SetAdmin(input);
             Output.WriteLine(ConsoleColor.Green, "\n{0} Login: ", input);
 
@@ -34,6 +36,9 @@ namespace WCFClient.Pages
              */
             Output.WriteLine("--------- LOGIN ----------");
             string username = Input.ReadString("Username: ");
+            // Navigate back if User type "\\" on first input
+            if (username.Contains("\\"))
+                Program.NavigateBack();
             username = Controls.CheckUserInput("Username", username);
             Console.Write("Password: ");
             string password = Controls.InputPassword();
@@ -57,11 +62,12 @@ namespace WCFClient.Pages
             /*
              * Go to the Menu
              */
-            if (SessionManager.GetUser() != null) {                   // Check Login
+            if (SessionManager.GetUser() != null) {                         // Check Login
                 Output.WriteLine("\nLogin Successful");
                 Input.ReadString("Press [Enter] to navigate to your menu");
                 switch (SessionManager.IsAdmin()){                          // Check User Type
-                    case true: Program.NavigateTo<AdminPage>();
+                    case true:
+                        Program.NavigateTo<AdminPage>();
                         break;
                     case false:
                         Program.NavigateTo<UserPage>();

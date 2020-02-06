@@ -6,13 +6,17 @@ namespace WCFClient.Pages
     class AddEvent : Page
     {
         public AddEvent(Program program)
-            : base("Add new Event", program)
+            : base("Add New Event", program)
         {
         }
 
         public override void Display()
         {
             base.Display();
+
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
 
             try
             {
@@ -34,6 +38,9 @@ namespace WCFClient.Pages
                  */
                 Output.WriteLine("------ ADD NEW EVENT ------- ");
                 string date_time = Input.ReadString("Data and Time of the Event: ");
+                // Navigate back if User type "\\" on first input
+                if (date_time.Contains("\\"))
+                    Program.NavigateBack();
                 DateTime dateTime = Controls.CheckDate(date_time);
                 string film_code = Input.ReadString("Code of the Film: ");
                 int filmCode = Controls.CheckIntForeignKey(film_code, "Film");

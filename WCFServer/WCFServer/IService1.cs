@@ -43,6 +43,7 @@ namespace WCFServer
         [OperationContract]
         bool CheckStringFK(string value, string valueType);
 
+
         // EVENTS METHODS
 
         [OperationContract]
@@ -72,6 +73,7 @@ namespace WCFServer
         [OperationContract]
         List<Ticket> GetTicketsList(string username);       
 
+
         // FILM METHODS
 
         [OperationContract]
@@ -86,6 +88,7 @@ namespace WCFServer
         [OperationContract]
         List<Film> GetFilmList();
 
+
         // HALL METHODS
 
         [OperationContract]
@@ -93,6 +96,7 @@ namespace WCFServer
 
         [OperationContract]
         string DrawHall(int eventCode);
+
 
         // PLACE METHODS 
 

@@ -14,6 +14,10 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
+
             /*
              * Change output encoding to allow special 
              * characters output such as € 
@@ -37,6 +41,9 @@ namespace WCFClient.Pages
                      */
                     Output.WriteLine("\n------ DELETE FILM ------- ");
                     string film_code = Input.ReadString("Insert the Code of the Film to delete: ");
+                    // Navigate back if User type "\\" on first input
+                    if (film_code.Contains("\\"))
+                        Program.NavigateBack();
                     int filmCode = Controls.CheckIntForeignKey(film_code, "Film");
 
                     /*

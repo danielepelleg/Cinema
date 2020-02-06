@@ -14,6 +14,11 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+
             /*
              * Change output encoding to allow special 
              * characters output such as € 
@@ -31,6 +36,9 @@ namespace WCFClient.Pages
 
                     DateTime dateTime = DateTime.Now;
                     string event_code = Input.ReadString("\nChoose the code of the show you want to buy the ticket: ");
+                    // Navigate back if User type "\\" on first input
+                    if (event_code.Contains("\\"))
+                        Program.NavigateBack();
                     int eventCode = Controls.CheckIntForeignKey(event_code, "Evento");
 
                     /*

@@ -6,13 +6,18 @@ namespace WCFClient.Pages
     class ShowUserTickets : Page
     {
         public ShowUserTickets(Program program)
-            : base("Show User Tickets", program)
+            : base("My Tickets", program)
         {
         }
 
         public override void Display()
         {
             base.Display();
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            
 
             /*
              * Change output encoding to allow special 
@@ -25,7 +30,7 @@ namespace WCFClient.Pages
              */
             try
             {
-                Output.WriteLine("{0} TICKETS: ", SessionManager.GetUser().Username);
+                Output.WriteLine("{0} Tickets: ", SessionManager.GetUser().Username);
                 TablePrinter.Ticket(SessionManager.GetServiceClient().GetTicketsList(SessionManager.GetUser().Username));
             }
             catch (Exception ex)

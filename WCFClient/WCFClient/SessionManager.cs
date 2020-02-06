@@ -17,8 +17,10 @@ namespace WCFClient
         // Store the logged user
         private static User user = null;
 
+        // Set the bool value for User's privilege
         private static bool admin;
 
+        // Reset the User when Logout
         public static void Reset() {
             user = null;
         }
@@ -36,13 +38,13 @@ namespace WCFClient
          * Connect to WCFServer.
          * @return the Service1Client
          */
-        public static Service1Client Connect() {              // TODO Fix Exception when 
-            Service1Client wcfClient = new Service1Client();  // Server not available
+        public static Service1Client Connect() {              
+            Service1Client wcfClient = new Service1Client();
             try {
                 wcfClient.GetFilmList();
             }
-            catch (Exception ex) {
-                Console.WriteLine("\nConnection Error! Server Unreacheable!");
+            catch {
+                Controls.ErrorMessage();
             }
             return wcfClient;
         }

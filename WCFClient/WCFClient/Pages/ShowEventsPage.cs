@@ -14,6 +14,18 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            if (SessionManager.IsAdmin()) {
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+            else {
+                Console.BackgroundColor = ConsoleColor.Magenta;
+                Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+
             /*
              * Change output encoding to allow special 
              * characters output such as € 

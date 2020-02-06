@@ -14,6 +14,10 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
+
             try
             {
                 if (SessionManager.GetServiceClient().GetPrenotationsList().Count != 0)
@@ -33,6 +37,9 @@ namespace WCFClient.Pages
                      */
                     Output.WriteLine("\n------ DELETE PRENOTATION ------- ");
                     string prenotation_code = Input.ReadString("Insert the Code of the Prenotation to delete: ");
+                    // Navigate back if User type "\\" on first input
+                    if (prenotation_code.Contains("\\"))
+                        Program.NavigateBack();
                     int prenotationCode = Controls.CheckIntForeignKey(prenotation_code, "Prenotazione");
 
                     /*

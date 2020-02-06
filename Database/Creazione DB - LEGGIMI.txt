@@ -1,0 +1,38 @@
+Per creare il Database "Cinema" utilizzare il file script.sql 
+nella master root del proprio Server SQL.
+
+Il database per un corretto funzionamento andrà a creare:
+- 8 Tabelle
+- 1 Vista
+- 13 Store Procedure
+
+In seguito alla creazione per aggiungere dei dati al database 
+occorrerà eseguire il file data.sql che andrà a popolare il database 
+inserendo diversi utenti, sale, film, programmazioni e prenotazioni.
+
+Di seguito sono elencate le Tabelle presenti in "Cinema":
+- Admin
+- UtenteFree
+- Film
+- Evento
+- Sala
+- Posto
+- Prenotazione
+- Riserva
+
+Di seguito le Viste:
+- Show
+
+Di seguito le Store Procedure:
+- AddNewEvento
+- AddNewFilm
+- AddNewPrenotazione
+- AddNewRiserva
+- DeleteEvento
+- DeleteFilm
+- DeletePrenotazione
+- DeleteUser
+- EditUser
+- RichiestaCodiceSala
+- VisualizzaPostiSala
+- VisualizzaPrenotazione

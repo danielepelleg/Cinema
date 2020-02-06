@@ -15,6 +15,10 @@ namespace WCFClient.Pages
         {
             base.Display();
 
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
+            Console.BackgroundColor = ConsoleColor.Black;
+
             try
             {
                 if (SessionManager.GetServiceClient().GetUsersList().Count != 0)
@@ -33,6 +37,9 @@ namespace WCFClient.Pages
                      */
                     Output.WriteLine("\n------ DELETE USER ------- ");
                     string username = Input.ReadString("Insert the Username of the User to delete: ");
+                    // Navigate back if User type "\\" on first input
+                    if (username.Contains("\\"))
+                        Program.NavigateBack();
                     string Username = Controls.CheckStringForeignKey(username, "UtenteFree");
                     
                     /*

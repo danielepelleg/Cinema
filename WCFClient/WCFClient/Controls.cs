@@ -1,4 +1,5 @@
 ﻿using System;
+using EasyConsole;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace WCFClient
 {
+    /* Controls Class
+     * Controls and check methods for User's input.
+     *
+     * @author Daniele Pellegrini<daniele.pellegrini@studenti.unipr.it> - 285240
+     * @author Riccardo Fava<riccardo.fava@studenti.unipr.it> - 287516
+     */
     class Controls
     {
         /*
@@ -70,7 +77,7 @@ namespace WCFClient
                 case "Username":
                     while ((value.Length < 1) || (value.Length > 30) || !CheckChar(value))
                     {
-                        Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 30! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
+                        Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 30 characters! Special characters are not allowed.\nRetry: ", userAttribute);
                         value = Console.ReadLine();
                     }
                     break;
@@ -78,7 +85,7 @@ namespace WCFClient
                 case "Password":
                     while ((value.Length < 4) || (value.Length > 32))
                     {
-                        Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 4 e 32!\nRiprovare: ", userAttribute);
+                        Console.WriteLine("\n{0} input not valid. \nThe length must be between 4 and 32 characters! Special characters are not allowed.\nRetry: ", userAttribute);
                         value = InputPassword();
                     }
                     break;
@@ -86,7 +93,7 @@ namespace WCFClient
                 case "Nome":
                     while ((value.Length < 1) || (value.Length > 20) || !CheckChar(value))
                     {
-                        Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 20! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
+                        Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 20 characters! Special characters are not allowed.\nRetry: ", userAttribute);
                         value = Console.ReadLine();
                     }
                     break;
@@ -94,7 +101,7 @@ namespace WCFClient
                 case "Cognome":
                     while ((value.Length < 1) || (value.Length > 20) || !CheckChar(value))
                     {
-                        Console.WriteLine("\n{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 20! I caratteri speciali non sono ammessi.\nRiprovare: ", userAttribute);
+                        Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 20 characters! Special characters are not allowed.\nRetry: ", userAttribute);
                         value = Console.ReadLine();
                     }
                     break;
@@ -113,7 +120,7 @@ namespace WCFClient
                 case "Titolo":
                     while ((value.Length < 1) || (value.Length > 50))
                     {
-                        Console.WriteLine("{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 50!\nRiprovare: ", filmAttribute);
+                        Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 50 characters!\nRetry: ", filmAttribute);
                         value = Console.ReadLine();
                     }
                     break;
@@ -121,7 +128,7 @@ namespace WCFClient
                 case "Regia":
                     while ((value.Length < 1) || (value.Length > 30))
                     {
-                        Console.WriteLine("{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 30!\nRiprovare: ", filmAttribute);
+                        Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 30 characters!\nRetry: ", filmAttribute);
                         value = Console.ReadLine();
                     }
                     break;
@@ -129,7 +136,7 @@ namespace WCFClient
                 case "Genere":
                     while ((value.Length < 1) || (value.Length > 20))
                     {
-                        Console.WriteLine("{0} non accettabile. \nInserire un numero di caratteri compreso tra 1 e 20!\nRiprovare: ", filmAttribute);
+                        Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 20 characters!\nRetry: ", filmAttribute);
                         value = Console.ReadLine();
                     }
                     break;
@@ -145,7 +152,7 @@ namespace WCFClient
         {
             while (!SessionManager.GetServiceClient().CheckIntFK(value, valueType))
             {
-                Console.WriteLine("{0} non presente. \nInserire un valore accettabile!\nRiprovare: ", valueType);
+                Console.WriteLine("{0} not in the database. \nInsert a different value!\nRetry: ", valueType);
                 value = Console.ReadLine();
             }
             return Convert.ToInt32(value);
@@ -158,7 +165,7 @@ namespace WCFClient
         {
             while (!SessionManager.GetServiceClient().CheckStringFK(value, valueType))
             {
-                Console.WriteLine("{0} non presente. \nInserire un valore accettabile!\nRiprovare: ", valueType);
+                Console.WriteLine("{0} not in the database. \nInsert a different value!\nRetry: ", valueType);
                 value = Console.ReadLine();
                 
             }
@@ -172,7 +179,7 @@ namespace WCFClient
         {
             while (!int.TryParse(value, out int number1))
             {
-                Console.WriteLine("Immissione non valida. Riprovare: ");
+                Console.WriteLine("Not valid input. Retry: ");
                 value = Console.ReadLine();
             }
             return Convert.ToInt32(value);
@@ -185,7 +192,7 @@ namespace WCFClient
         {
             while (!DateTime.TryParse(date, out DateTime date1))
             {
-                Console.WriteLine("Immissione non valida. Riprovare: ");
+                Console.WriteLine("Not valid input. Retry: ");
                 date = Console.ReadLine();
             }
             return Convert.ToDateTime(date);
@@ -198,14 +205,14 @@ namespace WCFClient
         {
             while (!decimal.TryParse(value, out decimal decimal1))
             {
-                Console.WriteLine("Immissione non valida. Riprovare: ");
+                Console.WriteLine("Not valid input. Retry: ");
                 value = Console.ReadLine();
             }
             foreach (char c in value)
             {
                 if (value.Contains("."))
                 {
-                    Console.WriteLine("Inserire la virgola anzichè il punto! Riprovare: ");
+                    Console.WriteLine("Use comma (,) instead of dot (.)! Retry: ");
                     value = Console.ReadLine();
                 }
             }
@@ -228,10 +235,12 @@ namespace WCFClient
             return Convert.ToInt32(place);
         }
 
-        // Messaggio di errore collegamento al DB
+        /*
+         * Error message when Server is not available
+         */ 
         public static void ErrorMessage()
         {
-            Console.WriteLine("\nIl Database non è raggiungibile al momento.");
+            Console.WriteLine("\nConnection Error! Server Unreacheable! Retry later.");
         }
     }
 }

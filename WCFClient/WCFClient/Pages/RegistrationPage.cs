@@ -24,6 +24,8 @@ namespace WCFClient.Pages
              * Choose the type of Registration (User - Admin)
              */
             UserType input = Input.ReadEnum<UserType>("Select the type of user you want to register: ");
+            if (input.Equals(UserType.Back))
+                Program.NavigateHome();
             SessionManager.SetAdmin(input);
             Output.WriteLine(ConsoleColor.Green, "\n{0} Sign In: ", input);
 
@@ -33,8 +35,11 @@ namespace WCFClient.Pages
              * Every input must be valid and checked. The password is hashed with 
              * a MD5 algorithm before to be stored in the database, for a security reason.
              */
-            Output.WriteLine("--------- REGISTRAZIONE ----------");
+            Output.WriteLine("--------- REGISTRATION ----------");
             string username = Input.ReadString("Username (max 30 characters): ");
+            // Navigate back if User type "\\" on first input
+            if (username.Contains("\\"))
+                Program.NavigateBack();
             username = Controls.CheckUserInput("Username", username);  
             string password = Input.ReadString("Password (max 32 characters): ");
             string hashedPassword = EasyEncryption.MD5.ComputeMD5Hash(Controls.CheckUserInput("Password", password));
