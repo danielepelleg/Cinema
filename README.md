@@ -1,12 +1,10 @@
-# Cinema
-This is a console program that uses WCF Services to book tickets of a cinema trough a series of command lines. 
 <!-- PROJECT LOGO -->
   <br />
     <p align="center">
   <a href="https://github.com/danielepelleg/Cinema">
     <img src="/WCFClient/WCFClient/Resources/cinema.png" alt="Logo" width="130" height="130">
   </a>
-  <h1 align="center">Sport Club</h1>
+  <h1 align="center">Cinema</h1>
   <p align="center">
     C# implementation of a console software representing a Cinema with film and events.
   </p>
@@ -19,7 +17,7 @@ This is a console program that uses WCF Services to book tickets of a cinema tro
   
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
-  - [Database](#databaseScheme)
+  - [Database](#database-scheme)
   - [Getting Started](#getting-started)
     - [Libraries](#Libraries)
     - [Updates](#updates)
@@ -29,7 +27,8 @@ This is a console program that uses WCF Services to book tickets of a cinema tro
    
    <!-- ABOUT THE PROJECT -->
    ## About The Project
-   **Cinema** simulates a cinema with different Film, Hall and Show (here called Events). 
+   **Cinema** simulates a cinema with different Film, Hall and Show (here called Events). It's a console 
+   program that uses WCF Services to book tickets of a cinema trough a series of command lines.  
    
    The system is made up of a MySQL Server Express Database to which the WCFDatabaseManager connects to, 
    which has the task to keep the personal data of the users, the administrators, the film, the events,
@@ -66,6 +65,7 @@ This is a console program that uses WCF Services to book tickets of a cinema tro
     
    
    <!-- DATABASE  -->
+   ## Database Scheme
    <img src="Database/Diagrammi/Schema Database Cinema.jpg" alt="database">
    
    <!-- GETTING STARTED -->
@@ -75,8 +75,8 @@ This is a console program that uses WCF Services to book tickets of a cinema tro
    
    ### Libraries
    The program requires two NuGet Packets to be executed.
-		- <a href="https://github.com/splttingatms/EasyConsole" title="EasyConsole">EasyConsole</a>
-		- <a href="https://github.com/douglasg14b/BetterConsoleTables" title="BetterConsoleTables">BetterConsoleTables</a>
+			- <a href="https://github.com/splttingatms/EasyConsole" title="EasyConsole">EasyConsole</a>
+			- <a href="https://github.com/douglasg14b/BetterConsoleTables" title="BetterConsoleTables">BetterConsoleTables</a>
 
    ### Updates
    Pull this repository for updates.
