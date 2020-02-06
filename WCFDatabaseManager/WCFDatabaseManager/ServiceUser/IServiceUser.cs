@@ -35,5 +35,8 @@ namespace WCFDatabaseManager
 
         [OperationContract]
         bool CheckStringFK(string value, string valueType);
+
+        [OperationContract]
+        void CheckConnection();
     }
 }

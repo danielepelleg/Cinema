@@ -240,7 +240,7 @@ namespace WCFClient
          */ 
         public static void ErrorMessage()
         {
-            Console.WriteLine("\nConnection Error!");
+            Console.WriteLine("\n\nConnection Error!");
         }
     }
 }

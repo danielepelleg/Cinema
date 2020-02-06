@@ -41,12 +41,13 @@ namespace WCFClient
         public static Service1Client Connect() {              
             Service1Client wcfClient = new Service1Client();
             try {
-                if (wcfClient.CheckConnection())
+                //Check if the Database Manager is reacheable
+                if (wcfClient.CheckConnection()) 
                 {
                     return wcfClient;
                 }
                 else {
-                    Controls.ErrorMessage();
+                    Console.WriteLine("\n\nConnection Error! Database Server Manager Unreacheable!");
                 }
             }
             catch {

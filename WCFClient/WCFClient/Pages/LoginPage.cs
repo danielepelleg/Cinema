@@ -73,7 +73,7 @@ namespace WCFClient.Pages
                         break;
                 }
             }
-            Output.WriteLine("\nLogin Failed");
+            Output.WriteLine("\nLogin Failed\n");
 
             /*
              * Navigate back

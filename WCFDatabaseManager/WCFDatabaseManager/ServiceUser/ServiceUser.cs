@@ -423,5 +423,11 @@ namespace WCFDatabaseManager
                 }
             }
         }
+
+        /*
+         * Function that allows the server to check the connection with the Database Manager
+         * 
+         */
+        public void CheckConnection() { }
     }
 }

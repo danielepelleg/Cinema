@@ -308,10 +308,8 @@ namespace WCFServer
             
         }
 
-
         public bool CheckPlace(int eventCode, int placeNumber) {
-            try
-            {
+            try {
                 return servicePlace.CheckPlace(eventCode, placeNumber);
             }
             catch {
@@ -324,14 +322,11 @@ namespace WCFServer
 
         public bool CheckConnection()
         {
-            try
-            {
-                // To check the connection we ask for a casual function to the Database Manager
-                serviceFilm.GetFilmList().ToList();
+            try  {
+                serviceUser.CheckConnection();
                 return true;
             }
-            catch
-            {
+            catch {
                 return false;
             }
         }
