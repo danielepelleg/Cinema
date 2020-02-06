@@ -22,7 +22,7 @@ namespace WCFServer
         private ServiceHallClient serviceHall = new ServiceReferenceHall.ServiceHallClient();
         private ServicePlaceClient servicePlace = new ServiceReferencePlace.ServicePlaceClient();
 
-        // USER - ADMIN METHODS 
+        //User Service methods
 
         public bool Registration(bool isAdmin, string username, string password, string name, string surname) {
             return serviceUser.Registration(isAdmin, username, password, name, surname);
@@ -52,7 +52,7 @@ namespace WCFServer
             return serviceUser.CheckStringFK(value, valueType);
         }
 
-        // FILM METHODS
+        //Film Service methods
 
         public bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre) {
             return serviceFilm.AddFilm(title, year, direction, duration, releaseDate, genre);
@@ -70,7 +70,7 @@ namespace WCFServer
             return serviceFilm.GetFilmList().ToList();
         }
 
-        // EVENTS METHODS
+        //Event Service methods
 
         public bool AddEvent(string usernameAdmin, DateTime dateTime, int filmCode, int hallCode, decimal price) {
             return serviceEvent.AddEvent(usernameAdmin, dateTime, filmCode, hallCode, price);
@@ -89,7 +89,7 @@ namespace WCFServer
             return serviceEvent.GetShowsList().ToList();
         }
 
-        // PRENOTATION METHODS
+        //Prenotation Service methods
 
         public bool AddPrenotation(DateTime dateTime, string usernameUser, int eventCode, int placeNumber) {
             return servicePrenotation.AddPrenotation(dateTime, usernameUser, eventCode, placeNumber);
@@ -109,7 +109,7 @@ namespace WCFServer
             return servicePrenotation.GetTicketsList(username).ToList();
         }
 
-        // HALL METHODS
+        //Hall Service methods
 
         public List<Hall> GetHallsList() {
             return serviceHall.GetHallsList().ToList();
@@ -119,7 +119,7 @@ namespace WCFServer
             return serviceHall.DrawHall(eventCode);
         }
 
-        // PLACE METHODS
+        //Place Service methods
 
         public bool CheckIntFK(string value, string valueType) {
             return servicePlace.CheckIntFK(value, valueType);

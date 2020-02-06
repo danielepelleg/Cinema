@@ -43,18 +43,6 @@ namespace WCFDatabaseManager
             UsernameUser = usernameUser;
             EventCode = eventCode;
         }
-
-        /*
-         * Show information about a prenotation
-         * 
-         * @return the String with the prenotion details
-         */
-        public string showPrenotations()
-        {
-            return "Prenotation code:" + PrenotationCode +
-                ", Date and time: " + DateTime +
-                ", Username of the user: " + UsernameUser +
-                ", Code of the event booked: " + EventCode;
-        }
+        
     }
 }

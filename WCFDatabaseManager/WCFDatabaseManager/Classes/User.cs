@@ -48,16 +48,5 @@ namespace WCFDatabaseManager
             this.Surname = surname;
         }
 
-        /*
-         * Show information about an User
-         * 
-         * @return the String with the user details
-         */
-    public string showUser()
-        {
-            return "Username: " + this.Username +
-                ", Name: " + this.Name +
-                ", Surname: " + this.Surname;
-        }
     }
 }

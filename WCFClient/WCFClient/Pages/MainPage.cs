@@ -12,7 +12,7 @@ namespace WCFClient.Pages
     {
         public MainPage(Program program)
             : base(" Main Page ", program,
-                 new Option("Registrazione", () => program.NavigateTo<RegistrationPage>()),
+                 new Option("Registration", () => program.NavigateTo<RegistrationPage>()),
                  new Option("Login", () => program.NavigateTo<LoginPage>()))
         {
         }

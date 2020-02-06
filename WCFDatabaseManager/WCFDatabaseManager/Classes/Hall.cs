@@ -29,16 +29,5 @@ namespace WCFDatabaseManager
             HallCode = hallCode;
             Capacity = capacity;
         }
-
-        /*
-         * Show information about a hall
-         * 
-         * @return the String with the hall details
-         */
-        public string showHall()
-        {
-            return "Hall Code:" + this.HallCode +
-                ", Capacity:" + this.Capacity;
-        }
     }
 }

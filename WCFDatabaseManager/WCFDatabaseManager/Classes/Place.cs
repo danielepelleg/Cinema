@@ -29,17 +29,6 @@ namespace WCFDatabaseManager
         }
 
         public Place() { }
-
-        /*
-         * Show information about a place
-         * 
-         * @return the String with the place details
-         */
-        public string showPlaces()
-        {
-            return "Place Number: " + this.PlaceNumber +
-                    "Hall code:" + this.HallCode;
-
-        }
+        
     }
 }
