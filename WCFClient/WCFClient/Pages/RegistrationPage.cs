@@ -58,7 +58,7 @@ namespace WCFClient.Pages
                 else Output.WriteLine("REGISTRATION ERROR\n Retry!\n");
             }
             catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
             /*

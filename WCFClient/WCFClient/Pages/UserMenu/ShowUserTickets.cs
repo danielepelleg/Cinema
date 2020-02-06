@@ -34,7 +34,7 @@ namespace WCFClient.Pages
                 TablePrinter.Ticket(SessionManager.GetServiceClient().GetTicketsList(SessionManager.GetUser().Username));
             }
             catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
 

@@ -57,13 +57,13 @@ namespace WCFClient.Pages
                 else Output.WriteLine("\nEVENT INSERTION FAILED!\nCheck that there are no other events at the same time, in the same date and in the same hall!");
 
             } catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
-    /*
-     * Navigate back
-     */
-    Input.ReadString("Press [Enter] to navigate back");
+            /*
+             * Navigate back
+             */
+            Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();
         }
 

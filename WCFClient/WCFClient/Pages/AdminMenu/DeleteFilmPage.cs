@@ -56,7 +56,7 @@ namespace WCFClient.Pages
                 } else Console.WriteLine("There are no Film in the DataBase!");
             }
             catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
             /*

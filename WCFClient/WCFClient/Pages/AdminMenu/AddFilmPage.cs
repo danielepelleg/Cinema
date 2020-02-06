@@ -50,7 +50,7 @@ namespace WCFClient.Pages
                 else Output.WriteLine("\nFILM INSERTION FAILED!\n");
             }
             catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
             /*

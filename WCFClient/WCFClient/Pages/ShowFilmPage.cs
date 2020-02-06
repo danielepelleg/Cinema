@@ -39,7 +39,7 @@ namespace WCFClient.Pages
                 TablePrinter.Film(SessionManager.GetServiceClient().GetFilmList());
             }
             catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
             /*

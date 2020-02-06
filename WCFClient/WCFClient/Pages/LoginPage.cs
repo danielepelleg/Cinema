@@ -54,9 +54,9 @@ namespace WCFClient.Pages
                     SessionManager.SetUser(SessionManager.GetServiceClient().GetUser(SessionManager.IsAdmin(), username));
                 }
             } catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
-            
+
 
             /*
              * Go to the Menu

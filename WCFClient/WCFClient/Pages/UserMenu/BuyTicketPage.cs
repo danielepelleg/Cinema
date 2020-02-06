@@ -72,7 +72,7 @@ namespace WCFClient.Pages
                 else Console.WriteLine("There are no Shows in the DB!\n");
             }
             catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
             /*

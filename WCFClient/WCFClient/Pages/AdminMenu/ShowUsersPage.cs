@@ -29,7 +29,7 @@ namespace WCFClient.Pages
                 TablePrinter.User(SessionManager.GetServiceClient().GetUsersList());
             }
             catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
             /*

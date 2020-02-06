@@ -41,13 +41,13 @@ namespace WCFClient.Pages
                 TablePrinter.Event(SessionManager.GetServiceClient().GetEventsList());
             
             } catch {
-                Console.WriteLine("Server Unreacheable, Retry later!");
+                Console.WriteLine("Error! Retry later!");
             }
 
-    /*
-     * Navigate back
-     */
-    Input.ReadString("Press [Enter] to navigate back");
+            /*
+             * Navigate back
+             */
+            Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();
         }
     }
