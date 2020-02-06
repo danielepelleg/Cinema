@@ -87,6 +87,8 @@ namespace WCFClient
                     {
                         Console.WriteLine("\n{0} input not valid. \nThe length must be between 4 and 32 characters! Special characters are not allowed.\nRetry: ", userAttribute);
                         value = InputPassword();
+                        Console.WriteLine("\n");
+
                     }
                     break;
 
@@ -95,6 +97,8 @@ namespace WCFClient
                     {
                         Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 20 characters! Special characters are not allowed.\nRetry: ", userAttribute);
                         value = Console.ReadLine();
+                        Console.WriteLine("\n");
+
                     }
                     break;
 
@@ -103,6 +107,8 @@ namespace WCFClient
                     {
                         Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 20 characters! Special characters are not allowed.\nRetry: ", userAttribute);
                         value = Console.ReadLine();
+                        Console.WriteLine("\n");
+
                     }
                     break;
             }
@@ -122,6 +128,8 @@ namespace WCFClient
                     {
                         Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 50 characters!\nRetry: ", filmAttribute);
                         value = Console.ReadLine();
+                        Console.WriteLine("\n");
+
                     }
                     break;
 
@@ -130,6 +138,8 @@ namespace WCFClient
                     {
                         Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 30 characters!\nRetry: ", filmAttribute);
                         value = Console.ReadLine();
+                        Console.WriteLine("\n");
+
                     }
                     break;
 
@@ -138,6 +148,7 @@ namespace WCFClient
                     {
                         Console.WriteLine("\n{0} input not valid. \nThe length must be between 1 and 20 characters!\nRetry: ", filmAttribute);
                         value = Console.ReadLine();
+                        Console.WriteLine("\n");
                     }
                     break;
             }
@@ -154,6 +165,8 @@ namespace WCFClient
             {
                 Console.WriteLine("{0} not in the database. \nInsert a different value!\nRetry: ", valueType);
                 value = Console.ReadLine();
+                Console.WriteLine("\n");
+
             }
             return Convert.ToInt32(value);
         }
@@ -167,7 +180,8 @@ namespace WCFClient
             {
                 Console.WriteLine("{0} not in the database. \nInsert a different value!\nRetry: ", valueType);
                 value = Console.ReadLine();
-                
+                Console.WriteLine("\n");
+
             }
             return value;
         }
@@ -181,6 +195,7 @@ namespace WCFClient
             {
                 Console.WriteLine("Not valid input. Retry: ");
                 value = Console.ReadLine();
+                Console.WriteLine("\n");
             }
             return Convert.ToInt32(value);
         }
@@ -194,6 +209,8 @@ namespace WCFClient
             {
                 Console.WriteLine("Not valid input. Retry: ");
                 date = Console.ReadLine();
+                Console.WriteLine("\n");
+
             }
             return Convert.ToDateTime(date);
         }
@@ -214,6 +231,7 @@ namespace WCFClient
                 {
                     Console.WriteLine("Use comma (,) instead of dot (.)! Retry: ");
                     value = Console.ReadLine();
+                    Console.WriteLine("\n");
                 }
             }
             return Decimal.Round(Convert.ToDecimal(value), 2);
