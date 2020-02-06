@@ -75,8 +75,10 @@
    
    ### Libraries
    The program requires two NuGet Packets to be executed.
-			- <a href="https://github.com/splttingatms/EasyConsole" title="EasyConsole">EasyConsole</a>
-			- <a href="https://github.com/douglasg14b/BetterConsoleTables" title="BetterConsoleTables">BetterConsoleTables</a>
+   
+   - <a href="https://github.com/splttingatms/EasyConsole" title="EasyConsole">EasyConsole</a>
+			
+   - <a href="https://github.com/douglasg14b/BetterConsoleTables" title="BetterConsoleTables">BetterConsoleTables</a>
 
    ### Updates
    Pull this repository for updates.
