@@ -41,7 +41,13 @@ namespace WCFClient
         public static Service1Client Connect() {              
             Service1Client wcfClient = new Service1Client();
             try {
-                wcfClient.GetFilmList();
+                if (wcfClient.CheckConnection())
+                {
+                    return wcfClient;
+                }
+                else {
+                    Controls.ErrorMessage();
+                }
             }
             catch {
                 Controls.ErrorMessage();

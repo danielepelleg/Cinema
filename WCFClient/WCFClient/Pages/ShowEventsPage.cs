@@ -39,17 +39,15 @@ namespace WCFClient.Pages
             {
                 Output.WriteLine("EVENTS LIST: ");
                 TablePrinter.Event(SessionManager.GetServiceClient().GetEventsList());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
+            
+            } catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
 
-            /*
-             * Navigate back
-             */
-            Input.ReadString("Press [Enter] to navigate back");
+    /*
+     * Navigate back
+     */
+    Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();
         }
     }

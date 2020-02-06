@@ -33,12 +33,10 @@ namespace WCFClient.Pages
                 Output.WriteLine("{0} Tickets: ", SessionManager.GetUser().Username);
                 TablePrinter.Ticket(SessionManager.GetServiceClient().GetTicketsList(SessionManager.GetUser().Username));
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
+            catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
-            
+
 
             /*
              * Navigate back

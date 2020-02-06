@@ -947,6 +947,12 @@ namespace WCFClient.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckPlace", ReplyAction="http://tempuri.org/IService1/CheckPlaceResponse")]
         System.Threading.Tasks.Task<bool> CheckPlaceAsync(int eventCode, int placeNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckConnection", ReplyAction="http://tempuri.org/IService1/CheckConnectionResponse")]
+        bool CheckConnection();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckConnection", ReplyAction="http://tempuri.org/IService1/CheckConnectionResponse")]
+        System.Threading.Tasks.Task<bool> CheckConnectionAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1166,6 +1172,14 @@ namespace WCFClient.ServiceReference1 {
         
         public System.Threading.Tasks.Task<bool> CheckPlaceAsync(int eventCode, int placeNumber) {
             return base.Channel.CheckPlaceAsync(eventCode, placeNumber);
+        }
+        
+        public bool CheckConnection() {
+            return base.Channel.CheckConnection();
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckConnectionAsync() {
+            return base.Channel.CheckConnectionAsync();
         }
     }
 }

@@ -49,25 +49,21 @@ namespace WCFClient.Pages
                 string _price = Input.ReadString("Insert the Price (ex: 8,50): ");
                 decimal price = Controls.CheckDecimal(_price);
                 
-
-
                 /*
                  * Send data to Database
                  */
                 if (SessionManager.GetServiceClient().AddEvent(SessionManager.GetUser().Username, dateTime, filmCode, hallCode, price))
                     Output.WriteLine("\nEVENT INSERTION SUCCESSFUL\n");
                 else Output.WriteLine("\nEVENT INSERTION FAILED!\nCheck that there are no other events at the same time, in the same date and in the same hall!");
+
+            } catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
-            }
-           
-            /*
-             * Navigate back
-             */
-            Input.ReadString("Press [Enter] to navigate back");
+
+    /*
+     * Navigate back
+     */
+    Input.ReadString("Press [Enter] to navigate back");
             Program.NavigateBack();
         }
 

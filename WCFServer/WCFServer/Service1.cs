@@ -25,113 +25,315 @@ namespace WCFServer
         //User Service methods
 
         public bool Registration(bool isAdmin, string username, string password, string name, string surname) {
-            return serviceUser.Registration(isAdmin, username, password, name, surname);
+            try
+            {
+                return serviceUser.Registration(isAdmin, username, password, name, surname);
+            }
+            catch {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public bool Login(bool isAdmin, string username, string password) {
-            return serviceUser.Login(isAdmin, username, password);
+            try
+            {
+                return serviceUser.Login(isAdmin, username, password);
+            }
+            catch {             
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public bool DeleteUser(string username) {
-            return serviceUser.DeleteUser(username);
+            try
+            {
+                return serviceUser.DeleteUser(username);
+            }
+            catch {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public bool EditUser(string oldUsername, string newUsername, string newPassword, string newName, string newSurname) {
-            return serviceUser.EditUser(oldUsername, newUsername, newPassword, newName, newSurname);
+            try
+            {
+                return serviceUser.EditUser(oldUsername, newUsername, newPassword, newName, newSurname);
+            }
+            catch {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
+
         }
 
         public User GetUser(bool isAdmin ,string username) {
-            return serviceUser.GetUser(isAdmin, username);
+            try
+            {
+                return serviceUser.GetUser(isAdmin, username);
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
         public List<User> GetUsersList() {
-            return serviceUser.GetUsersList().ToList();
+            try
+            {
+                return serviceUser.GetUsersList().ToList();
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
         public bool CheckStringFK(string value, string valueType) {
-            return serviceUser.CheckStringFK(value, valueType);
+            try
+            {
+                return serviceUser.CheckStringFK(value, valueType);
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         //Film Service methods
 
         public bool AddFilm(string title, int year, string direction, int duration, DateTime releaseDate, string genre) {
-            return serviceFilm.AddFilm(title, year, direction, duration, releaseDate, genre);
+            try
+            {
+                return serviceFilm.AddFilm(title, year, direction, duration, releaseDate, genre);
+            }
+            catch {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public bool DeleteFilm(int filmCode) {
-            return serviceFilm.DeleteFilm(filmCode);
+            try
+            {
+                return serviceFilm.DeleteFilm(filmCode);
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public Film GetFilm(int filmCode) {
-            return serviceFilm.GetFilm(filmCode);
+            try
+            {
+                return serviceFilm.GetFilm(filmCode);
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
         public List<Film> GetFilmList() {
-            return serviceFilm.GetFilmList().ToList();
+            try
+            {
+                return serviceFilm.GetFilmList().ToList();
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
         //Event Service methods
 
         public bool AddEvent(string usernameAdmin, DateTime dateTime, int filmCode, int hallCode, decimal price) {
-            return serviceEvent.AddEvent(usernameAdmin, dateTime, filmCode, hallCode, price);
+            try
+            {
+                return serviceEvent.AddEvent(usernameAdmin, dateTime, filmCode, hallCode, price);
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public bool DeleteEvent(int eventCode) {
-            return serviceEvent.DeleteEvent(eventCode);
+            try
+            {
+                return serviceEvent.DeleteEvent(eventCode);
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public List<Event> GetEventsList() {
-            return serviceEvent.GetEventsList().ToList();
+            try
+            {
+                return serviceEvent.GetEventsList().ToList();
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
         public List<Show> GetShowsList()
         {
-            return serviceEvent.GetShowsList().ToList();
+            try
+            {
+                return serviceEvent.GetShowsList().ToList();
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
         //Prenotation Service methods
 
         public bool AddPrenotation(DateTime dateTime, string usernameUser, int eventCode, int placeNumber) {
-            return servicePrenotation.AddPrenotation(dateTime, usernameUser, eventCode, placeNumber);
+            try
+            {
+                return servicePrenotation.AddPrenotation(dateTime, usernameUser, eventCode, placeNumber);
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public bool DeletePrenotation(int prenotationCode) {
-            return servicePrenotation.DeletePrenotation(prenotationCode);
+            try
+            {
+                return servicePrenotation.DeletePrenotation(prenotationCode);
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
         }
 
         public List<Prenotation> GetPrenotationsList()
         {
-            return servicePrenotation.GetPrenotationsList().ToList();
+            try
+            {
+                return servicePrenotation.GetPrenotationsList().ToList();
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
 
         public List<Ticket> GetTicketsList(string username) {
-            return servicePrenotation.GetTicketsList(username).ToList();
+            try
+            {
+                return servicePrenotation.GetTicketsList(username).ToList();
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
         //Hall Service methods
 
         public List<Hall> GetHallsList() {
-            return serviceHall.GetHallsList().ToList();
+            try
+            {
+                return serviceHall.GetHallsList().ToList();
+            }
+            catch
+            {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
         }
 
         public string DrawHall(int eventCode) {
-            return serviceHall.DrawHall(eventCode);
+            try
+            {
+                return serviceHall.DrawHall(eventCode);
+            }
+            catch {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return "Error!";
         }
 
         //Place Service methods
 
         public bool CheckIntFK(string value, string valueType) {
-            return servicePlace.CheckIntFK(value, valueType);
+            try
+            {
+                return servicePlace.CheckIntFK(value, valueType);
+            }
+            catch {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
+            
         }
 
         public List<Place> GetAvailablePlacesList(int eventCode) {
-            return servicePlace.GetAvailablePlacesList(eventCode).ToList();
+            try
+            {
+                return servicePlace.GetAvailablePlacesList(eventCode).ToList();
+            }
+            catch {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return null;
+            
         }
 
 
         public bool CheckPlace(int eventCode, int placeNumber) {
-            return servicePlace.CheckPlace(eventCode, placeNumber);
+            try
+            {
+                return servicePlace.CheckPlace(eventCode, placeNumber);
+            }
+            catch {
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+            }
+            return false;
+        }
+
+        //Check connection function
+
+        public bool CheckConnection()
+        {
+            try
+            {
+                // To check the connection we ask for a casual function to the Database Manager
+                serviceFilm.GetFilmList().ToList();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 

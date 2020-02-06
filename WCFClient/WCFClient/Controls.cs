@@ -240,7 +240,7 @@ namespace WCFClient
          */ 
         public static void ErrorMessage()
         {
-            Console.WriteLine("\nConnection Error! Server Unreacheable! Retry later.");
+            Console.WriteLine("\nConnection Error!");
         }
     }
 }

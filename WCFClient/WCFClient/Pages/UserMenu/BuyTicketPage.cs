@@ -71,10 +71,8 @@ namespace WCFClient.Pages
                 }
                 else Console.WriteLine("There are no Shows in the DB!\n");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
+            catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
 
             /*

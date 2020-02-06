@@ -51,12 +51,10 @@ namespace WCFClient.Pages
                 }
                 else Output.WriteLine("USER UPDATE ERROR\n Retry!\n");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
+            catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
-            
+
             /*
              * Navigate back
              */

@@ -28,12 +28,10 @@ namespace WCFClient.Pages
                 Output.WriteLine("PRENOTATIONS LIST: ");
                 TablePrinter.Prenotation(SessionManager.GetServiceClient().GetPrenotationsList());
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
+            catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
-            
+
             /*
              * Navigate back
              */

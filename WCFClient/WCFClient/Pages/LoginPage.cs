@@ -53,9 +53,8 @@ namespace WCFClient.Pages
                 {
                     SessionManager.SetUser(SessionManager.GetServiceClient().GetUser(SessionManager.IsAdmin(), username));
                 }
-            } catch (Exception ex){
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
+            } catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
             
 

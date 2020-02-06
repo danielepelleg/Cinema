@@ -57,12 +57,10 @@ namespace WCFClient.Pages
                     Output.WriteLine("REGISTRATION SUCCESS!\n Come back to login\n");
                 else Output.WriteLine("REGISTRATION ERROR\n Retry!\n");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
+            catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
-            
+
             /*
              * Navigate back
              */

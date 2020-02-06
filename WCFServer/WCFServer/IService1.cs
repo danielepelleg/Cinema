@@ -108,6 +108,11 @@ namespace WCFServer
 
         [OperationContract]
         bool CheckPlace(int eventCode, int placeNumber);
+
+        //Check connection function
+
+        [OperationContract]
+        bool CheckConnection();
     }
     
 }

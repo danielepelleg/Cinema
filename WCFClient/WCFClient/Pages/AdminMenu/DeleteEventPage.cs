@@ -56,12 +56,10 @@ namespace WCFClient.Pages
 
                 } else Console.WriteLine("There are no Events in the DataBase!");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception Type: {0}", ex.GetType());
-                Console.WriteLine("Message: {0}", ex.Message);
+            catch {
+                Console.WriteLine("Server Unreacheable, Retry later!");
             }
-            
+
             /*
              * Navigate back
              */
