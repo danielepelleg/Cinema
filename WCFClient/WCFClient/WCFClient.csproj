@@ -71,8 +71,11 @@
     <Compile Include="Pages\AdminMenu\DeletePrenotationPage.cs" />
     <Compile Include="Pages\AdminMenu\DeleteUser.cs" />
     <Compile Include="Pages\AdminMenu\EditUserPage.cs" />
+    <Compile Include="Pages\AdminMenu\ShowSubscribersPage.cs" />
     <Compile Include="Pages\AdminMenu\ShowUsersPage.cs" />
     <Compile Include="Pages\AdminMenu\ShowPrenotationsPage.cs" />
+    <Compile Include="Pages\UserMenu\DeleteSubscription.cs" />
+    <Compile Include="Pages\UserMenu\GetSubscription.cs" />
     <Compile Include="Pages\UserMenu\ShowUserTickets.cs" />
     <Compile Include="Pages\UserMenu\BuyTicketPage.cs" />
     <Compile Include="SessionManager.cs" />

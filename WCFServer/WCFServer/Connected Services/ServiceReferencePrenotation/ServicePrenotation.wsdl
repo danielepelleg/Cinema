@@ -19,6 +19,24 @@
   <wsdl:message name="IServicePrenotation_DeletePrenotation_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeletePrenotationResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicePrenotation_AddSubscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSubscription" />
+  </wsdl:message>
+  <wsdl:message name="IServicePrenotation_AddSubscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSubscriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePrenotation_DeleteSubscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSubscription" />
+  </wsdl:message>
+  <wsdl:message name="IServicePrenotation_DeleteSubscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSubscriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePrenotation_GetSubscription_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubscription" />
+  </wsdl:message>
+  <wsdl:message name="IServicePrenotation_GetSubscription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubscriptionResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicePrenotation_GetPrenotationsList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPrenotationsList" />
   </wsdl:message>
@@ -39,6 +57,18 @@
     <wsdl:operation name="DeletePrenotation">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePrenotation/DeletePrenotation" message="tns:IServicePrenotation_DeletePrenotation_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicePrenotation/DeletePrenotationResponse" message="tns:IServicePrenotation_DeletePrenotation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePrenotation/AddSubscription" message="tns:IServicePrenotation_AddSubscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePrenotation/AddSubscriptionResponse" message="tns:IServicePrenotation_AddSubscription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSubscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePrenotation/DeleteSubscription" message="tns:IServicePrenotation_DeleteSubscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePrenotation/DeleteSubscriptionResponse" message="tns:IServicePrenotation_DeleteSubscription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePrenotation/GetSubscription" message="tns:IServicePrenotation_GetSubscription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePrenotation/GetSubscriptionResponse" message="tns:IServicePrenotation_GetSubscription_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPrenotationsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePrenotation/GetPrenotationsList" message="tns:IServicePrenotation_GetPrenotationsList_InputMessage" />
@@ -62,6 +92,33 @@
     </wsdl:operation>
     <wsdl:operation name="DeletePrenotation">
       <soap:operation soapAction="http://tempuri.org/IServicePrenotation/DeletePrenotation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscription">
+      <soap:operation soapAction="http://tempuri.org/IServicePrenotation/AddSubscription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSubscription">
+      <soap:operation soapAction="http://tempuri.org/IServicePrenotation/DeleteSubscription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscription">
+      <soap:operation soapAction="http://tempuri.org/IServicePrenotation/GetSubscription" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -46,6 +46,35 @@ namespace WCFClient
         }
 
         /*
+        * Draw a table of Users
+        */
+        public static void Subscriber(List<User> userList)
+        {
+            if (userList.Count != 0)
+            {
+                // Create the columns
+                ColumnHeader[] headers = new[] {
+                new ColumnHeader(" USERNAME ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" NAME ", Alignment.Right, Alignment.Center),
+                new ColumnHeader(" SURNAME ", Alignment.Right, Alignment.Center),
+            };
+                Table table = new Table(headers);
+
+                // Add the rows of the table
+                foreach (User u in userList)
+                {
+                    table.AddRow(u.Username, u.Name, u.Surname);
+                }
+
+                // Format the table
+                table.Config = TableConfiguration.UnicodeAlt();
+
+                Output.WriteLine(table.ToString());
+            }
+            else Console.WriteLine("There are no Subscribers in the DataBase!");
+        }
+
+        /*
          * Draw a table of Film
          */
         public static void Film(List<Film> filmList)

@@ -18,6 +18,15 @@ namespace WCFDatabaseManager
         bool DeletePrenotation(int prenotationCode);
 
         [OperationContract]
+        bool AddSubscription(string username);
+
+        [OperationContract]
+        bool DeleteSubscription(string username);
+
+        [OperationContract]
+        bool GetSubscription(string username);
+
+        [OperationContract]
         List<Prenotation> GetPrenotationsList();
 
         [OperationContract]

@@ -37,8 +37,18 @@ namespace WCFClient.Pages
         User,
         Admin,
         Back
-
     }
 
-    
+    /*
+     * Decision Enumeration
+     * 
+     * Select the decision, YES or NO
+     */
+    enum Decision
+    {
+        YES,
+        NO
+    }
+
+
 }

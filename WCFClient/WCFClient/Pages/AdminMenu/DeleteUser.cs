@@ -19,8 +19,7 @@ namespace WCFClient.Pages
             Output.WriteLine(ConsoleColor.White, "--------== {0} ==--------\n", base.Title);
             Console.BackgroundColor = ConsoleColor.Black;
 
-            try
-            {
+            try {
                 if (SessionManager.GetServiceClient().GetUsersList().Count != 0)
                 {
                  /*

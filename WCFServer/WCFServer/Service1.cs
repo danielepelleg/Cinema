@@ -105,6 +105,21 @@ namespace WCFServer
             return null;
         }
 
+        public List<User> GetSubscribersList()
+        {
+            try
+            {
+                return serviceUser.GetSubscribersList().ToList();
+            }
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            return null;
+        }
+
         public bool CheckStringFK(string value, string valueType) {
             try
             {
@@ -255,6 +270,51 @@ namespace WCFServer
             try
             {
                 return servicePrenotation.DeletePrenotation(prenotationCode);
+            }
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            return false;
+        }
+
+        public bool AddSubscription(string username)
+        {
+            try
+            {
+                return servicePrenotation.AddSubscription(username);
+            }
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            return false;
+        }
+
+        public bool DeleteSubscription(string username)
+        {
+            try
+            {
+                return servicePrenotation.DeleteSubscription(username);
+            }
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Connection Error! Database Server Manager Unreacheable!");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            return false;
+        }
+
+        public bool GetSubscription(string username)
+        {
+            try
+            {
+                return servicePrenotation.GetSubscription(username);
             }
             catch
             {

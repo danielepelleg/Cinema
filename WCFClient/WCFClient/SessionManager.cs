@@ -20,9 +20,13 @@ namespace WCFClient
         // Set the bool value for User's privilege
         private static bool admin;
 
+        // Set the bool value for User's subscription
+        private static bool subscription;
+
         // Reset the User when Logout
         public static void Reset() {
             user = null;
+            subscription = false;
         }
 
         /*
@@ -68,6 +72,16 @@ namespace WCFClient
             return admin;
         }
 
+        public static bool IsSubscribed() {
+            return subscription;
+        }
+
+        public static string GetSubscribed(){
+            if (subscription)
+                return "Yes";
+            else return "No";
+        }
+
         public static void SetAdmin(Enum UserType)
         {
             switch (UserType.ToString()) {
@@ -76,6 +90,11 @@ namespace WCFClient
                 case "Admin": admin = true;
                     break;
             }
+        }
+
+        public static void SetSubscription(bool value)
+        {
+            subscription = value;
         }
     }
 }

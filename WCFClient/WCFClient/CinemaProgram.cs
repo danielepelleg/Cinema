@@ -24,10 +24,13 @@ namespace WCFClient
             AddPage(new DeletePrenotation(this));
             AddPage(new EditUserPage(this));
             AddPage(new ShowUsers(this));
+            AddPage(new ShowSubscribersPage(this));
             AddPage(new ShowFilm(this));
             AddPage(new ShowEvents(this));
             AddPage(new ShowPrenotations(this));
             AddPage(new BuyTicket(this));
+            AddPage(new GetSubscription(this));
+            AddPage(new DeleteSubscription(this));
             AddPage(new ShowUserTickets(this));
 
             /*

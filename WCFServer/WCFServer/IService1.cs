@@ -41,6 +41,9 @@ namespace WCFServer
         List<User> GetUsersList();
 
         [OperationContract]
+        List<User> GetSubscribersList();
+
+        [OperationContract]
         bool CheckStringFK(string value, string valueType);
 
 
@@ -66,6 +69,15 @@ namespace WCFServer
 
         [OperationContract]
         bool DeletePrenotation(int prenotationCode);
+
+        [OperationContract]
+        bool AddSubscription(string username);
+
+        [OperationContract]
+        bool DeleteSubscription(string username);
+
+        [OperationContract]
+        bool GetSubscription(string username);
 
         [OperationContract]
         List<Prenotation> GetPrenotationsList();

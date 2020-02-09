@@ -369,6 +369,71 @@ namespace WCFDatabaseManager
         }
 
         /*
+         * Get the list containing the User who has signed up for a subscription in the Cinema
+         */
+        public List<User> GetSubscribersList()
+        {
+            // Database connection
+            using (SqlConnection connection = DatabaseHandler.GetConnection())
+            {
+                // Define a new list of Users
+                List<User> subscribersList = new List<User>();
+
+                connection.Open();
+
+                // Start a local transaction.
+                SqlTransaction transaction = connection.BeginTransaction();
+                SqlCommand command = connection.CreateCommand();
+
+                // Assign both transaction object and connection to Command object
+                command.Connection = connection;
+                command.Transaction = transaction;
+
+                try
+                {
+                    command.CommandText = "SELECT Cinema.Abbonamento.Username, Cinema.UtenteFree.Nome, Cinema.UtenteFree.Cognome " +
+                        "FROM Cinema.Abbonamento, Cinema.UtenteFree WHERE Cinema.Abbonamento.Username = Cinema.UtenteFree.UsernameUtenteFree;";
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var username = reader.GetString(0);
+                            var name = reader.GetString(1);
+                            var surname = reader.GetString(2);
+
+
+                            subscribersList.Add(new User(username, name, surname));
+                        }
+                    }
+                    // Attempt to commit the transaction.
+                    transaction.Commit();
+
+                    return subscribersList;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Commit Exception Type: {0}", ex.GetType());
+                    Console.WriteLine("  Message: {0}", ex.Message);
+
+                    // Attempt to roll back the transaction.
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        // This catch block will handle any errors that may have occurred
+                        // on the server that would cause the rollback to fail 
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType());
+                        Console.WriteLine("  Message: {0}", ex2.Message);
+                    }
+
+                    return new List<User>() { };
+                }
+            }
+        }
+
+        /*
          * Check Foreign Key bond
          * 
          * @return true if the foreign key exists, false if not

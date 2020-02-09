@@ -1,5 +1,6 @@
 USE Cinema;
 
+
 -- ADMIN
 /** Username: Tom, Password: 1234 **/
 INSERT INTO [Cinema].[Admin] ([UsernameAdmin], [Password], [Nome], [Cognome]) VALUES (N'Tom', N'81dc9bdb52d04dc20036dbd8313ed055', N'Tommaso', N'Belli')
@@ -25,6 +26,8 @@ INSERT INTO [Cinema].[UtenteFree] ([UsernameUtenteFree], [Password], [Nome], [Co
 
 
 
+-- ABBONAMENTO
+INSERT INTO [Cinema].[Abbonamento] ([Username]) VALUES (N'Maty')
 
 
 -- FILM
@@ -118,25 +121,25 @@ INSERT INTO [Cinema].[Posto] ([NumeroPosto], [Codice_Sala]) VALUES (30, 3)
 
 -- EVENTO
 SET IDENTITY_INSERT [Cinema].[Evento] ON
-INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (1, N'2020-17-02 16:20:00', 1, 3, N'Tom', CAST(8.50 AS Decimal(3, 2)))
-INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (2, N'2020-17-02 16:30:00', 2, 1, N'Cate', CAST(8.50 AS Decimal(3, 2)))
-INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (3, N'2020-17-02 17:40:00', 3, 2, N'Ste', CAST(8.50 AS Decimal(3, 2)))
-INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (4, N'2020-21-02 18:30:00', 5, 2, N'Tom', CAST(5.00 AS Decimal(3, 2)))
-INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (5, N'2020-19-02 19:10:00', 6, 1, N'Ste', CAST(8.50 AS Decimal(3, 2)))
-INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (6, N'2020-18-02 22:20:00', 4, 2, N'Cate', CAST(7.50 AS Decimal(3, 2)))
-INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (7, N'2020-22-02 20:30:00', 1, 3, N'Cate', CAST(9.50 AS Decimal(3, 2)))
-INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (8, N'2019-22-02 20:50:00', 2, 1, N'Tom', CAST(9.50 AS Decimal(3, 2)))
+INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (1, N'2020-17-02 16:20:00', 1, 3, N'Tom', CAST(8.50 AS Decimal(5, 2)))
+INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (2, N'2020-17-02 16:30:00', 2, 1, N'Cate', CAST(8.50 AS Decimal(5, 2)))
+INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (3, N'2020-17-02 17:40:00', 3, 2, N'Ste', CAST(8.50 AS Decimal(5, 2)))
+INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (4, N'2020-21-02 18:30:00', 5, 2, N'Tom', CAST(5.00 AS Decimal(5, 2)))
+INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (5, N'2020-19-02 19:10:00', 6, 1, N'Ste', CAST(8.50 AS Decimal(5, 2)))
+INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (6, N'2020-18-02 22:20:00', 4, 2, N'Cate', CAST(7.50 AS Decimal(5, 2)))
+INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (7, N'2020-22-02 20:30:00', 1, 3, N'Cate', CAST(9.50 AS Decimal(5, 2)))
+INSERT INTO [Cinema].[Evento] ([CodiceEvento], [DataOra], [Codice_Film], [Codice_Sala], [Username_Admin], [Prezzo]) VALUES (8, N'2019-22-02 20:50:00', 2, 1, N'Tom', CAST(9.50 AS Decimal(5, 2)))
 SET IDENTITY_INSERT [Cinema].[Evento] OFF
 
 
 -- PRENOTAZIONE
 SET IDENTITY_INSERT [Cinema].[Prenotazione] ON
-INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento]) VALUES (1, N'2020-02-05 16:17:57', N'Maty', 5)
-INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento]) VALUES (2, N'2020-02-05 16:21:49', N'Mike', 1)
-INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento]) VALUES (3, N'2020-02-05 16:22:13', N'Mike', 6)
-INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento]) VALUES (4, N'2020-02-05 16:24:29', N'Cri', 3)
-INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento]) VALUES (5, N'2020-02-05 16:27:26', N'Jack', 8)
-INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento]) VALUES (6, N'2020-02-05 16:28:07', N'Maty', 2)
+INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento], [Prezzo]) VALUES (1, N'2020-02-05 16:17:57', N'Maty', 5, CAST(6.40 AS Decimal(3, 2)))
+INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento], [Prezzo]) VALUES (2, N'2020-02-05 16:21:49', N'Mike', 1, CAST(8.50 AS Decimal(3, 2)))
+INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento], [Prezzo]) VALUES (3, N'2020-02-05 16:22:13', N'Mike', 6, CAST(7.50 AS Decimal(3, 2)))
+INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento], [Prezzo]) VALUES (4, N'2020-02-05 16:24:29', N'Cri', 3, CAST(8.50 AS Decimal(3, 2)))
+INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento], [Prezzo]) VALUES (5, N'2020-02-05 16:27:26', N'Jack', 8, CAST(9.50 AS Decimal(3, 2)))
+INSERT INTO [Cinema].[Prenotazione] ([CodicePrenotazione], [DataOra], [Username_UtenteFree], [Codice_Evento], [Prezzo]) VALUES (6, N'2020-02-05 16:28:07', N'Maty', 2, CAST(6.40 AS Decimal(3, 2)))
 SET IDENTITY_INSERT [Cinema].[Prenotazione] OFF
 
 -- RISERVA (POSTI RISERVATI - COMPRATI)

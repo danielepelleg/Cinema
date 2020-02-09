@@ -15,6 +15,7 @@ namespace WCFClient.Pages
                   new Option("Delete Prenotation", () => program.NavigateTo<DeletePrenotation>()),
                   new Option("Edit User", () => program.NavigateTo<EditUserPage>()),
                   new Option("Show Users", () => program.NavigateTo<ShowUsers>()),
+                  new Option("Show Subscribers", () => program.NavigateTo<ShowSubscribersPage>()),
                   new Option("Show Film", () => program.NavigateTo<ShowFilm>()),
                   new Option("Show Events", () => program.NavigateTo<ShowEvents>()),
                   new Option("Show Prenotations", () => program.NavigateTo<ShowPrenotations>()))

@@ -146,6 +146,12 @@ namespace WCFServer.ServiceReferenceUser {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUsersList", ReplyAction="http://tempuri.org/IServiceUser/GetUsersListResponse")]
         System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User[]> GetUsersListAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetSubscribersList", ReplyAction="http://tempuri.org/IServiceUser/GetSubscribersListResponse")]
+        WCFServer.ServiceReferenceUser.User[] GetSubscribersList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetSubscribersList", ReplyAction="http://tempuri.org/IServiceUser/GetSubscribersListResponse")]
+        System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User[]> GetSubscribersListAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/CheckStringFK", ReplyAction="http://tempuri.org/IServiceUser/CheckStringFKResponse")]
         bool CheckStringFK(string value, string valueType);
         
@@ -232,6 +238,14 @@ namespace WCFServer.ServiceReferenceUser {
         
         public System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User[]> GetUsersListAsync() {
             return base.Channel.GetUsersListAsync();
+        }
+        
+        public WCFServer.ServiceReferenceUser.User[] GetSubscribersList() {
+            return base.Channel.GetSubscribersList();
+        }
+        
+        public System.Threading.Tasks.Task<WCFServer.ServiceReferenceUser.User[]> GetSubscribersListAsync() {
+            return base.Channel.GetSubscribersListAsync();
         }
         
         public bool CheckStringFK(string value, string valueType) {

@@ -49,9 +49,9 @@ namespace WCFClient.Pages
              */
             try
             {
-                if (SessionManager.GetServiceClient().Login(SessionManager.IsAdmin(), username, hashedPassword))
-                {
+                if (SessionManager.GetServiceClient().Login(SessionManager.IsAdmin(), username, hashedPassword)) {
                     SessionManager.SetUser(SessionManager.GetServiceClient().GetUser(SessionManager.IsAdmin(), username));
+                    SessionManager.SetSubscription(SessionManager.GetServiceClient().GetSubscription(SessionManager.GetUser().Username));
                 }
             } catch {
                 Console.WriteLine("Error! Retry later!");

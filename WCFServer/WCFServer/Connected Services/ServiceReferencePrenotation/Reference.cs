@@ -541,6 +541,24 @@ namespace WCFServer.ServiceReferencePrenotation {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePrenotation/DeletePrenotation", ReplyAction="http://tempuri.org/IServicePrenotation/DeletePrenotationResponse")]
         System.Threading.Tasks.Task<bool> DeletePrenotationAsync(int prenotationCode);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePrenotation/AddSubscription", ReplyAction="http://tempuri.org/IServicePrenotation/AddSubscriptionResponse")]
+        bool AddSubscription(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePrenotation/AddSubscription", ReplyAction="http://tempuri.org/IServicePrenotation/AddSubscriptionResponse")]
+        System.Threading.Tasks.Task<bool> AddSubscriptionAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePrenotation/DeleteSubscription", ReplyAction="http://tempuri.org/IServicePrenotation/DeleteSubscriptionResponse")]
+        bool DeleteSubscription(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePrenotation/DeleteSubscription", ReplyAction="http://tempuri.org/IServicePrenotation/DeleteSubscriptionResponse")]
+        System.Threading.Tasks.Task<bool> DeleteSubscriptionAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePrenotation/GetSubscription", ReplyAction="http://tempuri.org/IServicePrenotation/GetSubscriptionResponse")]
+        bool GetSubscription(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePrenotation/GetSubscription", ReplyAction="http://tempuri.org/IServicePrenotation/GetSubscriptionResponse")]
+        System.Threading.Tasks.Task<bool> GetSubscriptionAsync(string username);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePrenotation/GetPrenotationsList", ReplyAction="http://tempuri.org/IServicePrenotation/GetPrenotationsListResponse")]
         WCFServer.ServiceReferencePrenotation.Prenotation[] GetPrenotationsList();
         
@@ -595,6 +613,30 @@ namespace WCFServer.ServiceReferencePrenotation {
         
         public System.Threading.Tasks.Task<bool> DeletePrenotationAsync(int prenotationCode) {
             return base.Channel.DeletePrenotationAsync(prenotationCode);
+        }
+        
+        public bool AddSubscription(string username) {
+            return base.Channel.AddSubscription(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddSubscriptionAsync(string username) {
+            return base.Channel.AddSubscriptionAsync(username);
+        }
+        
+        public bool DeleteSubscription(string username) {
+            return base.Channel.DeleteSubscription(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteSubscriptionAsync(string username) {
+            return base.Channel.DeleteSubscriptionAsync(username);
+        }
+        
+        public bool GetSubscription(string username) {
+            return base.Channel.GetSubscription(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> GetSubscriptionAsync(string username) {
+            return base.Channel.GetSubscriptionAsync(username);
         }
         
         public WCFServer.ServiceReferencePrenotation.Prenotation[] GetPrenotationsList() {

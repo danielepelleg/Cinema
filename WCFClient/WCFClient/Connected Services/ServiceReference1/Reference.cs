@@ -840,6 +840,12 @@ namespace WCFClient.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetUsersList", ReplyAction="http://tempuri.org/IService1/GetUsersListResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.User>> GetUsersListAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubscribersList", ReplyAction="http://tempuri.org/IService1/GetSubscribersListResponse")]
+        System.Collections.Generic.List<WCFClient.ServiceReference1.User> GetSubscribersList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubscribersList", ReplyAction="http://tempuri.org/IService1/GetSubscribersListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.User>> GetSubscribersListAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CheckStringFK", ReplyAction="http://tempuri.org/IService1/CheckStringFKResponse")]
         bool CheckStringFK(string value, string valueType);
         
@@ -881,6 +887,24 @@ namespace WCFClient.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeletePrenotation", ReplyAction="http://tempuri.org/IService1/DeletePrenotationResponse")]
         System.Threading.Tasks.Task<bool> DeletePrenotationAsync(int prenotationCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddSubscription", ReplyAction="http://tempuri.org/IService1/AddSubscriptionResponse")]
+        bool AddSubscription(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddSubscription", ReplyAction="http://tempuri.org/IService1/AddSubscriptionResponse")]
+        System.Threading.Tasks.Task<bool> AddSubscriptionAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteSubscription", ReplyAction="http://tempuri.org/IService1/DeleteSubscriptionResponse")]
+        bool DeleteSubscription(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteSubscription", ReplyAction="http://tempuri.org/IService1/DeleteSubscriptionResponse")]
+        System.Threading.Tasks.Task<bool> DeleteSubscriptionAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubscription", ReplyAction="http://tempuri.org/IService1/GetSubscriptionResponse")]
+        bool GetSubscription(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSubscription", ReplyAction="http://tempuri.org/IService1/GetSubscriptionResponse")]
+        System.Threading.Tasks.Task<bool> GetSubscriptionAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetPrenotationsList", ReplyAction="http://tempuri.org/IService1/GetPrenotationsListResponse")]
         System.Collections.Generic.List<WCFClient.ServiceReference1.Prenotation> GetPrenotationsList();
@@ -1030,6 +1054,14 @@ namespace WCFClient.ServiceReference1 {
             return base.Channel.GetUsersListAsync();
         }
         
+        public System.Collections.Generic.List<WCFClient.ServiceReference1.User> GetSubscribersList() {
+            return base.Channel.GetSubscribersList();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<WCFClient.ServiceReference1.User>> GetSubscribersListAsync() {
+            return base.Channel.GetSubscribersListAsync();
+        }
+        
         public bool CheckStringFK(string value, string valueType) {
             return base.Channel.CheckStringFK(value, valueType);
         }
@@ -1084,6 +1116,30 @@ namespace WCFClient.ServiceReference1 {
         
         public System.Threading.Tasks.Task<bool> DeletePrenotationAsync(int prenotationCode) {
             return base.Channel.DeletePrenotationAsync(prenotationCode);
+        }
+        
+        public bool AddSubscription(string username) {
+            return base.Channel.AddSubscription(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddSubscriptionAsync(string username) {
+            return base.Channel.AddSubscriptionAsync(username);
+        }
+        
+        public bool DeleteSubscription(string username) {
+            return base.Channel.DeleteSubscription(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteSubscriptionAsync(string username) {
+            return base.Channel.DeleteSubscriptionAsync(username);
+        }
+        
+        public bool GetSubscription(string username) {
+            return base.Channel.GetSubscription(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> GetSubscriptionAsync(string username) {
+            return base.Channel.GetSubscriptionAsync(username);
         }
         
         public System.Collections.Generic.List<WCFClient.ServiceReference1.Prenotation> GetPrenotationsList() {
