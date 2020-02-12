@@ -1,0 +1,27 @@
+@startuml
+title Cinema - (User) Use Case Diagram
+
+left to right direction
+
+actor User
+
+actor Prenotation
+actor Subscription
+
+rectangle  APPLICATION {
+    User -- (Cinema Utilities)
+    (Cinema Utilities) <.. (Subscription Management) : <<extend>>
+    (Cinema Utilities) <.. (Buy a Ticket) : <<extend>>
+    (Cinema Utilities) <.. (View Data) : <<extend>>
+    (Cinema Utilities) -left-> (Login) : <<include>>
+    (Buy a Ticket) --> (Add Prenotation) : <<include>>
+    (Subscription Management) <.. (Get a Subscription) : <<extend>>
+    (Subscription Management) <.. (Delete a Subscription) : <<extend>>
+    (View Data) <.. (View Tickets List) : <<extend>>
+    (View Data) <.. (View Film List) : <<extend>>
+    (View Data) <.. (View Event List) : <<extend>>
+    Subscription -up- (Get a Subscription)
+    Subscription -up- (Delete a Subscription)
+    Prenotation -up- (Add Prenotation)
+}
+@enduml

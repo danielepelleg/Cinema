@@ -18,6 +18,9 @@
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
   - [Database](#database-scheme)
+  - [UML Diagrams](#uml-diagrams)
+      -[Administrator Use Case Diagram](#administrator-use-case)
+      -[User Use Case Diagram](#user-use-case)
   - [Getting Started](#getting-started)
     - [Libraries](#Libraries)
     - [Updates](#updates)
@@ -67,6 +70,15 @@
    <!-- DATABASE  -->
    ## Database Scheme
    <img src="Database/Diagrammi/Schema Database Cinema.jpg" alt="database">
+   
+   <!-- UML DIAGRAMS  -->    
+   ## UML Diagrams
+      
+   ### Administrator Use Case     
+   <img src="Documentazione/UML%20Diagrams/Admin-Use%20Case%20Diagram.png" alt="adminUseCase"> 
+   
+   ### User Use Case     
+   <img src="Documentazione/UML%20Diagrams/User-Use%20Case%20Diagram.png" alt="userUseCase"> 
    
    <!-- GETTING STARTED -->
    ## Getting Started

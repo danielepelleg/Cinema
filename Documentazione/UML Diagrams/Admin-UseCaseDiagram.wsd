@@ -1,0 +1,41 @@
+@startuml
+title Cinema - (Administrator) Use Case Diagram
+
+left to right direction
+
+actor Administrator
+actor User
+
+actor Film
+actor Event
+actor Prenotation
+
+rectangle  APPLICATION {
+    Administrator -- (Cinema Management)
+    (Cinema Management) <.. (User Management) : <<extend>>
+    (Cinema Management) <.. (Film Management) : <<extend>>
+    (Cinema Management) <.. (Event Management) : <<extend>>
+    (Cinema Management) <.. (Prenotation Management) : <<extend>>
+    (Cinema Management) <.. (View Database Data) : <<extend>>
+    (Cinema Management) -left-> (Login) : <<include>>
+    (View Database Data) <.. (View Prenotation List) : <<extend>>
+    (View Database Data) <.. (View Users List) : <<extend>>
+    (View Database Data) <.. (View Subscribers List) : <<extend>>
+    (View Database Data) <.. (View Film List) : <<extend>>
+    (View Database Data) <.. (View Event List) : <<extend>>
+    (User Management) <.. (Update User) : <<extend>>
+    (User Management) <.. (Delete User) : <<extend>>
+    (Film Management) <.. (Create Film) : <<extend>>
+    (Film Management) <.. (Delete Film) : <<extend>>
+    (Event Management) <.. (Create Event) : <<extend>>
+    (Prenotation Management) <.. (Delete Prenotation) : <<extend>>
+    (Event Management) <.. (Create Event) : <<extend>>
+    Film -up- (Create Film)
+    Film -up- (Delete Film)
+    Event -up- (Create Event)
+    Event -up- (Create Event)
+    Prenotation -up- (Delete Prenotation)
+    User -up- (Update User)
+    User -up- (Delete User)
+}
+@enduml
